@@ -38,6 +38,11 @@ app.use(express.urlencoded({extended: true}))
 app.use(cors(corsOptions))
 app.use(helmet())
 
+//==============ROUTES=======================
+// Prefix all route modules with their base path.
+//==============MONGOOSE CONFIG============
+mongoose.set('strictPopulate', false)
+//=============START THE SERVER=============
 connectDB().then(() => {
     app.listen(port, () => {
         console.log(`[INFO: app.js] Server is running on port: ${port}`);
