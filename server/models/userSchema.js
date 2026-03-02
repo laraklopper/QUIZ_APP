@@ -76,3 +76,10 @@ const userSchema = new mongoose.Schema({
 
 // =================VIRTUALS================
 
+// Virtual field to return full name as a single string
+userSchema.virtual('fullNameString').get(function () {
+    const { firstName, lastName } = this.fullName;
+    return `${firstName} ${lastName}`.trim();
+});
+
+module.exports = mongoose.model('user', userSchema)
