@@ -67,7 +67,9 @@ export default function App() {
         </>
       ):(
         <>
-         <Route exact path='/' element={<Login/>}/>
+         <Route exact path='/' element={<Login
+         userData={userData}
+         />}/>
          <Route path='/reg' element={<Registration/>}/>  
         </>    
       )}
