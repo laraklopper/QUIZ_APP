@@ -70,7 +70,7 @@ const userSchema = new mongoose.Schema({
     }
 },{
     timestamps: true,
-    toJSON: {virtuals : true},
+    toJSON: {virtuaSls : true},
     toObject: {virtuals: true}
 })
 
