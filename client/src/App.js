@@ -71,7 +71,8 @@ export default function App() {
          <Route path='/reg' element={<Registration/>}/>  
         </>    
       )}
-
+        {/* FALLBACK route */}
+          <Route path='*' element={<h2 id='pageNotFound'> 404: Page Not Found</h2>} />
 
       </Routes>
    </Container>
