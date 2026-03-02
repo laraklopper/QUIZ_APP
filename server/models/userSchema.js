@@ -63,8 +63,10 @@ const userSchema = new mongoose.Schema({
     // Field for password(hash in registration route)
     password: {
         type: String,
-        required: [true, 'user password is required']
-
+        required: [true, 'user password is required'],
+        minlength: [8, 'Password must be at least 8 characters long'],
+        maxlength: [1024, 'Password cannot exceed 1024 characters'],
+        select: false
     }
 },{
     timestamps: true,
@@ -73,3 +75,4 @@ const userSchema = new mongoose.Schema({
 })
 
 // =================VIRTUALS================
+
