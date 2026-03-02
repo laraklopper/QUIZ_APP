@@ -4,8 +4,16 @@ const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
 
+
 const envFilePath = path.join(process.cwd(), '.env');
 
+//Function to ensure .env has exactly one JWT_SECRET_KEY line.
+/**
+ * Ensures JWT_SECRET_KEY exists in the provided .env content.
+ * - Appends the key if missing
+ * - Replaces malformed or empty key entries
+ * - Preserves OS-specific line endings
+ */
 function ensureEnvHasKey(content, keyLine) {
     // Check if JWT_SECRET_KEY already exists anywhere in the file
     const hasKey = /(^|\r?\n)JWT_SECRET_KEY\s*=/.test(content);
