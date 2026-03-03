@@ -55,5 +55,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 - https://react-bootstrap.netlify.app/
 - https://lucide.dev/guide/packages/lucide-react
+- https://fonts.google.com/
 - https://www.w3schools.com/colors/colors_groups.asp
 
