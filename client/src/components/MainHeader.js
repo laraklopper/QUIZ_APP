@@ -16,8 +16,8 @@ export default function MainHeader({mainHeading}) {
                         {/* Header Clock */}
                     </div>
                     <div className="p-2 ms-auto"></div>
-                    <div className="p-2">
-                        <nav>
+                    <div className="p-2" id='navigation'>
+                        <nav className='navigation'>
                             <ul id='loginNavbar'>
                                 <li className='linkItem'>
                                     <Link className='refLink' to='/'>LOGIN</Link>
@@ -36,7 +36,7 @@ export default function MainHeader({mainHeading}) {
             <Col xs={5}>
                 <div id='headingBlock'>
                     <h1 id='appHeading'>QUIZ</h1>
-                    <h2>{mainHeading}</h2>
+                    <h2 id='pageHeading'>{mainHeading}</h2>
                 </div>
             </Col>
             <Col></Col>
