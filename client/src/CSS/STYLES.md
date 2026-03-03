@@ -21,6 +21,28 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 ## GOOGLE FONTS
 
+```html
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alkatra:wght@400..700&family=Playpen+Sans:wght@100..800&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Winky+Rough:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+
+```
+```css
+/* // <weight>: Use a value from 100 to 700 */
+/* // <uniquifier>: Use a unique and descriptive class name */
+font-family: "Roboto Mono", monospace;
+/* // <weight>: Use a value from 300 to 900 */
+/* // <uniquifier>: Use a unique and descriptive class name */
+font-family: "Winky Rough", sans-serif;
+/* // <weight>: Use a value from 400 to 700 */
+/* // <uniquifier>: Use a unique and descriptive class name */
+
+font-family: "Alkatra", system-ui;
+/* // <weight>: Use a value from 100 to 800 */
+/* // <uniquifier>: Use a unique and descriptive class name */
+font-family: "Playpen Sans", cursive;
+```
+
 ## COLOURS
 
 ```
