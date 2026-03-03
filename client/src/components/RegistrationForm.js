@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from 'react'
 import '../css/componentCSS/FormSetup.css';
+import '../css/componentCSS/RegistrationForm.css';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Stack from 'react-bootstrap/Stack';
@@ -122,7 +123,7 @@ export default function RegistrationForm({newUserData, setNewUserData, onSubmit,
                             </p>
                         )}
                     </Col>
-                    <Col xs={12} md={8}>
+                    <Col xs={12} md={8} id='regisFullNameCol'>
                         <div id='regisName'>
                             {/* -------- FIRST NAME -------- */}
                             <label className='regisLabel' htmlFor='regisFirstName'>
@@ -152,7 +153,6 @@ export default function RegistrationForm({newUserData, setNewUserData, onSubmit,
                                     First name is required.
                                 </p>
                             )}
-
                             {/* -------- LAST NAME -------- */}
                             <label className='regisLabel' htmlFor='regisLastName'>
                                 <p className='labelText'>LAST NAME:</p>
@@ -173,7 +173,7 @@ export default function RegistrationForm({newUserData, setNewUserData, onSubmit,
                                     aria-invalid={lastNameEmpty ? 'true' : 'false'}
                                     aria-describedby={lastNameEmpty ? lastNameErrorId : undefined}
                                 />
-                                <Asterisk size={16} aria-hidden='true'/>
+                                <Asterisk size={16} color='red' aria-hidden='true'/>
                             </label>
                             {/* Last name error (screen reader only) */}
                             {showLastNameError && (
@@ -184,10 +184,9 @@ export default function RegistrationForm({newUserData, setNewUserData, onSubmit,
                         </div>
                     </Col>
                 </Row>
-
-                {/* ======== ROW 2 — EMAIL + DATE OF BIRTH ======== */}
+                {/* ======== ROW 2 — EMAIL + DATE OF BIRTH + ADMIN CHECKBOX======== */}
                 <Row id='regisRow2'>
-                    <Col xs={6}>
+                    <Col xs={6} md={4}>
                         <div id='regisEmail'>
                             <label className='regisLabel' htmlFor='regisEmailInput'>
                                 <p className='labelText'>EMAIL:</p>
@@ -238,7 +237,7 @@ export default function RegistrationForm({newUserData, setNewUserData, onSubmit,
                         </div>
                     </Col>
 
-                    <Col xs={6}>
+                    <Col xs={6} md={4} >
                         <label className='regisLabel' htmlFor='regisDateOfBirth'>
                             <p className='labelText'>DATE OF BIRTH:</p>
                             <input
@@ -264,12 +263,9 @@ export default function RegistrationForm({newUserData, setNewUserData, onSubmit,
                             </p>
                         )}
                     </Col>
-                </Row>
-
-                {/* ======== ROW 3 — ADMIN CHECKBOX + PASSWORD ======== */}
-                <Row id='regisRow3'>
-                    <Col xs={6} md={4}>
-                        <label className='regisLabel' htmlFor='regisAdmin'>
+                    <Col xs={6} md={4} >
+                        <div id='adminRegistration'>
+                             <label className='regisLabel' htmlFor='regisAdmin'>
                             <p className='labelText'>REGISTER AS ADMIN:</p>
                             <input
                                 id='regisAdmin'
@@ -282,10 +278,15 @@ export default function RegistrationForm({newUserData, setNewUserData, onSubmit,
                                 aria-describedby='regisAdminHelp'
                             />
                         </label>
-                        <p id='regisAdminHelp' className='visibleMsg'>ADMIN USERS MUST BE 18 YEARS OR OLDER</p>
+                        <p id='regisAdminHelp' className='visibleMsg'>
+                        <small>ADMIN USERS MUST BE 18 YEARS OR OLDER</small>
+                        </p>
+                        </div>
                     </Col>
-
-                    <Col xs={12} md={8}>
+                </Row>
+                {/* ======== ROW 3 — PASSWORD ======== */}
+                <Row id='regisRow3'>
+                    <Col  md={12} id='regisCol'>
                         <div id='regisPassword'>
                             <label className='regisLabel' htmlFor='regisPasswordInput'>
                                 <p className='labelText'>PASSWORD</p>
@@ -365,12 +366,11 @@ export default function RegistrationForm({newUserData, setNewUserData, onSubmit,
                         </div>
                     </Col>
                 </Row>
-
                 {/* ======== ROW 4 — BUTTONS ======== */}
                 <Row id='regisRow4'>
-                    <Col></Col>
-                    <Col xs={5}>
-                        <Stack gap={2} className='col-md-5 mx-auto'>
+                    <Col id='regisCol'></Col>
+                    <Col xs={5} id='regisBtnCol'>
+                        <Stack gap={2} className='col-md-5 mx-auto' id='regisBtnStack'>
                             <Button
                                 variant='light'
                                 id='registerBtn'
@@ -392,7 +392,6 @@ export default function RegistrationForm({newUserData, setNewUserData, onSubmit,
                     </Col>
                     <Col></Col>
                 </Row>
-
             </div>
         </form>
     )
