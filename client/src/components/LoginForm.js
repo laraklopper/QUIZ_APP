@@ -97,22 +97,36 @@ export default function LoginForm({userData, setUserData}) {
           Username is required.
         </p>
       )}
-
     </Stack>
      <Stack gap={3} id='loginStack2'>
       <div className="p-2" id='passwordBlock'>
+      {/* -----------PASSWORD------------------- */}
         <label className='loginLabel' htmlFor='loginPassword'>
             <p className='loginLabelText'>PASSWORD:</p>
         </label>
         <input
-        type='password'
-        className='input'
-        id='loginPassword'
+            type='password'
+            className='input'
+            id='loginPassword'
             placeholder='PASSWORD'
             name='password'
             value={userData.password}
+            onFocus={() => setPasswordMsg(true)}
+            onBlur={() => {
+              setPasswordMsg(false);
+              setTouched((prev) => ({...prev, password: true}))
+            }}
+               // ARIA:
+            aria-required="true"
+            aria-invalid={passwordEmpty ? 'true' : 'false'}
+            aria-describedby={[
+            passwordMsg ? passwordHelpId : null,
+            passwordEmpty ? passwordErrorId : null,
+            ]
+              .filter(Boolean)
+              .join(' ')}
         />
-        <div>
+        <div className='showPassword'>
             <Button 
             variant='warning' 
             id='showPasswordBtn'
@@ -139,18 +153,31 @@ export default function LoginForm({userData, setUserData}) {
                   focusable='false' 
                 />
               </>
-            )
-
-
-            }</Button>
+            )}</Button>
         </div>
       </div>
-      <div className="p-2">
-        {/* Password Message */}
-      </div>
+        {/* Help text shown while password is focused */} 
+        {passwordMsg && (
+            <div className="p-2" id='messageBlock'>
+              <p className='msgText' id={passwordHelpId} aria-live="polite">
+                <strong>We will never share <br/> your password</strong>
+              </p>
+            </div>
+        )}
+        {/* Password error (Screen Reader only) */}
+        {showPasswordError && (
+          <p id={passwordErrorId} className="visually-hidden" role="alert">
+            Password is required.
+          </p>
+        )}
       <div className="p-2" id='loginBtnBlock'>
-        <Button variant='light' id='loginBtn' type='submit'>
-            LOGIN <LogIn aria-hidden='true' />
+        <Button 
+        variant='light' 
+        id='loginBtn' 
+        type='submit'
+        aria-label='Submit Login form button'
+        >
+         LOGIN <LogIn aria-hidden='true' />
         </Button>
       </div>
     </Stack>
