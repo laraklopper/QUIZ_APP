@@ -18,9 +18,22 @@ router.get('/me', async (req, res) => {
         }
 
         const user = await User.findById(userId)
-        .select('')
+        .select('-password')
+        .exec()
+
+             // Conditional rendering to check if user exists
+        if (!user) {
+            console.error('[ERROR: userRoutes.js]: User not found');// Log an error message in the console for debugging purposes
+            return res.status(404).json({ message: 'User not found' });// Send a 404 Not Found status code with a message
+        }
+
+        console.log(`[RESPONSE: userRoutes]`, user);// Log a response message in the console for debugging purposes
+        return res.status(200).json(user)// Send a 200 OK status code with the user data
     } catch (error) {
-        
+        console.error('[ERROR: userRoutes.js] Error fetching user', error.message);// Log an error message in the console for debugging purposes
+        res.status(500).json({ message: 'Internal Server Error', error: error.message });// Return a 500 (Internal Server Error) status code with a message
     }
 })
+
+
 module.exports = router
