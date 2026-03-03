@@ -4,3 +4,55 @@
     padding: 0px;
     width: 100%;
 }
+#registrationForm{
+    display: flex;
+    flex-direction: column;
+    margin: 0px;
+    padding: 10px 5px;
+    width: 100%;
+}
+#regisHeadingRow,#regisRow1, #regisRow2, #regisRow3, #regisRow4{
+    width: 100%;
+    margin: 0px;
+        padding: 10px 0px;
+
+}
+#regisName{
+        display: flex;
+    align-items: baseline;
+    gap: 10px;
+}
+.regisLabel{
+    display: flex;
+    align-items: baseline;
+}
+#regisPassword{
+    display: flex;
+    align-items: baseline;
+    gap: 5px;
+}
+#registerBtn{
+    height: 40px;
+    width: 180px;
+    margin: 10px;
+    font-weight: 700;
+    font-family: "Roboto Mono", monospace;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    color: #000;
+    border: solid #323A42 3px;
+}
+#registerBtn:hover{
+    height: 40px;
+    width: 180px;
+    margin: 10px;
+    font-weight: 700;
+    font-family: "Roboto Mono", monospace;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    color: #fff;
+    border: solid #323A42 3px;
+    background-color: #323A42;
+}
