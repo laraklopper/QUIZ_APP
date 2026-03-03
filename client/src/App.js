@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './App.css';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -31,6 +31,27 @@ export default function App() {
   const [loggedIn, setLoggedIn] = useState(false)
   const [error, setError] = useState(null)
 
+  //============USE EFFECT HOOK TO FETCH USERS======================
+  //Fetch users when the component mounts or when loggedIn changes
+  useEffect(() => {
+    // Function to fetch all users
+    const fetchUsers = async () => {//Define an async function to fetch all users
+      try {
+        const token = localStorage('token')
+
+      } catch (error) {
+        
+      }
+    }
+
+    // Function to fetch a (current) single user
+    const fetchCurrentUser = async () => {
+      
+    }
+
+
+  },[])
+  //=================================================
   return (
    <>
    <Container role='main'>
