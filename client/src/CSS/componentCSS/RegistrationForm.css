@@ -1,1 +1,76 @@
 /*REGISTRATION FORM  */
+#registrationForm{
+    display: flex;
+    background-color: #6c757d;
+    flex-direction: column;
+    margin: 0px;
+    padding: 10px 5px;
+    width: 100%;
+}
+#registrationDetails{
+    background-color: #A8AEB3;
+}
+#regisHeadingRow,#regisRow1, #regisRow2, #regisRow3, #regisRow4{
+    width: 100%;
+    margin: 0px;
+        padding: 10px 0px;
+
+}
+#regisCol1, #regisCol2, #regisCol3{
+    margin: 0px;
+    padding: 0px;
+        display: flex;
+    justify-content: center;
+}
+#regisCol4, #regisCol5{
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+}
+#regisName{
+        display: flex;
+    align-items: baseline;
+    gap: 10px;
+}
+#regisEmail{
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin: 0px;
+    padding: 0px;
+}
+.regisLabel{
+    display: flex;
+    align-items: baseline;
+}
+#regisPassword{
+    display: flex;
+    align-items: baseline;
+    gap: 5px;
+}
+/* BUTTONS */
+#registerBtn{
+    height: 40px;
+    width: 180px;
+    margin: 10px;
+    font-weight: 700;
+    font-family: "Roboto Mono", monospace;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    color: #000;
+    border: solid #323A42 3px;
+}
+#registerBtn:hover{
+    height: 40px;
+    width: 180px;
+    margin: 10px;
+    font-weight: 700;
+    font-family: "Roboto Mono", monospace;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    color: #fff;
+    border: solid #323A42 3px;
+    background-color: #323A42;
+}

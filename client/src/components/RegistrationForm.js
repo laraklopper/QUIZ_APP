@@ -150,7 +150,7 @@ export default function RegistrationForm({newUserData, setNewUserData, onSubmit,
                                     aria-invalid={firstNameEmpty ? 'true' : 'false'}
                                     aria-describedby={firstNameEmpty ? firstNameErrorId : undefined}
                                 />
-                                <Asterisk size={16} aria-hidden='true'/>
+                                <Asterisk size={16} aria-hidden='true' color='reds'/>
                             </label>
                             {/* First name error (screen reader only) */}
                             {showFirstNameError && (
