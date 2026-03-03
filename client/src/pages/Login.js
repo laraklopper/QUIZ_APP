@@ -42,8 +42,11 @@ export default function Login({userData, setUserData, setError, setLoggedIn}) {
 
 
   return (
-    <Container id='loginContainer'>
+    <Container id='loginContainer' role='main'>
+    {/* HEADER */}
+    {/* Render the MainHeader component with "LOGIN" as the mainHeading */}
     <MainHeader mainHeading='LOGIN'/>
+    {/*=========EVENT/ANIMATION===== */}
       <Row id='loginEventRow' aria-hidden='true' role='presentation'>
             <Col id='loginEventCol'>
                 <div className='event-bar'>
@@ -53,17 +56,22 @@ export default function Login({userData, setUserData, setError, setLoggedIn}) {
                 </div>
             </Col>
         </Row>
+        {/* SECTION 1 */}
         <section id='loginSection'>
-
-   <Row id='loginRow'>
-        <Col></Col>
-        <Col xs={6} id='loginCol'>
-            <div id='login-panel'>
-                <LoginForm userData={userData} setUserData={setUserData} onSubmit={submitLogin}/>
-            </div>
-        </Col>
-        <Col></Col>
-      </Row>
+        <Row id='loginRow'>
+                <Col></Col>
+                <Col xs={6} id='loginCol'>
+                {/* Login Form */}
+                    <div id='login-panel'>
+                    {/* Render the LoginForm.js Component */}
+                        <LoginForm 
+                        userData={userData} 
+                        setUserData={setUserData} 
+                        onSubmit={submitLogin}/>
+                    </div>
+                </Col>
+                <Col></Col>
+            </Row>
         </section>
     </Container>
   )
