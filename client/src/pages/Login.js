@@ -7,7 +7,9 @@ import LoginForm from '../components/LoginForm';
 import MainHeader from '../components/MainHeader';
 import { IdCard } from 'lucide-react';
 
-export default function Login({userData}) {
+export default function Login({userData, setUserData, setError}) {
+
+
   return (
     <Container id='loginContainer'>
     <MainHeader mainHeading='LOGIN'/>
@@ -26,7 +28,7 @@ export default function Login({userData}) {
         <Col></Col>
         <Col xs={6} id='loginCol'>
             <div id='login-panel'>
-                <LoginForm userData={userData}/>
+                <LoginForm userData={userData} setUserData={setUserData}/>
             </div>
         </Col>
         <Col></Col>
