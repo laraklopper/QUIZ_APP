@@ -169,6 +169,8 @@ export default function App() {
         <>
          <Route exact path='/' element={<Login
          userData={userData}
+         setUserData={setUserData}
+         setError={setError}
          />}/>
          <Route path='/reg' element={<Registration/>}/>  
         </>    
