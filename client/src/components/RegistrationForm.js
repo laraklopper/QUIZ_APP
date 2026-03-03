@@ -6,16 +6,34 @@ import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
 import { Asterisk, Eye, EyeOff } from 'lucide-react';
 
-export default function RegistrationForm({newUserData}) {
+export default function RegistrationForm({newUserData, setNewUserData, onSubmit}) {
     const [showPassword, setShowPassword] = useState(false)
     const [passwordMsg, setPasswordMsg] = useState(false)
     const [emailMsg, setEmailMsg] = useState(false)
 
     const handleInputChange = (event) => {
-        
+        const { name, value, type, checked } = event.target
+        const fieldValue = type === 'checkbox' ? checked : value
+
+        // Handle nested fields like 'fullName.firstName'
+        if (name.includes('.')) {
+            const [parent, child] = name.split('.')
+            setNewUserData((prev) => ({
+                ...prev,
+                [parent]: {
+                    ...prev[parent],
+                    [child]: fieldValue,
+                },
+            }))
+        } else {
+            setNewUserData((prev) => ({
+                ...prev,
+                [name]: fieldValue,
+            }))
+        }
     }
   return (
-    <form id='registrationForm' >
+    <form id='registrationForm' onSubmit={onSubmit}>
     {/* Screen Reader Heading */}
     <div id='registrationDetails'>
 <Row id='regisHeadingRow'>
@@ -40,7 +58,7 @@ export default function RegistrationForm({newUserData}) {
                     placeholder='USERNAME'
                     name='username'
                     value={newUserData.username}
-
+                    onChange={handleInputChange}
                 />
                 <Asterisk size={16} color='red'/>
                 </label>
@@ -52,18 +70,18 @@ export default function RegistrationForm({newUserData}) {
             <label className='regisLabel'>
                 <p className='labelText'>FIRST NAME:</p>
                 <input
-            className='input' 
+            className='input'
             type='text'
             required
             name='fullName.firstName'
             value={newUserData.fullName.firstName}
-
+            onChange={handleInputChange}
             placeholder='FIRST NAME'/>
             <Asterisk size={16}/>
             </label>
            
                <label className='regisLabel'>
-                <p className='labelText'>FIRST NAME:</p>
+                <p className='labelText'>LAST NAME:</p>
                   <input
             className='input'
             type='text'
@@ -71,9 +89,7 @@ export default function RegistrationForm({newUserData}) {
             required
             name='fullName.lastName'
             value={newUserData.fullName.lastName}
-            
-
-
+            onChange={handleInputChange}
             />
             <Asterisk size={16}/>
             </label>
@@ -94,10 +110,9 @@ export default function RegistrationForm({newUserData}) {
                 required
                 name='email'
                 value={newUserData.email}
+                onChange={handleInputChange}
                 onFocus={() => setEmailMsg(true)}
                 onBlur={() => setEmailMsg(false)}
-                
-                    
                 />
 <Asterisk size={16}/>
             </label>
@@ -114,9 +129,13 @@ export default function RegistrationForm({newUserData}) {
         <Col xs={6}>
             <label className='regisLabel'>
                 <p className='labelText'>DATE OF BIRTH:</p>
-                <input 
+                <input
                 className='input'
-                type='date'/>
+                type='date'
+                name='dateOfBirth'
+                value={newUserData.dateOfBirth}
+                onChange={handleInputChange}
+                />
                 <Asterisk size={16}/>
             </label>
         </Col>
@@ -126,7 +145,11 @@ export default function RegistrationForm({newUserData}) {
             <label className='regisLabel'>
             <p className='labelText'>REGISTER AS ADMIN:</p>
             <input
-            type='checkbox'/>
+            type='checkbox'
+            name='admin'
+            checked={newUserData.admin}
+            onChange={handleInputChange}
+            />
 
             </label>
             <p className='visibleMsg'>ADMIN USERS MUST BE 18 YEARS OR OLDER</p>
@@ -138,8 +161,11 @@ export default function RegistrationForm({newUserData}) {
                     <input
                         className='input'
                         placeholder='PASSWORD'
-                        type={showPassword ? 'text' : 'password'}//Toggle input type
+                        type={showPassword ? 'text' : 'password'}
                         required
+                        name='password'
+                        value={newUserData.password}
+                        onChange={handleInputChange}
                         onFocus={() => setPasswordMsg(true)}
                         onBlur={() => setPasswordMsg(false)}
                         aria-required='true'
@@ -186,7 +212,7 @@ export default function RegistrationForm({newUserData}) {
       <Col></Col>
         <Col xs={5}>
              <Stack gap={2} className="col-md-5 mx-auto">
-      <Button variant="light" id='registerBtn'>REGISTER</Button>
+      <Button variant="light" id='registerBtn' type='submit'>REGISTER</Button>
       <Button variant="danger" id='clearFormBtn'>CLEAR FORM</Button>
     </Stack>
         </Col>

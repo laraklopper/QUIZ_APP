@@ -6,7 +6,7 @@ import RegistrationForm from '../components/RegistrationForm';
 
 export default function Registration() {
   const [newUserData, setNewUserData] = useState({
-     username: '',
+    username: '',
     fullName: {
       firstName: '',
       lastName: '',
@@ -14,8 +14,14 @@ export default function Registration() {
     email: '',
     dateOfBirth: '',
     admin: false,
-    password:'',
+    password: '',
   })
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    console.log('New user data:', newUserData)
+  }
+
   return (
     <Container id='registrationContainer' role='main'>
       <MainHeader mainHeading={'REGISTRATION'}/>
@@ -24,6 +30,8 @@ export default function Registration() {
         <div id='regis-panel'>
           <RegistrationForm
             newUserData={newUserData}
+            setNewUserData={setNewUserData}
+            onSubmit={handleSubmit}
           />
         </div>
       </section>
