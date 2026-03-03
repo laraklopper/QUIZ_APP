@@ -1,10 +1,12 @@
 import React, { useCallback, useState } from 'react'
 import '../css/pagesCSS/Register.css'
 import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import MainHeader from '../components/MainHeader';
 import RegistrationForm from '../components/RegistrationForm';
 import { useNavigate } from 'react-router-dom';
-
+import { Form } from 'lucide-react';
 const EMPTY_FORM = {
   username: '',
   fullName: { firstName: '', lastName: '' },
@@ -48,6 +50,15 @@ export default function Registration() {
   return (
     <Container id='registrationContainer' role='main'>
       <MainHeader mainHeading={'REGISTRATION'}/>
+      <Row id='regisEventRow'>
+        <Col id='regisEventCol'>
+          <div className='event-bar'>
+            <div className='event-track'>
+             <Form className='event-slide' />
+            </div>
+          </div>
+        </Col>
+      </Row>
       <section id='regisSection'>
         {error && <p id='errorMessage'>{error}</p>}
         {/* Registration Form */}
