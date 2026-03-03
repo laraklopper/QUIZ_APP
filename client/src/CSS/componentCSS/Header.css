@@ -32,12 +32,28 @@
     align-items: center;
 }
 /* NAVBAR */
-#loginNavbar{
-    list-style-type: none;
+#loginNavbar,
+#navbar {
     display: flex;
-    flex-direction: column;
     gap: 10px;
-    align-items: center
+    list-style-type: none;
+    cursor: pointer;
+    padding: 5px;
+    margin: 0px;
+    background-color: #D6D6D6;
+    border-radius: 5px;
+    align-items: center;
+    flex-direction: column;
+    width: 200px;
+}
+/* links */
+.linkItem {
+    width: 200px;
+    padding: 2px 5px 2px 5px;
+    border-radius: 2px;
+    display: flex;
+    justify-content: center;
+    margin: 0px;
 }
 a, .refLink{
     display: flex;

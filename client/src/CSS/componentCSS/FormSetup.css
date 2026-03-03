@@ -1,0 +1,28 @@
+/* FORM SETUP */
+
+/* BUTTONS */
+#showPasswordBtn{
+    height: 40px;
+    width: 180px;
+    margin: 10px;
+    font-weight: 700;
+    font-family: "Roboto Mono", monospace;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    color: #000;
+    border: solid #323A42 3px;
+}
+#showPasswordBtn:hover{
+    height: 40px;
+    width: 180px;
+    margin: 10px;
+    font-weight: 700;
+    font-family: "Roboto Mono", monospace;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    color: #fff;
+    border: solid #323A42 3px;
+    background-color: #323A42;
+}
