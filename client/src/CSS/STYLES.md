@@ -69,6 +69,11 @@ font-family: "Playpen Sans", cursive;
 #323A42
 #a9a9a9;
 
+#A3D936
+#506A1B
+#698C23
+#83AE2C
+#9CD034
  #5c7b1e
  #3d5214
 ```
