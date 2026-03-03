@@ -1,4 +1,5 @@
 import React from 'react'
+import '../css/pagesCSS/Register.css'
 import Container from 'react-bootstrap/Container';
 import MainHeader from '../components/MainHeader';
 
