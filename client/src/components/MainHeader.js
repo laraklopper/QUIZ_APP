@@ -43,7 +43,7 @@ export default function MainHeader({mainHeading}) {
         </Row>
         <Row id='headerEventRow'>
             <Col id='headerCol1'>
-                <div className='headerEventBar'>
+                <div className='header-event-bar'>
                     <div className='event-track'>
                         <UserLock className='user-slide' />
 
