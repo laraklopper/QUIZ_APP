@@ -50,11 +50,15 @@
 .linkItem {
     width: 200px;
     padding: 2px 5px 2px 5px;
-    border-radius: 2px;
+    border-radius: 5px;
     display: flex;
     justify-content: center;
+background-color: #E8F0F6;
+height: 40px;
+    align-items: center;
     margin: 0px;
 }
+
 a, .refLink{
     display: flex;
     justify-content: center;
@@ -62,5 +66,20 @@ a, .refLink{
     padding: 0px;
     text-decoration: none;
     color: #000;
+    font-family: "Roboto Mono", monospace;
     font-weight: 700;
+    cursor: pointer;
+    font-size: 16px;
+    background-color: #E8F0F6;
+}
+a:hover, .refLink:hover{
+font-family: "Roboto Mono", monospace;
+ background-color: #323A42;
+    text-decoration: none;
+    margin: 0px;
+    padding: 0px;
+    padding: 5px 3px;
+    border-radius: 5px;
+    margin: 0px;
+    color: #FFF;
 }
