@@ -4,7 +4,7 @@ import Row from 'react-bootstrap/Row'; // Import the Row component from react-bo
 import Col from 'react-bootstrap/Col'; // Import the Col component from react-bootstrap
 import Stack from 'react-bootstrap/Stack';
 import { Link } from 'react-router-dom';
-
+import { UserLock } from 'lucide-react';
 export default function MainHeader({mainHeading}) {
     //=========================JSX RENDERING==================
   return (
@@ -45,6 +45,8 @@ export default function MainHeader({mainHeading}) {
             <Col id='headerCol1'>
                 <div className='headerEventBar'>
                     <div className='event-track'>
+                        <UserLock className='user-slide' />
+
 
                     </div>
                 </div>
