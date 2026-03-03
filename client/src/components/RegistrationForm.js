@@ -36,13 +36,12 @@ export default function RegistrationForm({newUserData, setNewUserData, onSubmit,
     <form id='registrationForm' onSubmit={onSubmit}>
     {/* Screen Reader Heading */}
     <div id='registrationDetails'>
-<Row id='regisHeadingRow'>
+    <Row id='regisHeadingRow'>
         <Col></Col>
-        <Col xs={5}>
-        <div id='formHeadingBlock'>
-<h3 className='formHeading'>SIGN UP</h3>
-        </div>
-            
+        <Col xs={5} id='regisHeadingCol'>
+            <div id='formHeadingBlock'>
+                <h3 className='formHeading'>SIGN UP</h3>
+            </div>          
         </Col>
         <Col></Col>
       </Row>
