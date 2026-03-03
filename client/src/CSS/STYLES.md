@@ -48,12 +48,11 @@ font-family: "Playpen Sans", cursive;
 ```
 #000000;
 #FFFFFF;
-#404040
-#591616
-#370E0E;
+<!-- WARNINGS/ERROR -->
 #C22419
 #dc3545
 #D41E11
+<!-- FORMS -->
 #6c757d
 #A8AEB3
 #808080
@@ -68,12 +67,16 @@ font-family: "Playpen Sans", cursive;
 #D6D6D6
 #323A42
 #a9a9a9;
-
+<!-- BUTTONS -->
+#323A42
+#E8F0F6
+<!--  -->
 #A3D936
 #506A1B
 #698C23
 #83AE2C
 #9CD034
+<!--  -->
  #5c7b1e
  #3d5214
 ```
