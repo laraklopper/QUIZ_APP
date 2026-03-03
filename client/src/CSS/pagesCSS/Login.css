@@ -1,9 +1,13 @@
 #loginSection{
     background-color: olive;
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
 }
 #login-panel{
     display: flex;
-        margin: 0px;
+    margin: 10px 0px;
     justify-content: center;
     width: 100%;
+    padding: 0px;
 }

@@ -11,11 +11,11 @@ export default function Login({userData}) {
   return (
     <Container id='loginContainer'>
     <MainHeader mainHeading='LOGIN'/>
-      <Row id='loginEventRow'>
+      <Row id='loginEventRow' aria-hidden='true' role='presentation'>
             <Col id='loginEventCol'>
                 <div className='event-bar'>
                     <div className='event-track'>
-                         <IdCard />
+                         <IdCard  className='event-slide'/>
                     </div>
                 </div>
             </Col>
