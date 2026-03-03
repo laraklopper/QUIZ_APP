@@ -3,8 +3,10 @@ import '../css/componentCSS/Header.css';
 import Row from 'react-bootstrap/Row'; // Import the Row component from react-bootstrap
 import Col from 'react-bootstrap/Col'; // Import the Col component from react-bootstrap
 import Stack from 'react-bootstrap/Stack';
+import { Link } from 'react-router-dom';
 
 export default function MainHeader() {
+    //=========================JSX RENDERING==================
   return (
     <header id='header'>
         <Row>
@@ -14,7 +16,18 @@ export default function MainHeader() {
                         {/* Header Clock */}
                     </div>
                     <div className="p-2 ms-auto">Second item</div>
-                    <div className="p-2">Third item</div>
+                    <div className="p-2">
+                        <nav>
+                            <ul id='loginNavbar'>
+                                <li className='linkItem'>
+                                    <Link className='refLink' to='/'>LOGIN</Link>
+                                </li>
+                                <li className='linkItem'>
+                                    <Link className='refLink' to='/reg'>REGISTRATION</Link>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
                  </Stack>
             </Col>
         </Row>
