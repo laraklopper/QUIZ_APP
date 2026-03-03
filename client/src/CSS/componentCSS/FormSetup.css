@@ -1,5 +1,19 @@
 /* FORM SETUP */
-
+.formHeading{
+        font-size: 28px;
+    font-family: "Playpen Sans", cursive;
+    font-weight: 800;
+    text-decoration: underline;
+}
+.input{
+    width: 200px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    border-radius: 5px;
+    border: solid black 1px;
+    height: 40px;
+}
 /* BUTTONS */
 #showPasswordBtn{
     height: 40px;

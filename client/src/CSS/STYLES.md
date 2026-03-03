@@ -84,4 +84,6 @@ font-family: "Playpen Sans", cursive;
 - https://lucide.dev/guide/packages/lucide-react
 - https://fonts.google.com/
 - https://www.w3schools.com/colors/colors_groups.asp
+- https://color.adobe.com/create/color-wheel
+
 
