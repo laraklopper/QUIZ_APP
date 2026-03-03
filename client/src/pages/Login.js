@@ -5,16 +5,18 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import LoginForm from '../components/LoginForm';
 import MainHeader from '../components/MainHeader';
-
+import { IdCard } from 'lucide-react';
 
 export default function Login({userData}) {
   return (
-    <Container>
+    <Container id='loginContainer'>
     <MainHeader mainHeading='LOGIN'/>
-      <Row>
-            <Col>
-                <div>
-                    <div></div>
+      <Row id='loginEventRow'>
+            <Col id='loginEventCol'>
+                <div className='event-bar'>
+                    <div className='event-track'>
+                         <IdCard />
+                    </div>
                 </div>
             </Col>
         </Row>
