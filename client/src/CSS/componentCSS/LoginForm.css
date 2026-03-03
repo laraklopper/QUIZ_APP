@@ -1,0 +1,13 @@
+#loginForm{
+        display: flex;
+    justify-content: center;
+}
+#loginStack1, #loginStack2{
+    display: flex;
+}
+.loginLabel{
+        display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}

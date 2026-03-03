@@ -9,9 +9,9 @@ export default function MainHeader({mainHeading}) {
     //=========================JSX RENDERING==================
   return (
     <header id='header'>
-        <Row>
-            <Col>
-                  <Stack direction="horizontal" gap={3}>
+        <Row id='headerRow1'>
+            <Col id='headerCol1'>
+                  <Stack direction="horizontal" gap={3} id='headerStack'>
                     <div className="p-2">
                         {/* Header Clock */}
                     </div>
@@ -41,10 +41,12 @@ export default function MainHeader({mainHeading}) {
             </Col>
             <Col></Col>
         </Row>
-        <Row>
-            <Col>
-                <div>
-                    <div></div>
+        <Row id='headerEventRow'>
+            <Col id='headerCol1'>
+                <div className='headerEventBar'>
+                    <div className='event-track'>
+
+                    </div>
                 </div>
             </Col>
         </Row>
