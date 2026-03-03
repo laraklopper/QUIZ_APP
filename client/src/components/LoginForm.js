@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button';
 import { Eye, EyeOff, LogIn } from 'lucide-react';
 
 
-export default function LoginForm({userData, setUserData}) {
+export default function LoginForm({userData, setUserData, onSubmit}) {
   const [showPassword, setShowPassword] = useState(false)
   const [usernameMsg, setUsernameMsg] = useState(false)
   const [passwordMsg, setPasswordMsg] = useState(false)
@@ -51,7 +51,7 @@ export default function LoginForm({userData, setUserData}) {
 
   //===============================================
   return (
-    <form id='loginForm' method='POST' aria-describedby={formTitleId}>
+    <form id='loginForm' method='POST' aria-describedby={formTitleId} onSubmit={onSubmit}>
 
         <div id='loginDetails'>
              <Stack gap={3} id='loginStack1'>

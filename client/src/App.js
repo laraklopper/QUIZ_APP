@@ -39,7 +39,7 @@ export default function App() {
     // Function to fetch all users
     const fetchUsers = async () => {//Define an async function to fetch all users
       try {
-        const token = localStorage('token');
+        const token = localStorage.getItem('token');
 
         if (!token || !loggedIn) return;
 
@@ -171,6 +171,7 @@ export default function App() {
          userData={userData}
          setUserData={setUserData}
          setError={setError}
+         setLoggedIn={setLoggedIn}
          />}/>
          <Route path='/reg' element={<Registration/>}/>  
         </>    

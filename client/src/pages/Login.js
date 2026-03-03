@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useCallback} from 'react'
 import '../css/pagesCSS/Login.css'
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -7,8 +7,38 @@ import LoginForm from '../components/LoginForm';
 import MainHeader from '../components/MainHeader';
 import { IdCard } from 'lucide-react';
 
-export default function Login({userData, setUserData, setError}) {
-    
+export default function Login({userData, setUserData, setError, setLoggedIn}) {
+
+    const submitLogin = useCallback(async (e) => {
+        e.preventDefault();
+        try {
+            const response = await fetch('http://localhost:3001/users/login', {
+                method: 'POST',
+                mode: 'cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    username: userData.username,
+                    password: userData.password,
+                }),
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.message || 'Login failed');
+            }
+
+            localStorage.setItem('token', data.token);
+            localStorage.setItem('username', userData.username);
+            localStorage.setItem('loggedIn', 'true');
+            setError(null);
+            setLoggedIn(true);
+        } catch (error) {
+            console.error('[ERROR: Login.js]', error.message);
+            setError(error.message);
+        }
+    }, [userData, setError, setLoggedIn])
+
 
 
   return (
@@ -24,12 +54,12 @@ export default function Login({userData, setUserData, setError}) {
             </Col>
         </Row>
         <section id='loginSection'>
-      
+
    <Row id='loginRow'>
         <Col></Col>
         <Col xs={6} id='loginCol'>
             <div id='login-panel'>
-                <LoginForm userData={userData} setUserData={setUserData}/>
+                <LoginForm userData={userData} setUserData={setUserData} onSubmit={submitLogin}/>
             </div>
         </Col>
         <Col></Col>
