@@ -5,7 +5,7 @@ import Col from 'react-bootstrap/Col'; // Import the Col component from react-bo
 import Stack from 'react-bootstrap/Stack';
 import { Link } from 'react-router-dom';
 
-export default function MainHeader() {
+export default function MainHeader({mainHeading}) {
     //=========================JSX RENDERING==================
   return (
     <header id='header'>
@@ -15,7 +15,7 @@ export default function MainHeader() {
                     <div className="p-2">
                         {/* Header Clock */}
                     </div>
-                    <div className="p-2 ms-auto">Second item</div>
+                    <div className="p-2 ms-auto"></div>
                     <div className="p-2">
                         <nav>
                             <ul id='loginNavbar'>
@@ -33,7 +33,12 @@ export default function MainHeader() {
         </Row>
         <Row>
             <Col></Col>
-            <Col xs={5}></Col>
+            <Col xs={5}>
+                <div>
+                    <h1>QUIZ</h1>
+                    <h2>{mainHeading}</h2>
+                </div>
+            </Col>
             <Col></Col>
         </Row>
         <Row>

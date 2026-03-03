@@ -3,27 +3,30 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import LoginForm from '../components/LoginForm';
+import MainHeader from '../components/MainHeader';
 
 
 export default function Login({userData}) {
   return (
     <Container>
-        <section id='loginSection'>
-        <Row>
+    <MainHeader mainHeading='LOGIN'/>
+      <Row>
             <Col>
                 <div>
                     <div></div>
                 </div>
             </Col>
         </Row>
-   <Row>
-        <Col>1 of 3</Col>
+        <section id='loginSection'>
+      
+   <Row id='loginRow'>
+        <Col></Col>
         <Col xs={6}>
             <div id='login-panel'>
                 <LoginForm userData={userData}/>
             </div>
         </Col>
-        <Col>3 of 3</Col>
+        <Col></Col>
       </Row>
         </section>
     </Container>
