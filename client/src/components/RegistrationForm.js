@@ -220,7 +220,7 @@ export default function RegistrationForm({newUserData, setNewUserData, onSubmit,
                                         emailEmpty ? emailErrorId : null,
                                     ].filter(Boolean).join(' ') || undefined}
                                 />
-                                <Asterisk size={16} aria-hidden='true'/>
+                                <Asterisk size={16} aria-hidden='true' color='red'/>
                             </label>
                             {/* Help text: announced politely while focused */}
                             {emailMsg && (
@@ -294,7 +294,7 @@ export default function RegistrationForm({newUserData, setNewUserData, onSubmit,
                 </Row>
                 {/* ======== ROW 3 — PASSWORD ======== */}
                 <Row id='regisRow3'>
-                    <Col  md={8} id='regisCol'>
+                    <Col  md={8} id='regisCol9'>
                         <div id='regisPassword'>
                             <label className='regisLabel' htmlFor='regisPasswordInput'>
                                 <p className='labelText'>PASSWORD</p>
