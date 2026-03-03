@@ -21,7 +21,7 @@ export default function Login({userData}) {
       
    <Row id='loginRow'>
         <Col></Col>
-        <Col xs={6}>
+        <Col xs={6} id='loginCol'>
             <div id='login-panel'>
                 <LoginForm userData={userData}/>
             </div>
