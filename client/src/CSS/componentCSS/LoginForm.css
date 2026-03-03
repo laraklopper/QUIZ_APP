@@ -54,15 +54,7 @@ LoginForm.js
     padding: 5px;
     font-weight: 700;
 }
-.input{
-        width: 200px;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    border-radius: 5px;
-    border: solid black 1px;
-    height: 40px;
-}
+
 /* Buttons */
 
 #loginBtn{
