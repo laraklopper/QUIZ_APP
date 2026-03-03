@@ -31,11 +31,11 @@ export default function MainHeader({mainHeading}) {
                  </Stack>
             </Col>
         </Row>
-        <Row>
+        <Row id='headerRow2'>
             <Col></Col>
             <Col xs={5}>
-                <div>
-                    <h1>QUIZ</h1>
+                <div id='headingBlock'>
+                    <h1 id='appHeading'>QUIZ</h1>
                     <h2>{mainHeading}</h2>
                 </div>
             </Col>
