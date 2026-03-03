@@ -161,7 +161,7 @@ export default function App() {
             <AddQuiz/>
           </ProtectedUserRoute>} />
           <Route path='/users' element={<ProtectedAdminRoute currentUser={currentUser}>
-            <Users/>
+            <Users logout={logout} users={users}/>
           </ProtectedAdminRoute>}/>
         </>
       ):(
