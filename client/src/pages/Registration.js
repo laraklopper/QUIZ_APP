@@ -1,37 +1,62 @@
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import '../css/pagesCSS/Register.css'
 import Container from 'react-bootstrap/Container';
 import MainHeader from '../components/MainHeader';
 import RegistrationForm from '../components/RegistrationForm';
+import { useNavigate } from 'react-router-dom';
+
+const EMPTY_FORM = {
+  username: '',
+  fullName: { firstName: '', lastName: '' },
+  email: '',
+  dateOfBirth: '',
+  admin: false,
+  password: '',
+}
 
 export default function Registration() {
-  const [newUserData, setNewUserData] = useState({
-    username: '',
-    fullName: {
-      firstName: '',
-      lastName: '',
-    },
-    email: '',
-    dateOfBirth: '',
-    admin: false,
-    password: '',
-  })
+  const navigate = useNavigate()
+  const [newUserData, setNewUserData] = useState(EMPTY_FORM)
+  const [error, setError] = useState(null)
 
-  const handleSubmit = (event) => {
+  const handleSubmit = useCallback(async (event) => {
     event.preventDefault()
-    console.log('New user data:', newUserData)
-  }
+    try {
+      const response = await fetch('http://localhost:3001/users/register', {
+        method: 'POST',
+        mode: 'cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newUserData),
+      })
+      const data = await response.json()
+      if (!response.ok) {
+        throw new Error(data.message || 'Registration failed')
+      }
+      setError(null)
+      navigate('/')
+    } catch (err) {
+      console.error('[ERROR: Registration.js]', err.message)
+      setError(err.message)
+    }
+  }, [newUserData, navigate])
+
+  const handleClearForm = useCallback(() => {
+    setNewUserData(EMPTY_FORM)
+    setError(null)
+  }, [])
 
   return (
     <Container id='registrationContainer' role='main'>
       <MainHeader mainHeading={'REGISTRATION'}/>
       <section id='regisSection'>
+        {error && <p id='errorMessage'>{error}</p>}
         {/* Registration Form */}
         <div id='regis-panel'>
           <RegistrationForm
             newUserData={newUserData}
             setNewUserData={setNewUserData}
             onSubmit={handleSubmit}
+            onClearForm={handleClearForm}
           />
         </div>
       </section>

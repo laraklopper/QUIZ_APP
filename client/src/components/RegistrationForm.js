@@ -6,7 +6,7 @@ import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
 import { Asterisk, Eye, EyeOff } from 'lucide-react';
 
-export default function RegistrationForm({newUserData, setNewUserData, onSubmit}) {
+export default function RegistrationForm({newUserData, setNewUserData, onSubmit, onClearForm}) {
     const [showPassword, setShowPassword] = useState(false)
     const [passwordMsg, setPasswordMsg] = useState(false)
     const [emailMsg, setEmailMsg] = useState(false)
@@ -70,20 +70,19 @@ export default function RegistrationForm({newUserData, setNewUserData, onSubmit}
             <label className='regisLabel'>
                 <p className='labelText'>FIRST NAME:</p>
                 <input
-            className='input'
-            type='text'
-            required
-            name='fullName.firstName'
-            value={newUserData.fullName.firstName}
-            onChange={handleInputChange}
-            placeholder='FIRST NAME'/>
-            <Asterisk size={16}/>
-            </label>
-           
+                    className='input'
+                    type='text'
+                    required
+                    name='fullName.firstName'
+                    value={newUserData.fullName.firstName}
+                    onChange={handleInputChange}
+                    placeholder='FIRST NAME'/>
+                    <Asterisk size={16}/>
+               </label>
                <label className='regisLabel'>
                 <p className='labelText'>LAST NAME:</p>
                   <input
-            className='input'
+                      className='input'
             type='text'
             placeholder='LAST NAME'
             required
@@ -213,7 +212,7 @@ export default function RegistrationForm({newUserData, setNewUserData, onSubmit}
         <Col xs={5}>
              <Stack gap={2} className="col-md-5 mx-auto">
       <Button variant="light" id='registerBtn' type='submit'>REGISTER</Button>
-      <Button variant="danger" id='clearFormBtn'>CLEAR FORM</Button>
+      <Button variant="danger" id='clearFormBtn' type='button' onClick={onClearForm}>CLEAR FORM</Button>
     </Stack>
         </Col>
         <Col></Col>

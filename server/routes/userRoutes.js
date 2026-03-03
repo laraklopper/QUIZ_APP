@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
 const router = express.Router()
+const secretKey = process.env.JWT_SECRET_KEY;
 
 const User = require('../models/userSchema');
 
@@ -56,7 +57,7 @@ router.get('/findUsers',  async (req, res) => {
 
 //-----------POST-------------------
 // Route for user login
-router.post('/login', async () => {
+router.post('/login', async (req, res) => {
     try {
         const { username, password } = req.body || {};//Extract the usersername and password
 
@@ -115,6 +116,78 @@ router.post('/login', async () => {
         res.status(500).json({ message: 'Internal Server Error' });// Send a 500 Internal Server Error status code with a message
     }
 })
-//Route for user registration
+
+// Route for user registration
+router.post('/register', async (req, res) => {
+    try {
+        const { username, fullName, email, dateOfBirth, admin, password } = req.body;
+
+        // Validate required fields
+        if (!username || !fullName?.firstName || !fullName?.lastName || !email || !dateOfBirth || !password) {
+            return res.status(400).json({ message: 'All required fields must be provided' });
+        }
+
+        // Check for duplicate username
+        const existingUsername = await User.findOne({ username });
+        if (existingUsername) {
+            return res.status(409).json({ message: 'Username is already taken' });
+        }
+
+        // Check for duplicate email
+        const existingEmail = await User.findOne({ email: email.toLowerCase() });
+        if (existingEmail) {
+            return res.status(409).json({ message: 'Email is already registered' });
+        }
+
+        // Validate admin age (must be 18+)
+        if (admin) {
+            const dob = new Date(dateOfBirth);
+            const today = new Date();
+            let age = today.getFullYear() - dob.getFullYear();
+            const monthDiff = today.getMonth() - dob.getMonth();
+            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
+                age--;
+            }
+            if (age < 18) {
+                return res.status(400).json({ message: 'Admin users must be 18 years or older' });
+            }
+        }
+
+        // Hash the password
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        // Create and save the new user
+        const newUser = new User({
+            username,
+            fullName: {
+                firstName: fullName.firstName,
+                lastName: fullName.lastName,
+            },
+            email,
+            dateOfBirth,
+            admin: admin || false,
+            password: hashedPassword,
+        });
+
+        await newUser.save();
+
+        console.log('[INFO: userRoutes.js] New user registered:', {
+            userId: newUser._id,
+            username: newUser.username,
+        });
+
+        return res.status(201).json({ message: 'User registered successfully' });
+
+    } catch (error) {
+        // Surface Mongoose validation errors clearly
+        if (error.name === 'ValidationError') {
+            const messages = Object.values(error.errors).map(e => e.message);
+            return res.status(400).json({ message: messages[0] });
+        }
+        console.error('[ERROR: userRoutes.js] Registration failed:', error.message);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+})
+
 //Export the userRouter
 module.exports = router

@@ -38,7 +38,7 @@ const userSchema = new mongoose.Schema({
         // Automatically converts the email to lowercase before saving
         set: (v) => v.toLowerCase(),
         validate: {
-            validator: (v) => emailRegex(v),
+            validator: (v) => emailRegex.test(v),
             message: (props) => `${props.value} is not a valid email adderss`
         },
         
@@ -70,7 +70,7 @@ const userSchema = new mongoose.Schema({
     }
 },{
     timestamps: true,
-    toJSON: {virtuaSls : true},
+    toJSON: {virtuals: true},
     toObject: {virtuals: true}
 })
 
