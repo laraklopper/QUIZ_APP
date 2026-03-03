@@ -1,15 +1,27 @@
 /* =========================
    EVENTS / ANIMATIONS 
    ========================= */
+   #loginEventRow,
    #headerEventRow{
     width: 100%;
     margin: 10px 0px 5px 0px;
     padding: 0px;
    }
+   #loginEventCol,
    #headerEventCol{
     width: 100%;
     margin: 10px 10px 5px 10px;
     padding: 5px 10px;
+}
+.event-bar{
+    width: 100%;
+    background-color: #C22419;
+    border-top: 2px solid #000;
+    border-bottom: 2px solid #000;
+       margin: 0px 5px;
+padding: 0px;
+    height: 40px;
+    display: flex;
 }
 .event-track {
     position: relative;
