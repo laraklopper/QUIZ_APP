@@ -1,14 +1,24 @@
-import React from 'react'
+import React, { useState } from 'react'
 import '../css/componentCSS/FormSetup.css';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
-export default function RegistrationForm() {
+import { Asterisk, Eye, EyeOff } from 'lucide-react';
+
+export default function RegistrationForm({newUserData}) {
+    const [showPassword, setShowPassword] = useState(false)
+    const [passwordMsg, setPasswordMsg] = useState(false)
+    const [emailMsg, setEmailMsg] = useState(false)
+
+    const handleInputChange = (event) => {
+        
+    }
   return (
     <form id='registrationForm' >
     {/* Screen Reader Heading */}
-     <Row id='regisHeadingRow'>
+    <div id='registrationDetails'>
+<Row id='regisHeadingRow'>
         <Col></Col>
         <Col xs={5}>
         <div id='formHeadingBlock'>
@@ -28,8 +38,11 @@ export default function RegistrationForm() {
                     id='regisUsername'
                     type='text'
                     placeholder='USERNAME'
+                    name='username'
+                    value={newUserData.username}
 
                 />
+                <Asterisk size={16} color='red'/>
                 </label>
                
        
@@ -42,8 +55,11 @@ export default function RegistrationForm() {
             className='input' 
             type='text'
             required
-            
+            name='fullName.firstName'
+            value={newUserData.fullName.firstName}
+
             placeholder='FIRST NAME'/>
+            <Asterisk size={16}/>
             </label>
            
                <label className='regisLabel'>
@@ -51,7 +67,15 @@ export default function RegistrationForm() {
                   <input
             className='input'
             type='text'
-            placeholder='LAST NAME'/>
+            placeholder='LAST NAME'
+            required
+            name='fullName.lastName'
+            value={newUserData.fullName.lastName}
+            
+
+
+            />
+            <Asterisk size={16}/>
             </label>
           
           </div>
@@ -60,16 +84,32 @@ export default function RegistrationForm() {
       </Row>
        <Row id='regisRow2'>
         <Col xs={6}>
+        <div id='regisEmail'>
             <label className='regisLabel'>
                 <p className='labelText'>EMAIL:</p>
                 <input
                 className='input'
                 type='email'
+                placeholder='EMAIL'
+                required
+                name='email'
+                value={newUserData.email}
+                onFocus={() => setEmailMsg(true)}
+                onBlur={() => setEmailMsg(false)}
+                
                     
                 />
-
+<Asterisk size={16}/>
             </label>
-            {/* EMAIL MSG */}
+            {emailMsg && (
+                <div id='emailMsg'>
+                    <p className='msgText'><strong>WE WILL NEVER SHARE YOUR EMAIL</strong></p>
+                </div>
+            )}
+        </div>
+            
+
+            
         </Col>
         <Col xs={6}>
             <label className='regisLabel'>
@@ -77,6 +117,7 @@ export default function RegistrationForm() {
                 <input 
                 className='input'
                 type='date'/>
+                <Asterisk size={16}/>
             </label>
         </Col>
       </Row>
@@ -88,19 +129,56 @@ export default function RegistrationForm() {
             type='checkbox'/>
 
             </label>
+            <p className='visibleMsg'>ADMIN USERS MUST BE 18 YEARS OR OLDER</p>
         </Col>
         <Col xs={12} md={8}>
             <div id='regisPassword'>
                 <label className='regisLabel'>
-                    <p>PASSWORD</p>
+                    <p className='labelText'>PASSWORD</p>
                     <input
                         className='input'
                         placeholder='PASSWORD'
+                        type={showPassword ? 'text' : 'password'}//Toggle input type
+                        required
+                        onFocus={() => setPasswordMsg(true)}
+                        onBlur={() => setPasswordMsg(false)}
+                        aria-required='true'
                     />
+                    <Asterisk size={16} color='red'/>
                 </label>
-            
-                    <Button variant='warning' id='showPasswordBtn'>SHOW PASSWORD</Button>
-               
+                    <Button 
+                    variant='warning' 
+                    id='showPasswordBtn' 
+                    onClick={() =>setShowPassword((s) => !s)}>
+                         {showPassword ? (
+                                <>
+                                HIDE PASSWORD
+                                <EyeOff 
+                                style={{ marginLeft: 6 }} 
+                                aria-hidden='true'
+                                focusable='false'//Prevents SVG icon from becoming keyboard-focusable.
+                                />
+                                </>
+                              ):(
+                                <>
+                                SHOW PASSWORD
+                                <Eye
+                                style={{marginLeft: 6}}
+                                aria-hidden='true'
+                                focusable='false'//Prevents SVG icon from becoming keyboard-focusable.
+                                />
+                                </>
+                              )}
+                    </Button>
+               <div>
+                {passwordMsg && (
+                    <div>
+                        <p className='msgText'>
+                         <strong> WE WILL NEVER SHARE YOUR PASSWORD </strong>
+                       </p>
+                    </div>
+                )}
+               </div>
             </div>
         </Col>
       </Row>
@@ -115,6 +193,8 @@ export default function RegistrationForm() {
         <Col></Col>
       </Row>
 
+    </div>
+     
     </form>
   )
 }

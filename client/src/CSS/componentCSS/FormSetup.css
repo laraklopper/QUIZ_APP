@@ -20,16 +20,23 @@
     border: solid black 1px;
     height: 40px;
 }
+.visibleMsg{
+    margin: 0px;
+    padding: 0px;
+    font-weight: 700;
+}
 /* BUTTONS */
 #showPasswordBtn{
     height: 40px;
-    width: 180px;
+        width: 200px;
+
     margin: 10px;
     font-weight: 700;
     font-family: "Roboto Mono", monospace;
     font-size: 14px;
     display: flex;
     justify-content: center;
+        align-items: center;
     color: #000;
     border: solid #323A42 3px;
 }
@@ -41,6 +48,7 @@
     font-family: "Roboto Mono", monospace;
     font-size: 14px;
     display: flex;
+        align-items: center;
     justify-content: center;
     color: #fff;
     border: solid #323A42 3px;

@@ -3,13 +3,25 @@
     margin: 0px;
     padding: 0px;
     width: 100%;
+    display: flex;
+        justify-content: center;
+}
+#regis-panel{
+    width: 95%;
+    display: flex;
+    margin: 10px 0px;
+    padding: 5px;
 }
 #registrationForm{
     display: flex;
+    background-color: #6c757d;
     flex-direction: column;
     margin: 0px;
     padding: 10px 5px;
     width: 100%;
+}
+#registrationDetails{
+    background-color: #A8AEB3;
 }
 #regisHeadingRow,#regisRow1, #regisRow2, #regisRow3, #regisRow4{
     width: 100%;
@@ -21,6 +33,13 @@
         display: flex;
     align-items: baseline;
     gap: 10px;
+}
+#regisEmail{
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin: 0px;
+    padding: 0px;
 }
 .regisLabel{
     display: flex;
