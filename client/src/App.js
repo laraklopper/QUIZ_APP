@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import './App.css';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -112,6 +112,23 @@ export default function App() {
 
   },[loggedIn, setError])
   //===================EVENT LISTENERS=================
+  const logout = useCallback(() => {
+    //Clear localStorage
+    localStorage.removeItem('token');
+    localStorage.removeItem('username');
+    localStorage.removeItem('loggedIn');  
+    /* Update loggedIn state to reflect that the 
+    user is no longer logged in*/
+    setLoggedIn(false);
+    setError(''); // Clear any existing error messages
+    setUserData({
+      username: '',
+      password: '',
+    });//Reset the userData
+    /*Use the navigate function to redirect the
+    user to the login page after logging out*/
+    navigate('/');
+  },[navigate])
   //=================================================
   return (
    <>
