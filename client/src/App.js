@@ -3,7 +3,7 @@ import './App.css';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import {Route, Routes} from 'react-router-dom'
+import {Route, Routes, useNavigate} from 'react-router-dom'
 // Import icons from lucide-react
 import { Bug } from 'lucide-react';
 import Login from './pages/Login';
@@ -31,6 +31,7 @@ export default function App() {
   const [loggedIn, setLoggedIn] = useState(false)
   const [error, setError] = useState(null)
 
+  const navigate = useNavigate();
   //============USE EFFECT HOOK TO FETCH USERS======================
   //Fetch users when the component mounts or when loggedIn changes
   useEffect(() => {
@@ -110,11 +111,12 @@ export default function App() {
 
 
   },[loggedIn, setError])
+  //===================EVENT LISTENERS=================
   //=================================================
   return (
    <>
-   <Container role='main'>
-     <Row>
+   <Container role='main' id='appContainer'>
+     <Row id='errorRow'>
         <Col></Col>
         <Col xs={6} id='stateCol' aria-live='polite'>
           {/* GLOBAL ERROR MESSAGE */}
