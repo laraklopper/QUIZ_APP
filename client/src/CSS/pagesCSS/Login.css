@@ -1,3 +1,9 @@
+#loginSection{
+    background-color: olive;
+}
 #login-panel{
+    display: flex;
+        margin: 0px;
+    justify-content: center;
     width: 100%;
 }
