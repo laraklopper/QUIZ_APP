@@ -53,4 +53,68 @@ router.get('/findUsers',  async (req, res) => {
         );
     }
 })
+
+//-----------POST-------------------
+// Route for user login
+router.post('/login', async () => {
+    try {
+        const { username, password } = req.body || {};//Extract the usersername and password
+
+        // Conditional rendering to check that both email and password are present
+        if (!username || !password) {
+            console.error('[ERROR: userRoutes.js , /login] Email and password are required');// Log an error message in the console for debugging purposes
+            return res.status(400).json({ message: 'Email and password are required' });// Send a 400 (Bad Request) status code with a message
+        }
+
+         //Find the user by username and include the password field
+        const user = await User.findOne({ 'username': username })
+            .select('+password')
+            .exec();
+
+        // Conditional rendering to check if user exists
+        if (!user) {
+            console.error('[ERROR: userRoutes.js] User not found');// Log an error message in the console for debugging purposes
+            return res.status(404).json({ message: 'User not found' });// Send a 404 (Not Found) status code with a message
+        }
+
+        const  isPasswordValid = await bcrypt.compare(password, user.password)
+        if (!isPasswordValid) {
+            console.error('[ERROR: userRoutes.js] Incorrect password');
+            return res.status(401).json({ message: 'Invalid credentials' });// Send a 401 (Unauthorized) status code with a message
+        }
+
+                // Generate JWT Token
+        const jwtToken = jwt.sign(
+            {
+                userId: user._id,// Set the userId in the token payload
+                isAdmin: !!user.admin,// Set the isAdmin flag in the token payload
+            },
+            secretKey,// Use the secret key to sign the token
+            {
+                expiresIn: '12h', // Set the token expiration time
+                algorithm: 'HS256' // Set the JWT algorithm
+            }
+        );
+
+        // Log an info message in the console for debugging purposes
+        console.log('[INFO: userRoutes.js] User logged in:', {
+            userId: user._id,
+            username: user.username,
+        });
+        // Send a 200 OK status code with the JWT token and user details
+        return res.status(200).json({
+            token: jwtToken,
+            userId: user._id,
+            fullName: user.fullName,
+            isAdmin: !!user.admin,
+        });
+
+
+    } catch (error) {
+          console.error('[ERROR: userRoutes.js] Login Failed:', error.message);// Log an error message in the console for debugging purposes
+        res.status(500).json({ message: 'Internal Server Error' });// Send a 500 Internal Server Error status code with a message
+    }
+})
+//Route for user registration
+//Export the userRouter
 module.exports = router

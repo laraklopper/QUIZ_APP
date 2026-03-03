@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const helmet = require('helmet');
 const connectDB = require('./config/connect');
+const userRoutes = require('./routes/userRoutes')
 const app = express()
 //Extract enviromental variables
 const port = process.env.PORT || 3001
@@ -40,6 +41,7 @@ app.use(helmet())
 
 //==============ROUTES=======================
 // Prefix all route modules with their base path.
+app.use('/users', userRoutes)
 //==============MONGOOSE CONFIG============
 mongoose.set('strictPopulate', false)
 //=============START THE SERVER=============
