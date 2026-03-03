@@ -84,17 +84,21 @@ export default function RegistrationForm({newUserData, setNewUserData, onSubmit,
                 {/* Screen-reader form title */}
                 <h2 id={formTitleId} className='visually-hidden'>Registration form</h2>
                 <Row id='regisHeadingRow'>
-                    <Col></Col>
-                    <Col xs={5}>
+                {/* Col 1 */}
+                    <Col id='regisCol1'></Col>
+                    {/* Col 2: HEADING */}
+                    <Col xs={5} id='regisCol2'>
                         <div id='formHeadingBlock'>
                             <h3 className='formHeading'>SIGN UP</h3>
                         </div>
                     </Col>
-                    <Col></Col>
+                    {/* Col 3 */}
+                    <Col id='regisCol3'></Col>
                 </Row>
                 {/* ======== ROW 1 — USERNAME + FULL NAME ======== */}
                 <Row id='regisRow1'>
-                    <Col xs={6} md={4}>
+                {/* Col 4: username */}
+                    <Col xs={6} md={4} id='regisCol4'>
                         <label className='regisLabel' htmlFor='regisUsername'>
                             <p className='labelText'>USERNAME:</p>
                             <input
@@ -123,7 +127,8 @@ export default function RegistrationForm({newUserData, setNewUserData, onSubmit,
                             </p>
                         )}
                     </Col>
-                    <Col xs={12} md={8} id='regisFullNameCol'>
+                    {/* Col 5: Full Name */}
+                    <Col xs={12} md={8} id='regisCol5'>
                         <div id='regisName'>
                             {/* -------- FIRST NAME -------- */}
                             <label className='regisLabel' htmlFor='regisFirstName'>
@@ -186,7 +191,8 @@ export default function RegistrationForm({newUserData, setNewUserData, onSubmit,
                 </Row>
                 {/* ======== ROW 2 — EMAIL + DATE OF BIRTH + ADMIN CHECKBOX======== */}
                 <Row id='regisRow2'>
-                    <Col xs={6} md={4}>
+                {/* Col6 : Email*/}
+                    <Col xs={6} md={4} id='regisCol6'>
                         <div id='regisEmail'>
                             <label className='regisLabel' htmlFor='regisEmailInput'>
                                 <p className='labelText'>EMAIL:</p>
@@ -236,8 +242,9 @@ export default function RegistrationForm({newUserData, setNewUserData, onSubmit,
                             )}
                         </div>
                     </Col>
+                    {/* Col 7: Date of Birth */}
 
-                    <Col xs={6} md={4} >
+                    <Col xs={6} md={4} id='regisCol7' >
                         <label className='regisLabel' htmlFor='regisDateOfBirth'>
                             <p className='labelText'>DATE OF BIRTH:</p>
                             <input
@@ -263,7 +270,8 @@ export default function RegistrationForm({newUserData, setNewUserData, onSubmit,
                             </p>
                         )}
                     </Col>
-                    <Col xs={6} md={4} >
+                    {/* Col 8: Admin registration */}
+                    <Col xs={6} md={4}  id='regisCol8'>
                         <div id='adminRegistration'>
                              <label className='regisLabel' htmlFor='regisAdmin'>
                             <p className='labelText'>REGISTER AS ADMIN:</p>
@@ -286,7 +294,7 @@ export default function RegistrationForm({newUserData, setNewUserData, onSubmit,
                 </Row>
                 {/* ======== ROW 3 — PASSWORD ======== */}
                 <Row id='regisRow3'>
-                    <Col  md={12} id='regisCol'>
+                    <Col  md={8} id='regisCol'>
                         <div id='regisPassword'>
                             <label className='regisLabel' htmlFor='regisPasswordInput'>
                                 <p className='labelText'>PASSWORD</p>
@@ -365,6 +373,27 @@ export default function RegistrationForm({newUserData, setNewUserData, onSubmit,
                             )}
                         </div>
                     </Col>
+                    <Col xs={6} md={4}>
+                    <Stack gap={2}  id='regisBtnStack'>
+                            <Button
+                                variant='light'
+                                id='registerBtn'
+                                type='submit'
+                                aria-label='Submit registration form'
+                            >
+                                REGISTER
+                            </Button>
+                            <Button
+                                variant='danger'
+                                id='clearFormBtn'
+                                type='button'
+                                onClick={onClearForm}
+                                aria-label='Clear registration form'
+                            >
+                                CLEAR FORM
+                            </Button>
+                        </Stack>
+        </Col>
                 </Row>
                 {/* ======== ROW 4 — BUTTONS ======== */}
                 <Row id='regisRow4'>
