@@ -292,7 +292,7 @@ export default function RegistrationForm({newUserData, setNewUserData, onSubmit,
                         </div>
                     </Col>
                 </Row>
-                {/* ======== ROW 3 — PASSWORD ======== */}
+                {/* ======== ROW 3 — PASSWORD + Buttons ======== */}
                 <Row id='regisRow3'>
                     <Col  md={8} id='regisCol9'>
                         <div id='regisPassword'>
@@ -322,8 +322,8 @@ export default function RegistrationForm({newUserData, setNewUserData, onSubmit,
                                     ].filter(Boolean).join(' ') || undefined}
                                 />
                                 <Asterisk size={16} color='red' aria-hidden='true'/>
-                            </label>
-                            <Button
+                                <div>
+                                    <Button
                                 variant='warning'
                                 id='showPasswordBtn'
                                 type='button'
@@ -353,9 +353,12 @@ export default function RegistrationForm({newUserData, setNewUserData, onSubmit,
                                     </>
                                 )}
                             </Button>
+                                </div>
+                            </label>
+                            
                             {/* Help text: announced politely while focused */}
                             {passwordMsg && (
-                                <div>
+                                <div id='regisPswdMessage'>
                                     <p
                                         className='msgText'
                                         id={passwordHelpId}
@@ -373,33 +376,8 @@ export default function RegistrationForm({newUserData, setNewUserData, onSubmit,
                             )}
                         </div>
                     </Col>
-                    <Col xs={6} md={4}>
-                    <Stack gap={2}  id='regisBtnStack'>
-                            <Button
-                                variant='light'
-                                id='registerBtn'
-                                type='submit'
-                                aria-label='Submit registration form'
-                            >
-                                REGISTER
-                            </Button>
-                            <Button
-                                variant='danger'
-                                id='clearFormBtn'
-                                type='button'
-                                onClick={onClearForm}
-                                aria-label='Clear registration form'
-                            >
-                                CLEAR FORM
-                            </Button>
-                        </Stack>
-        </Col>
-                </Row>
-                {/* ======== ROW 4 — BUTTONS ======== */}
-                <Row id='regisRow4'>
-                    <Col id='regisCol'></Col>
-                    <Col xs={5} id='regisBtnCol'>
-                        <Stack gap={2} className='col-md-5 mx-auto' id='regisBtnStack'>
+                    <Col xs={6} md={4} id='regisCol10'>
+                    <Stack id='regisBtnStack'>
                             <Button
                                 variant='light'
                                 id='registerBtn'
@@ -419,8 +397,8 @@ export default function RegistrationForm({newUserData, setNewUserData, onSubmit,
                             </Button>
                         </Stack>
                     </Col>
-                    <Col></Col>
                 </Row>
+            
             </div>
         </form>
     )

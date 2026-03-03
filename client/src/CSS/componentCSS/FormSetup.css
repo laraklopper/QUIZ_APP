@@ -8,7 +8,7 @@
     text-decoration: underline;
 }
 .labelText{
-        margin: 0px;
+    margin: 0px;
     padding: 5px;
     font-weight: 700;
     font-family: "Roboto Mono", monospace;
@@ -44,7 +44,7 @@
 }
 #showPasswordBtn:hover{
     height: 40px;
-    width: 180px;
+    width: 200px;
     margin: 10px;
     font-weight: 700;
     font-family: "Roboto Mono", monospace;
@@ -59,7 +59,7 @@
 #clearFormBtn{
     height: 40px;
     width: 180px;
-    margin: 10px;
+    margin: 5px;
     font-weight: 700;
     font-family: "Roboto Mono", monospace;
     font-size: 14px;
