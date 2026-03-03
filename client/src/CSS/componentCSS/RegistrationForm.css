@@ -13,7 +13,7 @@
 #regisHeadingRow,#regisRow1, #regisRow2, #regisRow3, #regisRow4{
     width: 100%;
     margin: 0px;
-        padding: 10px 0px;
+    padding: 10px 0px;
 
 }
 /* Heading Col */
@@ -68,7 +68,7 @@
     display: flex;
     align-items: baseline;
     margin: 0px;
-        padding: 0px 5px;
+    padding: 0px 5px;
 }
 #regisPassword{
     display: flex;
