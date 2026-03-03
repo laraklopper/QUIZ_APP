@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from 'react'
 import '../css/componentCSS/LoginForm.css'
+import '../css/componentCSS/FormSetup.css'
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
 import { Eye, EyeOff, LogIn } from 'lucide-react';
