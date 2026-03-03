@@ -1,4 +1,5 @@
 import React from 'react'
+import '../css/componentCSS/LoginForm.css'
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
 
