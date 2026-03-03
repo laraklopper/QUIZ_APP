@@ -1,35 +1,48 @@
+/* LOGIN FORM
+LoginForm.js
+*/
 #loginForm{
         display: flex;
     justify-content: center;
         width: 404px;
-    background-color: lightgrey;
-        border: solid;
+    background-color: #6c757d;
+        border: solid #323A42;
 }
+/* Layout */
 #loginDetails{
         display: flex;
     flex-direction: column;
     align-items: center;
         padding: 10px;
-        border: solid;
+     border-radius: 5px;
+     width: 300px;
         margin: 5px 0px;
+        background-color: #A8AEB3;
 }
+/* BOOTSTRAP */
+/* Stack */
 #loginStack1, #loginStack2{
     display: flex;
 }
 #formHeadingBlock{
-        display: flex;
+    display: flex;
     justify-content: center;
 }
 #usernameBlock, #passwordBlock{
-        display: flex;
+    display: flex;
     justify-content: center;
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
 }
+#loginBtnBlock{
+    display: flex;
+    justify-content: center;
+}
+/* Text */
 .loginLabel{
-        display: flex;
+    display: flex;
     flex-direction: column;
     align-items: center;
 
@@ -48,9 +61,54 @@
     border: solid black 1px;
     height: 40px;
 }
+/* Buttons */
 #showPasswordBtn{
     height: 40px;
     width: 180px;
     margin: 10px;
     font-weight: 700;
+    font-family: "Roboto Mono", monospace;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    color: #000;
+    border: solid #323A42 3px;
+}
+#showPasswordBtn:hover{
+    height: 40px;
+    width: 180px;
+    margin: 10px;
+    font-weight: 700;
+    font-family: "Roboto Mono", monospace;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    color: #fff;
+    border: solid #323A42 3px;
+    background-color: #323A42;
+}
+#loginBtn{
+       height: 40px;
+    width: 180px;
+    margin: 10px;
+    font-weight: 700;
+    font-family: "Roboto Mono", monospace;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    color: #000;
+    border: solid #323A42 3px;
+}
+#loginBtn:hover{
+    height: 40px;
+    width: 180px;
+    margin: 10px;
+    font-weight: 700;
+    font-family: "Roboto Mono", monospace;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    color: #fff;
+    border: solid #323A42 3px;
+    background-color: #323A42;
 }
