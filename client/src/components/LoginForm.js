@@ -3,6 +3,8 @@ import '../css/componentCSS/LoginForm.css'
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
 import { Eye, EyeOff, LogIn } from 'lucide-react';
+
+
 export default function LoginForm({userData, setUserData}) {
   const [showPassword, setShowPassword] = useState(false)
   const [usernameMsg, setUsernameMsg] = useState(false)
@@ -23,6 +25,17 @@ export default function LoginForm({userData, setUserData}) {
   // Only show validation errors AFTER field was touched
   const showUsernameError = touched.username && usernameEmpty;
   const showPasswordError = touched.password && passwordEmpty;
+
+  //==================EVENT LISTENERS=======================
+    //Function for handling user login data changes
+  const handleLoginInput = (event) => {
+    const { name, value } = event.target
+    // Update userData object immutably
+    setUserData((prev) => ({
+      ...prev,
+      [name]: value,
+    }))
+  }
 
     // ========= IDs USED BY aria-labelledby / aria-describedby =========
   // Keeps ARIA references stable and readable
@@ -53,43 +66,46 @@ export default function LoginForm({userData, setUserData}) {
         <label className='loginLabel'>
             <p className='loginLabelText'>USERNAME:</p>
             <input
-            className='input'
+               className='input'
+                id='loginUsername'
                 type='text'
                 placeholder='USERNAME'
                 name='username'
                 value={userData.username}
+                required
+                inputMode="text"// Helpful on mobile keyboards
+                onChange={handleLoginInput}
                 onFocus={() => setUsernameMsg(true)}
                 onBlur={() => {
-                          setUsernameMsg(false);
-                          setTouched((prev) => ({ ...prev, username: true }));
+                      setUsernameMsg(false);
+                      setTouched((prev) => ({ ...prev, username: true }));
                 }}
-                  aria-label='Login username input'                        
-                  id='loginUsername'
-                  // ARIA:
-                  aria-required="true"
-                  aria-invalid={usernameEmpty ? 'true' : 'false'}// Mark invalid if empty (simple validation)
-                  // Link to help + error text (screen reader reads these as extra context)
-                  aria-describedby={[
-                    usernameMsg ? usernameHelpId : null,
-                    usernameEmpty ? usernameErrorId : null,
-                  ]
-                    .filter(Boolean)
-                    .join(' ')}
-                  inputMode="text"// Helpful on mobile keyboards
+                // ARIA:
+                aria-label='Login username input'  
+                aria-required="true"
+                aria-invalid={usernameEmpty ? 'true' : 'false'}// Mark invalid if empty (simple validation)
+                // Link to help + error text (screen reader reads these as extra context)
+                aria-describedby={[
+                  usernameMsg ? usernameHelpId : null,
+                  usernameEmpty ? usernameErrorId : null,
+                ]
+                  .filter(Boolean)
+                  .join(' ')}            
             />
         </label>
       </div>
+     {/* Help text: announced politely while focused (and only shown when usernameMsg=true) */}
       {usernameMsg && (
-        <p
-          className="msgText"
-          id={usernameHelpId}
-          // ARIA: 
-          aria-live="polite"//polite live region so it can be announced without interrupting
-        >
-          <strong>
-            We will never share <br /> your username
-          </strong>
-        </p>
+        <div className="p-2" id="usernameMsgBlock">
+          <p
+            className="msgText"
+            id={usernameHelpId}
+            // ARIA: 
+            aria-live="polite"//polite live region so it can be announced without interrupting
+          >
+            <strong> We will never share <br /> your username</strong>
+          </p>
+        </div>
       )}
       {/* Username error (screen reader only) */}
       {showUsernameError && (
@@ -105,12 +121,16 @@ export default function LoginForm({userData, setUserData}) {
             <p className='loginLabelText'>PASSWORD:</p>
         </label>
         <input
-            type='password'
-            className='input'
+        // STYLING
+           className='input'
             id='loginPassword'
+            // Attributes
+            type='password'   
             placeholder='PASSWORD'
             name='password'
             value={userData.password}
+            // Events
+            onChange={handleLoginInput}
             onFocus={() => setPasswordMsg(true)}
             onBlur={() => {
               setPasswordMsg(false);
