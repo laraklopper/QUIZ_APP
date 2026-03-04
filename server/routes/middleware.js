@@ -2,15 +2,20 @@
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+//==============JWT Config===================
 const rawSecretKey = process.env.JWT_SECRET_KEY;
 const secretKey = rawSecretKey || 'secretkey';
 
+// Conditional rendering to checK if enviromental variables are present
 if (!rawSecretKey) {
     console.warn('JWT_SECRET_KEY is not set in the environment variables.');
 }
+// Industry standard, balances security and performance
+const SALT_ROUNDS = 10;// Number of hashing rounds
 
-const SALT_ROUNDS = 10;
-
+/*=============================
+JWT VERIFICATION MIDDLEWARE
+ ====================================*/ 
 // Middleware to authenticate JWT token
 const checkJwtToken = (req, res, next) => {
     try {
@@ -58,5 +63,16 @@ const checkJwtToken = (req, res, next) => {
     }
 }
 
+/*================================
+REQUEST LIMIT MIDDLEWARE
+===============================*/
+
+/*===============================
+PASSWORD VALIDATION MIDDLEWARE
+=========================*/
+
+/*====================================
+AGE VALIDATION MIDDLEWARE
+========================*/
 // Export the middleware function to be used in other parts of the application
 module.exports = {checkJwtToken}
