@@ -39,6 +39,47 @@
     font-family: "Alkatra", system-ui;
     font-weight: 700;
 }
+/* CLOCK */
+#headerClock{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+#timeItem,
+#dateItem{
+    display: flex;
+    gap: 5px;
+    background-color: transparent;
+    margin: 0px;
+    border: none;
+    padding: 0px;
+}
+#clockListText{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0px;
+    padding: 0px;
+    background-color: transparent;
+    font-size: 20px;
+    color: #000;
+}
+#dateTimeList{
+    display: flex;
+    gap: 10px;
+    margin: 0px;
+    padding: 0px;
+    background-color: transparent;
+}
+.clockListIcon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0px;
+    padding: 0px;
+    color: #000;
+}
 /* NAVBAR */
 #loginNavbar,
 #navbar {

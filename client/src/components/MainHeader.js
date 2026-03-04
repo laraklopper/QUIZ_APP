@@ -38,14 +38,16 @@ export default function MainHeader({mainHeading}) {
                         <div id='headerClock' aria-label='Current Date and Time'>                   
                             <ListGroup variant="flush" id='dateTimeList'>
                                 <ListGroup.Item id='dateItem'>
-                                    <h5 className='clockListIcon'><Calendar size={28}/></h5>
-                                    <h5 className='clockListText'>{dateDisplay(headerDate)}</h5>
+                                <p className='visually-hidden'>Current Date:</p>
+                                <h5 className='clockListIcon'><Calendar size={20}/></h5>
+                                <h5 className='clockListText'>{dateDisplay(headerDate)}</h5>
+                                    
                                 </ListGroup.Item>
                                 <ListGroup.Item id='timeItem'>
-                                    <h5 className='clockListIcon'><Clock8 size={28}/></h5>
+                                    <h5 className='clockListIcon'><Clock8 /></h5>
                                     <h5 className='clockListText'>{timeDisplay(headerDate)}</h5>
                                 </ListGroup.Item>
-                            </ListGroup>
+                            </ListGroup>                        
                         </div>
                     </div>
                     <div className="p-2 ms-auto"></div>
