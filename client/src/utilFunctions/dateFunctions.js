@@ -4,18 +4,19 @@ export const dateDisplay = (dateString) => {
     const options = {
         day: '2-digit',
         month: '2-digit',
-        year: 'numeric'
+        year: 'numeric',
+        timeZone: 'Africa/Johannesburg'// Set the timezone
     }
     return new Date(dateString).toLocaleDateString('en-GB', options);
 }
 
-// Function to get the current date in 'DD/MM/YYYY' format
-export const currentDate = () => {
-    const options = {
-        day: '2-digit', // Display day as two digit
-        month: '2-digit',  // Display month as two digits
-        year: 'numeric',// Display year as four digits
-        timeZone: 'Africa/Johannesburg'// Set the timezone
-    };
-    return new Intl.DateTimeFormat('en-GB', options).format(new Date());// Format the current date
+// Function to specify the time format
+// Format time as hh:mm:ss
+export const timeDisplay = (dateObj) => {
+    return dateObj.toLocaleTimeString('en-GB', {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false,
+    });
 };

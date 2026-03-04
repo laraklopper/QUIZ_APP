@@ -2,9 +2,13 @@ import React, {useState, useEffect} from 'react'
 import '../css/componentCSS/Header.css';
 import Row from 'react-bootstrap/Row'; // Import the Row component from react-bootstrap
 import Col from 'react-bootstrap/Col'; // Import the Col component from react-bootstrap
+import ListGroup from 'react-bootstrap/ListGroup';// Import the ListGroup component from react-bootstrap
 import Stack from 'react-bootstrap/Stack';
 import { Link } from 'react-router-dom';
-import { UserLock } from 'lucide-react';
+// Import icons from lucide-react
+import { UserLock, ChartBarBig, LogIn, Calendar, Clock8 } from 'lucide-react';
+import { dateDisplay } from '../utilFunctions/dateFunctions';
+
 export default function MainHeader({mainHeading}) {
     const [headerDate, setHeaderDate] = useState()
 
@@ -28,6 +32,15 @@ export default function MainHeader({mainHeading}) {
                   <Stack direction="horizontal" gap={3} id='headerStack'>
                     <div className="p-2">
                         {/* Header Clock */}
+                        <div id='headerClock' aria-label='Current Date and Time'>                   
+                            <ListGroup variant="flush" id='dateTimeList'>
+                                <ListGroup.Item>
+                                    <h5 className='clockListIcon'><Calendar size={28}/></h5>
+                                    <h5 className='clockListText'>{dateDisplay(headerDate)}</h5>
+                                </ListGroup.Item>
+                                <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
+                            </ListGroup>
+                        </div>
                     </div>
                     <div className="p-2 ms-auto"></div>
                     <div className="p-2" id='navigation'>
@@ -38,7 +51,7 @@ export default function MainHeader({mainHeading}) {
                                 </li>
                                 <li className='linkItem'>
                                     <Link className='refLink' to='/reg'>REGISTRATION</Link>
-                                </li>
+                                </li>   
                             </ul>
                         </nav>
                     </div>
