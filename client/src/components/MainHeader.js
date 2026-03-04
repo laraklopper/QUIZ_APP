@@ -9,6 +9,8 @@ import { Link } from 'react-router-dom';
 import { UserLock, ChartBarBig, LogIn, Calendar, Clock8 } from 'lucide-react';
 import { dateDisplay, timeDisplay } from '../utilFunctions/dateFunctions';
 
+/*MainHeader component: Displays the main header of the application, 
+including the current date and time, navigation links, and page heading.*/
 export default function MainHeader({mainHeading}) {
     const [headerDate, setHeaderDate] = useState()
 
@@ -27,6 +29,7 @@ export default function MainHeader({mainHeading}) {
     //=========================JSX RENDERING==================
   return (
     <header id='header'>
+    {/* Header Row 1: Date and Time + Navigation */}
         <Row id='headerRow1'>
             <Col id='headerCol1'>
                   <Stack direction="horizontal" gap={3} id='headerStack'>
@@ -61,9 +64,10 @@ export default function MainHeader({mainHeading}) {
                  </Stack>
             </Col>
         </Row>
+        {/* Header Row 2: Page Heading + main App Heading */}
         <Row id='headerRow2'>
             <Col></Col>
-            <Col xs={5}>
+            <Col xs={5} id='headingCol'>
                 <div id='headingBlock'>
                     <h1 id='appHeading'>QUIZ</h1>
                     <h2 id='pageHeading'>{mainHeading}</h2>
@@ -71,13 +75,12 @@ export default function MainHeader({mainHeading}) {
             </Col>
             <Col></Col>
         </Row>
-        <Row id='headerEventRow'>
-            <Col id='headerCol1'>
+        {/* Header Row 3: Event Bar */}
+        <Row id='headerEventRow' role='presentation' aria-hidden='true'>
+            <Col id='headerEventCol' aria-live='polite'>
                 <div className='header-event-bar'>
                     <div className='event-track'>
                         <UserLock className='user-slide' />
-
-
                     </div>
                 </div>
             </Col>
