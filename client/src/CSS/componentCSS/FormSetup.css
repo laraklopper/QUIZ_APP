@@ -21,11 +21,14 @@
     border-radius: 5px;
     border: solid black 1px;
     height: 40px;
+    font-family: "Roboto Mono", monospace;
+    font-weight: 700;
 }
 .visibleMsg{
     margin: 0px;
     padding: 0px;
     font-weight: 700;
+    font-family: "Roboto Mono", monospace;
 }
 /* BUTTONS */
 #showPasswordBtn{
