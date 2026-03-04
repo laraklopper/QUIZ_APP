@@ -5,6 +5,7 @@ import Col from 'react-bootstrap/Col';
 import Stack from 'react-bootstrap/Stack';
 import ListGroup from 'react-bootstrap/ListGroup';
 import { Calendar, Clock8 } from 'lucide-react';
+import { Copyright } from 'lucide-react';
 import { dateDisplay, timeDisplay } from '../utilFunctions/dateFunctions';
 
 export default function PageFooter() {
@@ -35,12 +36,13 @@ export default function PageFooter() {
             <div className="p-2 ms-auto"></div>
             <div className="p-2" id='footerTimeBlock'>
                 <div id='footerClock'>
-                        <ListGroup variant="flush" id='footerDateTime'>
-                            <ListGroup.Item id='dateItem'>
-                                <h5 className='clockListText'><Calendar size={20}/>{dateDisplay(footerDate)}</h5>
+                        <ListGroup variant="flush" id='footerDateTime' aria-labelledby='footeDateTimeTitle'>
+                        <p id='footerDateTimeTitle' className='visually-hidden'>Current Date & Time</p>
+                            <ListGroup.Item id='footerDateItem'>
+                                <h5 className='timeStamp'><Calendar size={20} fontWeight={700} fontFamily='"Playpen Sans", cursive'/>{dateDisplay(footerDate)}</h5>
                             </ListGroup.Item>
-                            <ListGroup.Item id='timeItem'>
-                                <h5 className='clockListText'><Clock8 size={20}/>{timeDisplay(footerDate)}</h5>
+                            <ListGroup.Item id='footerTimeItem'>
+                                <h5 className='timeStamp'><Clock8 size={20} fontWeight={700} fontFamily='"Playpen Sans", cursive'/>{timeDisplay(footerDate)}</h5>
                             </ListGroup.Item>
                         </ListGroup>
                 </div>
@@ -48,12 +50,16 @@ export default function PageFooter() {
         </Stack>
         </Col>
       </Row>
-       <Row>
-        <Col>1 of 3</Col>
-        <Col xs={5}>
-            <p id='footerText'>© 2026 Quiz App. All rights reserved.</p>
+       <Row id='footerRow3'>
+    <Col id='footerCol3'></Col>
+        <Col  xs={5} id='footerTextCol' aria-labelledby='footerTextTitle'>
+        <div aria-labelledby='footerTextTitle' id='copyRightBlock'>
+            <p id='footerTextTitle' className='visually-hidden'>Copyright</p>
+            <h6 id='footerText'> <Copyright size={16}/>2026 Quiz App. All rights reserved.</h6>
+        </div>
+            
         </Col>
-        <Col>3 of 3</Col>
+        <Col id='footerCol4'></Col>
       </Row>
     </footer>
   )
