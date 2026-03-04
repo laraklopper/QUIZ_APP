@@ -57,3 +57,6 @@ const checkJwtToken = (req, res, next) => {
         });
     }
 }
+
+// Export the middleware function to be used in other parts of the application
+module.exports = {checkJwtToken}
