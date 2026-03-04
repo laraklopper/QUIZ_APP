@@ -79,7 +79,9 @@
     display: flex;
     margin: 0px;
     padding: 0px;
-    align-items: flex-end;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
 }
 #regisPswdMessage{
     margin: 0px;
@@ -101,7 +103,8 @@
     height: 40px;
     width: 180px;
         margin: 5px;
-
+padding: 0px;
+align-items: center;
     font-weight: 700;
     font-family: "Roboto Mono", monospace;
     font-size: 14px;
@@ -114,7 +117,7 @@
     height: 40px;
     width: 180px;
        margin: 5px;
-
+padding: 0px;
     font-weight: 700;
     font-family: "Roboto Mono", monospace;
     font-size: 14px;

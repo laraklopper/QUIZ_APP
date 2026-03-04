@@ -59,10 +59,11 @@
 #clearFormBtn{
     height: 40px;
     width: 180px;
-    margin: 5px;
+    margin: 10px;
     font-weight: 700;
     font-family: "Roboto Mono", monospace;
     font-size: 14px;
+    padding: 0px;
     display: flex;
     justify-content: center;
     color: #000;
@@ -71,6 +72,7 @@
 #clearFormBtn:hover{
     height: 40px;
     width: 180px;
+    padding: 0px;
     margin: 10px;
     font-weight: 700;
     font-family: "Roboto Mono", monospace;
