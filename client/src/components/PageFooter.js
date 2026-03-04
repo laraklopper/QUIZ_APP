@@ -5,6 +5,7 @@ import Stack from 'react-bootstrap/Stack';
 import ListGroup from 'react-bootstrap/ListGroup';
 import { Calendar, Clock8 } from 'lucide-react';
 import { dateDisplay, timeDisplay } from '../utilFunctions/dateFunctions';
+
 export default function PageFooter() {
     const [footerDate, setFooterDate] = useState(new Date())
 
@@ -20,7 +21,7 @@ export default function PageFooter() {
     }, [])// Empty dependency array → runs once on mount
 
     //=========================JSX RENDERING==================
-    
+
   return (
     <footer className="page-footer">
         <Row id='footerRow1'>
