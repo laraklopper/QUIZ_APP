@@ -8,9 +8,12 @@ import { Calendar, Clock8 } from 'lucide-react';
 import { Copyright } from 'lucide-react';
 import { dateDisplay, timeDisplay } from '../utilFunctions/dateFunctions';
 
+//*PageFooter component: Displays the footer of the application, including the current date and time, and copyright information.*/
 export default function PageFooter() {
+    //========STATE VARIABLES================
     const [footerDate, setFooterDate] = useState(new Date())
 
+    //=================USE EFFECT HOOK TO UPDATE TIME======================
     useEffect(() => {
         // Create an interval that updates the time every second
         const timer = setInterval(() => {  
@@ -29,6 +32,7 @@ export default function PageFooter() {
         <Row id='footerRow1'>
         <Col id='footerCol1'></Col>
       </Row>
+      {/* FOOTER TIME AND DATE DISPLAY */}
       <Row id='footerRow2'>
         <Col id='footerCol2'>
         <Stack direction="horizontal" gap={3} id='footerTimeStack'>
@@ -52,14 +56,15 @@ export default function PageFooter() {
         </Stack>
         </Col>
       </Row>
+      {/* COPYRIGHT INFORMATION */}
        <Row id='footerRow3'>
     <Col id='footerCol3'></Col>
+    {/* COPYRIGHT INFORMATION */}
         <Col  xs={5} id='footerTextCol' aria-labelledby='footerTextTitle'>
         <div aria-labelledby='footerTextTitle' id='copyRightBlock'>
             <p id='footerTextTitle' className='visually-hidden'>Copyright</p>
             <h6 id='footerText'> <Copyright size={16}/>2026 Quiz App. All rights reserved.</h6>
-        </div>
-            
+        </div>            
         </Col>
         <Col id='footerCol4'></Col>
       </Row>
