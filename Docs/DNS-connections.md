@@ -119,12 +119,29 @@ Look for the **DNS Servers** line under your active network adapter.
 
 ## DNS AND THIS PROJECT
 
+This project is a full-stack MERN-style quiz application:
 
-This project connects to **MongoDB Atlas** using an SRV connection string stored in `server/.env`:
+| Layer | Port | Start Command |
+|---|---|---|
+| **React Client** | `3000` | `cd client && npm start` |
+| **Express Server** | `3001` | `cd server && npm start` |
+| **MongoDB Atlas** | Cloud | SRV connection (see below) |
+
+The server connects to **MongoDB Atlas** using an SRV connection string stored in `server/.env`:
 
 ```
-DATABASE_URL = mongodb+srv://user:password@cluster-one.0kjnxst.mongodb.net/
+DATABASE_URL = mongodb+srv://<user>:<password>@cluster-one.0kjnxst.mongodb.net/?appName=Cluster-One
+DATABASE_NAME = quizAppDatabase
 ```
+
+When the server starts, Mongoose resolves the SRV record:
+```
+_mongodb._tcp.cluster-one.0kjnxst.mongodb.net
+```
+
+This returns the actual hostnames and ports of the Atlas cluster nodes, then connects to the `quizAppDatabase` database.
+
+### Troubleshooting Connection Errors
 
 If you see this error:
 ```
@@ -134,4 +151,13 @@ querySrv ECONNREFUSED _mongodb._tcp.cluster-one.0kjnxst.mongodb.net
 It means your DNS server cannot resolve the SRV record. Fix it by:
 1. Changing your DNS to `8.8.8.8` / `8.8.4.4` (Google)
 2. Running `ipconfig /flushdns`
-3. Restarting the server with `node app.js`
+3. Restarting the server with `npm start` (from the `server/` directory)
+
+### Connection Timeouts
+
+The server is configured with:
+- **Server selection timeout:** 5000ms
+- **Connection timeout:** 10000ms
+- Auto-reconnection enabled
+
+If the connection times out, check your network and Atlas cluster status before retrying.
