@@ -126,7 +126,7 @@ export default function LoginForm({userData, setUserData, onSubmit}) {
            className='input'
             id='loginPassword'
             // Attributes
-            type='password'   
+            type={showPassword ? 'text' : 'password'}
             placeholder='PASSWORD'
             name='password'
             value={userData.password}
