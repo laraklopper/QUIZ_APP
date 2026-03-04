@@ -6,6 +6,7 @@ import Col from 'react-bootstrap/Col';
 import LoginForm from '../components/LoginForm';
 import MainHeader from '../components/MainHeader';
 import { IdCard } from 'lucide-react';
+import PageFooter from '../components/PageFooter';
 
 export default function Login({userData, setUserData, setError, setLoggedIn}) {
 
@@ -73,6 +74,7 @@ export default function Login({userData, setUserData, setError, setLoggedIn}) {
                 <Col></Col>
             </Row>
         </section>
+        <PageFooter/>
     </Container>
   )
 }
