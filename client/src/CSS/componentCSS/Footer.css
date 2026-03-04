@@ -47,6 +47,10 @@
     margin: 0px;
     padding: 0px;
 }
+#footerTimeBlock{
+        margin: 0px;
+    padding: 0px 5px 0px 0px;
+}
 /* CLOCK */
 #footerClock {
     display: flex;

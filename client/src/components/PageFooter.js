@@ -38,7 +38,7 @@ export default function PageFooter() {
         <Stack direction="horizontal" gap={3} id='footerTimeStack'>
             <div className="p-2"></div>
             <div className="p-2 ms-auto"></div>
-            <div className="p-2" id='footerTimeBlock'>
+            <div id='footerTimeBlock'>
                 <div id='footerClock'>
                         <ListGroup variant="flush" id='footerDateTime' aria-labelledby='footeDateTimeTitle'>
                         <p id='footerDateTimeTitle' className='visually-hidden'>Current Date & Time</p>
