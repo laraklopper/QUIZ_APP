@@ -33,19 +33,19 @@ export default function MainHeader({mainHeading}) {
         <Row id='headerRow1'>
             <Col id='headerCol1'>
                   <Stack direction="horizontal" gap={3} id='headerStack'>
-                    <div className="p-2">
+                    <div className="p-2" id='dateTimeBlock'>
                         {/* Header Clock */}
                         <div id='headerClock' aria-label='Current Date and Time'>                   
                             <ListGroup variant="flush" id='dateTimeList'>
-                                <ListGroup.Item id='dateItem'>
-                                <p className='visually-hidden'>Current Date:</p>
-                                <h5 className='clockListIcon'><Calendar size={20}/></h5>
-                                <h5 className='clockListText'>{dateDisplay(headerDate)}</h5>
-                                    
+                                {/* DATE:dateDisplay  -> formats Date into readable date string */}
+                                <ListGroup.Item id='dateItem' aria-labelledby='dateLabel'>
+                                    <p id='dateLabel' className='visually-hidden'>Current Date:</p>
+                                    <h5 className='clockListText'><Calendar size={20}/>{dateDisplay(headerDate)}</h5>
                                 </ListGroup.Item>
-                                <ListGroup.Item id='timeItem'>
-                                    <h5 className='clockListIcon'><Clock8 /></h5>
-                                    <h5 className='clockListText'>{timeDisplay(headerDate)}</h5>
+                                <ListGroup.Item id='timeItem' aria-labelledby='timeLabel'>
+                                {/* TIME: timeDisplay  -> formats Date into readable time string */}
+                                     <p id='timeLabel' className='visually-hidden'>Current Time:</p>
+                                    <h5 className='clockListText'><Clock8 size={20}/>{timeDisplay(headerDate)}</h5>
                                 </ListGroup.Item>
                             </ListGroup>                        
                         </div>

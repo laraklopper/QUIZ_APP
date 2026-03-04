@@ -34,6 +34,8 @@
 #appHeading{
     font-family: "Winky Rough", sans-serif;
     font-weight: 800;
+    text-decoration: underline;
+    font-size: 48px;
 }
 #pageHeading{
     font-family: "Alkatra", system-ui;
@@ -55,9 +57,8 @@
     border: none;
     padding: 0px;
 }
-#clockListText{
+.clockListText{
     display: flex;
-    justify-content: center;
     align-items: center;
     margin: 0px;
     padding: 0px;
