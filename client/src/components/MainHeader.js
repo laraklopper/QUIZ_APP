@@ -9,9 +9,15 @@ export default function MainHeader({mainHeading}) {
     const [headerDate, setHeaderDate] = useState()
 
     useEffect(() => {
-        const timer = setI
-    })
-
+    // Create an interval that updates the time every second
+    const timer = setInterval(() => {
+      setHeaderDate(new Date())
+    }, 1000);
+    // Cleanup function:
+    // Clears interval when component unmounts
+    // Prevents memory leaks and duplicate timers
+    return () => clearInterval(timer)
+  }, [])// Empty dependency array → runs once on mount
 
 
     //=========================JSX RENDERING==================
