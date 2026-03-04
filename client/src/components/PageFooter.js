@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Stack from 'react-bootstrap/Stack';
@@ -7,6 +7,20 @@ import { Calendar, Clock8 } from 'lucide-react';
 import { dateDisplay, timeDisplay } from '../utilFunctions/dateFunctions';
 export default function PageFooter() {
     const [footerDate, setFooterDate] = useState(new Date())
+
+    useEffect(() => {
+        // Create an interval that updates the time every second
+        const timer = setInterval(() => {  
+            setFooterDate(new Date())
+        }, 1000);
+        // Cleanup function:
+        // Clears interval when component unmounts
+        // Prevents memory leaks and duplicate timers
+        return () => clearInterval(timer)
+    }, [])// Empty dependency array → runs once on mount
+
+    //=========================JSX RENDERING==================
+    
   return (
     <footer className="page-footer">
         <Row id='footerRow1'>
