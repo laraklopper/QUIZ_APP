@@ -39,9 +39,11 @@ export default function PageFooter() {
                         <ListGroup variant="flush" id='footerDateTime' aria-labelledby='footeDateTimeTitle'>
                         <p id='footerDateTimeTitle' className='visually-hidden'>Current Date & Time</p>
                             <ListGroup.Item id='footerDateItem'>
+                             {/* DATE:dateDisplay  -> formats Date into readable date string */}
                                 <h5 className='timeStamp'><Calendar size={20} fontWeight={700} fontFamily='"Playpen Sans", cursive'/>{dateDisplay(footerDate)}</h5>
                             </ListGroup.Item>
                             <ListGroup.Item id='footerTimeItem'>
+                            {/* TIME: timeDisplay  -> formats Date into readable time string */}
                                 <h5 className='timeStamp'><Clock8 size={20} fontWeight={700} fontFamily='"Playpen Sans", cursive'/>{timeDisplay(footerDate)}</h5>
                             </ListGroup.Item>
                         </ListGroup>
