@@ -179,7 +179,7 @@ export default function LoginForm({userData, setUserData, onSubmit}) {
       </div>
         {/* Help text shown while password is focused */} 
         {passwordMsg && (
-            <div className="p-2" id='messageBlock'>
+            <div className="p-2" id='passwordMsgBlock'>
               <p className='msgText' id={passwordHelpId} aria-live="polite">
                 <strong>We will never share <br/> your password</strong>
               </p>

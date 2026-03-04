@@ -24,6 +24,19 @@
     font-family: "Roboto Mono", monospace;
     font-weight: 700;
 }
+#usernameMsgBlock, #passwordMsgBlock{
+    display: flex;
+    justify-content: center;
+}
+
+.msgText{
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    font-family: "Roboto Mono", monospace;
+    font-weight: 700;
+    text-align: center;
+ }
 .visibleMsg{
     margin: 0px;
     padding: 0px;
