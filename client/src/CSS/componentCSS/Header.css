@@ -4,7 +4,7 @@
     width: 100%;
     margin: 10px 0px;
     flex-direction: column;
-    background-color: silver;
+    background-color: #a9a9a9;
 }
 /* Layout */
 #headerRow1,
@@ -50,14 +50,19 @@
     width: 100%;
     justify-content: center;
     align-items: center;
+    background-color: #D6D6D6;
+    border-radius: 5px;
+    padding: 10px 5px 5px 5px;
 }
 
 /* DATE AND TIME LIST */
 #dateTimeList{
     display: flex;
+    align-items: flex-start;
     gap: 10px;
     margin: 0px;
     padding: 0px;
+    width: 150px;
     background-color: transparent;
 }
 #timeItem,
@@ -77,7 +82,10 @@
     margin: 0px;
     padding: 0px;
     background-color: transparent;
-    font-size: 20px;
+    font-size: 16px;
+    gap: 5px;
+    font-family: "Playpen Sans", cursive;
+    font-weight: 700;
     color: #000;
 }
 /* TIME AND DATE ICONS */
