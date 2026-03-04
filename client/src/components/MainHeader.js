@@ -52,11 +52,15 @@ export default function MainHeader({mainHeading}) {
                     </div>
                     <div className="p-2 ms-auto"></div>
                     <div className="p-2" id='navigation'>
+                    {/* Navigation Bar before Login*/}
                         <nav className='navigation'>
                             <ul id='loginNavbar'>
+                            {/* Navigation Links */}
+                                 {/* Link to Login Page */}
                                 <li className='linkItem'>
                                     <Link className='refLink' to='/'><LogIn className='linkIcon'/>LOGIN</Link>
                                 </li>
+                                {/* Link to Registration Page */}
                                 <li className='linkItem'>
                                     <Link className='refLink' to='/reg'><ChartBarBig className='linkIcon'/>REGISTRATION</Link>
                                 </li>   
