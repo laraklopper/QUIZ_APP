@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import '../css/componentCSS/Header.css';
 import Row from 'react-bootstrap/Row'; // Import the Row component from react-bootstrap
 import Col from 'react-bootstrap/Col'; // Import the Col component from react-bootstrap
@@ -6,6 +6,14 @@ import Stack from 'react-bootstrap/Stack';
 import { Link } from 'react-router-dom';
 import { UserLock } from 'lucide-react';
 export default function MainHeader({mainHeading}) {
+    const [headerDate, setHeaderDate] = useState()
+
+    useEffect(() => {
+        const timer = setI
+    })
+
+
+
     //=========================JSX RENDERING==================
   return (
     <header id='header'>
