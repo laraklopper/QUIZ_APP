@@ -150,7 +150,7 @@ export default function RegistrationForm({newUserData, setNewUserData, onSubmit,
                                     aria-invalid={firstNameEmpty ? 'true' : 'false'}
                                     aria-describedby={firstNameEmpty ? firstNameErrorId : undefined}
                                 />
-                                <Asterisk size={16} aria-hidden='true' color='reds'/>
+                                <Asterisk size={16} aria-hidden='true' color='red'/>
                             </label>
                             {/* First name error (screen reader only) */}
                             {showFirstNameError && (
@@ -243,7 +243,6 @@ export default function RegistrationForm({newUserData, setNewUserData, onSubmit,
                         </div>
                     </Col>
                     {/* Col 7: Date of Birth */}
-
                     <Col xs={6} md={4} id='regisCol7' >
                         <label className='regisLabel' htmlFor='regisDateOfBirth'>
                             <p className='labelText'>DATE OF BIRTH:</p>
@@ -261,7 +260,7 @@ export default function RegistrationForm({newUserData, setNewUserData, onSubmit,
                                 aria-invalid={dateOfBirthEmpty ? 'true' : 'false'}
                                 aria-describedby={dateOfBirthEmpty ? dateOfBirthErrorId : undefined}
                             />
-                            <Asterisk size={16} aria-hidden='true'/>
+                            <Asterisk size={16} color='red' aria-hidden='true'/>
                         </label>
                         {/* Date of birth error (screen reader only) */}
                         {showDateOfBirthError && (
