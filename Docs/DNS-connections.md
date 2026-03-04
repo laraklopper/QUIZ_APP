@@ -2,11 +2,14 @@
 **OVERVIEW**
 DNS `(Domain Name System)` is like a phone book for the internet. It translates human-readable domain names (e.g. `google.com`) into IP addresses (e.g. `142.250.80.46`) that computers use to communicate with each other.
 Without DNS, you would need to memorize IP addresses for every website or service you want to connect to.
+
 ## TABLE OF CONTENTS
 1. [HOW DNS WORKS](#how-dns-works)
-
-
-
+2. [TYPES OF DNS RECORDS](#types-of-dns-records)
+3. [SRV RECORDS AND MONGODB ATLAS](#srv-records-and-mongodb-atlas)
+4. [DNS SERVERS](#dns-servers)
+5. [COMMON DNS COMMANDS](#common-dns-commands)
+6. [DNS AND THIS PROJECT](#dns-and-this-project)
 
 ## How DNS Works
 
@@ -21,7 +24,7 @@ Your Computer → DNS Resolver → Root DNS → TLD DNS → Authoritative DNS �
 ```
 ---
 
-## Types of DNS Records
+## TYPES OF DNS RECORDS
 
 | Record Type | Purpose | Example |
 |---|---|---|
@@ -61,7 +64,7 @@ This SRV record returns the actual hostnames and ports of the MongoDB servers in
 
 ---
 
-## DNS Servers
+## DNS SERVERS
 
 Your DNS server is the service that resolves domain names. By default, your ISP assigns one automatically, but you can manually set a faster or more reliable one.
 
@@ -88,7 +91,7 @@ Your DNS server is the service that resolves domain names. By default, your ISP 
 
 ---
 
-## Common DNS Commands
+## COMMON DNS COMMANDS
 
 ### Flush DNS Cache (Windows)
 Clears locally stored DNS lookups, forcing fresh lookups:
@@ -114,7 +117,8 @@ Look for the **DNS Servers** line under your active network adapter.
 
 ---
 
-## DNS and This Project
+## DNS AND THIS PROJECT
+
 
 This project connects to **MongoDB Atlas** using an SRV connection string stored in `server/.env`:
 
