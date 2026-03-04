@@ -6,6 +6,7 @@
     flex-direction: column;
     background-color: silver;
 }
+/* Layout */
 #headerRow1,
 #headerRow2{
     display: flex;
@@ -31,6 +32,7 @@
     flex-direction: column;
     align-items: center;
 }
+/* HEADINGS */
 #appHeading{
     font-family: "Winky Rough", sans-serif;
     font-weight: 800;
@@ -40,6 +42,7 @@
 #pageHeading{
     font-family: "Alkatra", system-ui;
     font-weight: 700;
+    font-size: 30px;
 }
 /* CLOCK */
 #headerClock{
@@ -47,6 +50,15 @@
     width: 100%;
     justify-content: center;
     align-items: center;
+}
+
+/* DATE AND TIME LIST */
+#dateTimeList{
+    display: flex;
+    gap: 10px;
+    margin: 0px;
+    padding: 0px;
+    background-color: transparent;
 }
 #timeItem,
 #dateItem{
@@ -57,6 +69,8 @@
     border: none;
     padding: 0px;
 }
+/* TEXT */
+
 .clockListText{
     display: flex;
     align-items: center;
@@ -66,13 +80,7 @@
     font-size: 20px;
     color: #000;
 }
-#dateTimeList{
-    display: flex;
-    gap: 10px;
-    margin: 0px;
-    padding: 0px;
-    background-color: transparent;
-}
+/* TIME AND DATE ICONS */
 .clockListIcon{
     display: flex;
     justify-content: center;
@@ -81,7 +89,7 @@
     padding: 0px;
     color: #000;
 }
-/* NAVBAR */
+/* NAVIGATION BAR */
 #loginNavbar,
 #navbar {
     display: flex;
@@ -96,19 +104,18 @@
     flex-direction: column;
     width: 200px;
 }
-/* links */
+/* Links */
 .linkItem {
     width: 200px;
     padding: 2px 5px 2px 5px;
     border-radius: 5px;
     display: flex;
     justify-content: center;
-background-color: #E8F0F6;
-height: 40px;
+    background-color: #E8F0F6;
+    height: 40px;
     align-items: center;
     margin: 0px;
 }
-
 a, .refLink{
     display: flex;
     justify-content: center;
