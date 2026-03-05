@@ -356,13 +356,6 @@ router.delete('/deleteUser/:id', checkJwtToken, checkAdmin, generalLimiter, asyn
             return res.status(404).json({ success: false, message: 'User not found (or cannot be deleted).' });
         }
 
-        // 6) Attempt to find and delete the user by ID
-        const deletedUser = await User.findByIdAndDelete(id);
-        if (!deletedUser) {
-            console.error(`[ERROR: userRoutes.js, /deleteUser/:id] User with ID ${id} not found`);
-            return res.status(404).json({ success: false,  message: 'User not found' });
-        }
-
         console.log(`[INFO: userRoutes.js, /deleteUser/:id] User with ID ${id} deleted successfully`);
         return res.status(200).json({ success: true, message: 'User deleted successfully' });
     } catch (error) {
