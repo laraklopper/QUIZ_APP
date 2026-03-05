@@ -1,8 +1,8 @@
 // scoreRoute.js
 const express = require('express');
 const router = express.Router();
-const Score = require('../models/Score'); // import the Score model 
-const Quiz = require('../models/Quiz'); // Assuming you have a Quiz model defined in models/Quiz.js
+const Score = require('../models/Score'); // Import the Score model to interact with the scores collection in the database
+const Quiz = require('../models/Quiz'); // Import the Quiz model to check for existing quizzes when fetching scores
 const User = require('../models/User'); // Import the User model to check for existing users when fetching scores
 
 
@@ -90,7 +90,102 @@ router.get('/findScores/:username', async (req, res) => {
     }
 })
 //-----------POST---------------
-//----------PUT----------------
-//-----------DELETE----------------
+router.post('/submitScore', async (req, res) => {
+    try{
+        const { username, quizTitle, score } = req.body;// Extract the username, quiz title, and score from the request body
 
+        // Conditional rendering to check if the required fields are present and valid
+        if (!username || typeof username !== 'string' || !quizTitle || typeof quizTitle !== 'string' || score === undefined || typeof score !== 'number') {
+            console.error('[scoreRoutes.js, /submitScore] Invalid input. Username and quiz title must be strings, and score must be a number.');
+            return res.status(400).json({ success: false, message: 'Invalid input. Username and quiz title must be strings, and score must be a number.' });
+        }
+
+        if (typeof score !== 'number' || score < 0) {
+            return res.status(400).json({message: 'Score must be a integer'})
+        }
+
+        // Check if the quiz exists
+        const quiz = await Quiz.findOne({ title: quizTitle }).exec();
+        //Conditional rendering to check if the quiz exists
+        if (!quiz) {
+            console.error(`[scoreRoutes.js, /submitScore] Quiz not found: ${quizTitle}`);
+            return res.status(404).json({ success: false, message: 'Quiz not found.' });
+        }
+
+        //Check if a score already exists for the quiz    
+        const existingScore = await Score.findOne({ username, quizId: quiz._id }).exec();
+
+        // Conditional rendering to Check if a score already exists for the user and the quiz
+        if (existingScore) {
+            console.error(`[scoreRoutes.js, /submitScore] Score already exists for user ${username} and quiz ${quizTitle}`);
+            return res.status(400).json({ success: false, message: 'Score already exists for this user and quiz.' });
+        }else {
+            // If no existing score, create a new score document
+            // If a score exists, update it; otherwise, create a new score        
+            const newScore = existingScore
+                ? await Score.findByIdAndUpdate(
+                    existingScore._id,// Use the ID of the existing score
+                    { score, $inc: { attempts: 1 } },// Increment attempts
+                    { new: true }// Return the updated score
+                )
+                : await new Score({ username, name, score }).save();// Create a new score
+            res.status(201).json(newScore)// Save the score and return the result in JSON format
+        }
+       
+    //Log the score in the console for debugging purposes
+        console.log(`Score submitted: ${username} scored ${score} on quiz ${quizTitle}`);
+    }
+    catch (error) {
+        console.error('[ERROR: scoreRoutes.js, /submitScore] An error occurred while submitting the score.', error);
+        res.status(500).json({ success: false, message: 'An error occurred while submitting the score.', error: error.message });
+    }
+});
+//----------PUT----------------
+router.put('/updateScore/:id', async (req, res) => {
+    try {
+        const { id } = req.params;// Extract the score ID from the request parameters
+        const { score } = req.body;// Extract the new score from the request body
+
+        //Conditional rendering to check that the Id is a valid ObjectId
+            if (!mongoose.Types.ObjectId.isValid(id)) {
+                console.error(`[scoreRoutes.js, /updateScore/:id] Invalid score ID format: ${id}`);
+                return res.status(400).json({ success: false, message: 'Invalid score ID format.' });
+            }
+
+
+        //Conditional rendering to check if the score is a 0 or a positive number
+if (typeof score !== 'number' || score < 0) {
+    console.error(`[scoreRoutes.js, /updateScore/:id] Invalid score value: ${score}. Score must be a non-negative number.`);
+    return res.status(400).json({ success: false, message: 'Invalid score value. Score must be a non-negative number.' });
+}
+        
+           const existingScore = await Score.findById(id).exec();// Find existing score by id
+         //Conditional rendering to check if the score was found
+            if (!existingScore) {
+                console.error(`[scoreRoutes.js, /updateScore/:id] Score not found with ID: ${id}`);
+                return res.status(404).json({ success: false, message: 'Score not found.' });
+            }
+          // Conditional rendering to check if new score is higher
+            if (existingScore.score >= score) {
+                console.log(`[scoreRoutes.js, /updateScore/:id] Existing score (${existingScore.score}) is higher than or equal to new score (${score}). No update performed.`);
+                // If the new score is not higher than the existing score, return early
+                return res.status(200).json({ success: false, message: 'New score is not higher than the existing score' });
+                }
+
+                 // Find the score by its ID and update it
+                const editedScore = await Score.findByIdAndUpdate(
+                    id,//Score id
+                    { score, $inc: { attempts: 1 } },// Increment attempts 
+                    { new: true } //Return the updated document
+                );
+        
+         console.log(`[scoreRoutes.js, /updateScore/:id] Updated score for user ${existingScore.username} on quiz ${existingScore.quizId}`);//Log the edited score in the console for debugging purposes              
+        return res.status(200).json(editedScore); // Return the updated score in JSON format
+    } catch (error) {
+        console.error('[ERROR: scoreRoutes.js, /updateScore/:id] An error occurred while updating the score.', error);
+        res.status(500).json({ success: false, message: 'An error occurred while updating the score.', error: error.message });
+    }
+})
+
+// Export the router to be used in other parts of the application
 module.exports = router;
