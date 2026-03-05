@@ -63,10 +63,20 @@ const checkJwtToken = (req, res, next) => {
     }
 }
 
+
 /*================================
 REQUEST LIMIT MIDDLEWARE
 ===============================*/
+/**Middleware General API rate limiterapplied to sensitive endpoints to limit 
+  to 100 requests per 15 minutes per IP*/
 
+  /**Rate limiter middleware to limit registration attempts to 3 per hour per IP to
+ help prevent spam account creation*/
+
+ /*Rate limiter Middleware to limit login 
+requests to 5 attempts per 15 minutes per IP*/
+
+/*Rate limiter middleware to limit password updates*/
 /*===============================
 PASSWORD VALIDATION MIDDLEWARE
 =========================*/
@@ -96,7 +106,18 @@ const hashPassword = async (req, res, next) => {
 /*Middleware to ensure that the password has a minimum of 
 eight characters and at least one special character*/
 const checkPasswordStrength = (req, res, next) => {
-    const { password } = req.body || {};
+    console.log('[INFO: middleware.js, checkPasswordStrength] Validating password strength');
+     // Support both registration (password) and password change (newPassword)
+    const pwd = req.body?.password ?? req.body?.newPassword;
+
+    if (typeof pwd !== 'string') {
+        console.error('[ERROR: middleware.js, checkPasswordStrength]: Password is required and must be a string');
+        return res.status(400).json({
+            success: false,
+            message: 'Password is required and must be a string'
+        }); 
+    }
+  
     const passwordRegex = /^(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/; // Minimum 8 characters and at least one special character
     if (!passwordRegex.test(password)) {
         return res.status(400).json({
@@ -109,5 +130,15 @@ const checkPasswordStrength = (req, res, next) => {
 /*====================================
 AGE VALIDATION MIDDLEWARE
 ========================*/
+//Middleware function to check that user age
+/*Only users 18 or older can register */
+
+/*========================
+ROLE MIDDLEWARE
+==========================*/
+//Middleware to allow managers and admin users admin privilesges to access certain routes
+
+
+//=====================EXPORT MIDDLEWARE===================================
 // Export the middleware function to be used in other parts of the application
 module.exports = {checkJwtToken, hashPassword, checkPasswordStrength};
