@@ -93,9 +93,21 @@ const hashPassword = async (req, res, next) => {
         return res.status(500).json({ message: 'Error processing password' });
     }
 };
-
+/*Middleware to ensure that the password has a minimum of 
+eight characters and at least one special character*/
+const checkPasswordStrength = (req, res, next) => {
+    const { password } = req.body || {};
+    const passwordRegex = /^(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/; // Minimum 8 characters and at least one special character
+    if (!passwordRegex.test(password)) {
+        return res.status(400).json({
+            success: false,
+            message: 'Password must be at least 8 characters long and contain at least one special character.'
+        });
+    }
+    next();
+};  
 /*====================================
 AGE VALIDATION MIDDLEWARE
 ========================*/
 // Export the middleware function to be used in other parts of the application
-module.exports = {checkJwtToken, hashPassword};
+module.exports = {checkJwtToken, hashPassword, checkPasswordStrength};
