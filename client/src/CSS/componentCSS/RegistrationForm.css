@@ -10,7 +10,8 @@
 #registrationDetails{
     background-color: #A8AEB3;
 }
-#regisHeadingRow,#regisRow1, #regisRow2, #regisRow3, #regisRow4{
+#regisHeadingRow,
+#regisRow1, #regisRow2, #regisRow3, #regisRow4{
     width: 100%;
     margin: 0px;
     padding: 10px 0px;
