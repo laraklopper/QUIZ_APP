@@ -191,6 +191,75 @@ router.post('/register', checkAge, checkPasswordStrength, registrationLimiter, h
 })
 
 //---------------------PUT-------------------
+router.put('/editUser/:id', checkJwtToken, async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { username, fullName, email } = req.body;
+
+        // Find the user by ID
+        const user = await User.findById(id);
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        // Build updates from provided fields
+        const updates = {};
+        if (typeof username === 'string' && username.trim() !== '') {
+            updates.username = username.trim();
+        }
+        if (typeof fullName?.firstName === 'string' && fullName.firstName.trim() !== '') {
+            updates['fullName.firstName'] = fullName.firstName.trim();
+        }
+        if (typeof fullName?.lastName === 'string' && fullName.lastName.trim() !== '') {
+            updates['fullName.lastName'] = fullName.lastName.trim();
+        }
+        if (typeof email === 'string' && email.trim() !== '') {
+            updates.email = email.trim().toLowerCase();
+        }
+
+        if (Object.keys(updates).length === 0) {
+            console.error('[ERROR: userRoutes.js, editUser/:id] No valid fields provided for update');
+            return res.status(400).json({ success: false, message: 'No valid fields provided for update' });
+        }
+
+        // Check for duplicate username or email (excluding current user)
+        const orConditions = [];
+        if (updates.username) orConditions.push({ username: updates.username });
+        if (updates.email) orConditions.push({ email: updates.email });
+
+        if (orConditions.length > 0) {
+            const dup = await User.findOne({ _id: { $ne: id }, $or: orConditions }).exec();
+            if (dup) {
+                const field = dup.username === updates.username ? 'Username' : 'Email';
+                console.error(`[ERROR: userRoutes.js, /editUser/:id] ${field} already in use`);
+                return res.status(409).json({ message: `${field} is already in use` });
+            }
+        }
+
+        // Apply updates and save
+        if (updates.username) user.username = updates.username;
+        if (updates.email) user.email = updates.email;
+        if (updates['fullName.firstName'] || updates['fullName.lastName']) {
+            user.fullName = {
+                firstName: updates['fullName.firstName'] ?? user.fullName.firstName,
+                lastName: updates['fullName.lastName'] ?? user.fullName.lastName,
+            };
+        }
+        await user.save();
+
+        console.log('[INFO: userRoutes.js] User updated:', {
+            userId: user._id,
+            username: user.username,
+        });
+
+        return res.status(200).json({ success: true, message: 'User updated successfully' });
+
+    } catch (error) {
+        console.error('[ERROR: userRoutes.js] Edit User failed:', error.message);
+        res.status(500).json({ success: false, message: 'Internal Server Error' });
+    }
+});
+
 
 //----------------------DELETE-------------------
 
