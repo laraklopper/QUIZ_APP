@@ -262,8 +262,8 @@ ADMIN MIDDLEWARE
 const checkAdmin = (req, res, next) => {
     console.log('[DEBUG: middleware.js, checkAdmin] Checking user role for admin access');
     try {
-        const userRole = req.user?.admin;
-        if (userRole !== 'admin') {
+        const isAdmin = req.user?.admin;
+        if (!isAdmin) {
             console.error('[ERROR: middleware.js, checkAdmin]: User is not an admin');
             return res.status(403).json({
                 success: false,
