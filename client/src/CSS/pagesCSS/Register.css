@@ -1,10 +1,11 @@
+/* REGISTER */
 #regisSection{
     background-color: olive;
     margin: 0px;
     padding: 0px;
     width: 100%;
     display: flex;
-        justify-content: center;
+    justify-content: center;
 }
 #regis-panel{
     width: 95%;
@@ -12,8 +13,6 @@
     margin: 10px 0px;
     padding: 5px;
 }
-
-
 /* SECTION 2 */
 #infoSection{
     background-color: olive;
@@ -21,8 +20,8 @@
     padding: 10px 5px;
     width: 100%;
 }
+/* REGISTRATION RULES */
 #regisRequire{
-   
     font-family: "Alkatra", system-ui;
     margin: 0px;
     border: none;
@@ -67,9 +66,20 @@
         display: flex;
         align-items: center;
 }
+#rulesRow{
+    display: flex;
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+}
 #rulesCol{
     display: flex;
     margin: 0px;
     padding: 0px;
     justify-content: center;
+}
+#rulesCol1, #rulesCol2{
+    display: flex;
+    margin: 0px;
+    padding: 0px;
 }

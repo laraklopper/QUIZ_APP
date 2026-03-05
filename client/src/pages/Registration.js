@@ -77,7 +77,7 @@ export default function Registration() {
       </section>
       <section id='infoSection'>
              <Row id='rulesRow'>
-               <Col></Col>
+               <Col id='rulesCol1'></Col>
                <Col xs={6} id='rulesCol'>
                   <Card id='rulesCard'>
                       <Card.Header id='rulesHeader'> 
@@ -101,7 +101,7 @@ export default function Registration() {
                       </ListGroup>
                    </Card>
                   </Col>
-                 <Col></Col>
+                 <Col rulesCol2></Col>
               </Row>
            </section>
       <PageFooter />
