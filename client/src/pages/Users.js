@@ -5,6 +5,10 @@ import Footer from '../components/Footer';
 export default function Users({logout, users}) {
   return (
     <Container>
+     {/* HEADER */}
+     <section id='userList'>
+      {/* USERS LIST */}
+     </section>
       <Footer logout={logout}/>
     </Container>
   )
