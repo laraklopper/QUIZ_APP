@@ -77,38 +77,33 @@ export default function Registration() {
       </section>
       <section id='infoSection'>
              <Row id='rulesRow'>
-             <Col></Col>
+               <Col></Col>
                <Col xs={6} id='rulesCol'>
-             <Card id='rulesCard'>
-      <Card.Header id='rulesHeader'> <h3 id='regisRequire'><ClipboardList size={28} />REGISTRATION REQUIREMENTS:</h3></Card.Header>
-      <ListGroup variant="flush" id='rulesList'>
-        <ListGroup.Item id='rule1'>
-             <h6 className='rule'>
-               <Pencil size={16}/>  THE USERNAME MUST BE UNIQUE AND CONTAIN 3-20 CHARACTERS
-              </h6>
-        </ListGroup.Item>
-        <ListGroup.Item id='rule2'>
-           <h6 className='rule'><Pencil  size={16}/>
-           PASSWORDS MUST BE AT LEAST 8 CHARACTERS AND AT LEAST ONE SPECIAL CHARACTER
-                
-              </h6>
-        </ListGroup.Item>
-        <ListGroup.Item id='rule3'>
-        <h6 className='rule'><Pencil size={16} />USER INFORMATION IS PRIVATE AND MAY NOT BE ACCESSED WITHOUT AUTHORIZATION</h6></ListGroup.Item>
-        <ListGroup.Item id='rule4'> 
-                
-                <h6 className='rule'><Pencil size={16}/>USERS MAY ONLY ON INITIAL REGISTRATION REGISTER AS AN
-                ADMIN USER</h6>  </ListGroup.Item>
-                <ListGroup.Item id='rule5'>
-                <h6 className='rule'><Pencil size={16} />BY CREATING AN ACCOUNT, YOU AGREE TO OUR TERMS OF SERVICE AND PRIVACY POLICY</h6>
-                </ListGroup.Item>
-      </ListGroup>
-    </Card>
-        </Col>
-        <Col></Col>
-      
-      </Row>
-      </section>
+                  <Card id='rulesCard'>
+                      <Card.Header id='rulesHeader'> 
+                        <h3 id='regisRequire'><ClipboardList size={28} />REGISTRATION REQUIREMENTS:</h3>
+                      </Card.Header>
+                        <ListGroup variant="flush" id='rulesList'>
+                            <ListGroup.Item id='rule1'>
+                                    <h6 className='rule'><Pencil size={16}/>  THE USERNAME MUST BE UNIQUE AND CONTAIN<br/> 3-20 CHARACTERS</h6>
+                            </ListGroup.Item>
+                            <ListGroup.Item id='rule2'>
+                                    <h6 className='rule'><Pencil  size={16}/>PASSWORDS MUST BE AT LEAST 8 CHARACTERS <br/>AND AT LEAST ONE SPECIAL CHARACTER</h6>
+                            </ListGroup.Item>
+                            <ListGroup.Item id='rule3'>
+                                    <h6 className='rule'><Pencil size={16} />USER INFORMATION IS PRIVATE AND MAY <br/>NOT BE ACCESSED WITHOUT AUTHORIZATION</h6></ListGroup.Item>
+                            <ListGroup.Item id='rule4'> 
+                                    <h6 className='rule'><Pencil size={16}/>USERS MAY ONLY ON INITIAL REGISTRATION REGISTER<br/> AS AN ADMIN USER</h6>  
+                            </ListGroup.Item>
+                          <ListGroup.Item id='rule5'>
+                                      <h6 className='rule'><Pencil size={16} />BY CREATING AN ACCOUNT, YOU AGREE TO OUR TERMS <br/> OF SERVICE AND PRIVACY POLICY</h6>
+                          </ListGroup.Item>
+                      </ListGroup>
+                   </Card>
+                  </Col>
+                 <Col></Col>
+              </Row>
+           </section>
       <PageFooter />
     </Container>
   )
