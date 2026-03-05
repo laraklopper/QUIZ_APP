@@ -1,15 +1,19 @@
 // quizRoutes.js
+// Import necessary modules and packages
 const express = require('express');
 const mongoose = require('mongoose');
 const router = express.Router();
-const Quiz = require('../models/Quiz'); // Assuming you have a Quiz model defined in models/Quiz.js
-const Score = require('../models/Score'); // Assuming you have a Score model defined in models/Score.js
+// Import schemas
+const Quiz = require('../models/quizSchema'); // Import the Quiz model
+const Score = require('../models/scoreSchema'); //Import the Score model
+//Custom middleware
+const {checkJwtToken} = require('./middleware')
 
 //=============ROUTES===============
 //-------GET---------------
 // Route to get all quizzes
 // Send a GET request to /findQuizzes to retrieve all quizzes from the database
-router.get('/findQuizzes', async (req, res) => {
+router.get('/findQuizzes', checkJwtToken, async (req, res) => {
     try {
         const quizzes = await Quiz.find();
         res.status(200).json({success: true, quizList: quizzes});
