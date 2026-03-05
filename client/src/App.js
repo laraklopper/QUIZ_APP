@@ -152,16 +152,23 @@ export default function App() {
         <>
           <Route path='/' element={
             <ProtectedUserRoute currentUser={currentUser}>
-              <Home/>
+              <Home
+                logout={logout}
+              />
             </ProtectedUserRoute>
           }/>
           <Route path='/game' element={<ProtectedUserRoute currentUser={currentUser}>
-            <Game/>
+            <Game
+             logout={logout}
+            />
           </ProtectedUserRoute>}/>
           <Route path='/addQuiz' element={<ProtectedUserRoute currentUser={currentUser}>
-            <AddQuiz/>
+            <AddQuiz
+              logout={logout}
+            />
           </ProtectedUserRoute>} />
-          <Route path='/users' element={<ProtectedAdminRoute currentUser={currentUser}>
+          <Route path='/users' element={
+            <ProtectedAdminRoute currentUser={currentUser}>
             <Users logout={logout} users={users}/>
           </ProtectedAdminRoute>}/>
         </>
