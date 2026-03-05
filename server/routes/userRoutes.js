@@ -289,13 +289,13 @@ router.put('/editPassword', checkJwtToken, checkPasswordStrength, hashPassword, 
         // Conditional rendering to check if user exists
         if (!user) {
             console.error('[ERROR: userRoutes.js, /editPassword] User not found');//Log an error message in the console for debugging purposes
-            return res.status(404).json({ message: 'User not found' });//Send a 404 (Not Found) status code with a message
+            return res.status(404).json({ success: false, message: 'User not found' });//Send a 404 (Not Found) status code with a message
         }
         const isCurrentPasswordValid = await bcrypt.compare(currentPassword, user.password)
         // Conditional rendering to check if current password is valid
         if (!isCurrentPasswordValid) {
             console.error('[ERROR: userRoutes.js, /editPassword] Current password is incorrect');//Log an error message in the console for debugging purposes
-            return res.status(401).json({ message: 'Current password is incorrect' });//Send a 401 Unauthorized status code with a message
+            return res.status(401).json({ success: false, message: 'Current password is incorrect' });//Send a 401 (Unauthorized) status code with a message
         }
         // Check if new password is same as current password
         const isSamePassword = await bcrypt.compare(newPassword, user.password);
@@ -303,23 +303,23 @@ router.put('/editPassword', checkJwtToken, checkPasswordStrength, hashPassword, 
         // Conditional rendering to prevent new password from being the same as current password
         if (isSamePassword) {
             console.error('[ERROR: userRoutes.js, /editPassword] New password must be different from old password');//Log an error message in the console for debugging purposes
-            return res.status(400).json({ message: 'New password must be different from old password' });//Send a 400 Bad Request status code with a message
+            return res.status(400).json({ success: false, message: 'New password must be different from old password' });//Send a 400 Bad Request status code with a message
         }
 
         // Conditional rendering to prevent new password from being the same as current password
         if (currentPassword === newPassword) {
             console.error('[ERROR: userRoutes.js, /editPassword] New password must be different from old password');//Log an error message in the console for debugging purposes
-            return res.status(400).json({ message: 'New password must be different from old password' });//
+            return res.status(400).json({ success: false, message: 'New password must be different from old password' });//Send a 400 Bad Request status code with a message
         }
         // Update password with hashed version (already hashed by hashPassword middleware)
         // Note: req.body.newPassword is now hashed by the hashPassword middleware
         user.password = req.body.newPassword; // This is the hashed version from middleware
         await user.save();// Save the updated user
         // Return a success response
-        return res.status(200).json({ message: 'Password updated successfully' });
+        return res.status(200).json({ success: true, message: 'Password updated successfully' });
     } catch (error) {
         console.error('[ERROR userRoutes.js] /editPassword:', error.message);;//Log an error message in the console for debugging purposes
-        return res.status(500).json({ message: 'Server error' });//Send a 500 Internal Server Error status code with a message
+        return res.status(500).json({ success: false, message: 'Internal Server Error' });//Send a 500 (Internal Server Error) status code with a message
     }
 })
 
