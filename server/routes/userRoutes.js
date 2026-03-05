@@ -1,14 +1,29 @@
 // userRoutes.js
 require('dotenv').config();
+//Import required modules and packages
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
+//Create an instance of the Express Router
 const router = express.Router()
+// Import the User model and middleware functions
+const User = require('../models/userSchema');//Import User model
+// Import middleware functions for authentication, validation, and rate limiting
+const { 
+    checkJwtToken, // Middleware to check for a valid JWT token
+    checkAge, // Middleware to check if user is at least 13 years old
+    checkPasswordStrength, // Middleware to check if the password meets strength requirements
+    hashPassword, 
+    checkAdmin,// Middleware to check if the user has admin privileges
+    passwordUpdateRateLimiter,// Rate limiter for password update endpoint
+    registrationLimiter, // Rate limiter for registration endpoint
+    loginLimiter,  // Rate limiter for login endpoint
+    generalLimiter 
+} = require('./middleware');
+// Extract environmental variables
 const secretKey = process.env.JWT_SECRET_KEY;
 
-const User = require('../models/userSchema');
-const { checkJwtToken, checkAge, checkPasswordStrength, registrationLimiter, loginLimiter, hashPassword, checkAdmin, generalLimiter } = require('./middleware');
 
 router.get('/me', checkJwtToken, async (req, res) => {
     try {
@@ -324,6 +339,8 @@ router.put('/editPassword', checkJwtToken, checkPasswordStrength, hashPassword, 
 })
 
 //----------------------DELETE-------------------
+//Route to delete a user by ID
+//Send a delete request to the /deleteUser/:id endpoint
 router.delete('/deleteUser/:id', checkJwtToken, checkAdmin, generalLimiter, async (req, res) => {
     try {
         const loggedInUserId = req.user?.userId; // 1) Extract userId from the decoded token payload
