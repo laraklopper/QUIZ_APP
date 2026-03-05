@@ -9,6 +9,8 @@ const mongoose = require('mongoose');
 const router = express.Router()
 // Import the User model and middleware functions
 const User = require('../models/userSchema');//Import User model
+const Quiz = require('../models/quizSchema');// Import Quiz model
+const Score = require('../models/scoreSchema');// Import Score model
 // Import middleware functions for authentication, validation, and rate limiting
 const { 
     checkJwtToken, // Middleware to check for a valid JWT token
@@ -254,6 +256,7 @@ router.put('/editUser/:id', checkJwtToken, async (req, res) => {
         }
 
         // Apply updates and save
+        const oldUsername = user.username;// Capture old username before updating
         if (updates.username) user.username = updates.username;
         if (updates.email) user.email = updates.email;
         if (updates['fullName.firstName'] || updates['fullName.lastName']) {
@@ -263,6 +266,19 @@ router.put('/editUser/:id', checkJwtToken, async (req, res) => {
             };
         }
         await user.save();
+
+        // If username was changed, propagate it to the Quiz and Score collections
+        if (updates.username && updates.username !== oldUsername) {
+            await Quiz.updateMany(
+                { username: oldUsername },
+                { $set: { username: updates.username } }
+            );
+            await Score.updateMany(
+                { username: oldUsername },
+                { $set: { username: updates.username } }
+            );
+            console.log(`[INFO: userRoutes.js] Username propagated from '${oldUsername}' to '${updates.username}' in Quiz and Score collections`);
+        }
 
         console.log('[INFO: userRoutes.js] User updated:', {
             userId: user._id,
