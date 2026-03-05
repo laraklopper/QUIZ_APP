@@ -8,8 +8,9 @@ const router = express.Router()
 const secretKey = process.env.JWT_SECRET_KEY;
 
 const User = require('../models/userSchema');
+const { checkJwtToken, checkAge, checkPasswordStrength, registrationLimiter, loginLimiter, hashPassword } = require('./middleware');
 
-router.get('/me', async (req, res) => {
+router.get('/me', checkJwtToken, async (req, res) => {
     try {
         const userId = req.user?.userId;
 
@@ -37,7 +38,7 @@ router.get('/me', async (req, res) => {
 })
 
 //Route to GET all users
-router.get('/findUsers',  async (req, res) => {
+router.get('/findUsers', checkJwtToken,  async (req, res) => {
     try {        
         const { username } = req.query;// Extract the username from the query parameters
         // If a username is provided, use it to filter users, otherwise return all users
@@ -57,7 +58,7 @@ router.get('/findUsers',  async (req, res) => {
 
 //-----------POST-------------------
 // Route for user login
-router.post('/login', async (req, res) => {
+router.post('/login', loginLimiter, async (req, res) => {
     try {
         const { username, password } = req.body || {};//Extract the usersername and password
 
@@ -118,7 +119,7 @@ router.post('/login', async (req, res) => {
 })
 
 // Route for user registration
-router.post('/register', async (req, res) => {
+router.post('/register', checkAge, checkPasswordStrength, registrationLimiter, hashPassword, async (req, res) => {
     try {
         const { username, fullName, email, dateOfBirth, admin, password } = req.body;
 
