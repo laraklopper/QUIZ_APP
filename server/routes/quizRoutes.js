@@ -46,7 +46,40 @@ router.get('/findQuiz/:id', async (req, res) => {
 })
 //-------POST--------------
 // Route to create a new quiz
+router.post('/createQuiz', async (req, res) => {
+    console.log(req.body);// Log the request body to verify that the data is being received correctly from the client before processing it to create a new quiz in the database
+    try {
+        const {title, description, username, questions} = req.body;//Extract the title, description, username, and questions from the request body
 
+        //Conditional rendering to check if all required fields are present in the request body
+        if (!title || !description || !username || !questions) {
+            console.error('[ERROR: quizRoutes.js, /createQuiz] Missing required fields in request body:', req.body);
+            return res.status(400).json({success: false, message: 'Missing required fields: title, description, username, and questions are all required.'});
+        }
+
+        // Check if a quiz with the same title already exists in the database to prevent duplicate quiz titles
+        const existingQuiz = await Quiz.findOne({title: title.trim()});
+        // Conditional rendering to check if a quiz with the same title already exists in the database to prevent duplicate quiz titles
+        if (existingQuiz) {
+            console.error('[ERROR: quizRoutes.js, /createQuiz] Quiz with the same title already exists:', title);
+            return res.status(409).json({success: false, message: 'A quiz with the same title already exists. Please choose a different title.'});
+        }
+
+        // Create a new quiz document using the Quiz model
+        const newQuiz = new Quiz({
+            title,
+            description,
+            username,
+            questions
+        });
+        const savedQuiz = await newQuiz.save();
+        res.status(201).json({success: true, quiz: savedQuiz});
+        console.log(`[SUCCESS: quizRoutes.js, /createQuiz] Quiz created successfully: ${savedQuiz}`);
+    } catch (error) {
+        console.error('[ERROR: quizRoutes.js, /createQuiz] Failed to create quiz:', error);
+        res.status(500).json({success: false, message: 'Failed to create quiz.'});
+    }    
+});
 //--------PUT---------------
 // Route to update an existing quiz by its ID
 
