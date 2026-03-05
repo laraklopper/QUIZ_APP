@@ -207,10 +207,10 @@ router.post('/register', checkAge, checkPasswordStrength, registrationLimiter, h
     }
 })
 
-//---------------------PUT-------------------
+//---------------------PATCH-------------------
 //Route to edit a user by ID
-//Send a put request to the /editUser/:id endpoint
-router.put('/editUser/:id', checkJwtToken, async (req, res) => {
+//Send a patch request to the /editUser/:id endpoint
+router.patch('/editUser/:id', checkJwtToken, async (req, res) => {
     try {
         const { id } = req.params;
         const { username, fullName, email } = req.body;
@@ -294,8 +294,8 @@ router.put('/editUser/:id', checkJwtToken, async (req, res) => {
 });
 
 //Route to edit a user password
-//Send a put request to the /editPassword endpoint
-router.put('/editPassword', checkJwtToken, checkPasswordStrength, hashPassword, passwordUpdateRateLimiter, async (req, res) => {
+//Send a patch request to the /editPassword endpoint
+router.patch('/editPassword', checkJwtToken, checkPasswordStrength, hashPassword, passwordUpdateRateLimiter, async (req, res) => {
     try {
         const { currentPassword, newPassword } = req.body || {};//Extract currentPassword and new password from the request body
 
