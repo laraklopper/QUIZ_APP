@@ -256,11 +256,29 @@ const checkAge = (req, res, next) => {
     
 }
 /*========================
-ROLE MIDDLEWARE
+ADMIN MIDDLEWARE
 ==========================*/
-//Middleware to allow managers and admin users admin privilesges to access certain routes
-
-
+//Middleware to allow admin users admin privilesges to access certain routes
+const checkAdmin = (req, res, next) => {
+    console.log('[DEBUG: middleware.js, checkAdmin] Checking user role for admin access');
+    try {
+        const userRole = req.user?.admin;
+        if (userRole !== 'admin') {
+            console.error('[ERROR: middleware.js, checkAdmin]: User is not an admin');
+            return res.status(403).json({
+                success: false,
+                message: 'Access denied. Admin privileges required.'
+            });
+        }
+        next();
+    } catch (error) {
+        console.error('[ERROR: middleware.js, checkAdmin]:', error.message);
+        return res.status(500).json({
+            success: false,
+            message: 'Error validating admin privileges'
+        });
+    }
+};
 //=====================EXPORT MIDDLEWARE===================================
 // Export the middleware function to be used in other parts of the application
-module.exports = {checkJwtToken, hashPassword, checkPasswordStrength, checkAge };
+module.exports = {checkJwtToken, hashPassword, checkPasswordStrength, checkAge, checkAdmin, generalLimiter, registrationLimiter, loginLimiter, passwordUpdateLimiter};
