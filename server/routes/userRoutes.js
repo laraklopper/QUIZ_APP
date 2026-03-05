@@ -189,5 +189,9 @@ router.post('/register', async (req, res) => {
     }
 })
 
+//---------------------PUT-------------------
+
+//----------------------DELETE-------------------
+
 //Export the userRouter
 module.exports = router
