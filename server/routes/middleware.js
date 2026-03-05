@@ -186,7 +186,7 @@ const checkPasswordStrength = (req, res, next) => {
     }
   
     const passwordRegex = /^(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/; // Minimum 8 characters and at least one special character
-    if (!passwordRegex.test(password)) {
+    if (!passwordRegex.test(pwd)) {
         return res.status(400).json({
             success: false,
             message: 'Password must be at least 8 characters long and contain at least one special character.'
@@ -241,11 +241,12 @@ const checkAge = (req, res, next) => {
         // Conditional rendering to check if user meets age requirement
         if (years < MIN_AGE) {
             console.error(`[ERROR: middleware.js, checkAge]: You must be at least ${MIN_AGE} years old.`)
-            return res.status(400).json({ 
-                success: false, 
+            return res.status(400).json({
+                success: false,
                 message: `You must be at least ${MIN_AGE} years old.` })
         }
 
+        next();
     } catch (error) {
         console.error('[ERROR: middleware.js, checkAge]:', error.message);
         return res.status(500).json({
@@ -259,10 +260,11 @@ const checkAge = (req, res, next) => {
 ADMIN MIDDLEWARE
 ==========================*/
 //Middleware to allow admin users admin privilesges to access certain routes
+//Only allow users 18 or older to register as admins
 const checkAdmin = (req, res, next) => {
     console.log('[DEBUG: middleware.js, checkAdmin] Checking user role for admin access');
     try {
-        const isAdmin = req.user?.admin;
+        const isAdmin = req.user?.isAdmin;
         if (!isAdmin) {
             console.error('[ERROR: middleware.js, checkAdmin]: User is not an admin');
             return res.status(403).json({
@@ -281,4 +283,4 @@ const checkAdmin = (req, res, next) => {
 };
 //=====================EXPORT MIDDLEWARE===================================
 // Export the middleware function to be used in other parts of the application
-module.exports = {checkJwtToken, hashPassword, checkPasswordStrength, checkAge, checkAdmin, generalLimiter, registrationLimiter, loginLimiter, passwordUpdateLimiter};
+module.exports = {checkJwtToken, hashPassword, checkPasswordStrength, checkAge, checkAdmin, generalLimiter, registrationLimiter, loginLimiter, passwordUpdateRateLimiter: passwordUpdateLimiter};
