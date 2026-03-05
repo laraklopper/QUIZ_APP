@@ -1,7 +1,9 @@
 // scoreRoute.js
 const express = require('express');
 const router = express.Router();
-const Score = require('../models/Score'); // Assuming you have a Score model defined in models/Score.js 
+const Score = require('../models/Score'); // import the Score model 
+const Quiz = require('../models/Quiz'); // Assuming you have a Quiz model defined in models/Quiz.js
+const User = require('../models/User'); // Import the User model to check for existing users when fetching scores
 
 
 //===========ROUTES===============
@@ -76,15 +78,15 @@ router.get('/findScores/:username', async (req, res) => {
         }
         // Fetch the user score based on the user id
         const result = await Score.find({ username: user.username })
-        .populate('title')// Populate the quiz title reference if it's a relationship
-        .sort({createdAt: -1 })// Sort the scores by creation date (most recent first)
-        .exec();// Execute the query
+            .populate('title')// Populate the quiz title reference if it's a relationship
+            .sort({createdAt: -1 })// Sort the scores by creation date (most recent first)
+            .exec();// Execute the query
 
-        res.status(200).json()
-
-
+        res.status(200).json({userScores: result});
+        console.log(result);//Log the results in the console for debugging purposes
     } catch (error) {
-        
+        console.error('[ERROR: scoreRoutes.js, /findScores/:username] An error occurred while fetching user scores.', error);
+        res.status(500).json({ success: false, message: 'An error occurred while fetching user scores.', error: error.message });
     }
 })
 //-----------POST---------------
