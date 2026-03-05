@@ -260,6 +260,68 @@ router.put('/editUser/:id', checkJwtToken, async (req, res) => {
     }
 });
 
+//Route to edit a user password
+//Send a put request to the /editPassword endpoint
+router.put('/editPassword', checkJwtToken, checkPasswordStrength, hashPassword, passwordUpdateRateLimiter, async (req, res) => {
+    try {
+        const { currentPassword, newPassword } = req.body || {};//Extract currentPassword and new password from the request body
+
+        // Conditional rendering to check if both currentPassword and newPassword are present
+        if (!currentPassword || !newPassword) {
+            console.error('[ERROR: userRoutes.js, /editPassword] currentPassword and newPassword are required');//Log an error message in the console for debugging purposes
+            return res.status(400).json(//Return a 400 (Bad Request) status code with a error message
+                {success: false, message: 'currentPassword and newPassword are required'}
+            );
+        }
+
+        const userId = req.user?.userId;//Extract userId from the decoded token payload
+        // Conditional rendering to connect current password
+        if (!userId) {
+            console.error('[ERROR: userRoutes.js, /editPassword] Unauthorized: No userId found in token');//Log an error message in the console for debugging purposes
+            return res.status(401).json({ success: false, message: 'Unauthorized' });//Send a 401 (Unauthorized) status code with a message
+        }
+
+        // Require password field for comparison
+        const user = await User.findById(userId) // Find the user by userId
+            .select('+password')// Include the password field for comparison
+            .exec();// Execute the query
+
+        // Conditional rendering to check if user exists
+        if (!user) {
+            console.error('[ERROR: userRoutes.js, /editPassword] User not found');//Log an error message in the console for debugging purposes
+            return res.status(404).json({ message: 'User not found' });//Send a 404 (Not Found) status code with a message
+        }
+        const isCurrentPasswordValid = await bcrypt.compare(currentPassword, user.password)
+        // Conditional rendering to check if current password is valid
+        if (!isCurrentPasswordValid) {
+            console.error('[ERROR: userRoutes.js, /editPassword] Current password is incorrect');//Log an error message in the console for debugging purposes
+            return res.status(401).json({ message: 'Current password is incorrect' });//Send a 401 Unauthorized status code with a message
+        }
+        // Check if new password is same as current password
+        const isSamePassword = await bcrypt.compare(newPassword, user.password);
+
+        // Conditional rendering to prevent new password from being the same as current password
+        if (isSamePassword) {
+            console.error('[ERROR: userRoutes.js, /editPassword] New password must be different from old password');//Log an error message in the console for debugging purposes
+            return res.status(400).json({ message: 'New password must be different from old password' });//Send a 400 Bad Request status code with a message
+        }
+
+        // Conditional rendering to prevent new password from being the same as current password
+        if (currentPassword === newPassword) {
+            console.error('[ERROR: userRoutes.js, /editPassword] New password must be different from old password');//Log an error message in the console for debugging purposes
+            return res.status(400).json({ message: 'New password must be different from old password' });//
+        }
+        // Update password with hashed version (already hashed by hashPassword middleware)
+        // Note: req.body.newPassword is now hashed by the hashPassword middleware
+        user.password = req.body.newPassword; // This is the hashed version from middleware
+        await user.save();// Save the updated user
+        // Return a success response
+        return res.status(200).json({ message: 'Password updated successfully' });
+    } catch (error) {
+        console.error('[ERROR userRoutes.js] /editPassword:', error.message);;//Log an error message in the console for debugging purposes
+        return res.status(500).json({ message: 'Server error' });//Send a 500 Internal Server Error status code with a message
+    }
+})
 
 //----------------------DELETE-------------------
 
