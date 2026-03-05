@@ -26,7 +26,15 @@ const {
 // Extract environmental variables
 const secretKey = process.env.JWT_SECRET_KEY;
 
+//--------------CHECK ENVIROMENTAL VARIABLES----------------
+//Conditional rendering to check if enviromental variables are present
+if (!secretKey) {
+    console.error('[ERROR: userRoutes.js] JWT_SECRET_KEY is not defined in environment variables');
+    process.exit(1); // Exit the application with an error code
+}
 
+//=================ROUTES==========================
+//---------------------GET-------------------
 router.get('/me', checkJwtToken, async (req, res) => {
     try {
         const userId = req.user?.userId;
