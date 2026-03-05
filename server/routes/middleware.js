@@ -62,8 +62,6 @@ const checkJwtToken = (req, res, next) => {
         });
     }
 }
-
-
 /*================================
 REQUEST LIMIT MIDDLEWARE
 ===============================*/
@@ -132,7 +130,62 @@ AGE VALIDATION MIDDLEWARE
 ========================*/
 //Middleware function to check that user age
 /*Only users 18 or older can register */
+const checkAge = (req, res, next) => {  
+    console.log('[DEBUG: middleware.js, checkAge] Validating user age');
+    try {
+        const {dateOfBirth} = req.body || {};
 
+        console.log('[DEBUG: middleware.js, checkAge] Received dateOfBirth:', dateOfBirth);
+
+        if (!dateOfBirth) {
+            console.error('[ERROR: middleware.js, checkAge]: Date of birth is required');
+            return res.status(400).json({
+                success: false,
+                message: 'Date of birth is required'
+            });
+        }
+
+        const dob = new Date(dateOfBirth);
+        if (isNaN(dob.getTime())) {
+            console.error('[ERROR: middleware.js, checkAge]: Invalid date format for dateOfBirth');
+            return res.status(400).json({
+                success: false,
+                message: 'Invalid date format for date of birth'
+            });
+        }
+        const now = new Date();
+        if (dob > now) {
+            console.error('[ERROR: middleware.js, checkAge]: Date of birth cannot be in the future');
+            return res.status(400).json({
+                success: false,
+                message: 'Date of birth cannot be in the future'
+            });
+        }
+          // Calculate user age
+        const years =
+            now.getFullYear() -
+            dob.getFullYear() -
+            (now < new Date(now.getFullYear(), dob.getMonth(), dob.getDate()) ? 1 : 0);
+        console.log('[DEBUG: middleware.js, checkAge] Calculated user age:', years);
+
+        const MIN_AGE = 18;// Define minimum age requirement
+        // Conditional rendering to check if user meets age requirement
+        if (years < MIN_AGE) {
+            console.error(`[ERROR: middleware.js, checkAge]: You must be at least ${MIN_AGE} years old.`)
+            return res.status(400).json({ 
+                success: false, 
+                message: `You must be at least ${MIN_AGE} years old.` })
+        }
+
+    } catch (error) {
+        console.error('[ERROR: middleware.js, checkAge]:', error.message);
+        return res.status(500).json({
+            success: false,
+            message: 'Error validating user age'
+        });
+    }
+    
+}
 /*========================
 ROLE MIDDLEWARE
 ==========================*/
@@ -141,4 +194,4 @@ ROLE MIDDLEWARE
 
 //=====================EXPORT MIDDLEWARE===================================
 // Export the middleware function to be used in other parts of the application
-module.exports = {checkJwtToken, hashPassword, checkPasswordStrength};
+module.exports = {checkJwtToken, hashPassword, checkPasswordStrength, checkAge };
