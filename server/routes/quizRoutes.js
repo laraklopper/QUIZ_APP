@@ -217,23 +217,24 @@ router.patch('/updateQuiz/:id', async (req, res) => {
 // Route to delete a quiz by its ID
 router.delete('/deleteQuiz/:id' , checkJwtToken,  async (req, res) => {
     const { id } = req.params;// Extract quiz ID from the request parameters
-    
     try {
         const quiz = await Quiz.findById(id)// Find the quiz by its ID to check if the quiz exists
         //Conditional rendering to check if the quiz exists
         if (!quiz) {
-            // If the quiz is not found, respond with a 404 Not Found status and an error message
-            return res.status(404).json({ message: 'Quiz not found' });
+           console.error('[ERROR: quizRoutes.js, /deleteQuiz/:id] Quiz not found');//Log an error message in the console for debugging purposes
+            return res.status(404).json( // If the quiz is not found, respond with a 404 Not Found status and an error message
+                {success: false, message: 'Quiz not found' }
+            );
         }     
 
         const deletedQuiz = await Quiz.findByIdAndDelete(id);// Find the quiz by its ID and delete it from the database
 
-        console.log('Deleted Quiz:', deletedQuiz);// Log the deleted quiz in the console for debugging purposes
+        console.log('[SUCCESS: quizRoutes.js, /deleteQuiz/:id] Deleted Quiz:', deletedQuiz);// Log the deleted quiz in the console for debugging purposes
         res.status(200).json({ success: true, message: 'Quiz successfully deleted' });//Return a 200 OK status with a JSON object containing a success message
     } 
     catch (error) {
         //Error handling
-        console.error('Error deleting quiz:', error);//Log an error message in the console for debugging purposes
+        console.error('[ERROR: quizRoutes.js, /deleteQuiz/:id] Error deleting quiz:', error);//Log an error message in the console for debugging purposes
         return res.status(500).json({ success: false, error: error.message });// Respond with a 500 (Internal Server Error) status
     }
 });
