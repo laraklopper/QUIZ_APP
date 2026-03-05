@@ -2,6 +2,7 @@
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const rateLimit = require('express-rate-limit');
 //==============JWT Config===================
 const rawSecretKey = process.env.JWT_SECRET_KEY;
 const secretKey = rawSecretKey || 'secretkey';
@@ -67,14 +68,82 @@ REQUEST LIMIT MIDDLEWARE
 ===============================*/
 /**Middleware General API rate limiterapplied to sensitive endpoints to limit 
   to 100 requests per 15 minutes per IP*/
-
+const generalLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100, // Limit each IP to 100 requests per windowMs
+    message: {
+        success: false,
+        message: 'Too many requests from this IP, please try again after 15 minutes.'
+    },
+    standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
+    legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+    // Custom handler to log when rate limit is exceeded
+    handler: (req, res) => {
+        console.warn(`[WARN: middleware.js, generalLimiter] Too many requests from IP: ${req.ip}`);
+        res.status(429).json({
+            success: false,
+            message: 'Too many requests from this IP, please try again after 15 minutes.'
+        });
+    }   
+});
   /**Rate limiter middleware to limit registration attempts to 3 per hour per IP to
  help prevent spam account creation*/
-
- /*Rate limiter Middleware to limit login 
+const registrationLimiter = rateLimit({
+    windowMs: 60 * 60 * 1000, // 1 hour
+    max: 3, // Limit each IP to 3 registration attempts per windowMs
+    message: {
+        success: false,
+        message: 'Too many registration attempts from this IP, please try again after 1 hour.'
+    },
+    standardHeaders: true,
+    legacyHeaders: false,
+    handler: (req, res) => {
+        console.warn(`[WARN: middleware.js, registrationLimiter] Too many registration attempts from IP: ${req.ip}`);
+        res.status(429).json({
+            success: false,
+            message: 'Too many registration attempts from this IP, please try again after 1 hour.',// Inform user of time until they can try again
+            retryAfter: Math.ceil((req.rateLimit.resetTime - Date.now()) / 1000 / 60) + ' minutes'// minutes until reset
+        });
+    }
+});
+    /*Rate limiter Middleware to limit login 
 requests to 5 attempts per 15 minutes per IP*/
-
+const loginLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 5, // Limit each IP to 5 login attempts per windowMs
+    message: {
+        success: false,
+        message: 'Too many login attempts from this IP, please try again after 15 minutes.'
+    },
+    standardHeaders: true,
+    legacyHeaders: false,
+    skipSuccessfulRequests: true, // Only count failed login attempts towards the limit
+    handler: (req, res) => {
+        console.warn(`[WARN: middleware.js, loginLimiter] Too many login attempts from IP: ${req.ip}`);
+        res.status(429).json({
+            success: false,
+            message: 'Too many login attempts from this IP, please try again after 15 minutes.'
+        });
+    }
+});
 /*Rate limiter middleware to limit password updates*/
+const passwordUpdateLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 5, // Limit each IP to 5 password update attempts per windowMs
+    message: {
+        success: false,
+        message: 'Too many password update attempts from this IP, please try again after 15 minutes.'
+    },
+    standardHeaders: true,
+    legacyHeaders: false,
+    handler: (req, res) => {
+        console.warn(`[WARN: middleware.js, passwordUpdateLimiter] Too many password update attempts from IP: ${req.ip}`);
+        res.status(429).json({
+            success: false,
+            message: 'Too many password update attempts from this IP, please try again after 15 minutes.'
+        });
+    }
+}); 
 /*===============================
 PASSWORD VALIDATION MIDDLEWARE
 =========================*/
