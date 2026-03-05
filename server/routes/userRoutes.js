@@ -35,10 +35,12 @@ if (!secretKey) {
 
 //=================ROUTES==========================
 //---------------------GET-------------------
+// Route to Get current user details
 router.get('/me', checkJwtToken, async (req, res) => {
     try {
         const userId = req.user?.userId;
 
+        //Conditional rendering to check if user ID exists
         if (!userId) {
             console.error(`[ERROR: userRoutes.js]: Unauthorized: No userId found in the token payload`);
             return res.status(401).json({ message: `Unauthorized` })// Send a 401 (Unauthorized) status code with a message
