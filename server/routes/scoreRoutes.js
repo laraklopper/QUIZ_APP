@@ -1,14 +1,19 @@
 // scoreRoute.js
-const express = require('express');
-const router = express.Router();
+const express = require('express');// Import express to create a router for handling quiz score-related routes
+const mongoose = require('mongoose'); // Import mongoose to validate ObjectId formats
+//Import the necessary models and middleware to handle quiz scores and user authentication
 const Score = require('../models/Score'); // Import the Score model to interact with the scores collection in the database
 const Quiz = require('../models/Quiz'); // Import the Quiz model to check for existing quizzes when fetching scores
 const User = require('../models/User'); // Import the User model to check for existing users when fetching scores
-
+//Import custom middleware
+const {checkJwtToken} = require('./middleware'); // Import the checkJwtToken middleware 
+//Ceate a new router instance to define the routes for handling quiz scores
+const router = express.Router();// Create a new router instance to define the routes for handling quiz scores
 
 //===========ROUTES===============
 //-----------GET----------------
 // Route to get all quiz scores//
+// Send a GET request to /fetchScores endpoint with an optional username query parameter to fetch all scores or scores for a specific user
 router.get('/fetchScores', async (req, res) => {
     try {
         const {username} = req.query;
@@ -59,6 +64,7 @@ router.get('/fetchScores', async (req, res) => {
 });
 
 // Route to fetch all scores for a single user
+//send a GET request to /findScores/:username endpoint with the username as a parameter to fetch all scores for that user
 router.get('/findScores/:username', async (req, res) => {
     try {
         const { username } = req.params;// Extract the username from the request parameters
@@ -89,7 +95,31 @@ router.get('/findScores/:username', async (req, res) => {
         res.status(500).json({ success: false, message: 'An error occurred while fetching user scores.', error: error.message });
     }
 })
+
+//Route to fetch a single score for a specific quiz and user
+//Send a GET request to /findScore/:username/:quizTitle endpoint with the username and quiz title as parameters to fetch the score for that specific quiz and user
+//Find userScore for a specific quiz
+router.get('/findScore/:username/:quizTitle', async (req, res) => {
+    try {
+        const { username, quizTitle } = req.params;// Extract the username and quiz title from the request parameters   
+        // Fetch the score for the specified quiz and user
+        const result = await Score.findOne({ username, quizTitle }).exec();
+
+        // Conditional rendering to check if the score exists
+        if (!result) {
+            console.error(`[scoreRoutes.js, /findScore/:username/:quizTitle] Score not found for user ${username} and quiz ${quizTitle}`);
+            return res.status(404).json({ success: false, message: 'Score not found for this user and quiz.' });
+        }
+        res.status(200).json({ userScore: result });
+        console.log(result);//Log the result in the console for debugging purposes
+    } catch (error) {
+        console.error('[ERROR: scoreRoutes.js, /findScore/:username/:quizTitle] An error occurred while fetching the user score for the specified quiz.', error);
+        res.status(500).json({ success: false, message: 'An error occurred while fetching the user score for the specified quiz.', error: error.message });
+    }
+})
 //-----------POST---------------
+//Route to submit a quiz score
+//send a POST request to /submitScore endpoint with the username, quiz title, and score in the request body to submit a new score for a quiz
 router.post('/submitScore', async (req, res) => {
     try{
         const { username, quizTitle, score } = req.body;// Extract the username, quiz title, and score from the request body
@@ -141,7 +171,9 @@ router.post('/submitScore', async (req, res) => {
     }
 });
 //----------PUT----------------
-router.put('/updateScore/:id', async (req, res) => {
+// Route to update a UserScore
+// Send a PUT request to the  /updateScore/:id endpoint with the score ID as a parameter and the new score in the request body to update an existing score
+router.put('/updateScore/:id', checkJwtToken, async (req, res) => {
     try {
         const { id } = req.params;// Extract the score ID from the request parameters
         const { score } = req.body;// Extract the new score from the request body
@@ -154,10 +186,10 @@ router.put('/updateScore/:id', async (req, res) => {
 
 
         //Conditional rendering to check if the score is a 0 or a positive number
-if (typeof score !== 'number' || score < 0) {
-    console.error(`[scoreRoutes.js, /updateScore/:id] Invalid score value: ${score}. Score must be a non-negative number.`);
-    return res.status(400).json({ success: false, message: 'Invalid score value. Score must be a non-negative number.' });
-}
+            if (typeof score !== 'number' || score < 0) {
+                console.error(`[scoreRoutes.js, /updateScore/:id] Invalid score value: ${score}. Score must be a non-negative number.`);
+                return res.status(400).json({ success: false, message: 'Invalid score value. Score must be a non-negative number.' });
+            }
         
            const existingScore = await Score.findById(id).exec();// Find existing score by id
          //Conditional rendering to check if the score was found
@@ -165,7 +197,7 @@ if (typeof score !== 'number' || score < 0) {
                 console.error(`[scoreRoutes.js, /updateScore/:id] Score not found with ID: ${id}`);
                 return res.status(404).json({ success: false, message: 'Score not found.' });
             }
-          // Conditional rendering to check if new score is higher
+             // Conditional rendering to check if new score is higher
             if (existingScore.score >= score) {
                 console.log(`[scoreRoutes.js, /updateScore/:id] Existing score (${existingScore.score}) is higher than or equal to new score (${score}). No update performed.`);
                 // If the new score is not higher than the existing score, return early
