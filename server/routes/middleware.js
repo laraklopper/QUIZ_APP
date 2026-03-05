@@ -70,9 +70,32 @@ REQUEST LIMIT MIDDLEWARE
 /*===============================
 PASSWORD VALIDATION MIDDLEWARE
 =========================*/
+/*Middleware to hash password before registration or password changes
+ * Expects req.body.password to be present*/
+const hashPassword = async (req, res, next) => {
+    try {
+        const {password, newPassword} = req.body || {};
+
+        if (password && !newPassword) {
+            const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
+            req.body.password = hashedPassword; // Replace plain password with hashed version   
+            console.log('[INFO: middleware.js, hashPassword] Password hashed for registration/login'); 
+        }
+        // Hash new password for password changes
+        else if (newPassword) {
+            const hashedNewPassword = await bcrypt.hash(newPassword, SALT_ROUNDS);
+            req.body.newPassword = hashedNewPassword;// Replace plain new password with hashed version
+            console.log('[INFO: middleware.js, hashPassword] New password hashed for password change');
+        }
+        next();// Proceed to the next middleware or route handler
+    } catch (error) {
+        console.error('[ERROR: middleware.js, hashPassword]:', error.message);
+        return res.status(500).json({ message: 'Error processing password' });
+    }
+};
 
 /*====================================
 AGE VALIDATION MIDDLEWARE
 ========================*/
 // Export the middleware function to be used in other parts of the application
-module.exports = {checkJwtToken}
+module.exports = {checkJwtToken, hashPassword};
