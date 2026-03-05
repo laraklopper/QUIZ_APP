@@ -8,7 +8,7 @@ const router = express.Router()
 const secretKey = process.env.JWT_SECRET_KEY;
 
 const User = require('../models/userSchema');
-const { checkJwtToken, checkAge, checkPasswordStrength, registrationLimiter, loginLimiter, hashPassword } = require('./middleware');
+const { checkJwtToken, checkAge, checkPasswordStrength, registrationLimiter, loginLimiter, hashPassword, checkAdmin, generalLimiter } = require('./middleware');
 
 router.get('/me', checkJwtToken, async (req, res) => {
     try {
@@ -324,6 +324,53 @@ router.put('/editPassword', checkJwtToken, checkPasswordStrength, hashPassword, 
 })
 
 //----------------------DELETE-------------------
+router.delete('/deleteUser/:id', checkJwtToken, checkAdmin, generalLimiter, async (req, res) => {
+    try {
+        const loggedInUserId = req.user?.userId; // 1) Extract userId from the decoded token payload
+
+          // 2) Ensure the user is logged in
+        if (!loggedInUserId) {
+            console.error('[ERROR: userRoutes.js, /deleteUser/:id] Unauthorized: No userId found in token');
+            return res.status(401).json({ message: 'Unauthorized' });
+        }
+        const { id } = req.params; // 3) Extract id from the request parameters
+        // Validate ObjectId format before attempting to delete
+        if (!mongoose.isValidObjectId(id)) {
+            console.error('[ERROR: userRoutes.js, /deleteUser/:id] Invalid ObjectId:', id);
+            return res.status(400).json({ message: 'Invalid user id.' });
+        }
+        // 4) Prevent users from deleting their own account
+        if (loggedInUserId === id) {
+            console.error('[ERROR: userRoutes.js, /deleteUser/:id] Users cannot delete their own account');
+            return res.status(400).json({ message: 'Users cannot delete their own account' });
+        }
+
+        // 5) Atomic delete:same company, cannot delete admin users
+        const removedUser = await User.findOneAndDelete({
+            _id: id,
+            admin: { $ne: true },   // Cannot delete admin users
+        }).select('_id username admin');
+
+        if (!removedUser) {
+            console.error('[ERROR: userRoutes.js, /deleteUser/:id] User not found (or cannot be deleted).');
+            return res.status(404).json({ success: false, message: 'User not found (or cannot be deleted).' });
+        }
+
+        // 6) Attempt to find and delete the user by ID
+        const deletedUser = await User.findByIdAndDelete(id);
+        if (!deletedUser) {
+            console.error(`[ERROR: userRoutes.js, /deleteUser/:id] User with ID ${id} not found`);
+            return res.status(404).json({ success: false,  message: 'User not found' });
+        }
+
+        console.log(`[INFO: userRoutes.js, /deleteUser/:id] User with ID ${id} deleted successfully`);
+        return res.status(200).json({ success: true, message: 'User deleted successfully' });
+    } catch (error) {
+        console.error('[ERROR: userRoutes.js, /deleteUser/:id] Error deleting user:', error.message);
+        return res.status(500).json({ success: false, message: 'Internal Server Error' });
+    }
+})
+
 
 //Export the userRouter
 module.exports = router
