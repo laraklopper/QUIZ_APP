@@ -3,6 +3,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const router = express.Router();
 const Quiz = require('../models/Quiz'); // Assuming you have a Quiz model defined in models/Quiz.js
+const Score = require('../models/Score'); // Assuming you have a Score model defined in models/Score.js
+
 //=============ROUTES===============
 //-------GET---------------
 // Route to get all quizzes
@@ -82,9 +84,75 @@ router.post('/createQuiz', async (req, res) => {
 });
 //--------PUT---------------
 // Route to update an existing quiz by its ID
+router.put('/editQuiz/:id', async (req, res) => {
+        console.log(req.body);//Log the request body in the console for debugging purposes       
+   
+    try {
+         const { id } = req.params; // Extract quiz Id from the request parameters
+        const { title , username , questions } = req.body;// Extract title and questions from the request body
 
+        //Ensure the username of the user who created the quiz matches the user editing the quiz
+            //Conditional rendering to check if the quizId is a valid MongoDB ObjectId
+            if (!mongoose.Types.ObjectId.isValid(id)) {
+                return res.status(400).json({ success: false, message: 'Invalid quiz ID' });
+            }
+
+        const quiz = await Quiz.findById(id)// Find the quiz by ID    
+        console.log(quiz);//Log the quiz in the console for debugging purposes
+
+       
+        //Conditional rendering to check that the quiz exists
+        if (!quiz) {
+            console.error('Quiz not found');//Log an error message in the console for debugging purposes
+            return res.status(404).json({ message: 'Quiz not found' });// If the quiz doesn't exist, return a 404(Not found)response
+        }  
+        console.log(quiz);//Log the quiz in the console for debugging purposes     
+ 
+       
+        const updatedQuiz = {}//Create the updated quiz object
+   
+        //Conditional rendering to check if the title is provided
+        if (title) {updatedQuiz.title = title} // Only update the title if provided
+        
+         // Conditional rendering to check that the questions are properly provided
+        if (questions && Array.isArray(questions) && questions.length === 5) {
+            updatedQuiz.questions = questions
+        } else {
+            console.error('[ERROR: quizRoutes.js, /updateQuiz/:id] Invalid questions provided:', questions);
+            return res.status(400).json({success: false, message: 'Invalid questions provided. Questions must be an array of 5 questions.'});
+        }
+
+         const existingQuizTitle = await Quiz.findById(id)//Find the current quiz by ID
+        
+        //Conditional rendering to check if the quizTitle was changed
+        if(title && title !== existingQuizTitle.title){
+            //Update the quizTitle in the Score collection if the quizTitle is updated
+            await Score.updateMany(
+                {name: existingQuizTitle.title},//The existing quiz title
+                {$set:{title}}//Set the new quiz title
+            )
+        }
+        // Update the quiz in the database
+        const editedQuiz = await Quiz.findByIdAndUpdate(//Find the quiz by its ID and update it
+           id, // ID of the quiz to update
+            { $set : updatedQuiz},//Set the updated quiz
+            { new: true}// Return the updated document
+        ); 
+
+        console.log("[SUCCESS: quizRoutes.js, '/editQuiz/:id'] QUIZ: ", updatedQuiz);
+        
+        // Respond with the updated quiz 
+         res.status(200).json({ success: true, editedQuiz});
+        console.log(editedQuiz);//Log the updated quiz in the console for debugging purposes      
+
+    } catch (error) {
+        console.error('[ERROR: quizRoutes.js, /updateQuiz/:id] Failed to update quiz:', error);
+        res.status(500).json({success: false, message: 'Failed to update quiz.'});
+    }
+});
 //--------PATCH------------
 // Route to partially update an existing quiz by its ID
+
 //--------DELETE------------
 // Route to delete a quiz by its ID
 
