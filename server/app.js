@@ -41,7 +41,7 @@ app.use(helmet())
 
 //==============ROUTES=======================
 // Prefix all route modules with their base path.
-app.use('/users', userRoutes)
+app.use('/users', userRoutes);// All user-related routes will be prefixed with /users (e.g., /users/register, /users/login, etc.)
 //==============MONGOOSE CONFIG============
 mongoose.set('strictPopulate', false)
 //=============START THE SERVER=============
