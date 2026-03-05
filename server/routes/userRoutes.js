@@ -206,6 +206,8 @@ router.post('/register', checkAge, checkPasswordStrength, registrationLimiter, h
 })
 
 //---------------------PUT-------------------
+//Route to edit a user by ID
+//Send a put request to the /editUser/:id endpoint
 router.put('/editUser/:id', checkJwtToken, async (req, res) => {
     try {
         const { id } = req.params;
