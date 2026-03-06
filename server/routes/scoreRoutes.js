@@ -143,7 +143,7 @@ router.post('/submitScore', async (req, res) => {
         }
 
         //Check if a score already exists for the quiz    
-        const existingScore = await Score.findOne({ username, quizId: quiz._id }).exec();
+        const existingScore = await Score.findOne({ username, quizTitle }).exec();
 
         // Conditional rendering to Check if a score already exists for the user and the quiz
         if (existingScore) {
@@ -158,7 +158,7 @@ router.post('/submitScore', async (req, res) => {
                     { score, $inc: { attempts: 1 } },// Increment attempts
                     { new: true }// Return the updated score
                 )
-                : await new Score({ username, name, score }).save();// Create a new score
+                : await new Score({ username, quizTitle, score }).save();// Create a new score
             res.status(201).json(newScore)// Save the score and return the result in JSON format
         }
        
