@@ -28,24 +28,12 @@ if (!port) {
     process.exit(1)// Exit the Node.js process with a non-zero exit code (1)
 }
 
-// ========== CORS CONFIGURATION ==========
-const corsOptions = {
-    origin: process.env.NODE_ENV === 'production'
-        ? [process.env.FRONTEND_URL, process.env.ADMIN_URL].filter(Boolean)
-        : 'http://localhost:3000',
-    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    exposedHeaders: ['RateLimit-Limit', 'RateLimit-Remaining', 'RateLimit-Reset'],
-    credentials: true,
-    maxAge: 86400,
-    optionsSuccessStatus: 200
-};
 
 //==============GLOBAL MIDDLEWAR=============
 
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
-app.use(cors(corsOptions))
+app.use(cors())
 app.use(helmet())
 
 //==============ROUTES=======================
