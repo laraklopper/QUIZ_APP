@@ -10,8 +10,7 @@ if (!uri || !database) {
     process.exit(1);// Exit the process with a failure code
 }
 
-// =====================================================
-
+//==================== CONNECT FUNCTION ====================
 const connectDB = async () => {
     try {
         await mongoose.connect(uri, {
@@ -32,16 +31,11 @@ const connectDB = async () => {
 // Fired if an error occurs after initial connection
 mongoose.connection.on('error', (error) => {
     console.error(`[ERROR: connect.js] Error connecting to MongoDb database. Exiting now...`, error);
-    process.exit(1);// Exit to prevent app running without DB
 })
 
 // Fired when MongoDB disconnects (network issue, restart, etc.)
 mongoose.connection.on('disconnected', () => {
-    console.warn(
-        '[WARNING: connectDB.js] MongoDB disconnected! Attempting reconnection...'
-    );
-    // Attempt to reconnect automatically
-    connectDB();
+    console.warn('[WARNING: connectDB.js] MongoDB disconnected! Attempting reconnection...');
 });
 
 // Fired when MongoDB successfully reconnects
