@@ -11,7 +11,6 @@ if (!uri || !database) {
 }
 
 // =====================================================
-mongoose.Promise = global.Promise;
 
 const connectDB = async () => {
     try {
