@@ -49,10 +49,10 @@ const quizSchema = new mongoose.Schema({
                     trim: true,
                 }
             }
-        ]
+        ],
+         required: [true, 'Quiz questions are required'],
+         validate: [arrayLimit5, 'Quiz must have at least 5 questions'],
     },
-    required: [true, 'Quiz questions are required'],
-    validate: [arrayLimit5, 'Quiz must have at least 5 questions'],
 }, {timestamps: true});
 
 /* Custom validation function to ensure each 
