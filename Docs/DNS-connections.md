@@ -61,6 +61,26 @@ This SRV record returns the actual hostnames and ports of the MongoDB servers in
 | VPN blocking DNS queries | Timeout or ECONNREFUSED | Disconnect VPN |
 | Corporate/university firewall | Connection refused | Use a personal hotspot |
 | Stale DNS cache | Intermittent failures | Run `ipconfig /flushdns` |
+| Node.js c-ares resolver blocked | `querySrv ECONNREFUSED` (even though `nslookup` works) | Switch to a direct connection string (see below) |
+
+### SRV vs Direct Connection String
+
+`mongodb+srv://` triggers **two** DNS lookups inside Node.js:
+1. An **SRV lookup** — finds the hostnames and ports of the cluster nodes
+2. A **TXT lookup** — finds connection options (e.g. `authSource`, `replicaSet`)
+
+Node.js uses its own internal DNS resolver called **c-ares**, which is separate from the system resolver (`nslookup`, browser, etc.). On Windows, c-ares may attempt a **TCP fallback** for large DNS responses and get blocked by Windows Firewall or security software, even when `nslookup` succeeds.
+
+**Workaround:** bypass SRV entirely by using a direct connection string with the actual hostnames:
+
+```
+mongodb://<user>:<password>@<host1>:27017,<host2>:27017,<host3>:27017/?ssl=true&replicaSet=<replicaSetName>&authSource=admin
+```
+
+To get the direct connection string from Atlas:
+1. Go to your cluster → **Connect** → **Drivers**
+2. Toggle **SRV Connection String** off
+3. Copy the `mongodb://` string shown
 
 ---
 
@@ -127,19 +147,16 @@ This project is a full-stack MERN-style quiz application:
 | **Express Server** | `3001` | `cd server && npm start` |
 | **MongoDB Atlas** | Cloud | SRV connection (see below) |
 
-The server connects to **MongoDB Atlas** using an SRV connection string stored in `server/.env`:
+The server connects to **MongoDB Atlas** using a direct connection string stored in `server/.env`:
 
 ```
-DATABASE_URL = mongodb+srv://<user>:<password>@cluster-one.0kjnxst.mongodb.net/?appName=Cluster-One
+DATABASE_URL = mongodb://<user>:<password>@ac-bg2bqyr-shard-00-00.0kjnxst.mongodb.net:27017,ac-bg2bqyr-shard-00-01.0kjnxst.mongodb.net:27017,ac-bg2bqyr-shard-00-02.0kjnxst.mongodb.net:27017/?ssl=true&replicaSet=atlas-8igkur-shard-0&authSource=admin&appName=Cluster-One
 DATABASE_NAME = quizAppDatabase
 ```
 
-When the server starts, Mongoose resolves the SRV record:
-```
-_mongodb._tcp.cluster-one.0kjnxst.mongodb.net
-```
+This bypasses the SRV DNS lookup entirely by hardcoding the cluster node hostnames. Mongoose connects directly to the three replica set nodes on port `27017`.
 
-This returns the actual hostnames and ports of the Atlas cluster nodes, then connects to the `quizAppDatabase` database.
+> Previously `mongodb+srv://` was used, but Node.js's c-ares DNS resolver failed to resolve SRV records on this machine (`querySrv ECONNREFUSED`) even though `nslookup` succeeded. Switching to the direct string fixed the issue.
 
 ### Troubleshooting Connection Errors
 
@@ -148,10 +165,10 @@ If you see this error:
 querySrv ECONNREFUSED _mongodb._tcp.cluster-one.0kjnxst.mongodb.net
 ```
 
-It means your DNS server cannot resolve the SRV record. Fix it by:
-1. Changing your DNS to `8.8.8.8` / `8.8.4.4` (Google)
-2. Running `ipconfig /flushdns`
-3. Restarting the server with `npm start` (from the `server/` directory)
+The Node.js c-ares resolver is failing to perform the SRV DNS lookup. Fix it by switching to a direct connection string (already done in this project). If the direct string also fails, check:
+1. Atlas cluster is not paused (green dot on the Clusters page)
+2. Your IP is whitelisted in Atlas → Security → Network Access
+3. Port `27017` is not blocked by your firewall (`Test-NetConnection -ComputerName ac-bg2bqyr-shard-00-00.0kjnxst.mongodb.net -Port 27017`)
 
 ### Connection Timeouts
 
