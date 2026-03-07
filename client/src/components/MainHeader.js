@@ -73,7 +73,7 @@ export default function MainHeader({mainHeading}) {
         {/* Header Row 2: Page Heading + main App Heading */}
         <Row id='headerRow2'>
             <Col></Col>
-            <Col xs={5} id='headingCol'>
+            <Col xs={5} id='mainHeadingCol'>
                 <div id='headingBlock'>
                     <h1 id='appHeading'>QUIZ</h1>
                     <h2 id='pageHeading'>{mainHeading}</h2>

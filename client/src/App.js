@@ -55,8 +55,8 @@ export default function App() {
         /* Conditional rendering to check if the response
        is not successful (status code is not in the range 200-299)*/
         if (!response.ok) {
-          console.error('[ERROR: App.js]: Failed to fetch Clients');//Log an error message in the console for debugging purposes
-          throw new Error("Failed to fetch Clients");//Throw an error message if the GET request is unsuccessful
+          console.error('[ERROR: App.js]: Failed to fetch Users');//Log an error message in the console for debugging purposes
+          throw new Error("Failed to fetch users");//Throw an error message if the GET request is unsuccessful
         }
 
         const fetchedUsers = await response.json();//Parse the JSON data from the Response body
