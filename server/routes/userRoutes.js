@@ -80,8 +80,8 @@ router.post('/login', async (req, res) => {
 
         // Conditional rendering to check that both email and password are present
         if (!username || !password) {
-            console.error('[ERROR: userRoutes.js , /login] Email and password are required');// Log an error message in the console for debugging purposes
-            return res.status(400).json({ message: 'Email and password are required' });// Send a 400 (Bad Request) status code with a message
+            console.error('[ERROR: userRoutes.js , /login] Username and password are required');// Log an error message in the console for debugging purposes
+            return res.status(400).json({ message: 'Username and password are required' });// Send a 400 (Bad Request) status code with a message
         }
 
          //Find the user by username and include the password field

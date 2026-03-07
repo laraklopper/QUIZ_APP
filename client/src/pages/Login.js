@@ -17,13 +17,11 @@ export default function Login({userData, setUserData, setError, setLoggedIn}) {
         // e.preventDefault();
         try {
             setError?.(null);
-            const token = localStorage.getItem('token')
             const response = await fetch('http://localhost:3001/users/login', {
                 method: 'POST',
                 mode: 'cors',
-                headers: { 
+                headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify({
                     username: userData.username,
