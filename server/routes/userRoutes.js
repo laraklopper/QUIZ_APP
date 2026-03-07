@@ -11,6 +11,7 @@ const router = express.Router()
 const User = require('../models/userSchema');//Import User model
 const Quiz = require('../models/quizSchema');// Import Quiz model
 const Score = require('../models/scoreSchema');// Import Score model
+const { checkJwtToken, hashPassword, checkPasswordStrength } = require('./middleware');
 // Extract environmental variables
 const secretKey = process.env.JWT_SECRET_KEY;
 
@@ -134,7 +135,7 @@ router.post('/login', async (req, res) => {
 })
 
 // Route for user registration
-router.post('/register', hashPassword, async (req, res) => {
+router.post('/register', checkPasswordStrength, hashPassword, async (req, res) => {
     try {
         const { username, fullName, email, dateOfBirth, admin, password } = req.body;
 
