@@ -21,11 +21,21 @@
     margin: 0px;
     padding: 0px;
 }
+#headingCol{
+        width: 100%;
+    display: flex;
+    margin: 0px;
+    padding: 0px;
+}
 #headerStack{
         display: flex;
     width: 100%;
     margin: 0px;
     padding: 0px;
+}
+#headingStack{
+    display: flex;
+    align-items: center;
 }
 #headingBlock{
     display: flex;

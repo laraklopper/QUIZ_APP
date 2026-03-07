@@ -22,7 +22,7 @@ export default function Header({currentUser, heading}) {
   return (
     <header id='header' role='banner'>
     <Row id='headerRow1'>
-        <Col>
+        <Col id='headerCol1' >
             <Stack direction="horizontal" gap={3} id='clockStack'>
             <div className="p-2" id='dateTimeBlock'>          
                  <ListGroup variant="flush" id='dateTimeList'>
