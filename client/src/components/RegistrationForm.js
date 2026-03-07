@@ -7,7 +7,7 @@ import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
 import { Asterisk, Eye, EyeOff } from 'lucide-react';
 
-export default function RegistrationForm({newUserData, setNewUserData, onSubmit, onClearForm}) {
+export default function RegistrationForm({newUserData, setNewUserData, addUser, onClearForm}) {
     const [showPassword, setShowPassword] = useState(false)
     const [passwordMsg, setPasswordMsg] = useState(false)
     const [emailMsg, setEmailMsg] = useState(false)
@@ -79,7 +79,7 @@ export default function RegistrationForm({newUserData, setNewUserData, onSubmit,
 
     //===============================================
     return (
-        <form id='registrationForm' onSubmit={onSubmit} aria-describedby={formTitleId}>
+        <form id='registrationForm' onSubmit={addUser} aria-describedby={formTitleId}>
             <div id='registrationDetails'>
                 {/* Screen-reader form title */}
                 <h2 id={formTitleId} className='visually-hidden'>Registration form</h2>

@@ -25,7 +25,7 @@ export default function Registration() {
   const [newUserData, setNewUserData] = useState(EMPTY_FORM)
   const [error, setError] = useState(null)
 
-  const handleSubmit = useCallback(async (event) => {
+  const addUser = useCallback(async (event) => {
     event.preventDefault()
     try {
       const response = await fetch('http://localhost:3001/users/register', {
@@ -70,7 +70,7 @@ export default function Registration() {
           <RegistrationForm
             newUserData={newUserData}
             setNewUserData={setNewUserData}
-            onSubmit={handleSubmit}
+            addUser={addUser}
             onClearForm={handleClearForm}
           />
         </div>
