@@ -1,0 +1,60 @@
+/* Home.css */
+/* HOME PAGE */
+/* Home.js */
+#homeContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0px 0px 10px 0px;
+}
+/* SECTION 1: welcome message*/
+#welcomeSection{
+    background-color: #698C23;
+    margin: 0px 0px 10px 0px;
+    padding: 0px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+#welcomeRow {
+    margin: 10px 0px;
+    width: 100%;
+    padding: 0px 10px 0px 10px;
+    display: flex;
+    flex-direction: row;
+}
+#welcomeDiv {
+    display: flex;
+    flex-direction: column;
+    margin: 0px;
+    padding: 5px 0px 5px 0px;
+    color: #3D0F13;
+    align-items: center;
+    height: 100px;
+    justify-content: center;
+}
+
+/* Text */
+.welcomeLabel {
+    display: flex;
+    color: #3D0F13;
+    gap: 10px;
+    align-items: baseline;
+    margin: inherit;
+    text-decoration: underline;
+    padding: 5px 10px;
+}
+#welcomeHeading,
+#welcomeUser {
+    display: flex;
+    text-transform: uppercase;
+    color: #3D0F13;
+    font-family: "Playpen Sans", cursive;
+    
+    padding: 0px 0px 0px 5px;
+    margin: 0px;
+    font-style: italic;
+    margin: 0px;
+    font-size: 32px;
+    font-weight: 800;
+}

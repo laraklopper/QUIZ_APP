@@ -3,6 +3,7 @@
    ========================= */
    #loginEventRow,
    #regisEventRow,
+   #homeEventRow,
    #headerEventRow{
     width: 100%;
     margin: 10px 0px 5px 0px;
