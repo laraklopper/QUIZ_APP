@@ -11,7 +11,7 @@ const router = express.Router()
 const User = require('../models/userSchema');//Import User model
 const Quiz = require('../models/quizSchema');// Import Quiz model
 const Score = require('../models/scoreSchema');// Import Score model
-const { checkJwtToken, hashPassword, checkPasswordStrength } = require('./middleware');
+const { checkJwtToken, hashPassword, checkPasswordStrength, checkAdmin } = require('./middleware');
 // Extract environmental variables
 const secretKey = process.env.JWT_SECRET_KEY;
 
