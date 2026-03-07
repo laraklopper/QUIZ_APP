@@ -35,11 +35,11 @@ font-family: "Roboto Mono", monospace;
 font-family: "Winky Rough", sans-serif;
 /* // <weight>: Use a value from 400 to 700 */
 /* // <uniquifier>: Use a unique and descriptive class name */
-
 font-family: "Alkatra", system-ui;
 /* // <weight>: Use a value from 100 to 800 */
 /* // <uniquifier>: Use a unique and descriptive class name */
 font-family: "Playpen Sans", cursive;
+font-family: "Noto Serif", serif;
 ```
 
 ## COLOURS
