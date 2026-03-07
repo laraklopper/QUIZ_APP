@@ -7,6 +7,7 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 // Import icons from lucide-react
 import { FileUser } from 'lucide-react';
+import EditUserData from '../components/EditUserData';
 
 export default function Home({logout, currentUser}) {
 
@@ -44,7 +45,9 @@ export default function Home({logout, currentUser}) {
       </section>
       {/* SECTION 2 : user profile + edit user forms */}
       <section id='userProfile'>
-       
+        <div>
+          <EditUserData currentUser={currentUser}/>
+        </div>
       
       </section>
       <Footer logout={logout}/>
