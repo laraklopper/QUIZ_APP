@@ -95,7 +95,7 @@ router.post('/login', async (req, res) => {
             return res.status(404).json({ message: 'User not found' });// Send a 404 (Not Found) status code with a message
         }
 
-        const  isPasswordValid = await bcrypt.compare(password, user.password)
+        const  isPasswordValid = password === user.password;
         if (!isPasswordValid) {
             console.error('[ERROR: userRoutes.js] Incorrect password');
             return res.status(401).json({ message: 'Invalid credentials' });// Send a 401 (Unauthorized) status code with a message
@@ -135,7 +135,7 @@ router.post('/login', async (req, res) => {
 })
 
 // Route for user registration
-router.post('/register', checkPasswordStrength, hashPassword, async (req, res) => {
+router.post('/register', checkPasswordStrength, async (req, res) => {
     try {
         const { username, fullName, email, dateOfBirth, admin, password } = req.body;
 
@@ -170,9 +170,7 @@ router.post('/register', checkPasswordStrength, hashPassword, async (req, res) =
             }
         }
 
-        // Hash the password
-        const hashedPassword = await bcrypt.hash(password, 10);
-
+        // DEV ONLY: store plaintext password
         // Create and save the new user
         const newUser = new User({
             username,
@@ -183,7 +181,7 @@ router.post('/register', checkPasswordStrength, hashPassword, async (req, res) =
             email,
             dateOfBirth,
             admin: admin || false,
-            password: hashedPassword,
+            password,
         });
 
         await newUser.save();
@@ -294,7 +292,7 @@ router.patch('/editUser/:id', async (req, res) => {
 
 //Route to edit a user password
 //Send a patch request to the /editPassword endpoint
-router.patch('/editPassword', checkJwtToken, checkPasswordStrength, hashPassword, async (req, res) => {
+router.patch('/editPassword', checkJwtToken, checkPasswordStrength, async (req, res) => {
     try {
         const { currentPassword, newPassword } = req.body || {};//Extract currentPassword and new password from the request body
 
@@ -323,29 +321,19 @@ router.patch('/editPassword', checkJwtToken, checkPasswordStrength, hashPassword
             console.error('[ERROR: userRoutes.js, /editPassword] User not found');//Log an error message in the console for debugging purposes
             return res.status(404).json({ success: false, message: 'User not found' });//Send a 404 (Not Found) status code with a message
         }
-        const isCurrentPasswordValid = await bcrypt.compare(currentPassword, user.password)
+        const isCurrentPasswordValid = currentPassword === user.password;
         // Conditional rendering to check if current password is valid
         if (!isCurrentPasswordValid) {
             console.error('[ERROR: userRoutes.js, /editPassword] Current password is incorrect');//Log an error message in the console for debugging purposes
             return res.status(401).json({ success: false, message: 'Current password is incorrect' });//Send a 401 (Unauthorized) status code with a message
         }
-        // Check if new password is same as current password
-        const isSamePassword = await bcrypt.compare(newPassword, user.password);
-
-        // Conditional rendering to prevent new password from being the same as current password
-        if (isSamePassword) {
-            console.error('[ERROR: userRoutes.js, /editPassword] New password must be different from old password');//Log an error message in the console for debugging purposes
-            return res.status(400).json({ success: false, message: 'New password must be different from old password' });//Send a 400 Bad Request status code with a message
-        }
-
         // Conditional rendering to prevent new password from being the same as current password
         if (currentPassword === newPassword) {
             console.error('[ERROR: userRoutes.js, /editPassword] New password must be different from old password');//Log an error message in the console for debugging purposes
             return res.status(400).json({ success: false, message: 'New password must be different from old password' });//Send a 400 Bad Request status code with a message
         }
-        // Update password with hashed version (already hashed by hashPassword middleware)
-        // Note: req.body.newPassword is now hashed by the hashPassword middleware
-        user.password = req.body.newPassword; // This is the hashed version from middleware
+        // DEV ONLY: store plaintext password
+        user.password = newPassword;
         await user.save();// Save the updated user
         // Return a success response
         return res.status(200).json({ success: true, message: 'Password updated successfully' });
