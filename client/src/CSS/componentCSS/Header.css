@@ -98,8 +98,7 @@
     color: #000;
 }
 /* NAVIGATION BAR */
-#loginNavbar,
-#navbar {
+#loginNavbar{
     display: flex;
     gap: 10px;
     list-style-type: none;
@@ -111,6 +110,18 @@
     align-items: center;
     flex-direction: column;
     width: 200px;
+}
+#navbar {
+    display: flex;
+    gap: 10px;
+    list-style-type: none;
+    cursor: pointer;
+    padding: 5px;
+    margin: 0px;
+    background-color: #D6D6D6;
+    border-radius: 5px;
+    align-items: center;
+   
 }
 /* Links */
 .linkItem {

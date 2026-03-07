@@ -46,15 +46,15 @@ export default function Header({currentUser, heading}) {
         </Col>
     </Row>
       <Row id='headerRow2'>
-        <Col></Col>
-        <Col xs={5} id='headingCol'>
+        
+        <Col id='headingCol'>
             <Stack gap={3} id='headingStack'>
       <div className="p-2"> <h2 className='pageHeading'>{heading}</h2></div>
       <div className="p-2" id='currentUserName'>
          {/* ====LOGGED IN USERNAME======= */}
             {currentUser?.username && (                         
                     <h2 className="headerStatus">
-                    USERNAME: {currentUser.username}
+                        USERNAME: {currentUser.username}
                     </h2>
             )}
       </div>
@@ -84,15 +84,14 @@ export default function Header({currentUser, heading}) {
                 </ul>
             </nav>
       </div>
-    </Stack>
-         
+            </Stack>
         </Col>
-      
+     
       </Row>
         <Row id='headerEventRow' role='presentation' aria-hidden='true'>
         <Col>
-            <div>
-                <div>
+            <div className='header-event-bar'>
+                <div className='event-track'>
                     <User className='user-slide' size={32} />
                 </div>
             </div>
