@@ -49,7 +49,7 @@ export default function Header({currentUser, heading}) {
         
         <Col id='headingCol'>
             <Stack gap={3} id='headingStack'>
-      <div className="p-2"> <h2 className='pageHeading'>{heading}</h2></div>
+      <div className="p-2"> <h2 id='pageHeading'>{heading}</h2></div>
       <div className="p-2" id='currentUserName'>
          {/* ====LOGGED IN USERNAME======= */}
             {currentUser?.username && (                         

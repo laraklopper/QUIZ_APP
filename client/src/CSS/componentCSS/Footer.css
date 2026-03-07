@@ -108,8 +108,35 @@
     justify-content: center;
     font-size: 14px;
 }
-#logoutBtn{
-        display: flex;
+/* Button */
+/* Logout Button */
+#logoutBtn {
+    gap: 10px;
     width: 180px;
+    font-weight: 700;
+    color: black;
+    display: flex;
+    height: 40px;
+    text-align: center;
+    font-size: 18px;
     justify-content: center;
+    font-family: "Roboto Mono", monospace;
+    border: #323A42 3px solid;
+    align-items: center;
+}
+
+#logoutBtn:hover {
+    gap: 10px;
+    align-items: center;
+    width: 180px;
+    background-color: #323A42;
+    font-weight: 700;
+    height: 40px;
+    color: #FFF;
+    border: #323A42 solid;
+    display: flex;
+    text-align: center;
+    font-size: 18px;
+    justify-content: center;
+    font-family: "Roboto Mono", monospace;
 }
