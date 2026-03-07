@@ -78,7 +78,7 @@ export default function Header({currentUser, heading}) {
                     )}
                      {currentUser?.admin && (
                         <li className='linkItem'>
-                            <Link className='refLink' to='/users'></Link>
+                            <Link className='refLink' to='/users'>USERS</Link>
                         </li>
                     )}
                 </ul>
@@ -87,7 +87,7 @@ export default function Header({currentUser, heading}) {
     </Stack>
          
         </Col>
-        <Col></Col>
+      
       </Row>
         <Row id='headerEventRow' role='presentation' aria-hidden='true'>
         <Col>

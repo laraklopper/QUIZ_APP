@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button';
 
 export default function Footer({logout}) {
   return (
-    <footer id='footer' role='button'>
+    <footer id='footer' role='banner'>
      <Row id='footerRow1'>
         <Col id='footerCol1'>
             <Stack direction="horizontal" gap={3} id='footerStack1'>
