@@ -21,14 +21,13 @@ export default function Home({logout, currentUser}) {
      <Row id='welcomeRow'>
         <Col></Col>
         <Col xs={6} id='welcomeMsg' aria-live='polite'>
-                      {/* welcome msg */}
+            {/* welcome msg */}
             <div id='welcomeDiv'>
               <span className='welcomeLabel'>
                 <h2 id='welcomeHeading'>WELCOME:</h2>
                 <h2 id='welcomeUser'>{`${firstName} ${lastName}`}</h2>
               </span>
             </div> 
-
         </Col>
         <Col></Col>
       </Row>
@@ -43,8 +42,9 @@ export default function Home({logout, currentUser}) {
           </Col>
         </Row>
       </section>
-      {/* SECTION 2 */}
+      {/* SECTION 2 : user profile + edit user forms */}
       <section id='userProfile'>
+       
       
       </section>
       <Footer logout={logout}/>
