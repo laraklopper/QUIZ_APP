@@ -6,12 +6,14 @@ const router = express.Router();
 // Import schemas
 const Quiz = require('../models/quizSchema'); // Import the Quiz model
 const Score = require('../models/scoreSchema'); //Import the Score model
+//Custom middleware
+const {checkJwtToken} = require('./middleware')
 
 //=============ROUTES===============
 //-------GET---------------
 // Route to get all quizzes
 // Send a GET request to /findQuizzes to retrieve all quizzes from the database
-router.get('/findQuizzes', async (req, res) => {
+router.get('/findQuizzes', checkJwtToken, async (req, res) => {
     try {
         const quizzes = await Quiz.find();
         res.status(200).json({success: true, quizList: quizzes});
@@ -25,7 +27,7 @@ router.get('/findQuizzes', async (req, res) => {
 })
 //Route to get a specific quiz by its ID
 //send a GET request to /findQuiz/:id to retrieve a quiz by its ID from the database
-router.get('/findQuiz/:id', async (req, res) => {
+router.get('/findQuiz/:id', checkJwtToken, async (req, res) => {
     try {
         const {id} = req.params;
 
@@ -217,7 +219,7 @@ router.patch('/updateQuiz/:id', async (req, res) => {
 });
 //--------DELETE------------
 // Route to delete a quiz by its ID
-router.delete('/deleteQuiz/:id', async (req, res) => {
+router.delete('/deleteQuiz/:id' , checkJwtToken,  async (req, res) => {
     const { id } = req.params;// Extract quiz ID from the request parameters
     try {
         const quiz = await Quiz.findById(id)// Find the quiz by its ID to check if the quiz exists

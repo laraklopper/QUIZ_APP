@@ -5,6 +5,8 @@ const mongoose = require('mongoose'); // Import mongoose to validate ObjectId fo
 const Score = require('../models/scoreSchema'); // Import the Score model to interact with the scores collection in the database
 const Quiz = require('../models/quizSchema'); // Import the Quiz model to check for existing quizzes when fetching scores
 const User = require('../models/userSchema'); // Import the User model to check for existing users when fetching scores
+//Import custom middleware
+const {checkJwtToken} = require('./middleware'); // Import the checkJwtToken middleware 
 //Ceate a new router instance to define the routes for handling quiz scores
 const router = express.Router();// Create a new router instance to define the routes for handling quiz scores
 
@@ -12,7 +14,7 @@ const router = express.Router();// Create a new router instance to define the ro
 //-----------GET----------------
 // Route to get all quiz scores//
 // Send a GET request to /fetchScores endpoint with an optional username query parameter to fetch all scores or scores for a specific user
-router.get('/fetchScores', async (req, res) => {
+router.get('/fetchScores', checkJwtToken, async (req, res) => {
     try {
         const {username} = req.query;
 
@@ -171,7 +173,7 @@ router.post('/submitScore', async (req, res) => {
 //----------PUT----------------
 // Route to update a UserScore
 // Send a PUT request to the  /updateScore/:id endpoint with the score ID as a parameter and the new score in the request body to update an existing score
-router.put('/updateScore/:id', async (req, res) => {
+router.put('/updateScore/:id', checkJwtToken, async (req, res) => {
     try {
         const { id } = req.params;// Extract the score ID from the request parameters
         const { score } = req.body;// Extract the new score from the request body

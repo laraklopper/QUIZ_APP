@@ -24,7 +24,7 @@ if (!secretKey) {
 //=================ROUTES==========================
 //---------------------GET-------------------
 // Route to Get current user details
-router.get('/me', async (req, res) => {
+router.get('/me', checkJwtToken, async (req, res) => {
     try {
         const userId = req.user?.userId;
 
@@ -53,7 +53,7 @@ router.get('/me', async (req, res) => {
 })
 
 //Route to GET all users
-router.get('/findUsers', async (req, res) => {
+router.get('/findUsers', checkJwtToken, async (req, res) => {
     try {        
         const { username } = req.query;// Extract the username from the query parameters
         // If a username is provided, use it to filter users, otherwise return all users
@@ -134,7 +134,7 @@ router.post('/login', async (req, res) => {
 })
 
 // Route for user registration
-router.post('/register', async (req, res) => {
+router.post('/register', hashPassword, async (req, res) => {
     try {
         const { username, fullName, email, dateOfBirth, admin, password } = req.body;
 
@@ -293,7 +293,7 @@ router.patch('/editUser/:id', async (req, res) => {
 
 //Route to edit a user password
 //Send a patch request to the /editPassword endpoint
-router.patch('/editPassword', async (req, res) => {
+router.patch('/editPassword', checkJwtToken, checkPasswordStrength, hashPassword, async (req, res) => {
     try {
         const { currentPassword, newPassword } = req.body || {};//Extract currentPassword and new password from the request body
 
@@ -342,8 +342,9 @@ router.patch('/editPassword', async (req, res) => {
             console.error('[ERROR: userRoutes.js, /editPassword] New password must be different from old password');//Log an error message in the console for debugging purposes
             return res.status(400).json({ success: false, message: 'New password must be different from old password' });//Send a 400 Bad Request status code with a message
         }
-        const hashedNewPassword = await bcrypt.hash(newPassword, 10);
-        user.password = hashedNewPassword;
+        // Update password with hashed version (already hashed by hashPassword middleware)
+        // Note: req.body.newPassword is now hashed by the hashPassword middleware
+        user.password = req.body.newPassword; // This is the hashed version from middleware
         await user.save();// Save the updated user
         // Return a success response
         return res.status(200).json({ success: true, message: 'Password updated successfully' });
@@ -356,7 +357,7 @@ router.patch('/editPassword', async (req, res) => {
 //----------------------DELETE-------------------
 //Route to delete a user by ID
 //Send a delete request to the /deleteUser/:id endpoint
-router.delete('/deleteUser/:id', async (req, res) => {
+router.delete('/deleteUser/:id', checkJwtToken, checkAdmin, async (req, res) => {
     try {
         const loggedInUserId = req.user?.userId; // 1) Extract userId from the decoded token payload
 
