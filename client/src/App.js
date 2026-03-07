@@ -154,22 +154,25 @@ export default function App() {
             <ProtectedUserRoute currentUser={currentUser}>
               <Home
                 logout={logout}
+                currentUser={currentUser}
               />
             </ProtectedUserRoute>
           }/>
           <Route path='/game' element={<ProtectedUserRoute currentUser={currentUser}>
             <Game
              logout={logout}
+             currentUser={currentUser}
             />
           </ProtectedUserRoute>}/>
           <Route path='/addQuiz' element={<ProtectedUserRoute currentUser={currentUser}>
             <AddQuiz
               logout={logout}
+              currentUser={currentUser}
             />
           </ProtectedUserRoute>} />
           <Route path='/users' element={
             <ProtectedAdminRoute currentUser={currentUser}>
-            <Users logout={logout} users={users}/>
+            <Users logout={logout} users={users} currentUser={currentUser}/>
           </ProtectedAdminRoute>}/>
         </>
       ):(
