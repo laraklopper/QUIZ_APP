@@ -63,9 +63,11 @@ export default function EditUserData({currentUser}) {
         {/* Edit user buttons */}
       </div>
       <div className="p-2">
-        {/* Edit userde */}
+        {/* Edit userdeadta */}
       </div>
-      <div className="p-2">Third item</div>
+      <div className="p-2">
+        {/* Edit passwordForm. */}
+      </div>
     </Stack>
         </Col>
       </Row>
