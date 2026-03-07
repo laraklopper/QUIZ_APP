@@ -7,32 +7,43 @@ import LoginForm from '../components/LoginForm';
 import MainHeader from '../components/MainHeader';
 import PageFooter from '../components/PageFooter';
 import { IdCard } from 'lucide-react';
+
+//=========MAIN LOGIN COMPONENT=========
 export default function Login({userData, setUserData, setError, setLoggedIn}) {
 
-    const submitLogin = useCallback(async (e) => {
-        e.preventDefault();
+    //=============REQUESTS==================
+    //Function for user login
+    const submitLogin = useCallback(async () => {
+        // e.preventDefault();
         try {
+            setError?.(null);
+            const token = localStorage.getItem('token')
             const response = await fetch('http://localhost:3001/users/login', {
                 method: 'POST',
                 mode: 'cors',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
                 body: JSON.stringify({
                     username: userData.username,
                     password: userData.password,
                 }),
             });
 
-            const data = await response.json();
+            const data = await response.json().catch(() => ({}));// Safely parse JSON (avoid crash if server returns non-JSON)
 
-            if (!response.ok) {
-                throw new Error(data.message || 'Login failed');
-            }
-
-            localStorage.setItem('token', data.token);
-            localStorage.setItem('username', userData.username);
+            if (response.ok) {
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('username', userData.username);
             localStorage.setItem('loggedIn', 'true');
             setError(null);
             setLoggedIn(true);
+            }else{
+                throw new Error(data.message || 'Login failed');
+            }
+
+            
         } catch (error) {
             console.error('[ERROR: Login.js]', error.message);
             setError(error.message);
@@ -40,11 +51,13 @@ export default function Login({userData, setUserData, setError, setLoggedIn}) {
     }, [userData, setError, setLoggedIn])
 
 
+    //=================JSX RENDERING=====================
 
   return (
     <Container id='loginContainer' role='main'>
     {/* HEADER */}
-    {/* Render the MainHeader component with "LOGIN" as the mainHeading */}
+    {/* Render the MainHeader component 
+    with "LOGIN" as the mainHeading */}
     <MainHeader mainHeading='LOGIN'/>
     {/*=========EVENT/ANIMATION===== */}
       <Row id='loginEventRow' aria-hidden='true' role='presentation'>
@@ -56,7 +69,7 @@ export default function Login({userData, setUserData, setError, setLoggedIn}) {
                 </div>
             </Col>
         </Row>
-        {/* SECTION 1 */}
+        {/* SECTION 1: Login Form */}
         <section id='loginSection'>
         <Row id='loginRow'>
                 <Col></Col>
@@ -67,12 +80,13 @@ export default function Login({userData, setUserData, setError, setLoggedIn}) {
                         <LoginForm 
                         userData={userData} 
                         setUserData={setUserData} 
-                        onSubmit={submitLogin}/>
+                        submitLogin={submitLogin}/>
                     </div>
                 </Col>
                 <Col></Col>
             </Row>
         </section>
+        {/* FOOTER */}
         <PageFooter/>
     </Container>
   )

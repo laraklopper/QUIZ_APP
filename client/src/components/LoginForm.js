@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button';
 import { Eye, EyeOff, LogIn } from 'lucide-react';
 
 
-export default function LoginForm({userData, setUserData, onSubmit}) {
+export default function LoginForm({userData, setUserData, submitLogin}) {
   const [showPassword, setShowPassword] = useState(false)
   const [usernameMsg, setUsernameMsg] = useState(false)
   const [passwordMsg, setPasswordMsg] = useState(false)
@@ -28,6 +28,10 @@ export default function LoginForm({userData, setUserData, onSubmit}) {
   const showPasswordError = touched.password && passwordEmpty;
 
   //==================EVENT LISTENERS=======================
+  const handleLogin = (e) => {
+    e.preventDefault();
+    submitLogin();
+  }
     //Function for handling user login data changes
   const handleLoginInput = (event) => {
     const { name, value } = event.target
@@ -51,17 +55,21 @@ export default function LoginForm({userData, setUserData, onSubmit}) {
 
   //===============================================
   return (
-    <form id='loginForm' method='POST' aria-describedby={formTitleId} onSubmit={onSubmit}>
-
+    <form 
+      id='loginForm' 
+      method='POST' 
+      aria-labelledby={formTitleId} 
+      onSubmit={handleLogin}>
+      {/* LOGIN DETAILS */}
         <div id='loginDetails'>
              <Stack gap={3} id='loginStack1'>
-      <div className="p-2" id='formHeadingBlock'>
-        <h3 className='formHeading'>LOGIN</h3>
-            {/* Screen-reader title anchor*/}
-            <h2 id={formTitleId} className="visually-hidden">
-              Login form
-            </h2>
-      </div>
+                <div className="p-2" id='formHeadingBlock'>
+                  <h3 className='formHeading'>LOGIN</h3>
+                      {/* Screen-reader title anchor*/}
+                      <h2 id={formTitleId} className="visually-hidden">
+                        Login form
+                      </h2>
+                </div>  
       <div className="p-2" id='usernameBlock'>
       {/* ========USERNAME============== */}
         <label className='loginLabel'>
