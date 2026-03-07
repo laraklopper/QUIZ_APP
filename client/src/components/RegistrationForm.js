@@ -50,6 +50,10 @@ export default function RegistrationForm({newUserData, setNewUserData, addUser, 
     const passwordErrorId = 'regisPasswordError'
 
     //==================EVENT LISTENERS=======================
+    const handleRegistration = (e) => {
+        e.preventDefault();
+        addUser()
+    }
     const handleInputChange = (event) => {
         const { name, value, type, checked } = event.target
         const fieldValue = type === 'checkbox' ? checked : value
@@ -79,7 +83,7 @@ export default function RegistrationForm({newUserData, setNewUserData, addUser, 
 
     //===============================================
     return (
-        <form id='registrationForm' onSubmit={addUser} aria-describedby={formTitleId}>
+        <form id='registrationForm' onSubmit={handleRegistration} method='POST' aria-labelledby={formTitleId}>
             <div id='registrationDetails'>
                 {/* Screen-reader form title */}
                 <h2 id={formTitleId} className='visually-hidden'>Registration form</h2>
@@ -99,6 +103,7 @@ export default function RegistrationForm({newUserData, setNewUserData, addUser, 
                 <Row id='regisRow1'>
                 {/* Col 4: username */}
                     <Col xs={6} md={4} id='regisCol4'>
+                    {/* USERNAME */}
                         <label className='regisLabel' htmlFor='regisUsername'>
                             <p className='labelText'>USERNAME:</p>
                             <input
@@ -129,6 +134,7 @@ export default function RegistrationForm({newUserData, setNewUserData, addUser, 
                     </Col>
                     {/* Col 5: Full Name */}
                     <Col xs={12} md={8} id='regisCol5'>
+                    {/* FULL NAME */}
                         <div id='regisName'>
                             {/* -------- FIRST NAME -------- */}
                             <label className='regisLabel' htmlFor='regisFirstName'>
@@ -193,6 +199,7 @@ export default function RegistrationForm({newUserData, setNewUserData, addUser, 
                 <Row id='regisRow2'>
                 {/* Col6 : Email*/}
                     <Col xs={6} md={4} id='regisCol6'>
+                    {/* EMAIL */}
                         <div id='regisEmail'>
                             <label className='regisLabel' htmlFor='regisEmailInput'>
                                 <p className='labelText'>EMAIL:</p>
@@ -244,6 +251,7 @@ export default function RegistrationForm({newUserData, setNewUserData, addUser, 
                     </Col>
                     {/* Col 7: Date of Birth */}
                     <Col xs={6} md={4} id='regisCol7' >
+                    {/* DATE OF BIRTH */}
                         <label className='regisLabel' htmlFor='regisDateOfBirth'>
                             <p className='labelText'>DATE OF BIRTH:</p>
                             <input
@@ -354,7 +362,6 @@ export default function RegistrationForm({newUserData, setNewUserData, addUser, 
                             </Button>
                                 </div>
                             </label>
-                            
                             {/* Help text: announced politely while focused */}
                             {passwordMsg && (
                                 <div id='regisPswdMessage'>

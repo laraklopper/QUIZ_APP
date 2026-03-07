@@ -25,20 +25,45 @@ export default function Registration() {
   const [newUserData, setNewUserData] = useState(EMPTY_FORM)
   const [error, setError] = useState(null)
 
-  const addUser = useCallback(async (event) => {
-    event.preventDefault()
+  //Function to registerNewUser
+  const addUser = useCallback(async () => {
     try {
       const response = await fetch('http://localhost:3001/users/register', {
         method: 'POST',
         mode: 'cors',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json' 
+        },
         body: JSON.stringify(newUserData),
       })
-      const data = await response.json()
+      const data = await response.json().catch(() => ({}));// Safely parse JSON (avoid crash if server returns non-JSON)
+            /* Conditional rendering to check if the response
+         is not successful (status code is not in the range 200-299)*/
       if (!response.ok) {
-        throw new Error(data.message || 'Registration failed')
+        throw new Error(data.message || `Error adding user (Status: ${response.status})`);//Throw an error message if the POST request is unsuccessful
       }
+
+      //5) Store token if the backend returns it
+      if (data.token) {
+        localStorage.setItem('token', data.token);// Parse the response data as JSON
+      }
+
+      //6) Reset form fields after successful registration
+      setNewUserData({
+         username: '',
+          fullName: { 
+            firstName: '', 
+            lastName: '' 
+          },
+          email: '',
+          dateOfBirth: '',
+          admin: false,
+          password: '',
+      })
       setError(null)
+      alert('New user successfully registered');//Notify the user of successful registration
+      console.log('New user successfully registered');;//Log a message in the console for debugging purposes
+
       navigate('/')
     } catch (err) {
       console.error('[ERROR: Registration.js]', err.message)
@@ -46,11 +71,14 @@ export default function Registration() {
     }
   }, [newUserData, navigate])
 
+  //=================EVENT LISTENERS=========================
+  //Function to clear form
   const handleClearForm = useCallback(() => {
     setNewUserData(EMPTY_FORM)
     setError(null)
   }, [])
 
+  //=====================JSX RENDERING=======================
   return (
     <Container id='registrationContainer' role='main'>
       <MainHeader mainHeading={'REGISTRATION'}/>
