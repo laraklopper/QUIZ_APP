@@ -12,24 +12,42 @@ export default function EditUserForm() {
     </div>
       <div id='editUserDetails'>
        
-        <Stack gap={3}>
-      <div className="p-2">
+        <Stack gap={3} id='editUserFormStack'>
+      <div className="p-2" id='editUsername'>
         <label>
           <p className='labelText'>USERNAME</p>
         </label>
+        <input
+          className='input'
+          placeholder='USERNAME'
+        />
       </div>
-      <div className="p-2">Second item</div>
-      <div className="p-2">Third item</div>
+      <div className="p-2" id='fullNameEditBlock'>
+      <div id='firstNameEdit'>
+<label htmlFor='firstNameEdit'>
+          <p className='labelText'>FIRST NAME:</p>
+        </label>
+        <input
+          className='input'
+          id='firstNameEdit'
+          placeholder='FIRST NAME'
+        />
+      </div>
+           <div id='lastNameEdit'>
+<label>
+          <p className='labelText'>LAST NAME:</p>
+        </label>
+        <input/>
+      </div>
+      </div>
+      <div className="p-2" id='userEmailEdit'>
+        <label>
+          <p className='labelText'>EMAIL</p>
+        </label>
+      </div>
     </Stack>
-       <Stack gap={3}>
-      <div className="p-2">
-        <label>
-          <p className='labelText'>USERNAME</p>
-        </label>
-      </div>
-      <div className="p-2">Second item</div>
-      <div className="p-2">Third item</div>
-    </Stack></div>
+    
+    </div>
     <Stack gap={2} className="col-md-5 mx-auto">
       <Button variant="secondary">Save changes</Button>
       <Button variant="outline-secondary">Cancel</Button>
