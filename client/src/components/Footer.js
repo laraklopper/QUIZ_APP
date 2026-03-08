@@ -26,7 +26,7 @@ export default function Footer({currentUser, logout}) {
      <Row id='footerRow1'>
         <Col id='footerCol1'>
             <Stack direction="horizontal" gap={3} id='footerStack1'>
-                <div className="p-2" id='footerDetailsBlock'>
+                <div  id='footerDetailsBlock'>
                     {currentUser && ( 
                       <ul id='footerStatusList'>
                       {/* Username */}
