@@ -44,7 +44,7 @@
     font-family: "Roboto Mono", monospace;
 }
 /* BUTTONS */
-#showPasswordBtn{
+#showPasswordBtn, #showNewPswdBtn, #showCurrentPswdBtn{
     height: 40px;
         width: 200px;
 
@@ -58,7 +58,7 @@
     color: #000;
     border: solid #323A42 3px;
 }
-#showPasswordBtn:hover{
+#showPasswordBtn:hover, #showNewPswdBtn:hover, #showCurrentPswdBtn:hover{
     height: 40px;
     width: 200px;
     margin: 10px;
