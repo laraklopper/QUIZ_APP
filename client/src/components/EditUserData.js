@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import '../css/componentCSS/UserData.css'
 import '../css/componentCSS/Data.css'
 import Row from 'react-bootstrap/Row';
@@ -10,6 +10,10 @@ import EditPasswordForm from './EditPasswordForm';
 
 export default function EditUserData({currentUser}) {
   const [activeForm, setActiveForm] = useState('null')
+ // State to manage whether the user is in edit mode
+  // Convenience booleans for conditional rendering + ARIA states
+  const showAccountForm = activeForm === 'account'
+  const showPasswordForm = activeForm === 'password'
 
     const username = currentUser?.username || 'Username Not provided'//User username
     const firstName = currentUser?.fullName?.firstName || 'First name not provided';//User First name
@@ -18,6 +22,17 @@ export default function EditUserData({currentUser}) {
     const dateOfBirth = currentUser?.dateOfBirth || 'No date provided';//User Date of Birth
     const isAdmin = currentUser?.admin ? 'Yes' : 'No';//User Admin Status
 
+    //=============EVENT HANDLERS=================
+// If the same form is already open, close it; otherwise open it.
+  // Toggle account form
+  const toggleAccountForm = useCallback(() => {
+      setActiveForm(prevForm => (prevForm === 'account' ? null : 'account'));
+    }, []);
+    // Toggle password form
+    const togglePasswordForm = useCallback(() => {
+      setActiveForm(prevForm => (prevForm === 'password' ? null : 'password'));
+    },[])
+    //================JSX RENDERING==============
   return (
     <div id='userDetails'>
     <div id='userDetailsDiv'>
