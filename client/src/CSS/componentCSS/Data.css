@@ -1,0 +1,100 @@
+#toggleEditUserRow{
+    display: flex;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+#editUserStack{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 10px;
+    padding: 0px;;
+}
+#edit-user-details,
+#edit-user-password{
+    display: flex;
+    align-items: center;
+        gap: 10px;
+
+}
+#editUserCol{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+#editUserBtnBlock{
+   width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0px;
+    gap: 10px; 
+}
+.btnText{
+    font-weight: 500;
+    margin: 0px;
+    padding: 0px;
+}
+#userDetails{
+    display: flex;
+    margin: 0px;
+    padding: 0px;
+    flex-direction: column;
+    border: solid;
+    background-color: #9CD034;
+}
+.userDetailsLabel{
+    display: flex;
+    padding: 10px;
+        gap: 10px;
+}
+.dataTextHead{
+    text-transform: uppercase;
+    font-family: "Playpen Sans", cursive
+}
+.dataText{
+    text-transform: uppercase;
+    font-family: "Playpen Sans", cursive
+}
+
+.emailData{
+    text-transform: lowercase;
+    font-family: "Playpen Sans", cursive;
+        font-size: 20px;
+}
+#adminDataText, #usernameDataText,.userFullName{
+    text-transform: uppercase;
+    font-family: "Playpen Sans", cursive;
+    font-size: 20px,
+}
+#toggleEditAccountBtn,
+#toggleEditPswdBtn{
+      height: 40px;
+    width: 180px;
+        margin: 5px;
+padding: 0px;
+align-items: center;
+    font-weight: 700;
+    font-family: "Roboto Mono", monospace;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    color: #000;
+    border: solid #323A42 3px;
+}
+#toggleEditAccountBtn:hover,
+#toggleEditPswdBtn:hover{
+    height: 40px;
+    width: 180px;
+       margin: 5px;
+padding: 0px;
+    font-weight: 700;
+    font-family: "Roboto Mono", monospace;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    color: #fff;
+    border: solid #323A42 3px;
+    background-color: #323A42;
+}

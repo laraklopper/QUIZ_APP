@@ -1,7 +1,9 @@
 import React from 'react'
+import '../css/componentCSS/Data.css'
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Stack from 'react-bootstrap/Stack';
+import Button from 'react-bootstrap/Button';
 import {dateDisplay} from '../utilFunctions/dateFunctions'
 
 export default function EditUserData({currentUser}) {
@@ -29,15 +31,13 @@ export default function EditUserData({currentUser}) {
                 <h5 className='dataTextHead'>NAME:</h5>
                 <h5 className='userFullName'>{`${firstName} ${lastName}`} </h5>
             </span>
-
         </Col>
-       
        <Row>
         <Col xs={6} md={4}>
                <span className='userDetailsLabel'>
-                          <h5 className='dataTextHead'>EMAIL: </h5>
-                          <h5 className='dataText'>{email}</h5>
-                      </span>
+                    <h5 className='dataTextHead'>EMAIL: </h5>
+                    <h5 className='emailData'>{email}</h5>
+                </span>
         </Col>
         <Col xs={6} md={4}>
               <span className='userDetailsLabel'>
@@ -55,12 +55,17 @@ export default function EditUserData({currentUser}) {
       </Row>
       </Row>
         {/* Edit User details */}
-      
         <Row id='toggleEditUserRow'>
-        <Col>
-              <Stack gap={3}>
-      <div className="p-2">
+        <Col id='editUserCol'>
+              <Stack gap={3} id='editUserStack'>
+      <div id='editUserBtnBlock'>
         {/* Edit user buttons */}
+        <div id='edit-user-details'>
+            <p className='btnText'>CLICK HERE TO:</p><Button variant="warning" id='toggleEditAccountBtn'>EDIT ACCOUNT</Button>
+        </div>
+        <div id='edit-user-password'>
+            <p className='btnText'>CLICK HERE TO:</p><Button variant="warning" id='toggleEditPswdBtn'>EDIT PASSWORD</Button>
+        </div>
       </div>
       <div className="p-2">
         {/* Edit userdeadta */}
