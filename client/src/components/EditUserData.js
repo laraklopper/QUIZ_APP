@@ -128,6 +128,7 @@ export default function EditUserData({currentUser}) {
             {/* EDIT USER STACK: CONDITIONAL */}
             {/* Only render this stack if a form is active */}
             {activeForm && (
+              <div id='editUserForms'>
               <Stack  id='editUserStack'>
                   <div id='editUserBlock'>
                     {/* Edit userdataForm */}
@@ -156,6 +157,7 @@ export default function EditUserData({currentUser}) {
                     )}
                   </div>
               </Stack>
+              </div>
             )}
                
           </Col>

@@ -42,9 +42,10 @@
     display: flex;
         background-color: #6c757d;
     justify-content: center;
-    width: 100%;
+    width: 800px;
     margin: 0px;
-    padding: 0px;;
+    padding: 10px 5px;
+    align-items: center;
 }
 
 #edit-user-details,
@@ -61,6 +62,12 @@
     align-items: center;
         padding: 10px 0px;
         margin: 0px;
+}
+#edit-user-panal{
+    width: 700px;
+    border: solid;
+    display: flex;
+    justify-content: center;
 }
 #edit-password-panal{
     width: 500px;

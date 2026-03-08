@@ -1,4 +1,12 @@
 /* EDITUSERFORMS.css */
+#editUserForm{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+#editUserDetails{
+    display: flex;
+}
 /* Edit Password Form
 EditPasswordForm.js 
 PATCH: editPassword
