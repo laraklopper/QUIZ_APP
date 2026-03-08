@@ -79,6 +79,7 @@
 }
 #footerTimeItem, #footerDateItem {
     display: flex;
+    align-items: baseline;
     gap: 5px;
     background-color: transparent;
     margin: 0px;
@@ -117,16 +118,17 @@
 #footerDetailsBlock{
     display: flex;
     justify-content: flex-start;
-    padding: 0px 0px 0px 10px;
-    margin: 0px;
+    padding: 10px 0px 10px 10px;
+    background-color: #E8F0F6;
+    margin: 0px 5px;
 }
 #footerStatusList{
     display: flex;
     flex-direction: column;
     list-style-type: none;
-        gap: 5px;
-        margin: 0px;
-        padding: 0px;
+    gap: 5px;
+    margin: 0px;
+    padding: 0px;
 }
 .footerStatusItem{
     display: flex;
