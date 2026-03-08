@@ -15,7 +15,7 @@ export default function AddQuiz({logout, currentUser}) {
         {/* ADD QUIZ FORM */}
       </section>
       {/* FOOTER */}
-      <Footer logout={logout}/>
+      <Footer logout={logout} currentUser={currentUser}/>
     </Container>
   )
 }

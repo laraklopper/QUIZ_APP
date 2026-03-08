@@ -13,7 +13,7 @@ export default function Game({logout, currentUser}) {
       <section>
         {/* QUIZ + RESULTS */}
       </section>
-      <Footer logout={logout}/>
+      <Footer logout={logout} currentUser={currentUser}/>
     </Container>
   )
 }

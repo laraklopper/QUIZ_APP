@@ -50,7 +50,7 @@ export default function Home({logout, currentUser}) {
         </div>
       
       </section>
-      <Footer logout={logout}/>
+      <Footer logout={logout} currentUser={currentUser}/>
     </Container>
   )
 }

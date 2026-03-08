@@ -26,39 +26,32 @@ export default function Footer({currentUser, logout}) {
      <Row id='footerRow1'>
         <Col id='footerCol1'>
             <Stack direction="horizontal" gap={3} id='footerStack1'>
-                <div className="p-2">
-                    {/* uSER DETAIL
-                        USERNAME
-                        lOGGED IN AS USER/ADMIN
-                    */}
+                <div className="p-2" id='footerDetailsBlock'>
                     {currentUser && (
-                      <div>
-<ul id='footerStatusList'>
+                     
+                      <ul id='footerStatusList'>
                         <li className='footerListItem'>
-                          <span id='footerL'>
+                          <span id='footerUsername'>
                             <h5 className='footerStatusLabel'>USERNAME:</h5>
-                            <h5>{currentUser.username}</h5>
-
+                            <h5 className='footerStatusItem'>{currentUser.username}</h5>
                           </span>
                         </li>
                          {/* User Admin status */}
-                                  <li className='footerListItem'> 
-                                    <span id='adminDetails'>
-                                          <h5 className='footerStatusLabel'>Logged in as:</h5>
-                                              {/*Display based on whether or not user is admin  */}
-                                        <h5 id='adminStatus'>
-                                          {currentUser.admin ? (
-                                            // Display if admin user
-                                            <>< ShieldUser style={{ marginRight: 6 }} aria-hidden='true'/>Admin </>
-                                            ) : (
-                                              // Display if normal user
-                                            <><User style={{ marginRight: 6 }} />USER</>
-                                            )}</h5>
-                                    </span>
-                                  </li>
+                          <li className='footerListItem'> 
+                            <span id='adminDetails'>
+                                  <h5 className='footerStatusLabel'>Logged in as:</h5>
+                                      {/*Display based on whether or not user is admin  */}
+                                <h5 id='adminStatus'>
+                                  {currentUser.admin ? (
+                                    // Display if admin user
+                                    <>< ShieldUser style={{ marginRight: 6 }} aria-hidden='true'/>Admin </>
+                                    ) : (
+                                      // Display if normal user
+                                    <><User style={{ marginRight: 6 }} />USER</>
+                                    )}</h5>
+                            </span>
+                          </li>
                       </ul>
-                      </div>
-                      
                     )}
                 </div>
                 <div className="p-2 ms-auto"></div>

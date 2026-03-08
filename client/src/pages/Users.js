@@ -11,7 +11,7 @@ export default function Users({logout, currentUser}) {
      <section id='userList'>
       {/* USERS LIST */}
      </section>
-      <Footer logout={logout}/>
+      <Footer logout={logout} currentUser={currentUser}/>
     </Container>
   )
 }
