@@ -9,7 +9,7 @@ export default function EditPasswordForm({setError}) {
     // STATE VARIABLES
     // Form variables
     const [currentPassword, setCurrentPassword] = useState('')
-    const [newPassword, setNewPassword]
+    const [newPassword, setNewPassword] = useState()
 
     const [loading, setLoading] = useState(false);// State variable to indicate if the form is submitting
     // Password visibilty variables
@@ -18,16 +18,100 @@ export default function EditPasswordForm({setError}) {
     // Message variables
     const [passwordMsg, setPasswordMsg] = useState(false)
 
+      //=============UTILITY FUNCTIONS=============
+   // Function to check password strength
+    const isStrongPassword = useCallback((pwd) => {
+        return /^(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,}$/ //Regex pattern to check for at least 8 characters and one special character
+        .test( 
+            String(pwd || '')// Ensure pwd is a string before testing
+        );
+    }, []);
+    
     const resetForm = useCallback(() => {
-        
-    })
+        setCurrentPassword('');
+        setNewPassword('')
+        setError?.(null)
+    },[setError])
     //=============REQUESTS=========================
+//Function to edit password
+const editPassword = useCallback(async (e) => {
+    setLoading(true)
+    e.preventDefault();
+    setError?.(null)
+    try {
+         // Client-side checks (still keep server-side validation too)
+            if (!currentPassword || !newPassword) {
+                const msg = 'Both current and new passwords are required.';
+                setError?.(msg);
+                alert(msg);
+                return;
+            }
+            // Conditional rendering to check if new password is different from current password
+            if (newPassword === currentPassword) {
+                const msg = 'New password must be different from the current password.';// Error message
+                setError?.(msg);// Set the error state to display the error in the UI
+                alert(msg);// Alert user of error
+                return;// Exit the function early
+            }
+               // Conditional rendering to check password strength
+            if (!isStrongPassword(newPassword)) {
+                const msg = //Message for weak password
+                    'New password must be at least 8 characters long and include at least one special character.';
+                setError?.(msg);// Set the error state to display the error in the UI
+                alert(msg);// Alert user of error
+                return;// Exit the function early
+            }
+             const token = localStorage.getItem('token');// Retrieve JWT token from local storage
+            //Conditional rendering to check if token exists
+            if (!token) {
+                const msg = 'User is not authenticated. Please log in again.';// Error message for missing token
+                setError?.(msg);// Set the error state to display the error in the UI
+                alert(msg);// Alert user of error
+                return;// Exit the function early
+            }
+            const response = await fetch('http://localhost:3001/users/editPassword', {
+                method: 'PATCH',
+                mode: 'cors',
+                headers: {
+                   'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,     
+                },
+                body: JSON.stringify({
+                    currentPassword,
+                    newPassword
+                })
+            })
+            const data = await response.json().catch (() => ({}));
+              /* Conditional rendering to check if the response
+        is not successful (status code is not in the range 200-299)*/
+            if (!response.ok) {
+                const errorMessage = data.message || 'Failed to change password.';//Default error message
+                setError?.(errorMessage);// Set the error state to display the error in the UI
+                alert(errorMessage);// Alert user of error
+                return;// Exit the function early
+            }
+
+            resetForm();// Reset form fields on success
+            console.log('[SUCCESS: EditPasswordForm.js] Password successfully changed');// Log success message to console for debugging
+            setLoading(false);//Set loading to false
+            // setError?.(null)// Clear any error messages
+            alert('Password changed successfully.');// Alert user of success
+    } catch (error) {
+        const msg = error?.message || 'An error occurred while changing the password.';// Default error message
+            setError?.(msg);// Set the error state to display the error in the UI
+            console.error('[ERROR: EditPasswordForm.js, editPassword]', msg);// Log the error message in the console for debugging
+            alert('Error changing password');// Alert user of error
+    } finally{
+        // Always set loading to false after request completes
+                setLoading(false);
+    }
+}, [currentPassword, newPassword, setError, isStrongPassword, resetForm])
 
     //====================JSX RENDERING====================
   return (
-    <form id='editPasswordForm' aria-busy={loading} aria-labelledby='editPasswordForm'>
+    <form id='editPasswordForm' aria-busy={loading} aria-labelledby='editPasswordForm' onSubmit={editPassword}>
     {/* Screen Reader Heading */}
-    <p className="visually-hidden" id='editPasswordForm'></p>
+    <p className="visually-hidden" id='editPasswordForm'>EDIT PASSWORD FORM</p>
         <div id='editPswdBlock'>
             <Stack gap={3} id='currentPasswordInputStack' aria-label='password input stack'>
                 <div className="p-2">
@@ -147,6 +231,7 @@ export default function EditPasswordForm({setError}) {
                 variant="danger" 
                 id='clearFormBtn'
                 type='button'
+                onClick={resetForm}
                 >CLEAR FORM</Button>
                 {/* ----------SUBMIT CHANGE PASWORD BUTTON -----*/}
                 <Button 
