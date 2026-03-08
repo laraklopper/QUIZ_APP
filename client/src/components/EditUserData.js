@@ -87,7 +87,7 @@ export default function EditUserData({currentUser}) {
         <Row id='toggleEditUserRow'>
           <Col id='editUserCol'>
              <Stack gap={2} className="col-md-5 mx-auto" id='editUserBtnStack'>
-                <div className="p-2" id='edit-user-details'>
+                <div  id='edit-user-details'>
                  <p className='btnText'>CLICK HERE TO:</p>
                         {/* TOGGLE BUTTON TO EDIT USER DETAILS */}
                           <Button 
@@ -128,8 +128,8 @@ export default function EditUserData({currentUser}) {
             {/* EDIT USER STACK: CONDITIONAL */}
             {/* Only render this stack if a form is active */}
             {activeForm && (
-              <Stack gap={3} id='editUserStack'>
-                  <div className="p-2" id='editUserBlock'>
+              <Stack  id='editUserStack'>
+                  <div id='editUserBlock'>
                     {/* Edit userdataForm */}
                       {showAccountForm &&(
                         <div
@@ -144,7 +144,7 @@ export default function EditUserData({currentUser}) {
                         </div>
                       )}
                   </div>
-                  <div className="p-2" id='editPasswordBlock'>
+                  <div id='editPasswordBlock'>
                     {/* Toggle Edit passwordForm. */}
                     {showPasswordForm && (
                       <div id='edit-password-panal' role='region' aria-labelledby='editPasswordHeading'>

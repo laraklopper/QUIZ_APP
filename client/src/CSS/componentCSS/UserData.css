@@ -13,14 +13,23 @@
     flex-direction: column;
     align-items: center;
 }
+
 #editUserBtnStack{
     background-color: #BFBFBF;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 0px;
+    margin: 10px 0px;
     gap: 10px; 
 }
+#editUserStack{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 10px;
+    padding: 0px;;
+}
+
 #edit-user-details,
 #edit-user-password{
     display: flex;
