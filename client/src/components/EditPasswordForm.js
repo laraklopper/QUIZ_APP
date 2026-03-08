@@ -9,7 +9,7 @@ export default function EditPasswordForm({setError}) {
     // STATE VARIABLES
     // Form variables
     const [currentPassword, setCurrentPassword] = useState('')
-    const [newPassword, setNewPassword] = useState()
+    const [newPassword, setNewPassword] = useState('')
 
     const [loading, setLoading] = useState(false);// State variable to indicate if the form is submitting
     // Password visibilty variables
@@ -131,6 +131,8 @@ const editPassword = useCallback(async (e) => {
                         required
                         disabled={loading}
                         placeholder='CURRENT PASSWORD'
+                        value={currentPassword}
+                        onChange={(e) => setCurrentPassword(e.target.value)}
                         onFocus={() => setPasswordMsg(true)}
                         onBlur={() => setPasswordMsg(false)}
                          //ARIA attributes
@@ -153,7 +155,7 @@ const editPassword = useCallback(async (e) => {
                 role='button'
                 aria-pressed={showPassword}
                 aria-controls='currentPswdInput'
-                aria-label={setShowPassword ? 'Hide current password' : 'Show current password'}
+                aria-label={showPassword ? 'Hide current password' : 'Show current password'}
                 >
                 {/* Conditional rendering to show password text */}
                     {showPassword ? (
@@ -183,6 +185,8 @@ const editPassword = useCallback(async (e) => {
                         type={showNewPassword ? 'text': 'password'}
                         disabled={loading}
                         minLength={8}
+                        value={newPassword}
+                        onChange={(e) => setNewPassword(e.target.value)}
                         onFocus={() => setPasswordMsg(true)}// show password help text on focus
                         onBlur={() => setPasswordMsg(false)}// hide password help text on blur
                         //ARIA attributes
