@@ -212,7 +212,18 @@ const editPassword = useCallback(async (e) => {
                     aria-controls='password'
                     aria-label={showNewPassword ? 'Hide password' : 'Show password'}
                     >
-                        SHOW PASSORD
+                          {/* Conditional rendering to show password text */}
+                    {showNewPassword ? (
+                    <>
+                            Hide Password
+                            <EyeOff aria-hidden="true" style={{ marginLeft: 6 }} fontWeight={700} />
+                        </>
+                    ) : (
+                        <>
+                            Show Password
+                            <Eye aria-hidden="true" style={{ marginLeft: 6 }} fontWeight={700} />
+                        </> 
+                    )}
                     </Button>
                 </div>          
                 {/* Password Message */}
