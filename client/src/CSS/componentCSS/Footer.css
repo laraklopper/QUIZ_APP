@@ -12,7 +12,6 @@
     display: flex;
     width: 100%;
     margin: 0px;
-    height: 20px;
     justify-content: center;
 }
 #footerRow2{
@@ -24,8 +23,9 @@
 #footerRow3 {
     display: flex;
     width: 100%;
-    margin: 0px;
+    margin: 10px 0px 5px 0px;
     height: 20px;
+    padding: 0px;
 }
 /* footer columns */
 #footerCol2 {
