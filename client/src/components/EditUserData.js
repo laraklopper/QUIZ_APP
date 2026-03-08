@@ -9,7 +9,7 @@ import {dateDisplay} from '../utilFunctions/dateFunctions'
 import EditPasswordForm from './EditPasswordForm';
 import EditUserForm from './EditUserForm';
 
-export default function EditUserData({currentUser}) {
+export default function EditUserData({currentUser, setError}) {
   const [activeForm, setActiveForm] = useState('null')
  // State to manage whether the user is in edit mode
   // Convenience booleans for conditional rendering + ARIA states
@@ -152,7 +152,9 @@ export default function EditUserData({currentUser}) {
                        {/* Screen Reader Heading */}
                             <h3 id="editPasswordHeading" className="visually-hidden">Edit Password details</h3>
                       {/* Render the EditPasswordForm component */}
-                        <EditPasswordForm/>
+                        <EditPasswordForm
+                          setError={setError}
+                        />
                     </div>
                     )}
                   </div>

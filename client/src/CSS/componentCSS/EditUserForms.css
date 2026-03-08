@@ -7,6 +7,20 @@
 #editUserDetails{
     display: flex;
 }
+#editUserFormStack{
+    display: flex;
+    align-items: center;
+}
+#editUsername,
+#fullNameEditBlock,
+#userEmailEdit{
+    display: flex;
+    align-items: baseline;
+}
+#firstNameEdit, #lastNameEdit{
+    display: flex;
+    align-items: baseline;
+}
 /* Edit Password Form
 EditPasswordForm.js 
 PATCH: editPassword
@@ -29,10 +43,19 @@ PATCH: editPassword
     flex-direction: column;
     align-items: center;
 }
+.editPswdInput{
+    display: flex;
+    margin: 0px;
+    padding: 0px;
+    align-items: center;
+    gap: 5px;
+}
 #currentPswdBlock, #newPasswordBlock{
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
+    margin: 0px;
+    padding: 0px;
 }
 #showCurrentPswdBlock, #showNewPswdBlock{
     display: flex;
@@ -45,10 +68,24 @@ PATCH: editPassword
     align-items: center;
     padding: 10px 0px;
 }
-#editPswdBtn
+#editUserBtn,
+#editPswdBtn{
+  height: 40px;
+    width: 180px;
+    margin: 10px;
+    font-weight: 700;
+    font-family: "Roboto Mono", monospace;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000;
+    border: solid #323A42 3px;  
+}
+#editUserBtn:hover,
 #editPswdBtn:hover{
     height: 40px;
-    width: 200px;
+    width: 180px;
     margin: 10px;
     font-weight: 700;
     font-family: "Roboto Mono", monospace;

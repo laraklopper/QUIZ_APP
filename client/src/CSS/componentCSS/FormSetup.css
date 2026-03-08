@@ -24,6 +24,10 @@
     font-family: "Roboto Mono", monospace;
     font-weight: 700;
 }
+.inputIcon{
+    margin: 0px;
+    padding: 0px;
+}
 #usernameMsgBlock, #passwordMsgBlock{
     display: flex;
     justify-content: center;

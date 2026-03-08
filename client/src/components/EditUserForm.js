@@ -1,9 +1,9 @@
 import React from 'react'
 import '../css/componentCSS/FormSetup.css'
 import '../css/componentCSS/EditUserForms.css'
-
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
+
 export default function EditUserForm() {
   return (
     <form id='editUserForm' method='PATCH'>
@@ -15,7 +15,7 @@ export default function EditUserForm() {
         <Stack gap={3} id='editUserFormStack'>
       <div className="p-2" id='editUsername'>
         <label>
-          <p className='labelText'>USERNAME</p>
+          <p className='labelText'>USERNAME:</p>
         </label>
         <input
           className='input'
@@ -29,7 +29,7 @@ export default function EditUserForm() {
         </label>
         <input
           className='input'
-          id='firstNameEdit'
+          id='editfirstNameInput'
           placeholder='FIRST NAME'
         />
       </div>
@@ -37,20 +37,28 @@ export default function EditUserForm() {
 <label>
           <p className='labelText'>LAST NAME:</p>
         </label>
-        <input/>
+        <input
+          className='input'
+          id='editLastNameInput'
+        />
       </div>
       </div>
       <div className="p-2" id='userEmailEdit'>
-        <label>
-          <p className='labelText'>EMAIL</p>
+        <label htmlFor='editEmailInput'>
+          <p className='labelText'>EMAIL:</p>
         </label>
+        <input 
+          className='input'
+          id='editEmailInput'
+          type='email'
+        />
       </div>
     </Stack>
     
     </div>
     <Stack gap={2} className="col-md-5 mx-auto">
-      <Button variant="secondary">Save changes</Button>
-      <Button variant="outline-secondary">Cancel</Button>
+      <Button variant="light" id='editUserBtn'>EDIT USER</Button>
+      <Button variant="danger" id='clearFormBtn'>CLEAR FORM</Button>
     </Stack>
       
     </form>

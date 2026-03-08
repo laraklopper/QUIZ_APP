@@ -9,7 +9,7 @@ import Header from '../components/Header';
 import { FileUser } from 'lucide-react';
 import EditUserData from '../components/EditUserData';
 
-export default function Home({logout, currentUser}) {
+export default function Home({logout, currentUser, setError}) {
 
    // SAFE DISPLAY VALUES FOR UI
   const firstName = currentUser?.fullName?.firstName || 'First name not provided';
@@ -46,7 +46,7 @@ export default function Home({logout, currentUser}) {
       {/* SECTION 2 : user profile + edit user forms */}
       <section id='userProfile'>
         <div>
-          <EditUserData currentUser={currentUser}/>
+          <EditUserData currentUser={currentUser} setError={setError}/>
         </div>
       
       </section>
