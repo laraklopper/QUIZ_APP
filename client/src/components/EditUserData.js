@@ -60,12 +60,15 @@ export default function EditUserData({currentUser}) {
               <Stack gap={3} id='editUserStack'>
       <div id='editUserBtnBlock'>
         {/* Edit user buttons */}
-        <div id='edit-user-details'>
+        <div id='toggleEditUserDiv'>
+ <div id='edit-user-details'>
             <p className='btnText'>CLICK HERE TO:</p><Button variant="warning" id='toggleEditAccountBtn'>EDIT ACCOUNT</Button>
         </div>
         <div id='edit-user-password'>
             <p className='btnText'>CLICK HERE TO:</p><Button variant="warning" id='toggleEditPswdBtn'>EDIT PASSWORD</Button>
         </div>
+        </div>
+       
       </div>
       <div className="p-2">
         {/* Edit userdataForm */}
