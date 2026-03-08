@@ -23,6 +23,8 @@ export default function EditUserData({currentUser}) {
     const dateOfBirth = currentUser?.dateOfBirth || 'No date provided';//User Date of Birth
     const isAdmin = currentUser?.admin ? 'Yes' : 'No';//User Admin Status
 
+    //============REQUESTS========================
+
     //=============EVENT HANDLERS=================
 // If the same form is already open, close it; otherwise open it.
   // Toggle account form
@@ -128,7 +130,6 @@ export default function EditUserData({currentUser}) {
                   </div>
                   <div className="p-2" id='editUserBlock'>
                     {/* Edit userdataForm */}
-                    <div>
                       {showAccountForm &&(
                         <div
                         id='edit-user-panal'
@@ -141,12 +142,13 @@ export default function EditUserData({currentUser}) {
                             <EditUserForm/>
                         </div>
                       )}
-                    </div>
                   </div>
                   <div className="p-2" id='editPasswordBlock'>
                     {/* Toggle Edit passwordForm. */}
                     {showPasswordForm && (
-                      <div id='edit-password-panal' role='region'>
+                      <div id='edit-password-panal' role='region' aria-labelledby='editPasswordHeading'>
+                       {/* Screen Reader Heading */}
+                            <h3 id="editPasswordHeading" className="visually-hidden">Edit Password details</h3>
                       {/* Render the EditPasswordForm component */}
                         <EditPasswordForm/>
                     </div>
