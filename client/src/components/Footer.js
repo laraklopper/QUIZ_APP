@@ -36,14 +36,15 @@ export default function Footer({currentUser, logout}) {
 <ul id='footerStatusList'>
                         <li className='footerListItem'>
                           <span id='footerL'>
-                            <h5 className='footerStatusLabel'></h5>
+                            <h5 className='footerStatusLabel'>USERNAME:</h5>
+                            <h5>{currentUser.username}</h5>
 
                           </span>
                         </li>
                          {/* User Admin status */}
                                   <li className='footerListItem'> 
                                     <span id='adminDetails'>
-                                          <h5 id='status'>Logged in as:</h5>
+                                          <h5 className='footerStatusLabel'>Logged in as:</h5>
                                               {/*Display based on whether or not user is admin  */}
                                         <h5 id='adminStatus'>
                                           {currentUser.admin ? (
