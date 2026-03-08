@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import '../css/componentCSS/UserData.css'
 import '../css/componentCSS/Data.css'
 import Row from 'react-bootstrap/Row';
@@ -9,6 +9,7 @@ import {dateDisplay} from '../utilFunctions/dateFunctions'
 import EditPasswordForm from './EditPasswordForm';
 
 export default function EditUserData({currentUser}) {
+  const [activeForm, setActiveForm] = useState('null')
 
     const username = currentUser?.username || 'Username Not provided'//User username
     const firstName = currentUser?.fullName?.firstName || 'First name not provided';//User First name
