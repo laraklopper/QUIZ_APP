@@ -1,32 +1,9 @@
-#toggleEditUserRow{
-    display: flex;
-    width: 100%;
-    margin: 0px;
-    padding: 0px;
-}
-#editUserStack{
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    margin: 10px;
-    padding: 0px;;
-}
-
-
-
 .btnText{
     font-weight: 500;
     margin: 0px;
     padding: 0px;
 }
-#userDetails{
-    display: flex;
-    margin: 0px;
-    padding: 0px;
-    flex-direction: column;
-    border: solid;
-    background-color: #9CD034;
-}
+
 .userDetailsLabel{
     display: flex;
     padding: 10px;

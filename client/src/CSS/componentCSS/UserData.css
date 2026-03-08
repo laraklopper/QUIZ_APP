@@ -1,3 +1,19 @@
+#userDetails{
+    display: flex;
+    margin: 0px 0px 10px 0px;
+    padding: 10px;
+    flex-direction: column;
+  
+    background-color: #83AE2C;
+}
+#userDetailsDiv{
+    display: flex;
+        margin: 0px 5px;
+    padding: 0px;
+    flex-direction: column;
+    border: solid #323A42;
+    background-color: #83AE2C;
+}
 #toggleEditUserRow{
     display: flex;
     width: 100%;
@@ -24,9 +40,10 @@
 }
 #editUserStack{
     display: flex;
+        background-color: #6c757d;
     justify-content: center;
     width: 100%;
-    margin: 10px;
+    margin: 0px;
     padding: 0px;;
 }
 
@@ -42,6 +59,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+        padding: 10px 0px;
+        margin: 0px;
 }
 #edit-password-panal{
     width: 500px;
