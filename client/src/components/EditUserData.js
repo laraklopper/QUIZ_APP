@@ -68,7 +68,7 @@ export default function EditUserData({currentUser}) {
         </div>
       </div>
       <div className="p-2">
-        {/* Edit userdeadta */}
+        {/* Edit userdataForm */}
       </div>
       <div className="p-2">
         {/* Edit passwordForm. */}
