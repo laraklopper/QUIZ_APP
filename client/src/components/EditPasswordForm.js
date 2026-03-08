@@ -185,6 +185,7 @@ const editPassword = useCallback(async (e) => {
                         type={showNewPassword ? 'text': 'password'}
                         disabled={loading}
                         minLength={8}
+                        placeholder='NEW PASSWORD'
                         value={newPassword}
                         onChange={(e) => setNewPassword(e.target.value)}
                         onFocus={() => setPasswordMsg(true)}// show password help text on focus
