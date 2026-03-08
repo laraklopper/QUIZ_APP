@@ -86,12 +86,9 @@ export default function EditUserData({currentUser}) {
         {/* Edit User details */}
         <Row id='toggleEditUserRow'>
           <Col id='editUserCol'>
-                <Stack gap={3} id='editUserStack'>
-                  <div id='editUserBtnBlock'>
-                    {/* Edit user buttons */}
-                    <div id='toggleEditUserDiv'>
-                      <div id='edit-user-details'>
-                        <p className='btnText'>CLICK HERE TO:</p>
+             <Stack gap={2} className="col-md-5 mx-auto" id='editUserBtnStack'>
+                <div className="p-2" id='edit-user-details'>
+                 <p className='btnText'>CLICK HERE TO:</p>
                         {/* TOGGLE BUTTON TO EDIT USER DETAILS */}
                           <Button 
                           variant="warning" 
@@ -107,8 +104,8 @@ export default function EditUserData({currentUser}) {
                           >
                           {showAccountForm ? 'EXIT': 'EDIT ACCOUNT'}
                         </Button>
-                    </div>
-                    <div id='edit-user-password'>
+                  </div>
+                   <div id='edit-user-password'>
                         <p className='btnText'>CLICK HERE TO:</p>
                         {/* TOGGLE BUTTON TO EDIT PASSWORD DETAILS */}
                         <Button 
@@ -124,10 +121,14 @@ export default function EditUserData({currentUser}) {
                           aria-label='Button to toggle Edit user Form'
                           >
                             {showPasswordForm ? 'EXIT' : 'EDIT PASSWORD'}
-                          </Button>
+                        </Button>
                     </div>
-                    </div>
-                  </div>
+                 
+            </Stack>
+            {/* EDIT USER STACK: CONDITIONAL */}
+            {/* Only render this stack if a form is active */}
+            {activeForm && (
+              <Stack gap={3} id='editUserStack'>
                   <div className="p-2" id='editUserBlock'>
                     {/* Edit userdataForm */}
                       {showAccountForm &&(
@@ -154,7 +155,9 @@ export default function EditUserData({currentUser}) {
                     </div>
                     )}
                   </div>
-               </Stack>
+              </Stack>
+            )}
+               
           </Col>
         </Row>
     </div>

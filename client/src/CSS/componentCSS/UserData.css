@@ -1,9 +1,73 @@
-#editPasswordBlock{
+#toggleEditUserRow{
+    display: flex;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    flex-direction: column;
+    align-items: center;
+}
+#editUserCol {
     width: 100%;
     display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
-#edit-password-panel{
+#editUserBtnStack{
+    background-color: #BFBFBF;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0px;
+    gap: 10px; 
+}
+#edit-user-details,
+#edit-user-password{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+}
+#editPasswordBlock{
+   width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#edit-password-panal{
     width: 500px;
     display: flex;
     justify-content: center;
+}
+
+/* BUTTONS */
+#toggleEditAccountBtn,
+#toggleEditPswdBtn{
+    height: 40px;
+    width: 180px;
+    margin: 5px;
+    padding: 0px;
+    align-items: center;
+    font-weight: 700;
+    font-family: "Roboto Mono", monospace;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    color: #000;
+    border: solid #323A42 3px;
+}
+#toggleEditAccountBtn:hover,
+#toggleEditPswdBtn:hover{
+    height: 40px;
+    width: 180px;
+    margin: 5px;
+    padding: 0px;
+    font-weight: 700;
+    font-family: "Roboto Mono", monospace;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    color: #fff;
+    border: solid #323A42 3px;
+    background-color: #323A42;
 }

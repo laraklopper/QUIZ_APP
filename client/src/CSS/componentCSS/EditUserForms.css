@@ -1,8 +1,15 @@
+/* EDITUSERFORMS.css */
+/* Edit Password Form
+EditPasswordForm.js 
+PATCH: editPassword
+*/
 #editPasswordForm{
     width: 100%;
     background-color: silver;
     display: flex;
     justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 #editPswdBlock{
     display: flex;
