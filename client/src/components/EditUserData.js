@@ -6,6 +6,7 @@ import Col from 'react-bootstrap/Col';
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
 import {dateDisplay} from '../utilFunctions/dateFunctions'
+import EditPasswordForm from './EditPasswordForm';
 
 export default function EditUserData({currentUser}) {
 
@@ -18,6 +19,7 @@ export default function EditUserData({currentUser}) {
 
   return (
     <div id='userDetails'>
+    <div id='userDetailsDiv'>
           <Row id='userDetailsRow1'>
            <Col xs={6} md={4}>
            {/* Username */}
@@ -53,8 +55,11 @@ export default function EditUserData({currentUser}) {
                 <h5 id='adminDataText'>{isAdmin}</h5>
             </span>
         </Col>
+        
       </Row>
+      
       </Row>
+      </div>
         {/* Edit User details */}
         <Row id='toggleEditUserRow'>
         <Col id='editUserCol'>
@@ -74,8 +79,12 @@ export default function EditUserData({currentUser}) {
       <div className="p-2">
         {/* Edit userdataForm */}
       </div>
-      <div className="p-2">
+      <div className="p-2" id='editPasswordBlock'>
         {/* Edit passwordForm. */}
+        <div id='edit-password-panal'>
+        <EditPasswordForm/>
+
+        </div>
       </div>
     </Stack>
         </Col>

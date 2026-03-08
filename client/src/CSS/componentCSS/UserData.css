@@ -1,0 +1,9 @@
+#editPasswordBlock{
+    width: 100%;
+    display: flex;
+}
+#edit-password-panel{
+    width: 500px;
+    display: flex;
+    justify-content: center;
+}

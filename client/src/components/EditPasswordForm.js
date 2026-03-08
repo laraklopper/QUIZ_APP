@@ -14,7 +14,7 @@ export default function EditPasswordForm() {
     {/* Screen Reader Heading */}
     <p className="visually-hidden" id='editPasswordForm'></p>
         <div id='editPswdBlock'>
-            <Stack gap={3} id='newPasswordInputStack' aria-label='password input stack'>
+            <Stack gap={3} id='currentPasswordInputStack' aria-label='password input stack'>
                 <div className="p-2">
                     <h3 id='formHeading'>EDIT PASSWORD</h3>
                 </div>
@@ -27,16 +27,17 @@ export default function EditPasswordForm() {
                         id='currentPswdInput'
                     />
                 </div>
-                <div className="p-2" id='showCurrentPswdBlock'><Button variant='warning' id='showCurrentPswdBtn'></Button></div>
+                <div className="p-2" id='showCurrentPswdBlock'><Button variant='warning' id='showCurrentPswdBtn'>SHOW PASSWORD</Button></div>
             </Stack>
-            <Stack gap={3}>
+            <Stack gap={3} id='newPswdStack'>
             {/* New Password */}
-                <div className="p-2">
-                    <label>
-                        <p className='labelText'>NEW PASSORD</p>
+                <div className="p-2" id='newPasswordBlock'>
+                    <label htmlFor='newPasswordInput'>
+                        <p className='labelText'>NEW PASSORD:</p>
                     </label>
                     <input
                         className='input'
+                        id='newPasswordInput'
                     />
                 </div>
                 <div className="p-2">
@@ -54,15 +55,7 @@ export default function EditPasswordForm() {
                 <Button variant="danger">CLEAR FORM</Button>
                 <Button variant="light" id='editPswdBtn' type='submit'>EDIT PASSWORD</Button>
             </Stack>
-        <Stack gap={3}>
-                <div id='submitPswdChangeBlock'>
-                    <Button id='editPswdBtn' type='submit'></Button>
-                </div>
-      <div className="p-2">
-        {/*  */}
-      </div>
-      <div className="p-2">Third item</div>
-    </Stack>
+  
         
     </form>
   )

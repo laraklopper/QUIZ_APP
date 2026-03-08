@@ -1,0 +1,30 @@
+#editPasswordForm{
+    width: 100%;
+    background-color: silver;
+    display: flex;
+    justify-content: center;
+}
+#editPswdBlock{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#currentPasswordInputStack{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#currentPswdBlock{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#showCurrentPswdBtn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 180px;
+    font-family: "Roboto Mono", monospace;
+    font-weight: 700;
+    color: #000;
+}
