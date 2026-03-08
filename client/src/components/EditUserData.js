@@ -7,6 +7,7 @@ import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
 import {dateDisplay} from '../utilFunctions/dateFunctions'
 import EditPasswordForm from './EditPasswordForm';
+import EditUserForm from './EditUserForm';
 
 export default function EditUserData({currentUser}) {
   const [activeForm, setActiveForm] = useState('null')
@@ -35,76 +36,125 @@ export default function EditUserData({currentUser}) {
     //================JSX RENDERING==============
   return (
     <div id='userDetails'>
-    <div id='userDetailsDiv'>
+      <div id='userDetailsDiv' aria-labelledby="userDetailsHeading">
+        {/* Screen-reader-only heading for userDetails */}
+          <h2 id="userDetailsHeading" className="visually-hidden">
+            User account details
+          </h2>
           <Row id='userDetailsRow1'>
-           <Col xs={6} md={4}>
-           {/* Username */}
-        <span className='userDetailsLabel'>
-            <h5 className='dataTextHead'>USERNAME:</h5>
-            <h5 id='usernameDataText'>{username}</h5>
-        </span>
-        </Col>
-        <Col xs={12} md={8}>
-            {/* User Full Name */}
-            <span className='userDetailsLabel'>
-                <h5 className='dataTextHead'>NAME:</h5>
-                <h5 className='userFullName'>{`${firstName} ${lastName}`} </h5>
-            </span>
-        </Col>
-       <Row>
-        <Col xs={6} md={4}>
-               <span className='userDetailsLabel'>
-                    <h5 className='dataTextHead'>EMAIL: </h5>
-                    <h5 className='emailData'>{email}</h5>
-                </span>
-        </Col>
-        <Col xs={6} md={4}>
+            <Col xs={6} md={4}>
+              {/* Username */}
               <span className='userDetailsLabel'>
-                <h5 className='dataTextHead'>DATE OF BIRTH: </h5>
-                <h5 className='dataText'>{dateDisplay(dateOfBirth)}</h5>
-            </span>
-        </Col>
-        <Col xs={6} md={4}>
-          {/* User admin status*/}
-            <span className='userDetailsLabel'>
-                <h5 className='dataTextHead'>ADMIN: </h5>
-                <h5 id='adminDataText'>{isAdmin}</h5>
-            </span>
-        </Col>
+                  <h5 className='dataTextHead'>USERNAME:</h5>
+                  <h5 id='usernameDataText'>{username}</h5>
+              </span>
+            </Col>
+            <Col xs={12} md={8}>
+                {/* User Full Name */}
+                <span className='userDetailsLabel'>
+                    <h5 className='dataTextHead'>NAME:</h5>
+                    <h5 className='userFullName'>{`${firstName} ${lastName}`} </h5>
+                </span>
+            </Col>
+          </Row>
+          <Row id='userDetailsRow2'>
+            <Col xs={6} md={4}>
+                  <span className='userDetailsLabel'>
+                        <h5 className='dataTextHead'>EMAIL: </h5>
+                        <h5 className='emailData'>{email}</h5>
+                    </span>
+            </Col>
+            <Col xs={6} md={4}>
+                  <span className='userDetailsLabel'>
+                    <h5 className='dataTextHead'>DATE OF BIRTH: </h5>
+                    <h5 className='dataText'>{dateDisplay(dateOfBirth)}</h5>
+                </span>
+            </Col>
+            <Col xs={6} md={4}>
+              {/* User admin status*/}
+                <span className='userDetailsLabel'>
+                    <h5 className='dataTextHead'>ADMIN: </h5>
+                    <h5 id='adminDataText'>{isAdmin}</h5>
+                </span>
+            </Col>
+            
+          </Row>      
         
-      </Row>
-      
-      </Row>
       </div>
         {/* Edit User details */}
         <Row id='toggleEditUserRow'>
-        <Col id='editUserCol'>
-              <Stack gap={3} id='editUserStack'>
-      <div id='editUserBtnBlock'>
-        {/* Edit user buttons */}
-        <div id='toggleEditUserDiv'>
- <div id='edit-user-details'>
-            <p className='btnText'>CLICK HERE TO:</p><Button variant="warning" id='toggleEditAccountBtn'>EDIT ACCOUNT</Button>
-        </div>
-        <div id='edit-user-password'>
-            <p className='btnText'>CLICK HERE TO:</p><Button variant="warning" id='toggleEditPswdBtn'>EDIT PASSWORD</Button>
-        </div>
-        </div>
-       
-      </div>
-      <div className="p-2">
-        {/* Edit userdataForm */}
-      </div>
-      <div className="p-2" id='editPasswordBlock'>
-        {/* Edit passwordForm. */}
-        <div id='edit-password-panal'>
-        <EditPasswordForm/>
-
-        </div>
-      </div>
-    </Stack>
-        </Col>
-      </Row>
+          <Col id='editUserCol'>
+                <Stack gap={3} id='editUserStack'>
+                  <div id='editUserBtnBlock'>
+                    {/* Edit user buttons */}
+                    <div id='toggleEditUserDiv'>
+                      <div id='edit-user-details'>
+                        <p className='btnText'>CLICK HERE TO:</p>
+                        {/* TOGGLE BUTTON TO EDIT USER DETAILS */}
+                          <Button 
+                          variant="warning" 
+                          id='toggleEditAccountBtn'
+                          type='button'
+                          onClick={toggleAccountForm}
+                          // ARIA ATTRIBUTES
+                          role='button'
+                          aria-label='Button to toggle Edit user Form'
+                          aria-pressed={showAccountForm}
+                          aria-expanded={showAccountForm}
+                          aria-controls='edit-user-panal'
+                          >
+                          {showAccountForm ? 'EXIT': 'EDIT ACCOUNT'}
+                        </Button>
+                    </div>
+                    <div id='edit-user-password'>
+                        <p className='btnText'>CLICK HERE TO:</p>
+                        {/* TOGGLE BUTTON TO EDIT PASSWORD DETAILS */}
+                        <Button 
+                          variant="warning" 
+                          id='toggleEditPswdBtn'
+                          type='button'
+                          onClick={togglePasswordForm}
+                          // ARIA-ATTRIBUTES
+                          role='button'
+                          aria-pressed={showPasswordForm}
+                          aria-expanded={showPasswordForm}
+                          aria-controls='edit-password-panal' 
+                          aria-label='Button to toggle Edit user Form'
+                          >
+                            {showPasswordForm ? 'EXIT' : 'EDIT PASSWORD'}
+                          </Button>
+                    </div>
+                    </div>
+                  </div>
+                  <div className="p-2" id='editUserBlock'>
+                    {/* Edit userdataForm */}
+                    <div>
+                      {showAccountForm &&(
+                        <div
+                        id='edit-user-panal'
+                        role='region'
+                        aria-labelledby='editAccountHeading'
+                        >
+                          {/* Screen Reader Heading */}
+                            <h3 id="editAccountHeading" className="visually-hidden">Edit account details</h3>
+                            {/* Render the EditUserForm component */}
+                            <EditUserForm/>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                  <div className="p-2" id='editPasswordBlock'>
+                    {/* Toggle Edit passwordForm. */}
+                    {showPasswordForm && (
+                      <div id='edit-password-panal' role='region'>
+                      {/* Render the EditPasswordForm component */}
+                        <EditPasswordForm/>
+                    </div>
+                    )}
+                  </div>
+               </Stack>
+          </Col>
+        </Row>
     </div>
   )
 }
