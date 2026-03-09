@@ -5,6 +5,7 @@ import '../css/componentCSS/AddQuizForm.css'
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
 import { Asterisk} from 'lucide-react';
+import NewQuestionsList from './NewQuestionsList';
 
 export default function AddQuizForm(
   {currentUser, quizName, setQuizName, currentQuestion, setCurrentQuestion, questions, setQuestions, setError}) {
@@ -240,9 +241,7 @@ export default function AddQuizForm(
             </Stack>
         </div>
       </form>
-      {/* New Questions List component
-      include add Quiz Button
-      */}
+      <NewQuestionsList/>
     </div>
    
   )
