@@ -29,6 +29,8 @@ export default function App() {
     admin: false,
     password:'',
   })
+  const [quizName, setQuizName] = useState('')
+  const [questions, setQuestions] = useState([])
   const [loggedIn, setLoggedIn] = useState(false)
   const [error, setError] = useState(null)
 
@@ -167,6 +169,10 @@ export default function App() {
           </ProtectedUserRoute>}/>
           <Route path='/addQuiz' element={<ProtectedUserRoute currentUser={currentUser}>
             <AddQuiz
+            questions={questions}
+            quizName={quizName}
+            setQuestions={setQuestions}
+            setQuizName={setQuizName}
               logout={logout}
               currentUser={currentUser}
             />

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import '../css/pagesCSS/AddQuiz.css'
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -7,7 +7,14 @@ import Button from 'react-bootstrap/Button';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import AddQuizForm from '../components/AddQuizForm';
-export default function AddQuiz({logout, currentUser}) {
+export default function AddQuiz({logout, currentUser, quizName, questions, setQuizName}) {
+  //=============STATE VARIABLES===================
+  const [currentQuestion, setCurrentQuestion] = useState({
+    questionText: '',
+    correctAnswer: '',
+    options: ['', '', ''],
+  })
+  //=============JSX RENDERING=======================
   return (
     <Container>
       {/* HEADER */}
@@ -27,7 +34,14 @@ export default function AddQuiz({logout, currentUser}) {
         </div>
         {/* Only display if form is displayed */}
             <div id='add-quiz-panal'>
-                <AddQuizForm currentUser={currentUser}/>
+                <AddQuizForm 
+                questions={questions}
+                currentUser={currentUser}
+                  quizName={quizName}
+                  setCurrentQuestion={setCurrentQuestion}
+                  setQuizName={setQuizName}
+                  currentQuestion={currentQuestion}
+                />
             </div>
         </Col>
         <Col xs={4} md={2}></Col>
