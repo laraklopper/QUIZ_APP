@@ -45,7 +45,7 @@ export default function PageFooter() {
                             <ListGroup.Item id='footerDateItem'>
                              {/* DATE:dateDisplay  -> formats Date into readable date string */}
                              <h5 className='listIcon' aria-hidden='true'><Calendar fontWeight={700} size={20} fontFamily='"Playpen Sans", cursive'/></h5>
-                                <h5 className='timeStamp'><Calendar size={20} fontWeight={700} fontFamily='"Playpen Sans", cursive'/>{dateDisplay(footerDate)}</h5>
+                                <h5 className='timeStamp'>{dateDisplay(footerDate)}</h5>
                             </ListGroup.Item>
                             <ListGroup.Item id='footerTimeItem'>
                             {/* TIME: timeDisplay  -> formats Date into readable time string */}
