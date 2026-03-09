@@ -55,7 +55,7 @@ export default function AddQuizForm(
           <p className='labelText'>QUIZ NAME:</p>
           <input
           type='text'
-            className='input'
+            className='addQuizInput'
             id='newQuizNameInput'
             name='newQuizName'
             value={quizName}
@@ -84,7 +84,7 @@ export default function AddQuizForm(
                   <p className='labelText'>QUESTION:</p>
                   <input
                     type='text'
-                    className='input'
+                    className='addQuizInput'
                     id='newQuestionInput'
                     placeholder='QUESTION'
                     name='questionText'
@@ -107,7 +107,7 @@ export default function AddQuizForm(
                   <p className='labelText'>CORRECT ANSWER:</p>
                   <input
                   type='text'
-                    className='input'
+                    className='addQuizInput'
                     id='correctAnswerInput'
                     name='correctAnswer'
                     onChange={(e) =>
@@ -135,7 +135,7 @@ export default function AddQuizForm(
                   <p className='labelText'>1. ALTERNATIVE ANSWER:</p>
                   <input
                     type='text'
-                    className='input'
+                    className='addQuizInput'
                     id='altAns1'
                     placeholder='ALTERNATIVE ANSWER 1'
                     name='options[0]'
@@ -158,7 +158,7 @@ export default function AddQuizForm(
                   <p className='labelText'>2. ALTERNATIVE ANSWER:</p>
                   <input
                     type='text'
-                    className='input'
+                    className='addQuizInput'
                     id='option2'
                     placeholder='ALTERNATIVE ANSWER 2'
                     value={currentQuestion.options[1]}
@@ -184,7 +184,7 @@ export default function AddQuizForm(
                     <p className='labelText'>3. ALTERNATIVE ANSWER:</p>
                     <input
                     type='text'
-                      className='input'
+                      className='addQuizInput'
                       id='option3'
                       name='options[2]'
                       placeholder='ALTERNATIVE 3'
