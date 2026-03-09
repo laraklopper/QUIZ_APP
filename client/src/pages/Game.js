@@ -7,11 +7,12 @@ export default function Game({logout, currentUser}) {
     <Container>
       {/* HEADER */}
       <Header currentUser={currentUser} heading='GAME'/>
-      <section>
-        {/* SELECT QUIZ FORM + VIEW PAST SCORES*/}
+      <section className='quizSection'>
+        {/* SELECT QUIZ FORM 
+        + QUIZ*/}
       </section>
       <section>
-        {/* QUIZ + RESULTS */}
+        {/* QUIZ  RESULTS + PAST RESULTS*/}
       </section>
       <Footer logout={logout} currentUser={currentUser}/>
     </Container>
