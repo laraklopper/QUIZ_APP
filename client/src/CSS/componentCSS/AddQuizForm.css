@@ -59,6 +59,17 @@ AddQuizForm.js: POST
     padding: 0px;
     text-decoration: underline;
 }
+.addQuizInput{
+    width: 230px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    border-radius: 5px;
+    border: solid black 1px;
+    height: 40px;
+    font-family: "Roboto Mono", monospace;
+    font-weight: 700;
+}
 .newQuizLabel{
     display: flex;
     align-items: center;

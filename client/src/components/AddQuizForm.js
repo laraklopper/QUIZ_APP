@@ -1,7 +1,7 @@
 // AddQuizForm.js
 import React, { useCallback } from 'react'
 import '../css/componentCSS/FormSetup.css'
-import '../css/componentCSS/QuizForms.css'
+import '../css/componentCSS/AddQuizForm.css'
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
 import { Asterisk} from 'lucide-react';
@@ -187,7 +187,7 @@ export default function AddQuizForm(
                       className='addQuizInput'
                       id='option3'
                       name='options[2]'
-                      placeholder='ALTERNATIVE 3'
+                      placeholder='ALTERNATIVE ANSWER 3'
                       value={currentQuestion.options[2]}
                       onChange={(e) => {
                         const options = [...currentQuestion.options];
