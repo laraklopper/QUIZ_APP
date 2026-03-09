@@ -44,10 +44,10 @@ export default function AddQuizForm(
       <form id='addQuizForm' method='POST' aria-labelledby='addQuizFormHeading'>
       {/* Screen Reader Heading */}
         <h4 className='visually-hidden' id='addQuizFormHeading'>Add Quiz Form</h4>
-         <Stack gap={3} id='newQuizStack1'>
+         <Stack  id='newQuizStack1'>
       <div id='addQuizHeading'><h3 className='formHeading'>ADD QUIZ</h3></div>
       {/* -----------USERNAME (readonly + hidden)-------------- */}
-      <div className="p-2" id='quizUsername' hidden>
+      <div className="p-2" id='quizUsername' hidden aria-hidden='true'>
       <input
         className='input'
         value={`username: ${currentUser?.username || ''}`}
@@ -57,7 +57,7 @@ export default function AddQuizForm(
       />
       </div>
       {/* --------NEW QUIZ NAME------------ */}
-      <div className="p-2" id='newQuizNameBlock'>
+      <div  id='newQuizNameBlock'>
         <label className='newQuizLabel' htmlFor='newQuizNameInput'>
           <p className='labelText'>QUIZ NAME:</p>
           <input
@@ -74,7 +74,7 @@ export default function AddQuizForm(
             aria-label='New quiz name input'
           />
         </label>
-        <Asterisk size={16} color='red' aria-hidden='true'/>
+        <Asterisk size={16} color='#990000' aria-hidden='true'/>
       </div>
       </Stack>
       {/* ===========NEW QUESTIONS========== */}
@@ -106,7 +106,7 @@ export default function AddQuizForm(
                     aria-required='true'
                   />
                  </label>
-                 <Asterisk size={16} color='red' aria-hidden='true'/>
+                 <Asterisk size={16} color='#990000' aria-hidden='true'/>
               </div>
               {/* -------------CORRECT ANSER---------------------- */}
               <div className="p-2" id='newCorrectAnswerBlock'>
@@ -131,7 +131,7 @@ export default function AddQuizForm(
                    aria-label='Correct answer input'
                   />
                  </label>
-                 <Asterisk size={16} color='red' aria-hidden='true'/>
+                 <Asterisk size={16} color='#990000' aria-hidden='true'/>
               </div>
             </Stack>
             {/* --------ALTERNATIVE ANSWERS------------- */}
@@ -157,7 +157,7 @@ export default function AddQuizForm(
                     aria-label='alternative answer 1'
                   />
                  </label>
-                 <Asterisk size={16} color='red' aria-hidden='true'/>
+                 <Asterisk size={16} color='#990000' aria-hidden='true'/>
             </div>
             {/* -----Alternative Answer 2------------ */}
             <div className="p-2" id='altAns2'>
@@ -183,7 +183,7 @@ export default function AddQuizForm(
                     aria-label='alternative answer 2'
                   />
                  </label>
-                 <Asterisk size={16} color='red' aria-hidden='true'/>
+                 <Asterisk size={16} color='#990000' aria-hidden='true'/>
             </div>
             {/* -----Alternative Answer 3------------ */}
               <div className="p-2" id='altAns3'>
@@ -207,13 +207,13 @@ export default function AddQuizForm(
                       aria-label='alternative answer 3'
                     />
                   </label>
-                  <Asterisk size={16} color='red' aria-hidden='true'/>
+                  <Asterisk size={16} color='#990000' aria-hidden='true'/>
               </div>
             </Stack>
              <Stack gap={3} id='newQuestionBtnStack'>
-      <div className="p-2">
+      <div className="p-2" id='required'>
          <p className='infoMsg'>
-                  <small><Asterisk color='red' size={12} /> Indicates required information</small>
+                  <small><Asterisk color='#990000' size={12} /> Indicates required information</small>
         </p>
       </div>
      {/* BUTTONS */}

@@ -28,6 +28,8 @@ AddQuizForm.js: POST
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: 10px 0px;
+    padding: 5px 0px 2px 0px;
 }
 #addQuizHeading,#newQuestionHeadingBlock{
     display: flex;
@@ -56,7 +58,7 @@ AddQuizForm.js: POST
     flex-direction: column;
     margin: 0px;
     padding: 0px;
-    width: 500px;
+    width: 530px;
 }
 .addQuestionHeading{
     font-size: 24px;
