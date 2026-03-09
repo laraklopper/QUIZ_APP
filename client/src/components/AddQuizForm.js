@@ -5,6 +5,7 @@ import '../css/componentCSS/QuizForms.css'
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
 import { Asterisk} from 'lucide-react';
+
 export default function AddQuizForm({currentUser}) {
   return (
     <div id='newQuizForm'>
@@ -30,22 +31,67 @@ export default function AddQuizForm({currentUser}) {
             id='newQuizNameInput'
 
           />
-          <Asterisk size={16} color='red' aria-hidden='true'/>
+          
         </label>
-
+        <Asterisk size={16} color='red' aria-hidden='true'/>
       </div>
       
     </Stack>
-        <div>
-            <Stack gap={3}>
-              <div className="p-2">
-                 <label>
-                  <p className='labelText'></p>
-                 </label>
+        <div id='addQuestionDiv'>
+            <Stack gap={3} id='newQuizStack2'>
+              <div className="p-2" id='newQuestionHeadingBlock'>
+                <h4 className='addQuestionHeading'>ADD QUESTIONS</h4>
               </div>
-              <div className="p-2"></div>
-              <div className="p-2"></div>
+              <div className="p-2" id='newQuestionBlock'>
+                 <label className='newQuizLabel'>
+                  <p className='labelText'>QUESTION:</p>
+                  <input
+                    className='input'
+                  />
+                 </label>
+                 <Asterisk size={16} color='red' aria-hidden='true'/>
+              </div>
+              <div className="p-2" id='newCorrectAnswerBlock'>
+                <label className='newQuizLabel'>
+                  <p className='labelText'>CORRECT ANSWER:</p>
+                  <input
+                    className='input'
+                  />
+                 </label>
+                 <Asterisk size={16} color='red' aria-hidden='true'/>
+              </div>
             </Stack>
+            <Stack gap={3} id='newQuizStack3'>
+            {/* Alternative Answers */}
+
+            <div className="p-2" id='altAns1'>
+              <label className='newQuizLabel'>
+                  <p className='labelText'>1. ALTERNATIVE ANSWER:</p>
+                  <input
+                    className='input'
+                  />
+                 </label>
+                 <Asterisk size={16} color='red' aria-hidden='true'/>
+            </div>
+            <div className="p-2" id='altAns2'>
+               <label className='newQuizLabel'>
+                  <p className='labelText'>2. ALTERNATIVE ANSWER:</p>
+                  <input
+                    className='input'
+                  />
+                 </label>
+                 <Asterisk size={16} color='red' aria-hidden='true'/>
+            </div>
+            <div className="p-2" id='altAns3'>
+               <label className='newQuizLabel'>
+                  <p className='labelText'>3. ALTERNATIVE ANSWER:</p>
+                  <input
+                    className='input'
+                  />
+                 </label>
+                 <Asterisk size={16} color='red' aria-hidden='true'/>
+            </div>
+          </Stack>
             <Stack direction="horizontal" gap={3} id='newQuestionBtnStack'>
               <div className="p-2">
                 <p className='infoMsg'><small><Asterisk color='red' size={12} /> Indicates required information</small></p>

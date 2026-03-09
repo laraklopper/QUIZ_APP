@@ -1,5 +1,9 @@
 #newQuizSection{
     width: 100%;
+        padding: 10px 0px;
+        margin: 0px;
+        display: flex;
+    background-color: olivedrab;
 }
 #addQuizRow{
     width: 100%;
@@ -8,8 +12,35 @@
 }
 #addQuizCol{
  margin: 0px;
-    padding: 0px;
+    padding: 10px 0px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: #6c757d;
+}
+#add-quiz-panal{
+    padding: 10px;
+}
+#toggleAddQuizBtn{
+        display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 180px;
+    font-weight: 700;
+    font-family: "Roboto Mono", monospace;
+    height: 40px;
+    color: #000;
+    border: solid #323A42 3px;
+}
+#toggleAddQuizBtn:hover{
+        display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 180px;
+    height: 40px;
+    color: #FFF;
+    font-weight: 700;
+    font-family: "Roboto Mono", monospace;
+    border: solid #323A42 3px;
+    background-color: #323A42;
 }

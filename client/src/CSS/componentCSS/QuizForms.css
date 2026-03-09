@@ -5,6 +5,10 @@ AddQuizForm.js
 #newQuizForm{
     display: flex;
     justify-content: center;
+    background-color: #BFBFBF;
+    border-radius: 10px;
+    padding: 10px 5px;
+    margin: 0px;
 }
 #addQuizForm{
     display: flex;
@@ -15,6 +19,23 @@ AddQuizForm.js
 #newQuizStack1{
     display: flex;
     flex-direction: column;
+    justify-content: center;
+}
+#newQuizNameBlock{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#addQuizHeading,#newQuestionHeadingBlock{
+    display: flex;
+    margin: 0px;
+    padding: 0px;
+    justify-content: center;
+}
+#newQuestionBlock, #newCorrectAnswerBlock, #altAns1, #altAns2, #altAns3{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 #newQuestionBtnStack{
     display: flex;
@@ -22,6 +43,21 @@ AddQuizForm.js
     margin: 0px;
     padding: 0px;
     width: 100%;
+}
+#addQuestionDiv{
+    background-color: #808080;
+    display: flex;
+    flex-direction: column;
+    margin: 0px;
+    padding: 0px
+}
+.addQuestionHeading{
+    font-size: 24px;
+    font-family: "Playpen Sans", cursive;
+    font-weight: 800;
+    margin: 0px;
+    padding: 0px;
+    text-decoration: underline;
 }
 .newQuizLabel{
     display: flex;
