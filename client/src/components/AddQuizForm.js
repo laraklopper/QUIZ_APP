@@ -31,6 +31,13 @@ export default function AddQuizForm(
 
   },[currentQuestion, questions, setCurrentQuestion, setError, setQuestions])
 
+  //Function to resetQuestions
+  const resetQuestionsForm = useCallback(() => {
+    setQuizName('');
+    setQuestions([]);
+    setCurrentQuestion({ questionText: '', correctAnswer: '', options: ['', '', ''] });
+    setError?.(null);
+  }, [setQuizName, setQuestions, setCurrentQuestion, setError])
   //================JSX RENDERING======================
   return (
     <div id='newQuizForm'>
@@ -203,14 +210,14 @@ export default function AddQuizForm(
                   <Asterisk size={16} color='red' aria-hidden='true'/>
               </div>
             </Stack>
-            <Stack direction="horizontal" gap={3} id='newQuestionBtnStack'>
-              <div className="p-2" id='required'>
-                <p className='infoMsg'>
+             <Stack gap={3} id='newQuestionBtnStack'>
+      <div className="p-2">
+         <p className='infoMsg'>
                   <small><Asterisk color='red' size={12} /> Indicates required information</small>
-                </p>
-              </div>
-              {/* BUTTONS */}
-              <div className="p-2 ms-auto">
+        </p>
+      </div>
+     {/* BUTTONS */}
+              <div className="p-2" id='addQuestionBtnBlock'>
                 <Button 
                   variant="light"
                   type='button'
@@ -221,15 +228,16 @@ export default function AddQuizForm(
                   ADD QUESTION
                 </Button>
               </div>
-              <div className="p-2">
+              <div className="p-2" id='clearQuestionBtnBlock'>
                 <Button
-                  type='button' 
-                  variant="danger" 
-                  id='clearFormBtn'>
+                  type='button'
+                  variant="danger"
+                  id='clearFormBtn'
+                  onClick={resetQuestionsForm}
+                  >
                     CLEAR
                 </Button></div>
             </Stack>
-         
         </div>
       </form>
       {/* New Questions List component

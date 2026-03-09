@@ -28,6 +28,14 @@
     margin: 0px;
     padding: 0px;
 }
+#required{
+    display: flex;
+    align-self: center;
+}
+.infoMsg{
+    font-family: "Alkatra", system-ui;
+    font-weight: 700;
+}
 #usernameMsgBlock, #passwordMsgBlock{
     display: flex;
     justify-content: center;
