@@ -93,7 +93,7 @@ export default function AddQuiz(
         <Row id='addQuizRow'>
         <Col xs={4} md={2} id='addQuizCol1'></Col>
         <Col xs={12} md={8} id='addQuizCol'>
-        <div>
+        <div id='toggle-btn-div'>
           {/* Button to toggle AddQuizForm */}
           <h6 className='btnText'>CLICK HERE TO:</h6>
           <Button 
@@ -105,9 +105,11 @@ export default function AddQuiz(
           aria-pressed={newQuizForm}
           aria-expanded={newQuizForm}
           aria-controls='add-quiz-panal'
-          >ADD NEW QUIZ</Button>
+          >
+          ADD NEW QUIZ
+          </Button>
         </div>
-        {/* Only display if form is displayed */}
+        {/* Conditional rendering Only display if form is displayed */}
         {newQuizForm && (
         <div id='add-quiz-panal'>
                 <AddQuizForm
