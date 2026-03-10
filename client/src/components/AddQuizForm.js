@@ -40,6 +40,7 @@ export default function AddQuizForm(
     setCurrentQuestion({ questionText: '', correctAnswer: '', options: ['', '', ''] });
     setError?.(null);
   }, [setQuizName, setQuestions, setCurrentQuestion, setError])
+  
   //================JSX RENDERING======================
   return (
     <div id='newQuizForm'>

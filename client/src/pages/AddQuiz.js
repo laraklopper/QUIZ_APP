@@ -19,6 +19,7 @@ export default function AddQuiz(
   }
 ) {
   //=============STATE VARIABLES===================
+  const [newQuizForm, setNewQiuzForm] =useState(false)
   const [currentQuestion, setCurrentQuestion] = useState({
     questionText: '',
     correctAnswer: '',
@@ -74,6 +75,10 @@ export default function AddQuiz(
     }
   }, [quizName, description, questions, currentUser, setQuizName, setQuestions]);
 
+  //===============EVENT LISTENERS====================
+  //Function to toggle Add Quiz form
+  const toggleAddQuiz =  () => setNewQiuzForm((prev) => !prev);
+  
   //=============JSX RENDERING=======================
   return (
     <Container id='pageContainer'>
@@ -86,18 +91,29 @@ export default function AddQuiz(
       <section id='newQuizSection'>
         {/* ADD QUIZ FORM */}
         <Row id='addQuizRow'>
-        <Col xs={4} md={2}></Col>
+        <Col xs={4} md={2} id='addQuizCol1'></Col>
         <Col xs={12} md={8} id='addQuizCol'>
         <div>
           {/* Button to toggle AddQuizForm */}
-          <Button variant="info" id='toggleAddQuizBtn' type='button'>ADD QUIZ FORM</Button>
+          <h6 className='btnText'>CLICK HERE TO:</h6>
+          <Button 
+          variant="info" 
+          id='toggleAddQuizBtn' 
+          type='button' 
+          onClick={toggleAddQuiz}
+          aria-label='Button to toggle add Quiz form'
+          aria-pressed={newQuizForm}
+          aria-expanded={newQuizForm}
+          aria-controls='add-quiz-panal'
+          >ADD NEW QUIZ</Button>
         </div>
         {/* Only display if form is displayed */}
-            <div id='add-quiz-panal'>
+        {newQuizForm && (
+        <div id='add-quiz-panal'>
                 <AddQuizForm
-                questions={questions}
-                setQuestions={setQuestions}
-                currentUser={currentUser}
+                  questions={questions}
+                  setQuestions={setQuestions}
+                  currentUser={currentUser}
                   quizName={quizName}
                   setCurrentQuestion={setCurrentQuestion}
                   setQuizName={setQuizName}
@@ -109,8 +125,9 @@ export default function AddQuiz(
                   addQuiz={addQuiz}
                 />
             </div>
+        )}           
         </Col>
-        <Col xs={4} md={2}></Col>
+        <Col xs={4} md={2} id='addQuizCol2'></Col>
         </Row>
       </section>
       {/* FOOTER */}
