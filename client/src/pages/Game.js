@@ -4,7 +4,7 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 export default function Game({logout, currentUser}) {
   return (
-    <Container>
+    <Container id='pageContainer' role='main'>
       {/* HEADER */}
       <Header currentUser={currentUser} heading='GAME'/>
       <section className='quizSection'>

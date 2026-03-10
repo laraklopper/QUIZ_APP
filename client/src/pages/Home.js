@@ -16,7 +16,7 @@ export default function Home({logout, currentUser, setError}) {
   const lastName = currentUser?.fullName?.lastName || 'Last name not provided';
 
   return (
-    <Container id='homeContainer' role='main'>
+    <Container id='pageContainer' role='main'>
      <Header heading='HOME' currentUser={currentUser}/>
       <section id='welcomeSection'>
      <Row id='welcomeRow'>

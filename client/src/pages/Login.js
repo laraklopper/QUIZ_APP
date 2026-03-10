@@ -52,7 +52,7 @@ export default function Login({userData, setUserData, setError, setLoggedIn}) {
     //=================JSX RENDERING=====================
 
   return (
-    <Container id='loginContainer' role='main'>
+    <Container id='pageContainer' role='main'>
     {/* HEADER */}
     {/* Render the MainHeader component 
     with "LOGIN" as the mainHeading */}

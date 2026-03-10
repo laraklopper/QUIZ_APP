@@ -5,7 +5,7 @@ import Header from '../components/Header';
 
 export default function Users({logout, currentUser}) {
   return (
-    <Container>
+    <Container id='pageContainer'>
      {/* HEADER */}
      <Header heading='USERS' currentUser={currentUser}/>
      <section id='userList'>

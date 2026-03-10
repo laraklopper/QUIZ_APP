@@ -76,7 +76,7 @@ export default function AddQuiz(
 
   //=============JSX RENDERING=======================
   return (
-    <Container>
+    <Container id='pageContainer'>
       {/* HEADER */}
       <Header currentUser={currentUser} heading='ADD QUIZ'/>
       <section id='quizList'>

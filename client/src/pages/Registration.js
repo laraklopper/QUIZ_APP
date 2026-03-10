@@ -80,7 +80,7 @@ export default function Registration() {
 
   //=====================JSX RENDERING=======================
   return (
-    <Container id='registrationContainer' role='main'>
+    <Container id='pageContainer' role='main'>
       <MainHeader mainHeading={'REGISTRATION'}/>
       <Row id='regisEventRow'>
         <Col id='regisEventCol'>
