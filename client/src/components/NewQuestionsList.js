@@ -44,14 +44,14 @@ export default function NewQuestionsList({questions, setQuestions, setQuizName, 
                     </p>
                 </div>
                 <div className="p-2">
-                    <Button variant="danger">DELETE QUESTION</Button>
+                    <Button variant="danger" type='button' id='deleteQuesBtn' onClick={deleteNewQuestion}>DELETE QUESTION</Button>
                 </div>
             </Stack>
         ))}
          <Stack gap={2} className="col-md-5 mx-auto">
             
-            <Button variant="danger" id='clearFormBtn'>CLEAR</Button>
-            <Button variant="light">Save changes</Button>
+            <Button variant="danger" id='clearFormBtn' type='button' onClick={handleClearQuiz}>CLEAR</Button>
+            <Button variant="light" id='addQuizBtn'>ADD QUIZ</Button>
         </Stack>
      </div>
    </div>
