@@ -54,7 +54,14 @@ export default function NewQuestionsList({addNewQuiz, quizName, questions, setQu
                     </p>
                 </div>
                 <div className="p-2">
-                    <Button variant="danger" type='button' id='deleteQuesBtn' onClick={() => deleteNewQuestion(index)}>DELETE QUESTION</Button>
+                    <Button 
+                    variant="danger" 
+                    type='button' 
+                    id='deleteQuesBtn' 
+                    onClick={() => deleteNewQuestion(index)}
+                    aria-label='Delete question button'>
+                    DELETE QUESTION
+                    </Button>
                 </div>
             </Stack>
         ))}
