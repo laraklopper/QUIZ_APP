@@ -19,7 +19,7 @@ export default function AddQuiz({logout, currentUser, quizName, questions, setQu
 
   //=============REQUESTS=========================
   // Function to submit a new quiz to the server
-  const submitQuiz = useCallback(async () => {
+  const addQuiz = useCallback(async () => {
     try {
       setError(null);
 
@@ -96,7 +96,7 @@ export default function AddQuiz({logout, currentUser, quizName, questions, setQu
                   setDescription={setDescription}
                   error={error}
                   setError={setError}
-                  submitQuiz={submitQuiz}
+                  addQuiz={addQuiz}
                 />
             </div>
         </Col>

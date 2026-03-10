@@ -9,7 +9,7 @@ import NewQuestionsList from './NewQuestionsList';
 
 export default function AddQuizForm(
   {currentUser, quizName, setQuizName, currentQuestion, setCurrentQuestion, questions, setQuestions, setError,
-   description, setDescription, error, submitQuiz}) {
+   description, setDescription, error, addQuiz}) {
   
     //============EVENT LISTENERS=========================
   //Function to add a new question
@@ -260,17 +260,7 @@ export default function AddQuizForm(
                     CLEAR
                 </Button>
               </div>
-              <div className="p-2" id='submitQuizBtnBlock'>
-                <Button
-                  type='button'
-                  variant="success"
-                  id='submitQuizBtn'
-                  onClick={submitQuiz}
-                  aria-label='Submit quiz button'
-                >
-                  SUBMIT QUIZ
-                </Button>
-              </div>
+             
               {error && (
                 <div className="p-2" id='quizErrorBlock' role='alert' aria-live='polite'>
                   <p id='quizErrorMsg'>{error}</p>
@@ -279,7 +269,14 @@ export default function AddQuizForm(
             </Stack>
         </div>
       </form>
-      <NewQuestionsList/>
+      <NewQuestionsList
+        addNewQuiz={addQuiz}
+        quizName={quizName}
+        questions={questions}
+        setQuestions={setQuestions}
+        setQuizName={setQuizName}
+        setErrorMessage={setError}
+      />
     </div>
    
   )

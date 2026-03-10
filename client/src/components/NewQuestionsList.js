@@ -1,8 +1,8 @@
-import React from 'react'
+import React, {useCallback} from 'react'
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
 
-export default function NewQuestionsList({questions, setQuestions, setQuizName, setErrorMessage}) {
+export default function NewQuestionsList({addNewQuiz, quizName, questions, setQuestions, setQuizName, setErrorMessage}) {
 
      //============EVENT LISTENERS===================
   // Function to delete a question new questuion
@@ -18,15 +18,25 @@ export default function NewQuestionsList({questions, setQuestions, setQuizName, 
     setQuestions([]);// Clear the questions list
     setErrorMessage('');// Clear any error messages
   };
+    // Function to handle form submission
+  const handleAddNewQuiz = useCallback(async() => {
+    /*Conditional rendering to check if the quiz name is 
+    provided and if there is at least one question*/
+    if (!quizName || questions.length === 0) {
+      setErrorMessage('Please enter a quiz')// Set error message to notify the user 
+      return;//Exit the function
+    }
+    await addNewQuiz()//Call the addNewQuiz component
+    // Clear the data after successful submission
+    setQuestions([]);  // Clear all questions
+    setQuizName('');   // Clear the quiz name
+    setErrorMessage('')// Clear any error messages after successful submission
+  },[addNewQuiz, questions.length, quizName, setQuizName, setErrorMessage, setQuestions])
+
 //============================
   return (
     <div id='newQuiz'>
      <div id='newQuizOutput'>
-        <Stack gap={3}>
-        <div className="p-2">First item</div>
-        <div className="p-2">Second item</div>
-        <div className="p-2">Third item</div>
-        </Stack>
         {questions.map((q, index)=>(
             <Stack gap={3} key={index}>
                 <div className="p-2">
@@ -44,14 +54,14 @@ export default function NewQuestionsList({questions, setQuestions, setQuizName, 
                     </p>
                 </div>
                 <div className="p-2">
-                    <Button variant="danger" type='button' id='deleteQuesBtn' onClick={deleteNewQuestion}>DELETE QUESTION</Button>
+                    <Button variant="danger" type='button' id='deleteQuesBtn' onClick={() => deleteNewQuestion(index)}>DELETE QUESTION</Button>
                 </div>
             </Stack>
         ))}
          <Stack gap={2} className="col-md-5 mx-auto">
             
             <Button variant="danger" id='clearFormBtn' type='button' onClick={handleClearQuiz}>CLEAR</Button>
-            <Button variant="light" id='addQuizBtn'>ADD QUIZ</Button>
+            <Button variant="light" id='addQuizBtn' type='button' onClick={handleAddNewQuiz}>ADD QUIZ</Button>
         </Stack>
      </div>
    </div>

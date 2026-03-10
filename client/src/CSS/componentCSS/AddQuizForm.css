@@ -9,6 +9,8 @@ AddQuizForm.js: POST
     border-radius: 10px;
     padding: 10px 5px;
     margin: 0px;
+    flex-direction: column;
+    align-items: center;
 }
 #addQuizForm{
     display: flex;
@@ -24,23 +26,27 @@ AddQuizForm.js: POST
     flex-direction: column;
     justify-content: center;
 }
-#newQuizNameBlock{
+#newQuizNameBlock,  #newQuizDescriptionBlock{
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 10px 0px;
     padding: 5px 0px 2px 0px;
+    gap: 10px;
 }
 #addQuizHeading,#newQuestionHeadingBlock{
     display: flex;
     margin: 0px;
     padding: 0px;
     justify-content: center;
+    align-items: baseline;
+   
 }
 #newQuestionBlock, 
 #newCorrectAnswerBlock, 
 #altAns1, #altAns2, #altAns3{
     display: flex;
+    gap: 10px;
     align-items: center;
     justify-content: center;
 }
@@ -84,8 +90,12 @@ AddQuizForm.js: POST
     align-items: center;
     gap: 10px;
 }
+/* NEW QUESTIONS LIST */
+#newQuiz{
+    width: 530px;
+}
 /* BUTTONS */
-#newQuestionBtn{
+#newQuestionBtn, #addQuizBtn{
       height: 40px;
     width: 180px;
     margin: 10px;
@@ -99,7 +109,7 @@ AddQuizForm.js: POST
     color: #000;
     border: solid #323A42 3px;
 }
-#newQuestionBtn:hover{
+#newQuestionBtn:hover, #addQuizBtn:hover{
     height: 40px;
     width: 180px;
     padding: 0px;
