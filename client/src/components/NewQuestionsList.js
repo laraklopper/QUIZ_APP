@@ -65,7 +65,7 @@ export default function NewQuestionsList({addNewQuiz, quizName, questions, setQu
                 </div>
             </Stack>
         ))}
-         <Stack gap={2} className="col-md-5 mx-auto">
+         <Stack gap={2} className="col-md-5 mx-auto" id='quizOutputBtnStack'>
             
             <Button variant="danger" id='clearFormBtn' type='button' onClick={handleClearQuiz}>CLEAR</Button>
             <Button variant="light" id='addQuizBtn' type='button' onClick={handleAddNewQuiz}>ADD QUIZ</Button>

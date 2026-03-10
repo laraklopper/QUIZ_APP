@@ -90,9 +90,36 @@ AddQuizForm.js: POST
     align-items: center;
     gap: 10px;
 }
+.newQuestionText{
+        margin: 0px;
+    padding: 0px;
+        font-size: 15px;
+    text-decoration: underline;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-family: 'Playpen Sans';
+}
+.newAnswerOutput{
+        font-size: 15px;
+    text-decoration: underline;
+        margin: 0px;
+    padding: 0px;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-family: 'Playpen Sans';
+}
+.newOptionsOutput{
+        font-size: 15px;
+    text-decoration: underline;
+    font-weight: 700;
+    font-family: 'Playpen Sans';
+    text-transform: capitalize;
+    margin: 0px;
+    padding: 0px;
+}
 /* NEW QUESTIONS LIST */
 #newQuiz{
-    width: 600px;
+        width: 700px;
         display: flex;
     flex-direction: column;
     margin: 10px 0px;
@@ -107,6 +134,7 @@ AddQuizForm.js: POST
 }
 #newQuestionStack{
     display: flex;
+        border-radius: 5px;
         flex-direction: row;
     align-items: baseline;
     width: 100%;
@@ -114,6 +142,12 @@ AddQuizForm.js: POST
         margin: 5px 0px;
     padding: 0px;
     background-color: #E8F0F6;
+}
+#quizOutputBtnStack{
+    display: flex;
+    align-items: center;
+    margin: 0px;
+    padding: 0px;
 }
 /* BUTTONS */
 #newQuestionBtn,#deleteQuesBtn, #addQuizBtn{
