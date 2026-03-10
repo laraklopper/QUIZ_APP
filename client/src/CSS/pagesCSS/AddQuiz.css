@@ -10,6 +10,10 @@
     margin: 0px;
     padding: 0px;
 }
+#addQuizCol1, #addQuizCol2{
+    margin: 0px;
+    padding: 0px
+}
 #addQuizCol{
  margin: 0px;
     padding: 10px 0px;
