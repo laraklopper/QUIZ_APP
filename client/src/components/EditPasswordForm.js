@@ -28,6 +28,10 @@ export default function EditPasswordForm({setError}) {
     }, []);
     
     const resetForm = useCallback(() => {
+          const confirmReset = window.confirm(
+             "Are you sure you want to clear the form?"
+             );// Confirm before clearing
+            if (!confirmReset) return;// If user cancels, exit function
         setCurrentPassword('');
         setNewPassword('')
         setError?.(null)
