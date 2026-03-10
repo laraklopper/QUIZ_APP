@@ -92,10 +92,31 @@ AddQuizForm.js: POST
 }
 /* NEW QUESTIONS LIST */
 #newQuiz{
-    width: 530px;
+    width: 600px;
+        display: flex;
+    flex-direction: column;
+    margin: 10px 0px;
+    padding: 10px 0px;
+}
+#newQuizOutput{
+       margin: 10px 0px;
+    padding: 5px 0px;
+    background-color: #A8AEB3;
+    display: flex;
+    flex-direction: column;
+}
+#newQuestionStack{
+    display: flex;
+        flex-direction: row;
+    align-items: baseline;
+    width: 100%;
+    justify-content: space-evenly;
+        margin: 5px 0px;
+    padding: 0px;
+    background-color: #E8F0F6;
 }
 /* BUTTONS */
-#newQuestionBtn, #addQuizBtn{
+#newQuestionBtn,#deleteQuesBtn, #addQuizBtn{
       height: 40px;
     width: 180px;
     margin: 10px;
@@ -109,7 +130,7 @@ AddQuizForm.js: POST
     color: #000;
     border: solid #323A42 3px;
 }
-#newQuestionBtn:hover, #addQuizBtn:hover{
+#newQuestionBtn:hover, #deleteQuesBtn:hover, #addQuizBtn:hover{
     height: 40px;
     width: 180px;
     padding: 0px;

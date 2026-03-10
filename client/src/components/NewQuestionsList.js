@@ -38,7 +38,7 @@ export default function NewQuestionsList({addNewQuiz, quizName, questions, setQu
     <div id='newQuiz'>
      <div id='newQuizOutput'>
         {questions.map((q, index)=>(
-            <Stack gap={3} key={index}>
+            <Stack gap={3} key={index} id='newQuestionStack'>
                 <div className="p-2">
                     {/* Display the question text*/}
                     <p className='newQuestionText'>{q.questionText}</p>
