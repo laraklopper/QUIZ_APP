@@ -85,7 +85,8 @@ export default function Registration() {
   return (
     <Container id='pageContainer' role='main'>
       <MainHeader mainHeading={'REGISTRATION'}/>
-      <Row id='regisEventRow'>
+      {/* ---------EVENT/ANIMATION---------- */}
+      <Row id='regisEventRow' role='presentation'>
         <Col id='regisEventCol'>
           <div className='event-bar'>
             <div className='event-track'>
@@ -94,6 +95,7 @@ export default function Registration() {
           </div>
         </Col>
       </Row>
+      {/* SECTION 1: Registration Form */}
       <section id='regisSection'>
         {error && <p id='errorMessage'>{error}</p>}
         {/* Registration Form */}
@@ -106,6 +108,7 @@ export default function Registration() {
           />
         </div>
       </section>
+      {/* SECTION 2: Registration Information */}
       <section id='infoSection'>
              <Row id='rulesRow'>
                <Col id='rulesCol1'></Col>
@@ -136,6 +139,7 @@ export default function Registration() {
                  <Col id='rulesCol2'></Col>
               </Row>
            </section>
+           {/* Render the PageFooter component */}
       <PageFooter />
     </Container>
   )
