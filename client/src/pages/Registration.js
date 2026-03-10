@@ -75,6 +75,8 @@ export default function Registration() {
   //=================EVENT LISTENERS=========================
   //Function to clear form
   const handleClearForm = useCallback(() => {
+    const confirmClear = window.confirm("Are you sure you want to clear the form?");
+    if (!confirmClear) return;
     setNewUserData(EMPTY_FORM)
     setError(null)
   }, [])
