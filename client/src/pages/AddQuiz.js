@@ -7,7 +7,17 @@ import Button from 'react-bootstrap/Button';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import AddQuizForm from '../components/AddQuizForm';
-export default function AddQuiz({logout, currentUser, quizName, questions, setQuizName, setQuestions}) {
+
+export default function AddQuiz(
+  {
+    logout, 
+    currentUser, 
+    quizName, 
+    questions, 
+    setQuizName, 
+    setQuestions
+  }
+) {
   //=============STATE VARIABLES===================
   const [currentQuestion, setCurrentQuestion] = useState({
     questionText: '',
@@ -101,9 +111,7 @@ export default function AddQuiz({logout, currentUser, quizName, questions, setQu
             </div>
         </Col>
         <Col xs={4} md={2}></Col>
-
         </Row>
-
       </section>
       {/* FOOTER */}
       <Footer logout={logout} currentUser={currentUser}/>
