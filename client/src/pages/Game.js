@@ -1,4 +1,5 @@
 import React from 'react'
+import '../css/pagesCSS/PageSetup.css'
 import Container from 'react-bootstrap/Container';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
