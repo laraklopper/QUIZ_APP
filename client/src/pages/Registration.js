@@ -130,7 +130,7 @@ export default function Registration() {
                       </ListGroup>
                    </Card>
                   </Col>
-                 <Col rulesCol2></Col>
+                 <Col id='rulesCol2'></Col>
               </Row>
            </section>
       <PageFooter />
