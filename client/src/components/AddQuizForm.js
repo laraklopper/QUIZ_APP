@@ -8,7 +8,8 @@ import { Asterisk} from 'lucide-react';
 import NewQuestionsList from './NewQuestionsList';
 
 export default function AddQuizForm(
-  {currentUser, quizName, setQuizName, currentQuestion, setCurrentQuestion, questions, setQuestions, setError}) {
+  {currentUser, quizName, setQuizName, currentQuestion, setCurrentQuestion, questions, setQuestions, setError,
+   description, setDescription, error, submitQuiz}) {
   
     //============EVENT LISTENERS=========================
   //Function to add a new question
@@ -73,6 +74,26 @@ export default function AddQuizForm(
             autoComplete='off'
             aria-required='true'
             aria-label='New quiz name input'
+          />
+        </label>
+        <Asterisk size={16} color='#990000' aria-hidden='true'/>
+      </div>
+      {/* --------QUIZ DESCRIPTION------------ */}
+      <div id='newQuizDescriptionBlock'>
+        <label className='newQuizLabel' htmlFor='newQuizDescriptionInput'>
+          <p className='labelText'>DESCRIPTION:</p>
+          <input
+            type='text'
+            className='addQuizInput'
+            id='newQuizDescriptionInput'
+            name='description'
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            placeholder='QUIZ DESCRIPTION'
+            required
+            autoComplete='off'
+            aria-required='true'
+            aria-label='Quiz description input'
           />
         </label>
         <Asterisk size={16} color='#990000' aria-hidden='true'/>
@@ -237,7 +258,24 @@ export default function AddQuizForm(
                   onClick={resetQuestionsForm}
                   >
                     CLEAR
-                </Button></div>
+                </Button>
+              </div>
+              <div className="p-2" id='submitQuizBtnBlock'>
+                <Button
+                  type='button'
+                  variant="success"
+                  id='submitQuizBtn'
+                  onClick={submitQuiz}
+                  aria-label='Submit quiz button'
+                >
+                  SUBMIT QUIZ
+                </Button>
+              </div>
+              {error && (
+                <div className="p-2" id='quizErrorBlock' role='alert' aria-live='polite'>
+                  <p id='quizErrorMsg'>{error}</p>
+                </div>
+              )}
             </Stack>
         </div>
       </form>
