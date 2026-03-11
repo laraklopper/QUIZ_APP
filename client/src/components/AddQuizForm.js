@@ -8,8 +8,20 @@ import { Asterisk} from 'lucide-react';
 import NewQuestionsList from './NewQuestionsList';
 
 export default function AddQuizForm(
-  {currentUser, quizName, setQuizName, currentQuestion, setCurrentQuestion, questions, setQuestions, setError,
-   description, setDescription, error, addQuiz}) {
+  {
+    currentUser, 
+    quizName, 
+    setQuizName, 
+    currentQuestion, 
+    setCurrentQuestion, 
+    questions, 
+    setQuestions, 
+    setError,
+    description, 
+    setDescription, 
+    error, 
+    addQuiz
+  }) {
   
     //============EVENT LISTENERS=========================
   //Function to add a new question

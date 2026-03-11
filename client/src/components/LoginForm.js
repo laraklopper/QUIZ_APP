@@ -8,7 +8,6 @@ import { Eye, EyeOff, LogIn } from 'lucide-react';
 
 export default function LoginForm({userData, setUserData, submitLogin}) {
   const [showPassword, setShowPassword] = useState(false)
-  const [usernameMsg, setUsernameMsg] = useState(false)
   const [passwordMsg, setPasswordMsg] = useState(false)
   const [touched, setTouched] = useState({username: false, password: false})
 
@@ -45,7 +44,6 @@ export default function LoginForm({userData, setUserData, submitLogin}) {
     // ========= IDs USED BY aria-labelledby / aria-describedby =========
   // Keeps ARIA references stable and readable
   const formTitleId = 'loginFormTitle';
-  const usernameHelpId = 'loginUsernameHelp';
   const passwordHelpId = 'loginPasswordHelp';
   // error IDs (for aria-describedby)
   const usernameErrorId = 'loginUsernameError';
@@ -84,18 +82,13 @@ export default function LoginForm({userData, setUserData, submitLogin}) {
                 required
                 inputMode="text"// Helpful on mobile keyboards
                 onChange={handleLoginInput}
-                onFocus={() => setUsernameMsg(true)}
-                onBlur={() => {
-                      setUsernameMsg(false);
-                      setTouched((prev) => ({ ...prev, username: true }));
-                }}
                 // ARIA:
                 aria-label='Login username input'  
                 aria-required="true"
                 aria-invalid={usernameEmpty ? 'true' : 'false'}// Mark invalid if empty (simple validation)
                 // Link to help + error text (screen reader reads these as extra context)
                 aria-describedby={[
-                  usernameMsg ? usernameHelpId : null,
+              
                   usernameEmpty ? usernameErrorId : null,
                 ]
                   .filter(Boolean)
@@ -103,19 +96,8 @@ export default function LoginForm({userData, setUserData, submitLogin}) {
             />
         </label>
       </div>
-     {/* Help text: announced politely while focused (and only shown when usernameMsg=true) */}
-      {usernameMsg && (
-        <div className="p-2" id="usernameMsgBlock">
-          <p
-            className="msgText"
-            id={usernameHelpId}
-            // ARIA: 
-            aria-live="polite"//polite live region so it can be announced without interrupting
-          >
-            <strong> We will never share <br /> your username</strong>
-          </p>
-        </div>
-      )}
+     
+     
       {/* Username error (screen reader only) */}
       {showUsernameError && (
         <p id={usernameErrorId} className="visually-hidden" role="alert">

@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState, useCallback, useEffect } from 'react'
 import '../css/pagesCSS/AddQuiz.css'
 import '../css/pagesCSS/PageSetup.css'
 import Container from 'react-bootstrap/Container';
@@ -16,7 +16,8 @@ export default function AddQuiz(
     quizName, 
     questions, 
     setQuizName, 
-    setQuestions
+    setQuestions,
+    fetchQuizzes
   }
 ) {
   //=============STATE VARIABLES===================
@@ -28,6 +29,11 @@ export default function AddQuiz(
   })
   const [description, setDescription] = useState('');
   const [error, setError] = useState(null);
+
+  //===============REACT HOOKS=============
+  useEffect(() => {
+    fetchQuizzes();// Call the function to fetch quizzes
+  },[fetchQuizzes])
 
   //=============REQUESTS=========================
   // Function to submit a new quiz to the server
@@ -86,8 +92,37 @@ export default function AddQuiz(
       {/* HEADER */}
       <Header currentUser={currentUser} heading='ADD QUIZ'/>
       <section id='quizList'>
+       <Row>
+        <Col xs={6} md={4}>
+          xs=6 md=4
+        </Col>
+        <Col xs={6} md={4}>
+        {/* TOGGLE TABLE BUTTON */}
+          <Button>
+            SHOW QUIZZES
+          </Button>
+        </Col>
+        <Col xs={6} md={4}>
+          xs=6 md=4
+        </Col>
+      </Row>
       {/* Quiz list + edit quiz form */}
-      {/* Edit quiz instructions */}
+       <Row id='quizListTableRow'>
+       <Col xs={3} md={2}></Col>
+        <Col xs={12} md={8} id='quizListCol'>
+          {/* Quiz list table
+              display: 
+              title,
+              description
+              username(of userwho created quiz),
+              DELETE QUIZ BTN (only available if user created the quiz or is admin)
+              TOGGLE EDIT QUIZ BTN 
+           */}
+        </Col>
+        <Col xs={3} md={2}>
+        </Col>
+      </Row>
+      
       </section>
       <section id='newQuizSection'>
         {/* ADD QUIZ FORM */}

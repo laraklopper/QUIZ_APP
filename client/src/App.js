@@ -39,6 +39,7 @@ export default function App() {
   })
   const [quizName, setQuizName] = useState('')
   const [questions, setQuestions] = useState([])
+  const [quizList, setQuizList] = useState([])
   const [loggedIn, setLoggedIn] = useState(false)
   const [error, setError] = useState(null)
 
@@ -122,6 +123,39 @@ export default function App() {
 
 
   },[loggedIn, setError])
+
+  const fetchQuizzes = useCallback(async () => {
+    try {
+      const token = localStorage.getItem('token');// Retrieve the JWT token from localStorage
+
+      const response = await fetch ('http://localhost:3001/quiz/findQuizzes', {
+        method : 'GET',
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/json',// Specify the Content-Type in the payload as JSON
+          'Authorization': `Bearer ${token}`,// Attach JWT token to the Authorization header
+        }
+      })
+
+       /* Conditional rendering to check if the response
+        is not successful (status code is not in the range 200-299)*/
+      if (!response.ok) {
+        throw new Error('Failed to fetch quizzes');//Throw an error message if the GET request is unsuccessful
+      }
+
+      const quizData = await response.json();
+      if (quizData && Array.isArray(quizData.quizList)) {
+        setQuizList(quizData.quizList)
+      }else{
+
+      }
+    
+
+    } catch (error) {
+      setError('Error fetching Quizzes', error)
+      console.error('[ERROR: APP.js]: Error fetching Quizzes', error);
+    }
+  },[ setError]) 
   //===================EVENT LISTENERS=================
   const logout = useCallback(() => {
     //Clear localStorage
@@ -183,6 +217,8 @@ export default function App() {
             setQuizName={setQuizName}
               logout={logout}
               currentUser={currentUser}
+              quizList={quizList}
+              fetchQuizzes={fetchQuizzes}
             />
           </ProtectedUserRoute>} />
           <Route path='/users' element={
