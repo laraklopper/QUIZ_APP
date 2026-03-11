@@ -5,23 +5,26 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
+import Table from 'react-bootstrap/Table';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import AddQuizForm from '../components/AddQuizForm';
 
 export default function AddQuiz(
   {
-    logout, 
-    currentUser, 
-    quizName, 
-    questions, 
-    setQuizName, 
+    logout,
+    currentUser,
+    quizName,
+    questions,
+    setQuizName,
     setQuestions,
-    fetchQuizzes
+    fetchQuizzes,
+    quizList
   }
 ) {
   //=============STATE VARIABLES===================
-  const [newQuizForm, setNewQiuzForm] =useState(false)
+  const [newQuizForm, setNewQiuzForm] = useState(false)
+  const [showQuizList, setShowQuizList] = useState(false)
   const [currentQuestion, setCurrentQuestion] = useState({
     questionText: '',
     correctAnswer: '',
@@ -92,37 +95,54 @@ export default function AddQuiz(
       {/* HEADER */}
       <Header currentUser={currentUser} heading='ADD QUIZ'/>
       <section id='quizList'>
-       <Row>
-        <Col xs={6} md={4}>
-          xs=6 md=4
-        </Col>
-        <Col xs={6} md={4}>
-        {/* TOGGLE TABLE BUTTON */}
-          <Button>
-            SHOW QUIZZES
-          </Button>
-        </Col>
-        <Col xs={6} md={4}>
-          xs=6 md=4
-        </Col>
-      </Row>
-      {/* Quiz list + edit quiz form */}
-       <Row id='quizListTableRow'>
-       <Col xs={3} md={2}></Col>
-        <Col xs={12} md={8} id='quizListCol'>
-          {/* Quiz list table
-              display: 
-              title,
-              description
-              username(of userwho created quiz),
-              DELETE QUIZ BTN (only available if user created the quiz or is admin)
-              TOGGLE EDIT QUIZ BTN 
-           */}
-        </Col>
-        <Col xs={3} md={2}>
-        </Col>
-      </Row>
-      
+        <Row>
+          <Col xs={6} md={4}></Col>
+          <Col xs={6} md={4}>
+            {/* TOGGLE TABLE BUTTON */}
+            <Button
+              variant='secondary'
+              onClick={() => setShowQuizList((prev) => !prev)}
+              aria-expanded={showQuizList}
+              aria-controls='quizListTableRow'
+            >
+              {showQuizList ? 'HIDE QUIZZES' : 'SHOW QUIZZES'}
+            </Button>
+          </Col>
+          <Col xs={6} md={4}></Col>
+        </Row>
+        {/* Quiz list + edit quiz form */}
+        {showQuizList && (
+          <Row id='quizListTableRow'>
+            <Col xs={3} md={2}></Col>
+            <Col xs={12} md={8} id='quizListCol'>
+              <Table striped bordered hover responsive aria-label='Quiz list'>
+                <thead>
+                  <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Created By</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {quizList.length === 0 ? (
+                    <tr>
+                      <td colSpan={3}>No quizzes found.</td>
+                    </tr>
+                  ) : (
+                    quizList.map((quiz) => (
+                      <tr key={quiz._id}>
+                        <td>{quiz.title}</td>
+                        <td>{quiz.description}</td>
+                        <td>{quiz.username}</td>
+                      </tr>
+                    ))
+                  )}
+                </tbody>
+              </Table>
+            </Col>
+            <Col xs={3} md={2}></Col>
+          </Row>
+        )}
       </section>
       <section id='newQuizSection'>
         {/* ADD QUIZ FORM */}
