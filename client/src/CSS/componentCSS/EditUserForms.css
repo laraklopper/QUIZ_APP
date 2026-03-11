@@ -73,6 +73,8 @@ PATCH: editPassword
   height: 40px;
     width: 180px;
     margin: 10px;
+    gap: 10px;
+    text-transform: uppercase;
     font-weight: 700;
     font-family: "Roboto Mono", monospace;
     font-size: 14px;

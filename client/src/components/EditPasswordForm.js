@@ -4,7 +4,7 @@ import '../css/componentCSS/EditUserForms.css'
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';// Import the Button component from react-bootstrap
 import { Eye, EyeOff, Asterisk } from 'lucide-react';
-
+import { UserKey } from 'lucide-react';
 export default function EditPasswordForm({setError}) {
     // STATE VARIABLES
     // Form variables
@@ -262,7 +262,7 @@ const editPassword = useCallback(async (e) => {
                 role='button'   
                 aria-label='button to submit new password form'
                 >
-                {loading ? 'Saving…' : 'Save changes'}
+                {loading ? 'Saving…' : 'Save changes'} <UserKey />
                 </Button>
             </Stack>
   

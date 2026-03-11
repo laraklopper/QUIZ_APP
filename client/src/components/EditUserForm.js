@@ -3,6 +3,7 @@ import '../css/componentCSS/FormSetup.css'
 import '../css/componentCSS/EditUserForms.css'
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
+import { UserRoundPen } from 'lucide-react';
 
 export default function EditUserForm(
   {//PROPS PASSED FROM PARENT COMPONENT (EditUserData.js)
@@ -161,9 +162,10 @@ export default function EditUserForm(
           variant="light" 
           id='editUserBtn' 
           type='submit' 
+          role='button'
           aria-label='Button to submit edit user profile form'
           >
-          EDIT USER
+          EDIT USER <UserRoundPen aria-hidden='true' forntweight={700}/>
           </Button>
         <Button variant="danger" id='clearFormBtn' type='button' onClick={clearForm} aria-label='Button to clear edit user profile form'>CLEAR FORM</Button>
       </Stack>   

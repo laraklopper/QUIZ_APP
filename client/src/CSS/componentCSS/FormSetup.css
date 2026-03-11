@@ -58,8 +58,8 @@
 /* BUTTONS */
 #showPasswordBtn, #showNewPswdBtn, #showCurrentPswdBtn{
     height: 40px;
-        width: 200px;
-
+    width: 200px;
+    text-transform: uppercase;
     margin: 10px;
     font-weight: 700;
     font-family: "Roboto Mono", monospace;
