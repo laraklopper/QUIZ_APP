@@ -137,13 +137,12 @@ export default function AddQuiz(
                         <td>{quiz.title}</td>
                         <td>{quiz.description}</td>
                         <td>{quiz.username}</td>
-                        <td>
+                        <td id='quizTableBtns'>
                         {/* Delete quiz button: only available to user who created the quiz and admin users */}
-                        <Button variant='danger'>DELETE QUIZ</Button>
-                          
+                        <Button variant='danger' type='button' id='deleteQuizBtn'>DELETE QUIZ</Button>
                           {/*Toggle Edit quiz button: only available to user who created the quiz and admin users */}
                           {/* Display edit quiz if the form is not active and exit if the form is active */}
-                          <Button variant='warning'>EDIT QUIZ/EXIT</Button>
+                          <Button variant='warning' type='button' id='toggleEditQuizBtn'>EDIT QUIZ/EXIT</Button>
                         </td>
                       </tr>
                     ))
