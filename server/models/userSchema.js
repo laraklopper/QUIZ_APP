@@ -1,8 +1,10 @@
 // userSchema.js
 const mongoose = require('mongoose');
 
+//---------REGUALAR EXPRESSIONS--------------------
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+// Define new userSchema
 const userSchema = new mongoose.Schema({
     username: {
         type: String,

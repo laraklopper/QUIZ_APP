@@ -1,7 +1,7 @@
 // scoreRoute.js
 const express = require('express');// Import express to create a router for handling quiz score-related routes
-const mongoose = require('mongoose'); // Import mongoose to validate ObjectId formats
 //Import the necessary models and middleware to handle quiz scores and user authentication
+const mongoose = require('mongoose'); // Import mongoose to validate ObjectId formats
 const Score = require('../models/scoreSchema'); // Import the Score model to interact with the scores collection in the database
 const Quiz = require('../models/quizSchema'); // Import the Quiz model to check for existing quizzes when fetching scores
 const User = require('../models/userSchema'); // Import the User model to check for existing users when fetching scores

@@ -3,7 +3,7 @@ require('dotenv').config();
 //Import required modules and packages
 const express = require('express');
 const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
+// const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
 //Create an instance of the Express Router
 const router = express.Router()
