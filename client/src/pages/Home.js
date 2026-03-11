@@ -18,7 +18,9 @@ export default function Home({logout, currentUser, setError}) {
 
   return (
     <Container id='pageContainer' role='main'>
+    {/* Render the Header componenent with HOME as the heading */}
      <Header heading='HOME' currentUser={currentUser}/>
+     {/* Section 1: Welcome Message + Animation */}
       <section id='welcomeSection'>
      <Row id='welcomeRow'>
         <Col></Col>
@@ -46,10 +48,9 @@ export default function Home({logout, currentUser, setError}) {
       </section>
       {/* SECTION 2 : user profile + edit user forms */}
       <section id='userProfile'>
-        <div>
+        <div id='userProfileBlock'>
           <EditUserData currentUser={currentUser} setError={setError}/>
         </div>
-      
       </section>
       <Footer logout={logout} currentUser={currentUser}/>
     </Container>

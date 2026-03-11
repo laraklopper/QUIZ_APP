@@ -7,6 +7,7 @@ export default function Game({logout, currentUser}) {
   return (
     <Container id='pageContainer' role='main'>
       {/* HEADER */}
+      {/* Render the Header component with GAME as the heading */}
       <Header currentUser={currentUser} heading='GAME'/>
       <section className='quizSection'>
         {/* SELECT QUIZ FORM 
