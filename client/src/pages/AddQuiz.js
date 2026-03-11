@@ -11,7 +11,7 @@ import Header from '../components/Header';
 import AddQuizForm from '../components/AddQuizForm';
 
 export default function AddQuiz(
-  {
+  {//PROPS PASSED FROM PARENT COMPONENT (App.js)
     logout,
     currentUser,
     quizName,
@@ -23,7 +23,7 @@ export default function AddQuiz(
   }
 ) {
   //=============STATE VARIABLES===================
-  const [newQuizForm, setNewQiuzForm] = useState(false)
+  const [newQuizForm, setNewQuizForm] = useState(false)
   const [showQuizList, setShowQuizList] = useState(false)
   const [currentQuestion, setCurrentQuestion] = useState({
     questionText: '',
@@ -87,7 +87,7 @@ export default function AddQuiz(
 
   //===============EVENT LISTENERS====================
   //Function to toggle Add Quiz form
-  const toggleAddQuiz =  () => setNewQiuzForm((prev) => !prev);
+  const toggleAddQuiz =  () => setNewQuizForm((prev) => !prev);
   
   //=============JSX RENDERING=======================
   return (
@@ -97,10 +97,12 @@ export default function AddQuiz(
       <section id='quizList'>
         <Row>
           <Col xs={6} md={4}></Col>
-          <Col xs={6} md={4}>
+          <Col xs={6} md={4} id='toggleQuizListCol'>
             {/* TOGGLE TABLE BUTTON */}
             <Button
               variant='secondary'
+              type='button'
+              id='toggleQuizList'
               onClick={() => setShowQuizList((prev) => !prev)}
               aria-expanded={showQuizList}
               aria-controls='quizListTableRow'
@@ -115,7 +117,7 @@ export default function AddQuiz(
           <Row id='quizListTableRow'>
             <Col xs={3} md={2}></Col>
             <Col xs={12} md={8} id='quizListCol'>
-              <Table striped bordered hover responsive aria-label='Quiz list'>
+              <Table striped bordered hover responsive aria-label='Quiz list' id='quizListTable'>
                 <thead>
                   <tr>
                     <th>Title</th>
@@ -126,7 +128,7 @@ export default function AddQuiz(
                 <tbody>
                   {quizList.length === 0 ? (
                     <tr>
-                      <td colSpan={3}>No quizzes found.</td>
+                      <td colSpan={3}><p id='errorMessage'>NO QUIZZES FOUND</p></td>
                     </tr>
                   ) : (
                     quizList.map((quiz) => (

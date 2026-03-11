@@ -152,6 +152,7 @@ export default function AddQuizForm(
                     className='addQuizInput'
                     id='correctAnswerInput'
                     name='correctAnswer'
+                    value={currentQuestion.correctAnswer}
                     onChange={(e) =>
                     setCurrentQuestion({
                       ...currentQuestion,
