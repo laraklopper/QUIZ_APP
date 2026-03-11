@@ -54,7 +54,7 @@ export default function App() {
 
         if (!token || !loggedIn) return;
 
-        const response = await fetch(`http://localhost:3001/users/fetchUsers`, {
+        const response = await fetch(`http://localhost:3001/users/findUsers`, {
           method: 'GET',
           mode: 'cors',
           headers: {
@@ -128,7 +128,7 @@ export default function App() {
     try {
       const token = localStorage.getItem('token');// Retrieve the JWT token from localStorage
 
-      const response = await fetch ('http://localhost:3001/quiz/findQuizzes', {
+      const response = await fetch ('http://localhost:3001/quizzes/findQuizzes', {
         method : 'GET',
         mode: 'cors',
         headers: {

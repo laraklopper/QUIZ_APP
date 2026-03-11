@@ -118,11 +118,12 @@ export default function AddQuiz(
             <Col xs={3} md={2}></Col>
             <Col xs={12} md={8} id='quizListCol'>
               <Table striped bordered hover responsive aria-label='Quiz list' id='quizListTable'>
-                <thead>
-                  <tr>
-                    <th>Title</th>
-                    <th>Description</th>
-                    <th>Created By</th>
+                <thead id='tableHeading'>
+                  <tr id='tableRow'>
+                    <th id='quizListTitle'>Title</th>
+                    <th id='quizListDescription'>Description</th>
+                    <th id='quiz created by'>Created By</th>
+                    <th></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -136,6 +137,14 @@ export default function AddQuiz(
                         <td>{quiz.title}</td>
                         <td>{quiz.description}</td>
                         <td>{quiz.username}</td>
+                        <td>
+                        {/* Delete quiz button: only available to user who created the quiz and admin users */}
+                        <Button variant='danger'>DELETE QUIZ</Button>
+                          
+                          {/*Toggle Edit quiz button: only available to user who created the quiz and admin users */}
+                          {/* Display edit quiz if the form is not active and exit if the form is active */}
+                          <Button variant='warning'>EDIT QUIZ/EXIT</Button>
+                        </td>
                       </tr>
                     ))
                   )}
