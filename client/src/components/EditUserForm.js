@@ -12,6 +12,7 @@ export default function EditUserForm(
     editUserProfile
   }) {
 
+    //========EVENT LISTENENRS============
   const handleUpdate=(e) => {
   const confirmEdit = window.confirm('Are you sure you want to edit user details')
        //Conditional rendering: if user cancels, exit function
@@ -22,6 +23,7 @@ export default function EditUserForm(
       console.log('[EditUserForm.js]: Edit user account');//Log a message in the console for debugging purposes
       editUserProfile()
   }
+  // 
  const handleInputChange = (event) => {
   const {name, value} = event.target;
 
@@ -61,6 +63,7 @@ export default function EditUserForm(
             email: currentUser?.email || ''           
         });
     };
+
   //==========JSX RENDERING=============
   return (
     <form id='editUserForm' method='PATCH' aria-labelledby='editUserProfileForm' onSubmit={handleUpdate}>
@@ -74,8 +77,8 @@ export default function EditUserForm(
       <div id='editUserDetails'>
        {/* Edit Details stack */}
         <Stack gap={3} id='editUserFormStack'>
+        {/* ----USERNAME-------- */}
       <div className="p-2" id='editUsername'>
-      {/* ----USERNAME-------- */}
         <label className='editUserLabel' htmlFor='editUsernameInput'>
           <p className='labelText'>USERNAME:</p>
         </label>
@@ -86,13 +89,15 @@ export default function EditUserForm(
           name='username'
           value={editUserData.username}
           onChange={handleInputChange}
-
-
+          autoComplete='username'
+          //ARIA ATTRIBUTES
+          aria-required='false'
+          aria-label='Edit username input'
         />
       </div>
       {/* =============FULL NAME================== */}
       <div className="p-2" id='fullNameEditBlock'>
-      {/* -------------FIRST NAME */}
+      {/* -------------FIRST NAME------------- */}
       <div id='firstNameEdit'>
       <label htmlFor='firstNameEdit' className='editUserLabel'>
           <p className='labelText'>FIRST NAME:</p>
@@ -106,14 +111,14 @@ export default function EditUserForm(
           placeholder={currentUser?.fullName?.firstName || 'FIRST NAME'}
           onChange={handleInputChange}
           autoComplete='given-name'
-          required
-          aria-required='true'
-
+          // ARIA ATTRIBUTES
+          aria-required='false'
+          aria-label='First name input field'
         />
       </div>
       {/* ----------LAST NAME----------- */}
-           <div id='lastNameEdit'>
-        <label >
+      <div id='lastNameEdit'>
+        <label className='editUserLabel' htmlFor='editLastNameInput'>
           <p className='labelText'>LAST NAME:</p>
         </label>
         <input
@@ -123,10 +128,10 @@ export default function EditUserForm(
           value={editUserData.fullName.lastName}
           onClick={handleInputChange}
           placeholder={currentUser?.fullName?.lastName || 'LAST NAME'}
-          required
           autoComplete='family-name'
-
-
+          // ARIA ATTRIBUTES
+          aria-label='Last name input field'
+          aria-required='false'  
         />
       </div>
       </div>
@@ -139,14 +144,28 @@ export default function EditUserForm(
           className='input'
           id='editEmailInput'
           type='email'
+          name='email'
+          value={editUserData.email}
           placeholder={currentUser?.email}
+          onClick={handleInputChange}
+          autoComplete='email'
+          // ARIA ATTRIBUTES
+          aria-label='Email input field'
+          aria-required='false'
         />
       </div>
     </Stack>
     </div>
       <Stack gap={2} className="col-md-5 mx-auto" id='editUserBtnStack' role='toolbar'>
-        <Button variant="light" id='editUserBtn' type='submit'>EDIT USER</Button>
-        <Button variant="danger" id='clearFormBtn' type='button' onClick={clearForm}>CLEAR FORM</Button>
+        <Button 
+          variant="light" 
+          id='editUserBtn' 
+          type='submit' 
+          aria-label='Button to submit edit user profile form'
+          >
+          EDIT USER
+          </Button>
+        <Button variant="danger" id='clearFormBtn' type='button' onClick={clearForm} aria-label='Button to clear edit user profile form'>CLEAR FORM</Button>
       </Stack>   
     </form>
   )
