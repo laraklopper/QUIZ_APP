@@ -1,14 +1,35 @@
+#quizList{
+    width: 100%;
+            padding: 10px 0px;
+    margin: 10px 0px;
+        display: flex;
+    background-color: olivedrab;
+        flex-direction: column;
+}
 #newQuizSection{
     width: 100%;
         padding: 10px 0px;
         margin: 0px;
         display: flex;
     background-color: olivedrab;
+        flex-direction: column;
+}
+#quizListRow{
+    display: flex;
+    width: 100%;
+    margin:  0px;
+    padding: 0px;
 }
 #addQuizRow{
     width: 100%;
     margin: 0px;
     padding: 0px;
+}
+#toggleQuizListCol{
+     margin: 10px 0px;
+    padding: 0px;
+    display: flex;
+    justify-content: center;
 }
 #addQuizCol1, #addQuizCol2{
     margin: 0px;
@@ -25,7 +46,7 @@
 #add-quiz-panal{
     padding: 10px;
 }
-#toggleAddQuizBtn{
+#toggleQuizListBtn, #toggleAddQuizBtn{
         display: flex;
     align-items: center;
     justify-content: center;
@@ -36,7 +57,7 @@
     color: #000;
     border: solid #323A42 3px;
 }
-#toggleAddQuizBtn:hover{
+#toggleQuizListBtn:hover, #toggleAddQuizBtn:hover{
         display: flex;
     align-items: center;
     justify-content: center;

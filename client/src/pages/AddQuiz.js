@@ -95,14 +95,14 @@ export default function AddQuiz(
       {/* HEADER */}
       <Header currentUser={currentUser} heading='ADD QUIZ'/>
       <section id='quizList'>
-        <Row>
+        <Row id='quizListRow' aria-live='polite'>
           <Col xs={6} md={4}></Col>
           <Col xs={6} md={4} id='toggleQuizListCol'>
             {/* TOGGLE TABLE BUTTON */}
             <Button
               variant='secondary'
               type='button'
-              id='toggleQuizList'
+              id='toggleQuizListBtn'
               onClick={() => setShowQuizList((prev) => !prev)}
               aria-expanded={showQuizList}
               aria-controls='quizListTableRow'
@@ -114,7 +114,7 @@ export default function AddQuiz(
         </Row>
         {/* Quiz list + edit quiz form */}
         {showQuizList && (
-          <Row id='quizListTableRow'>
+          <Row id='quizListTableRow' aria-live='polite'>
             <Col xs={3} md={2}></Col>
             <Col xs={12} md={8} id='quizListCol'>
               <Table striped bordered hover responsive aria-label='Quiz list' id='quizListTable'>
