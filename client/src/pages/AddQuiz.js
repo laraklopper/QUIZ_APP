@@ -1,6 +1,7 @@
 import React, { useState, useCallback, useEffect } from 'react'
 import '../css/pagesCSS/AddQuiz.css'
 import '../css/pagesCSS/PageSetup.css'
+import '../css/componentCSS/QuizData.css'
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -121,7 +122,7 @@ export default function AddQuiz(
                 <thead id='tableHeading'>
                   <tr id='tableRow'>
                     <th id='quizListTitle'>Title</th>
-                    <th id='quizListDescription'>Description</th>
+                    <th id='quizDescrip'>DESCRIPTION</th>
                     <th id='quiz created by'>Created By</th>
                     <th></th>
                   </tr>
@@ -138,11 +139,14 @@ export default function AddQuiz(
                         <td>{quiz.description}</td>
                         <td>{quiz.username}</td>
                         <td id='quizTableBtns'>
-                        {/* Delete quiz button: only available to user who created the quiz and admin users */}
+                        <div id='tableBtnsDiv'>
+  {/* Delete quiz button: only available to user who created the quiz and admin users */}
                         <Button variant='danger' type='button' id='deleteQuizBtn'>DELETE QUIZ</Button>
                           {/*Toggle Edit quiz button: only available to user who created the quiz and admin users */}
                           {/* Display edit quiz if the form is not active and exit if the form is active */}
                           <Button variant='warning' type='button' id='toggleEditQuizBtn'>EDIT QUIZ/EXIT</Button>
+                        </div>
+                      
                         </td>
                       </tr>
                     ))

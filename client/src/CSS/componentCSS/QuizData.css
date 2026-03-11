@@ -1,0 +1,33 @@
+#quizListTable{
+    width: 100%;
+}
+#quizListTable, td{
+    text-align: center;
+    text-transform: uppercase;
+        width: 180px;
+    margin: 0px;
+}
+#quizListTitle{
+    width: 200px;
+}
+#toggleEditQuizBtn, #deleteQuizBtn{
+     height: 40px;
+    width: 150px;
+    margin: 0px;
+    font-weight: 700;
+    font-family: "Roboto Mono", monospace;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    color: #000;
+    border: solid #323A42 3px;
+
+}
+#quizTableBtns{
+    margin: 0px;
+    padding: 0px;
+}
+#tableBtnsdiv{
+        display: flex;
+    justify-content: center;
+}
