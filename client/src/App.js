@@ -1,20 +1,28 @@
+//App.js (client)
 import React, { useCallback, useEffect, useState } from 'react'
+//Import css stylesheets
 import './App.css';
 import './css/pagesCSS/Animations.css'
+// Bootstrap components
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+// Import react router components
 import {Route, Routes, useNavigate} from 'react-router-dom'
 // Import icons from lucide-react
 import { Bug } from 'lucide-react';
+// Pages
 import Login from './pages/Login';
 import Registration from './pages/Registration';
 import Home from './pages/Home';
 import Game from './pages/Game'
-import ProtectedUserRoute from './protectedRoutes/ProtectedUserRoute'
-import ProtectedAdminRoute from './protectedRoutes/ProtectedAdminRoute'
 import AddQuiz from './pages/AddQuiz';
 import Users from './pages/Users';
+//Protected Routes
+import ProtectedUserRoute from './protectedRoutes/ProtectedUserRoute'
+import ProtectedAdminRoute from './protectedRoutes/ProtectedAdminRoute'
+
+//=====MAIN APP FUNCTION COMPONENT==============
 export default function App() {
   const [currentUser, setCurrentUser] = useState(null)
   const [users, setUsers] = useState([])
