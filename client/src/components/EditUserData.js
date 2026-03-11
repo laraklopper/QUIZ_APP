@@ -10,6 +10,14 @@ import EditPasswordForm from './EditPasswordForm';
 import EditUserForm from './EditUserForm';
 
 export default function EditUserData({currentUser, setError}) {
+  const [editUserData, setEditUserDate]= useState({
+    username: '',
+    fullName: {
+      firstName: '',
+      lastName: '',
+    },
+    email: ''
+  })
   const [activeForm, setActiveForm] = useState('null')
  // State to manage whether the user is in edit mode
   // Convenience booleans for conditional rendering + ARIA states
@@ -24,7 +32,54 @@ export default function EditUserData({currentUser, setError}) {
     const isAdmin = currentUser?.admin ? 'Yes' : 'No';//User Admin Status
 
     //============REQUESTS========================
+    //-------PATCH-----------------
+    //EditUserProfile
+    const editUserProfile = useCallback(async () => {
+      try {
+        const token = localStorage.getItem('token');
+        if (!token) throw new Error("User is not authenticated. Please log in again.");
+        const userId = currentUser?._id || localStorage.getItem('userId');
+        if (!userId) throw new Error('No user id available');
+        const response = await fetch(`http://localhost:3001/users/editUser/${userId}`, {
+        method: 'PATCH',//HTTP Request method
+        mode: 'cors',//Enable CORS for Cross-Origin-Resource Sharing
+        headers: {
+          'Content-Type': 'application/json', //Specify the Content-Type as JSON
+          'Authorization': `Bearer ${token}`, // Attach the token in the Authorization header
+        },
+        body: JSON.stringify(editUserData), // Send updated user data
+      });
+      /* Conditional rendering to check if the response
+          is not successful (status code is not in the range 200-299)*/
+      if (!response.ok) {
+        // Handle status-specific errors first (gives user better feedback)
+        if (response.status === 401) throw new Error('Unauthorized. Please login again.');
+        if (response.status === 403) throw new Error('Forbidden. You cannot edit this account.');
+        if (response.status === 409) throw new Error('Email or contact number already in use.');
+        // Try to read backend message for other error cases
+        const data = await response.json().catch(() => ({}));
+        throw new Error(data.message || 'Failed to update user account');//Throw an error message if PUT request is unsuccessful
+      }
 
+      const data = await response.json();// Parse the JSON data from the response body
+      const updated = data.updatedUser;
+
+      setEditUserDate(updated);// Update currentUser in App state (this refreshes the UI everywhere)
+
+      // Re-sync edit form with saved values (keep shape!)
+      setEditUserDate({
+        username: updated.username || '',
+        fullName: { ...updated.fullName },
+        companyName: updated.companyName || '',
+        email: updated.email || '',
+       
+      });
+      } catch (error) {
+         console.error(`[ERROR: EditUserData.js]: Error updating account ${error.message}`);
+          setError(error.message || 'Error updating account. Please try again.');// Set the error state to display the error in the UI
+        alert(`Error updating account`)//Notify user if there is an error
+      }
+    },[setEditUserDate, editUserData, setError, currentUser?._id])
     //=============EVENT HANDLERS=================
 // If the same form is already open, close it; otherwise open it.
   // Toggle account form
@@ -123,7 +178,6 @@ export default function EditUserData({currentUser, setError}) {
                             {showPasswordForm ? 'EXIT' : 'EDIT PASSWORD'}
                         </Button>
                     </div>
-                 
             </Stack>
             {/* EDIT USER STACK: CONDITIONAL */}
             {/* Only render this stack if a form is active */}
@@ -141,7 +195,12 @@ export default function EditUserData({currentUser, setError}) {
                           {/* Screen Reader Heading */}
                             <h3 id="editAccountHeading" className="visually-hidden">Edit account details</h3>
                             {/* Render the EditUserForm component */}
-                            <EditUserForm/>
+                            <EditUserForm
+                              editUserData={editUserData}
+                              setEditUserData={setEditUserDate}
+                              editUserProfile={editUserProfile}
+                              currentUser={currentUser}
+                            />
                         </div>
                       )}
                   </div>
