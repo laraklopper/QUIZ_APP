@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import '../css/pagesCSS/PageSetup.css'
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -8,6 +8,17 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 import SelectQuizForm from '../components/SelectQuizForm';
 export default function Game({logout, currentUser}) {
+  const [selectedQuizId, setSelectedQuizId] = useState();
+  // const [timer, setTimer] = useState(10);
+  // const [quizTimer, setQuizTimer] = useState()
+
+   //============USE EFFECT HOOK==================
+  /* useEffect to fetch quizzes when the component 
+  mounts or when fetchQuizzes changes*/
+  //==========REQUEST===========
+  //----------GET----------------
+  // Function to fetch a single quiz by quizId
+  //=========JSX RENDERING===============
   return (
     <Container id='pageContainer' role='main'>
       {/* HEADER */}
