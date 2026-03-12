@@ -79,7 +79,7 @@ export default function Quiz(
   const handleAnswerClick = (isCorrect) => {
     if (isCorrect) {
       setCurrentScore(currentScore + 1)
-      setFeedback(<p>CORRECT <Check /></p>)
+      setFeedback(<p className='correctFeedback'>CORRECT <Check /></p>)
     } else {
       setFeedback(<p className='feedbackTxt'>INCORRECT <X /> </p>);
     }
