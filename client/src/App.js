@@ -304,10 +304,14 @@ const fetchUserScores = useCallback(async () => {
               currentUser={currentUser}
               quiz={quiz}
               setQuiz={setQuiz}
+              userScores={userScores}
               setUserScores={setUserScores}
               selectedQuiz={selectedQuiz}
               setSelectedQuiz={setSelectedQuiz}
-              
+              loggedIn={loggedIn}
+              fetchUserScores={fetchUserScores}
+              quizName={quizName}
+              questions={questions}
             />
           </ProtectedUserRoute>}/>
           <Route path='/addQuiz' element={<ProtectedUserRoute currentUser={currentUser}>
