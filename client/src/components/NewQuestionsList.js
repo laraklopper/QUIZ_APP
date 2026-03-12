@@ -20,18 +20,14 @@ export default function NewQuestionsList({addNewQuiz, quizName, questions, setQu
   };
     // Function to handle form submission
   const handleAddNewQuiz = useCallback(async() => {
-    /*Conditional rendering to check if the quiz name is 
+    /*Conditional rendering to check if the quiz name is
     provided and if there is at least one question*/
     if (!quizName || questions.length === 0) {
-      setErrorMessage('Please enter a quiz')// Set error message to notify the user 
+      setErrorMessage('Please enter a quiz')// Set error message to notify the user
       return;//Exit the function
     }
     await addNewQuiz()//Call the addNewQuiz component
-    // Clear the data after successful submission
-    setQuestions([]);  // Clear all questions
-    setQuizName('');   // Clear the quiz name
-    setErrorMessage('')// Clear any error messages after successful submission
-  },[addNewQuiz, questions.length, quizName, setQuizName, setErrorMessage, setQuestions])
+  },[addNewQuiz, questions.length, quizName, setErrorMessage])
 
 //============================
   return (

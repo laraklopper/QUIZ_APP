@@ -52,7 +52,7 @@ router.get('/findQuiz/:id', checkJwtToken, async (req, res) => {
 })
 //-------POST--------------
 // Route to create a new quiz
-router.post('/createQuiz', async (req, res) => {
+router.post('/createQuiz', checkJwtToken, async (req, res) => {
     console.log(req.body);// Log the request body to verify that the data is being received correctly from the client before processing it to create a new quiz in the database
     try {
         const {title, description, username, questions} = req.body;//Extract the title, description, username, and questions from the request body
