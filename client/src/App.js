@@ -43,11 +43,7 @@ export default function App() {
   const [quizList, setQuizList] = useState([])
   const [selectedQuiz, setSelectedQuiz] = useState(null);// State to store the selected quiz
     //Score variables
-  const [userScores, setUserScores] = useState({ // State to store the current user's quiz scores
-    result: '',
-    date: '',
-    attemptNumber: ''
-  });
+  const [userScores, setUserScores] = useState([]); // State to store the current user's quiz scores
   const [scores, setScores] =useState([]);// State to hold scores
   const [loggedIn, setLoggedIn] = useState(false)
   const [error, setError] = useState(null)
@@ -131,7 +127,7 @@ export default function App() {
     }
 
 
-  },[loggedIn, setError])
+  },[loggedIn])
 // Function to fetch quizzes
   const fetchQuizzes = useCallback(async () => {
     try {
@@ -164,7 +160,7 @@ export default function App() {
       setError('Error fetching Quizzes', error)
       console.error('[ERROR: APP.js]: Error fetching Quizzes', error);
     }
-  },[ setError]) 
+  },[])
 
    useEffect(() => {
     //Function to fetch all scores
@@ -243,7 +239,7 @@ const fetchUserScores = useCallback(async () => {
     console.error('Error fetching userScores', error.message);//Log an error message in the console for debugging purposes
     setError(`Error fetching userScores: ${error.message}`);// Set the error state to display the error in the UI
   }
-},[setUserScores, setError]);
+},[]);
   //===================EVENT LISTENERS=================
   const logout = useCallback(() => {
     //Clear localStorage
@@ -295,6 +291,7 @@ const fetchUserScores = useCallback(async () => {
             <ProtectedUserRoute currentUser={currentUser}>
             <Game
               quizList={quizList}
+              scores={scores}
               fetchQuizzes={fetchQuizzes}
               setQuizList={setQuizList}
               setQuizName={setQuizName}
