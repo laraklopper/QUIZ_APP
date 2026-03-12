@@ -32,28 +32,28 @@ export default function SelectQuizForm(
             </div>
             <div id='selectQuizBlock'> 
           
+            {/* ------SCREEN READER HEADING---------- */}
+            <p id='selectQuizFormHeading' className='visually-hidden'>SELECT QUIZ FORM</p>
             <Form.Select
                 value={selectedQuizId}
-                id='selectQuizForm' 
+                id='selectQuizForm'
                 onChange={handleSelect}
                 aria-labelledby="selectQuizFormHeading"
                 >
-            {/* ------SCREEN READER HEADING---------- */}
-            <p id='selectQuizFormHeading' className='visually-hidden'>SELECT QUIZ FORM</p>
-            {/* Default option prompting 
+            {/* Default option prompting
             the user to select a quiz */}
                 <option id='selectQuizOption' value={''}>SELECT A QUIZ</option>
                 {/* Map over the quizList array to create an option for each quiz */}
                 {quizList && quizList.length > 0 && quizList.map ((quiz) => (
-                    <option 
-                        key={quiz._id} 
-                        value={quiz._id} 
-                        className='input' 
+                    <option
+                        key={quiz._id}
+                        value={quiz._id}
+                        className='input'
                         id='quizOptions'>
-                        {/* Display quiz name */}
-                        {quiz.name}
+                        {/* Display quiz title */}
+                        {quiz.title}
                     </option>
-                ))}   
+                ))}
                 </Form.Select>
             </div>
             
