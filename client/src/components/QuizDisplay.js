@@ -232,7 +232,10 @@ export default function QuizDisplay({
                   questions={questions}
                   timer={timer}
                   quizCompleted={quizCompleted}
-
+                  currentScore={currentScore}
+                  setCurrentScore={setCurrentScore}
+                  handleNextQuestion={handleNextMove}
+                  handleRestart={handleRestart}
                 />
             </div>
           )}  
@@ -245,7 +248,7 @@ export default function QuizDisplay({
         <Col></Col>
         <Col xs={6}>
           {/* RESULT */}
-          {loading && quizCompleted && (
+          {!loading && quizCompleted && (
             <div id='quiz-results-panal'>
             <Results
               totalQuestions={questions.length || 0}

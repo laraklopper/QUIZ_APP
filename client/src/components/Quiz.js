@@ -101,10 +101,10 @@ export default function Quiz(
   return (
     <div id='quiz' aria-labelledby='current'>
     {/* ---------------SCREEN READER MESSAGE------------- */}
-    <p className='visually-hidden' id='currentQuiz'>{quiz.quizName}</p>
+    <p className='visually-hidden' id='currentQuiz'>{quiz.name}</p>
     <Stack gap={3} id='quizStack1'>
       <div className="p-2">{/* Display quiz name */}
-          <h3 className='quizName'>{quiz.quizName}</h3></div>
+          <h3 className='quizName'>{quiz.name}</h3></div>
       <div className="p-2">
          {/* Display question number */}
             <div id='questionNumber'>
