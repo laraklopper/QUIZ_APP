@@ -199,12 +199,9 @@ export default function QuizDisplay({
     <div id='quizDisplay'>
     {/* Show the quiz start form if a quiz is selected but not started */}
     {loading && <div><p>Loading...</p></div>}
-     
-       <Row>
-        <Col xs={3} md={2}>
-          
-        </Col>
-        <Col xs={12} md={8}>
+       <Row id='quizStartRow'>
+        <Col xs={3} md={2}></Col>
+        <Col xs={12} md={8} id='quizStartCol'>
         {/* Render child components only when loading is complete */}
         {loading && selectedQuizId && (
           <div id='quiz-display-form'>
@@ -217,18 +214,16 @@ export default function QuizDisplay({
           />
           </div>
         )}
-          
         </Col>
-        <Col xs={3} md={2}>
-         
-        </Col>
+        <Col xs={3} md={2}></Col>
       </Row>
-      <Row>
+      <Row id='quizDisplayCol'>
         <Col></Col>
-        <Col xs={6}>
+        <Col xs={6} id='quizDisplayCol'>
           {/* QUIZ */}
-          {!loading && quiz && setQuizStarted && (
-            <div id='quiz-display-panal'>
+          <div aria-labelledby='quiz-display-panal'>
+            {!loading && quiz && setQuizStarted && (
+              <div id='quiz-display-panal'>
                 <Quiz
                   quiz={quiz}
                   quizIndex={quizIndex}
@@ -240,14 +235,13 @@ export default function QuizDisplay({
 
                 />
             </div>
-          )
-
-          }
-          
+          )}  
+          </div>
+             
         </Col>
         <Col></Col>
       </Row>
-      <Row>
+      <Row id='quizResultsRow'>
         <Col></Col>
         <Col xs={6}>
           {/* RESULT */}
@@ -264,20 +258,11 @@ export default function QuizDisplay({
               handleNextMove={handleNextMove}
               handleRestart={handleRestart}
             />
-
             </div>
-
           )}
-          
         </Col>
-        <Col>3 of 3</Col>
+        <Col></Col>
       </Row>
-     
-          
-       
-      {/* START QUIZ FORM */}
-      {/* QUIZ */}
-      {/* RESULT */}
     </div>
   )
 }
