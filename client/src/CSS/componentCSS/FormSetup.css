@@ -32,11 +32,12 @@
     display: flex;
     align-self: center;
 }
+/* MESSAGES */
 .infoMsg{
     font-family: "Alkatra", system-ui;
     font-weight: 700;
 }
-#usernameMsgBlock, #passwordMsgBlock{
+ #passwordMsgBlock{
     display: flex;
     justify-content: center;
 }
