@@ -1,5 +1,5 @@
 // Results.js
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 
 export default function Results(
   {
@@ -13,7 +13,23 @@ export default function Results(
     const [submitted, setSubmitted] = useState(false)
     const [submissionError, setSubmissionError] = useState(null);
 
-    const
+    const handleSubmitScore = useCallback(async (e) => {
+      e.preventDefault()
+      setSubmitted(true)
+      setSubmissionError(null)
+      try {
+        await addScore()
+        console.log(currentScore);
+        setShowScore(false)
+      } catch (error) {
+        setSubmissionError('Failed to save score');
+        console.error('[ERROR: Results.js, handleSubmitScore]: Failed to save score', error.message);
+      }finally{
+        setSubmitted(false);
+      }
+    },[addScore, currentScore])
+    //=================================
+    
   return (
     <div>Results</div>
   )
