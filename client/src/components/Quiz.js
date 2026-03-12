@@ -1,5 +1,8 @@
 // Quiz.js
 import React, { useEffect, useState } from 'react'
+import '../css/componentCSS/FormSetup.css'
+import '../css/componentCSS/Quiz.css'
+import '../css/componentCSS/QuizData.css'
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
 import { ArrowBigRightDash, RotateCcw, X ,Check   } from 'lucide-react';
@@ -81,7 +84,7 @@ export default function Quiz(
       setCurrentScore(currentScore + 1)
       setFeedback(<p className='correctFeedback'>CORRECT <Check /></p>)
     } else {
-      setFeedback(<p className='feedbackTxt'>INCORRECT <X /> </p>);
+      setFeedback(<p className='incorrectFeedback'>INCORRECT <X /> </p>);
     }
     setTimeout(() => setFeedback(''), 1000)
   }

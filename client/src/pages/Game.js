@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import '../css/pagesCSS/PageSetup.css'
+import '../css/pagesCSS/Game.css'
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -81,12 +82,13 @@ export default function Game({
       if (!response.ok) {
         throw new Error('Failed to fetch quiz');
       }
-       const fetchedQuiz = await response.json(); // Parse the JSON response
-      console.log(fetchedQuiz)
-      // Conditional rendering to check if fetchedQuiz is valid
-      if (!fetchedQuiz || !fetchedQuiz.questions) {
+       const fetchedData = await response.json(); // Parse the JSON response
+      console.log(fetchedData)
+      // Conditional rendering to check if fetchedData is valid
+      if (!fetchedData || !fetchedData.quiz || !fetchedData.quiz.questions) {
         throw new Error('Invalid quiz data');// Throw error if the data type is invalid
       }
+      const fetchedQuiz = fetchedData.quiz;
        // Shuffle the questions to randomize their order
       const shuffledQuestions = fetchedQuiz.questions.map(question => {
         const optionsWithCorrectAnswer = [...question.options, question.correctAnswer];// Combine options and correct answer
@@ -100,9 +102,9 @@ export default function Game({
         prevQuizList.map((q) => (q._id === quizId ? fetchedQuiz : q))
       );
       setQuestions(shuffledQuestions);
-      setQuizName(fetchedQuiz.name);// Set the quiz name
+      setQuizName(fetchedQuiz.title);// Set the quiz name
       setQuiz(fetchedQuiz);// Set the fetched quiz
-      console.log(fetchedQuiz.name);//Log the fetched quiz name in the console for  debugging purposes
+      console.log(fetchedQuiz.title);//Log the fetched quiz name in the console for  debugging purposes
     } catch (error) {
       setError(`Error fetching quiz: ${error.message}`);// Set the error state and an error messsage
       console.error(`Error fetching quiz: ${error.message}`);//Log an error message in the console for debugging purposes
@@ -116,9 +118,9 @@ export default function Game({
       {/* HEADER */}
       {/* Render the Header component with GAME as the heading */}
       <Header currentUser={currentUser} heading='GAME'/>
-      <section className='quizSection'>
+      <section id='quizSection'>
         {/* SELECT QUIZ FORM */}
-         <Row>
+         <Row id='selectQuizRow'>
           <Col></Col>
           <Col xs={6}>
             <SelectQuizForm
@@ -129,7 +131,7 @@ export default function Game({
           </Col>
           <Col></Col>
       </Row>
-          <div>
+          <div id='display-quiz-panal'>
             <QuizDisplay
               quiz={quiz}
               setQuiz={setQuiz}
@@ -156,8 +158,8 @@ export default function Game({
         <Row>
         <Col></Col>
         <Col xs={6}>
-        <div className='toggleDiv'>
-          <h6 className='btnTxt'>CLICK HERE TO:</h6> <Button id='togglePastScoresBtn'></Button>
+        <div className='toggle-btn-div'>
+          <h6 className='btnTxt'>CLICK HERE TO:</h6> <Button id='togglePastScoresBtn' variant='primary'>VIEW PAST SCORES</Button>
         </div>
           <div id='past-results panal'>
           <PastScores

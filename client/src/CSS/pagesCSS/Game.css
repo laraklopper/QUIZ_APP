@@ -1,0 +1,14 @@
+#quizSection{
+    background-color: #4A7A39;
+}
+#selectQuizRow{
+    display: flex;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+#selectQuizCol{
+    display: flex;
+    margin: 0px;
+    padding: 10px 0px;
+}

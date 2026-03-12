@@ -5,13 +5,13 @@
     padding: 0px 0px 10px 0px;
     margin: 0px;
 }
-#toggle-btn-div{
+.toggle-btn-div{
   display: flex;
     align-items: center;
     gap: 10px;
         margin: 0px;
         padding: 5px 10px;
-    background-color: #b0da5c;
+    background-color: #EBEBEB;
     border-radius: 3px;
 }
 .btnText{

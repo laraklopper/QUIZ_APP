@@ -93,3 +93,28 @@ AddQuizForm.js
     border: solid #323A42 3px;
     background-color: #323A42;
 }
+#selectFormHeading{
+    display: flex;
+    justify-content: center;
+}
+#selectQuizLabelBlock{
+        display: flex;
+    justify-content: center;
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+}
+#selectQuizOption, #quizOptions{
+    width: 200px;
+}
+Form.select, #selectQuizForm{
+    width: 200px;
+        text-align: center;
+        font-family: "Roboto Mono", monospace;
+}
+#selectQuizBlock{
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+    justify-content: center;
+}

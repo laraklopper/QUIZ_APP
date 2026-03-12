@@ -1,0 +1,15 @@
+/* Quiz */
+
+/* FEEDBACK */
+.correctFeedback{
+    margin: 0px;
+    padding: 0px;
+    text-align: center;
+    font-family: "Playpen Sans", cursive;
+}
+.incorrectFeedback{
+    margin: 0px;
+    padding: 0px;
+    text-align: center;
+    font-family: "Noto Serif", serif;    
+}

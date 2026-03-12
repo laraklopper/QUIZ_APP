@@ -24,13 +24,13 @@ export default function SelectQuizForm(
             <div className="p-2" id='selectFormHeading'>
                 <h3 className='formHeading'>SELECT QUIZ</h3>
             </div>
-            <div className="p-2">
+            <div id='selectQuizLabelBlock'>
                   {/* Label for the quizList dropdown */}
             <label id='selectQuizLabel'>
                 <p className='labelText'>SELECT QUIZ BELOW</p>
             </label>
             </div>
-            <div className="p-2"> 
+            <div id='selectQuizBlock'> 
           
             <Form.Select
                 value={selectedQuizId}
