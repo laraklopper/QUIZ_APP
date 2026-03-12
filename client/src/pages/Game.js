@@ -6,6 +6,7 @@ import Col from 'react-bootstrap/Col';
 // Custom components
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+import SelectQuizForm from '../components/SelectQuizForm';
 export default function Game({logout, currentUser}) {
   return (
     <Container id='pageContainer' role='main'>
@@ -17,6 +18,7 @@ export default function Game({logout, currentUser}) {
          <Row>
         <Col>1 of 3</Col>
         <Col xs={6}>
+          <SelectQuizForm/>
 
         </Col>
         <Col>3 of 3</Col>
