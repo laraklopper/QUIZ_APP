@@ -132,14 +132,20 @@ export default function Game({
           <div>
             <QuizDisplay
               quiz={quiz}
+              setQuiz={setQuiz}
               setQuizTimer={setQuizTimer}
               timer={timer}
               setError={setError}
               setTimer={setTimer}
               currentUser={currentUser}
-              setSelectedQuizId={selectedQuizId}
+              selectedQuizId={selectedQuizId}
+              setSelectedQuizId={setSelectedQuizId}
               quizTimer={quizTimer}
               fetchQuiz={fetchQuiz}
+              quizName={quizName}
+              userScores={userScores}
+              setUserScores={setUserScores}
+              questions={questions}
             />
           </div>
        
@@ -156,6 +162,7 @@ export default function Game({
           <div id='past-results panal'>
           <PastScores
             userScores={userScores}
+            fetchUserScores={fetchUserScores}
             loggedIn={loggedIn}
             setSelectedQuiz={setSelectedQuiz}
             selectedQuiz={selectedQuiz}

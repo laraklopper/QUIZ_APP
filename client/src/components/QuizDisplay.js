@@ -153,7 +153,7 @@ export default function QuizDisplay({
     e.preventDefault()
     if(!selectedQuizId) return
     try {
-      await fetchQuiz
+      await fetchQuiz(selectedQuizId)
       setQuizStarted(true)
       setQuizIndex(0);
       setCurrentScore(0);
@@ -177,8 +177,8 @@ export default function QuizDisplay({
   else{
     setQuizStarted(false)
     setQuiz(null)
-    setSelectedQuizId()
-    setQuizCompleted()
+    setSelectedQuizId(null)
+    setQuizCompleted(true)
   }
   },[quiz, quizIndex, quizTimer, setQuizIndex, setQuizStarted, setQuiz, setSelectedQuizId, setTimer, setQuizCompleted])
 
@@ -203,7 +203,7 @@ export default function QuizDisplay({
         <Col xs={3} md={2}></Col>
         <Col xs={12} md={8} id='quizStartCol'>
         {/* Render child components only when loading is complete */}
-        {loading && selectedQuizId && (
+        {!loading && selectedQuizId && (
           <div id='quiz-display-form'>
           <StartQuizForm
             quiz={quiz}
@@ -222,7 +222,7 @@ export default function QuizDisplay({
         <Col xs={6} id='quizDisplayCol'>
           {/* QUIZ */}
           <div aria-labelledby='quiz-display-panal'>
-            {!loading && quiz && setQuizStarted && (
+            {!loading && quiz && quizStarted && (
               <div id='quiz-display-panal'>
                 <Quiz
                   quiz={quiz}
