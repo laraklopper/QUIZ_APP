@@ -8,7 +8,8 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 import SelectQuizForm from '../components/SelectQuizForm';
 import QuizDisplay from '../components/QuizDisplay';
-
+import Button from 'react-bootstrap/Button';
+import PastScores from '../components/PastScores';
 
 export default function Game({
   logout,
@@ -22,7 +23,8 @@ export default function Game({
   quiz,
   setQuiz,
   userScores,
-  setUserScores
+  setUserScores,
+  
 }) {
   const [selectedQuizId, setSelectedQuizId] = useState();
   const [timer, setTimer] = useState(10);
@@ -140,6 +142,19 @@ export default function Game({
       <section>
         {/* PAST QUIZ RESULTS
         */}
+        <Row>
+        <Col></Col>
+        <Col xs={6}>
+        <div className='toggleDiv'>
+          <h6 className='btnTxt'>CLICK HERE TO:</h6> <Button id='togglePastScoresBtn'></Button>
+        </div>
+          <div id='past-results panal'>
+          <PastScores/>
+
+          </div>
+        </Col>
+        <Col></Col>
+      </Row>
       </section>
       <Footer logout={logout} currentUser={currentUser}/>
     </Container>
