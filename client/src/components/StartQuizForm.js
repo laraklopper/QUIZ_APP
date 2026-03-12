@@ -2,23 +2,60 @@ import React from 'react'
 import '../css/componentCSS/FormSetup.css'
 import '../css/componentCSS/QuizForms.css'
 import Stack from 'react-bootstrap/Stack';
-// import Button from 'react-bootstrap/Button';
+import Button from 'react-bootstrap/Button';
 
-
+//StartQuizForm function component
 export default function StartQuizForm(
-  {
-    timer, 
+  {//PROPS PASSED FROM PARENT COMPONENT (QuizDisplay.js)
     quiz, 
     quizTimer, 
     setQuizTimer, 
     quizStarted, 
     handleQuizStart}) {
+
+      //===============JSX RENDERING=================
+
   return (
-    <form>
-         <Stack gap={3}>
-          <div className="p-2"></div>
-          <div className="p-2">Second item</div>
-          <div className="p-2">Third item</div>
+    <form 
+      onSubmit={handleQuizStart} 
+      id='startQuizForm' 
+      aria-labelledby='startQuizHeading'>
+    {/* -----------SCREEN READER HEADING------------- */}
+    <p className='visually-hidden' id='startQuizHeading'>START QUIZ FORM</p>
+    {/* ----------FORM INPUT------------ */}
+         <Stack gap={3} id='startQuizStack' aria-live='polite'>
+           <div className="p-2" id='selectedQuizNameBlock'>   
+           {/* SELECTED QUIZ NAME */}
+             <h3 className='quizName'>{quiz ? quiz.name : ''}</h3> 
+             {/* If the quiz does not exist display an empty string */}
+            </div>                    
+                 <div className="p-2" id='addTimerBlock'>
+                      <label id='addTimerLabel' htmlFor='addQuizTimer'>
+                      <p className='labelText'>ADD TIMER:</p>
+                  </label>
+                  {/* Checkbox to add timer based on the quizTimer state */}
+                  <input
+                      type='checkbox'
+                      checked={quizTimer}//Current state of the timer 
+                      // Update the timer state when toggled
+                      onChange={(e) => setQuizTimer(e.target.checked)}
+                      id='addQuizTimer'
+                      // Disable checkbox if the quiz has started
+                      disabled={quizStarted} 
+                      aria-label='Add timer checkbox'
+                  />
+          </div>
+          <div className="p-2" id='startQuizBtnBlock'>
+          {/* Button to start quiz */}
+            <Button 
+            type='submit' 
+            variant='light' 
+            id='startQuizBtn' 
+            aria-label='button to start quiz'
+            >
+              START QUIZ
+            </Button>
+          </div>
          </Stack>
     </form>
   )
