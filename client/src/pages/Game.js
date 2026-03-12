@@ -7,6 +7,7 @@ import Col from 'react-bootstrap/Col';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import SelectQuizForm from '../components/SelectQuizForm';
+import QuizDisplay from '../components/QuizDisplay';
 
 
 export default function Game({
@@ -17,11 +18,13 @@ export default function Game({
   setError,
   setQuizList,
   setQuizName,
-  setQuestions
+  setQuestions,
+  quiz,
+  setQuiz
 }) {
   const [selectedQuizId, setSelectedQuizId] = useState();
-  // const [timer, setTimer] = useState(10);
-  // const [quizTimer, setQuizTimer] = useState()
+  const [timer, setTimer] = useState(10);
+  const [quizTimer, setQuizTimer] = useState()
 
    //============USE EFFECT HOOK==================
   /* useEffect to fetch quizzes when the component 
@@ -57,7 +60,7 @@ export default function Game({
       if(!quizId) return;
 
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://localhost:3001/quiz/findQuiz/${quizId}`, {
+      const response = await fetch(`http://localhost:3001/quizzes/findQuiz/${quizId}`, {
         method: 'GET',
         mode: 'cors',
         headers: {
@@ -89,11 +92,13 @@ export default function Game({
       );
       setQuestions(shuffledQuestions);
       setQuizName(fetchedQuiz.name);// Set the quiz name
+      setQuiz(fetchedQuiz);// Set the fetched quiz
       console.log(fetchedQuiz.name);//Log the fetched quiz name in the console for  debugging purposes
     } catch (error) {
-      
+      setError(`Error fetching quiz: ${error.message}`);// Set the error state and an error messsage
+      console.error(`Error fetching quiz: ${error.message}`);//Log an error message in the console for debugging purposes
     }
-  })
+  },[setQuizName, setQuizList,setError, setQuestions,setQuiz ])
 
 
   //=========JSX RENDERING===============
@@ -115,6 +120,20 @@ export default function Game({
           </Col>
           <Col></Col>
       </Row>
+          <div>
+            <QuizDisplay
+              quiz={quiz}
+              setQuizTimer={setQuizTimer}
+              timer={timer}
+              setError={setError}
+              setTimer={setTimer}
+              currentUser={currentUser}
+              setSelectedQuizId={selectedQuizId}
+              quizTimer={quizTimer}
+              fetchQuiz={fetchQuiz}
+            />
+          </div>
+       
       </section>
       <section>
         {/* PAST QUIZ RESULTS
