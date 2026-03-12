@@ -41,6 +41,7 @@ export default function App() {
   const [quizName, setQuizName] = useState('')
   const [questions, setQuestions] = useState([])
   const [quizList, setQuizList] = useState([])
+  const [selectedQuiz, setSelectedQuiz] = useState(null);// State to store the selected quiz
     //Score variables
   const [userScores, setUserScores] = useState({ // State to store the current user's quiz scores
     result: '',
@@ -131,7 +132,7 @@ export default function App() {
 
 
   },[loggedIn, setError])
-
+// Function to fetch quizzes
   const fetchQuizzes = useCallback(async () => {
     try {
       const token = localStorage.getItem('token');// Retrieve the JWT token from localStorage
@@ -164,6 +165,47 @@ export default function App() {
       console.error('[ERROR: APP.js]: Error fetching Quizzes', error);
     }
   },[ setError]) 
+
+   useEffect(() => {
+    //Function to fetch all scores
+    const fetchScores = async () => {
+      try {
+        const token = localStorage.getItem('token');// Retrieve the JWT token from localStorage
+        if (!token || !loggedIn) return;// If no token is found, exit the function
+
+        //Send a GET request to the server
+        const response = await fetch ('http://localhost:3001/scores/findScores', {
+          method: 'GET',//HTTP request method
+          mode: 'cors',//Enable Cross-Origin Resource Sharing 
+          headers: {
+            'Content-Type': 'application/json',//Specify the Content-Type in the request payload 
+            'Authorization': `Bearer ${token}`// Attach JWT token for authorization
+          }
+        })
+
+        /* Conditional rendering to check if the response
+        is not successful (status code is not in the range 200-299)*/
+        if (!response.ok) {
+          throw new Error("Failed to fetch user scores");//Throw an error message if the GET request is unsuccessful
+        } 
+        //Conditional rendering to ensure the data is an array
+        const fetchedScores = await response.json();//Parse the response as JSON
+        if (fetchedScores && Array.isArray(fetchedScores.scores)) {
+                  setScores(fetchedScores.scores)//Update the state
+        }
+  
+        // console.log(fetchedScores);//Log the scores in the console for debugging purposes       
+      } catch (error) {
+        console.error('Error fetching  scores', error);//Log an error message in the console for debugging purposes
+        setError('Error fetching  scores', error)// Set the error state to display the error in the UI       
+      }
+    }
+
+    //Conditional rendering to check if the user is logged in
+    if (loggedIn) {
+      fetchScores()//Call the fetchScores function if the user is logged in
+    }
+  },[loggedIn])
 
   //Function to fetch scores list from database
 const fetchUserScores = useCallback(async () => {
@@ -262,6 +304,9 @@ const fetchUserScores = useCallback(async () => {
               currentUser={currentUser}
               quiz={quiz}
               setQuiz={setQuiz}
+              setUserScores={setUserScores}
+              selectedQuiz={selectedQuiz}
+              setSelectedQuiz={setSelectedQuiz}
               
             />
           </ProtectedUserRoute>}/>

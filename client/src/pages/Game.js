@@ -149,7 +149,12 @@ export default function Game({
           <h6 className='btnTxt'>CLICK HERE TO:</h6> <Button id='togglePastScoresBtn'></Button>
         </div>
           <div id='past-results panal'>
-          <PastScores/>
+          <PastScores
+            userScores={userScores}
+            loggedIn={loggedIn}
+            setSelectedQuiz={setSelectedQuiz}
+            selectedQuiz={selectedQuiz}
+          />
 
           </div>
         </Col>
