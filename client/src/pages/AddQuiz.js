@@ -45,8 +45,16 @@ export default function AddQuiz(
     try {
       setError(null);
 
+      if (!currentUser) {
+        setError('You must be logged in to create a quiz.');
+        return;
+      }
       if (!quizName) {
         setError('Please enter a quiz name.');
+        return;
+      }
+      if (!description) {
+        setError('Please enter a quiz description.');
         return;
       }
       if (questions.length < 5) {
@@ -65,7 +73,7 @@ export default function AddQuiz(
         body: JSON.stringify({
           title: quizName,
           description,
-          username: currentUser?.username,
+          username: currentUser.username,
           questions,
         }),
       });
@@ -77,6 +85,7 @@ export default function AddQuiz(
         setDescription('');
         setQuestions([]);
         setCurrentQuestion({ questionText: '', correctAnswer: '', options: ['', '', ''] });
+        fetchQuizzes();
       } else {
         throw new Error(data.message || 'Failed to create quiz.');
       }
@@ -84,7 +93,7 @@ export default function AddQuiz(
       console.error('[ERROR: AddQuiz.js]', error.message);
       setError(error.message);
     }
-  }, [quizName, description, questions, currentUser, setQuizName, setQuestions]);
+  }, [quizName, description, questions, currentUser, setQuizName, setQuestions, fetchQuizzes]);
 
   //===============EVENT LISTENERS====================
   //Function to toggle Add Quiz form
