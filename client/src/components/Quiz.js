@@ -17,6 +17,7 @@ export default function Quiz(
 
   }
 ) {
+  //============JSX RENDERING================
   return (
     <div>Quiz</div>
   )
