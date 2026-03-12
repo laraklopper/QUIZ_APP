@@ -5,6 +5,7 @@ import Col from 'react-bootstrap/Col';
 import StartQuizForm from './StartQuizForm';
 export default function QuizDisplay({
   quiz,
+  setQuiz,
   timer,
   setTimer,
   quizTimer,
@@ -14,11 +15,10 @@ export default function QuizDisplay({
   selectedQuizId,
   setSelectedQuizId,
   fetchQuiz,
-quizName,
-userScores,
-setUserScores
-  
-  
+  quizName,
+  userScores,
+  setUserScores,
+  questions
 }) {
   //======STATE VARIABLES=========== 
   const [quizIndex, setQuizIndex] = useState(0);
@@ -150,6 +150,33 @@ setUserScores
       console.error('Error starting quiz');
     }
   },[selectedQuizId, quizTimer, fetchQuiz, setTimer, setQuizIndex, setError])
+
+  // Function to move to the next question
+  const handleNextMove = useCallback(() => {
+    if (quiz && quiz.questions && quizIndex < quiz.questions.length - 1) {
+      setQuizIndex(quizIndex + 1)
+      if (quizTimer) setTimer(10)
+    }
+  else{
+    setQuizStarted(false)
+    setQuiz(null)
+    setSelectedQuizId()
+    setQuizCompleted()
+  }
+  },[quiz, quizIndex, quizTimer, setQuizIndex, setQuizStarted, setQuiz, setSelectedQuizId, setTimer, setQuizCompleted])
+
+  const handleRestart = useCallback(() => {
+    setQuizIndex(0)
+    setCurrentScore(0)
+    setQuizStarted(true)
+    setQuizCompleted(false)
+    if (quizTimer) {
+      setTimer(10);
+      handleQuizStart({preventDefault: () => {}})
+    } else {
+      setTimer(null)
+    }
+  },[quizTimer, handleQuizStart, setTimer])
   //=============JSX RENDERING========
   return (
     <div>
