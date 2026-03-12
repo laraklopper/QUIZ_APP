@@ -122,7 +122,7 @@ export default function Game({
         {/* SELECT QUIZ FORM */}
          <Row id='selectQuizRow'>
           <Col></Col>
-          <Col xs={6}>
+          <Col xs={6} id='selectQuizCol'>
             <SelectQuizForm
               quizList={quizList}
               selectedQuizId={selectedQuizId}
@@ -152,14 +152,14 @@ export default function Game({
           </div>
        
       </section>
-      <section>
+      <section id='scoresSection'>
         {/* PAST QUIZ RESULTS
         */}
-        <Row>
+        <Row id='pastScoresRow'>
         <Col></Col>
-        <Col xs={6}>
+        <Col xs={6} id='pastScoresCol'>
         <div className='toggle-btn-div'>
-          <h6 className='btnTxt'>CLICK HERE TO:</h6> <Button id='togglePastScoresBtn' variant='primary'>VIEW PAST SCORES</Button>
+          <h6 className='btnText'>CLICK HERE TO:</h6> <Button id='togglePastScoresBtn' variant='primary'>VIEW PAST SCORES</Button>
         </div>
           <div id='past-results panal'>
           <PastScores

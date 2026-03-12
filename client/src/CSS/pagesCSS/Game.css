@@ -18,3 +18,43 @@
     margin: 0px;
     padding: 10px 0px;
 }
+#pastScoresRow{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+#pastScoresCol{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#pastScoresOutput{
+        display: flex;
+    justify-content: center;
+}
+#togglePastScoresBtn{
+        display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+    font-weight: 700;
+    font-family: "Roboto Mono", monospace;
+    height: 40px;
+    color: #000;
+    border: solid #323A42 3px;
+}
+#togglePastScoresBtn:hover{
+        display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+    font-weight: 700;
+    font-family: "Roboto Mono", monospace;
+    height: 40px;
+    color: #FFF;
+    background-color: #323A42;
+    border: solid #323A42 3px;
+}
