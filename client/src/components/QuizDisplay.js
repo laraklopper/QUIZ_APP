@@ -1,8 +1,10 @@
 // QuizDisplay.js
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useState, useEffect } from 'react'
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import StartQuizForm from './StartQuizForm';
+import Quiz from './Quiz';
+import Results from './Results';
 export default function QuizDisplay({
   quiz,
   setQuiz,
@@ -31,6 +33,21 @@ export default function QuizDisplay({
    //==============USE EFFECT HOOK========================
    //UseEffect to fetch and setup necessary data
   //the useEffect hook ensures that when the QuizDisplay component is rendered 
+ useEffect(() => {
+    const setup = async () => {
+      try {
+        if (selectedQuizId) {
+          await fetchQuiz(selectedQuizId)
+        }
+      } catch (error) {
+        setError(`Error setting up quiz:${error.message}`)
+        console.error('Setup error:', error);
+      }finally{
+        setLoading(false)
+      }
+    }
+    setup();
+  },[selectedQuizId, fetchQuiz, setError])
 
    //==============REQUESTS============
   //--------------GET--------------------
@@ -130,7 +147,7 @@ export default function QuizDisplay({
       } catch (error) {
         
       }
-    },[])
+    },[checkExistingScore, updateScore])
   //================EVENT LISTENERS================
   const handleQuizStart = useCallback(async (e) => {
     e.preventDefault()
@@ -179,24 +196,81 @@ export default function QuizDisplay({
   },[quizTimer, handleQuizStart, setTimer])
   //=============JSX RENDERING========
   return (
-    <div>
+    <div id='quizDisplay'>
+    {/* Show the quiz start form if a quiz is selected but not started */}
+    {loading && <div><p>Loading...</p></div>}
+     
        <Row>
         <Col xs={3} md={2}>
           
         </Col>
         <Col xs={12} md={8}>
+        {/* Render child components only when loading is complete */}
+        {loading && selectedQuizId && (
+          <div id='quiz-display-form'>
           <StartQuizForm
-          quiz={quiz}
+            quiz={quiz}
             timer={timer}
             setQuizTimer={setQuizTimer}
             quizStarted={quizStarted}
             handleQuizStart={handleQuizStart}
-            
           />
+          </div>
+        )}
+          
         </Col>
         <Col xs={3} md={2}>
          
         </Col>
+      </Row>
+      <Row>
+        <Col></Col>
+        <Col xs={6}>
+          {/* QUIZ */}
+          {!loading && quiz && setQuizStarted && (
+            <div id='quiz-display-panal'>
+                <Quiz
+                  quiz={quiz}
+                  quizIndex={quizIndex}
+                  setQuizIndex={setQuizIndex}
+                  quizTimer={quizTimer}
+                  questions={questions}
+                  timer={timer}
+                  quizCompleted={quizCompleted}
+
+                />
+            </div>
+          )
+
+          }
+          
+        </Col>
+        <Col></Col>
+      </Row>
+      <Row>
+        <Col></Col>
+        <Col xs={6}>
+          {/* RESULT */}
+          {loading && quizCompleted && (
+            <div id='quiz-results-panal'>
+            <Results
+              totalQuestions={questions.length || 0}
+              selectedQuizId={selectedQuizId}
+              currentScore={currentScore}
+              currentUser={currentUser}
+              quizName={quizName}
+              addScore={addScore}
+              setQuizCompleted={setQuizCompleted}
+              handleNextMove={handleNextMove}
+              handleRestart={handleRestart}
+            />
+
+            </div>
+
+          )}
+          
+        </Col>
+        <Col>3 of 3</Col>
       </Row>
      
           
