@@ -41,6 +41,13 @@ export default function App() {
   const [quizName, setQuizName] = useState('')
   const [questions, setQuestions] = useState([])
   const [quizList, setQuizList] = useState([])
+    //Score variables
+  const [userScores, setUserScores] = useState({ // State to store the current user's quiz scores
+    result: '',
+    date: '',
+    attemptNumber: ''
+  });
+  const [scores, setScores] =useState([]);// State to hold scores
   const [loggedIn, setLoggedIn] = useState(false)
   const [error, setError] = useState(null)
 
@@ -157,6 +164,44 @@ export default function App() {
       console.error('[ERROR: APP.js]: Error fetching Quizzes', error);
     }
   },[ setError]) 
+
+  //Function to fetch scores list from database
+const fetchUserScores = useCallback(async () => {
+  try {
+    const token = localStorage.getItem('token');//Retrieve the JWT token from LocalStorage
+    const username = localStorage.getItem('username')//Retrieve the username from localStorage
+    //send GET request to server to find scores
+    const response = await fetch(`http://localhost:3001/scores/findScores/${username}`, {
+      method: 'GET',//HTTP request method
+      mode: 'cors',//Enable Cross-Origin Resource Sharing 
+      headers: {
+        'Content-Type': 'application/json', //Specify the Content-Type in the payload as JSON
+        'Authorization': `Bearer ${token}`,//Attatch the token in the Authorization header
+      }
+    })
+
+    /* Conditional rendering to check if the response
+        is not successful (status code is not in the range 200-299)*/
+    if (!response.ok) {
+      throw new Error('Unable to fetch user scores')//Throw an error message if the GET request is unsuccessful
+     }
+
+     const quizScores = await response.json();//Parse JSON response
+    
+     //Conditional rendering to ensure the data is an array
+    if (quizScores && quizScores.userScores && Array.isArray(quizScores.userScores)) {
+      setUserScores(quizScores.userScores); // Update state with fetched scores
+    }
+    else {     
+      throw new Error('Invalid data type');//Throw an error message if the data type is invalid
+    }
+  //  console.log(quizScores);//Log the quizScores in the console for debugging purposes
+
+  } catch (error) {
+    console.error('Error fetching userScores', error.message);//Log an error message in the console for debugging purposes
+    setError(`Error fetching userScores: ${error.message}`);// Set the error state to display the error in the UI
+  }
+},[setUserScores, setError]);
   //===================EVENT LISTENERS=================
   const logout = useCallback(() => {
     //Clear localStorage
@@ -217,6 +262,7 @@ export default function App() {
               currentUser={currentUser}
               quiz={quiz}
               setQuiz={setQuiz}
+              
             />
           </ProtectedUserRoute>}/>
           <Route path='/addQuiz' element={<ProtectedUserRoute currentUser={currentUser}>

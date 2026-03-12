@@ -20,7 +20,9 @@ export default function Game({
   setQuizName,
   setQuestions,
   quiz,
-  setQuiz
+  setQuiz,
+  userScores,
+  setUserScores
 }) {
   const [selectedQuizId, setSelectedQuizId] = useState();
   const [timer, setTimer] = useState(10);
