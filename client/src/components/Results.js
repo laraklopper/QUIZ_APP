@@ -1,5 +1,8 @@
 // Results.js
 import React, { useCallback, useState } from 'react'
+import Stack from 'react-bootstrap/Stack';
+import Button from 'react-bootstrap/Button'; // Import the Button component from react-bootstrap
+import { currentDate } from '../utilFunctions/dateFunctions';
 
 export default function Results(
   {
@@ -29,8 +32,74 @@ export default function Results(
       }
     },[addScore, currentScore])
     //=================================
-    
+
   return (
-    <div>Results</div>
+    showScore && (
+      <div id='results'>
+      <form onSubmit={handleSubmitScore} id='quizResultsForm'>
+      {/* -------------SCREEN READER HEADING------------------ */}
+          <div>
+            <Stack gap={3}>
+            {/* QUIZ NAME */}
+      <div className="p-2" id='quizNameBlock'>
+        <input
+          value={quizName || 'UNNAMED QUIZ'}
+          readOnly
+          type='text'
+          className='input'
+          aria-readonly='true'
+
+        />
+        {/* USERNAME */}
+         <input
+        id='quizUser'
+        className='input'
+        type='text'
+        value={`USERNAME: ${currentUser?.username || ''}`}
+        readOnly
+        aria-readonly='true'/>
+      </div>
+      
+      {/* SCORE AND TOTAL QUESTIONS */}
+      <div className="p-2">
+        {/* Display the result with the score and total questions */}
+              <input
+                id='resultOutput'
+                className='resultFormInput'
+                type='text'
+                value={`RESULT: ${currentScore} OF ${totalQuestions}`} // Display score and total questions
+                readOnly
+              />
+              <input
+                type='text'
+                value={currentDate()}// Display the current date
+                name='date'
+                readOnly
+                className='input'
+                aria-readonly='true'
+              />
+      </div>
+      {/* BUTTON */}
+      <div className="p-2">
+       <Button 
+       variant='light' 
+       type='submit' 
+       disabled={submitted} 
+       id='saveScoreBtn' 
+       aria-label='BUTTON TO SAVE SCORE' 
+       aria-disabled={submitted}>
+        {/* Text bassed on the submission state */}
+          {submitted ? 'Submitting...' : 'SAVE SCORE AND EXIT'}  
+       </Button>
+      </div>
+    </Stack>
+          </div>
+          {/* Display error message if an error 
+          occurs when the score is submitted */}
+        {submissionError && <p>{submissionError}</p>}
+      </form>
+
+      </div>
+    )
   )
 }
