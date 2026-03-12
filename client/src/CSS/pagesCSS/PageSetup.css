@@ -1,16 +1,16 @@
 #pageContainer{
-  display: flex;
+    display: flex;
     flex-direction: column;
     width: 100%;
     padding: 0px 0px 10px 0px;
     margin: 0px;
 }
 .toggle-btn-div{
-  display: flex;
+    display: flex;
     align-items: center;
     gap: 10px;
-        margin: 0px;
-        padding: 5px 10px;
+    margin: 0px;
+    padding: 5px 10px;
     background-color: #EBEBEB;
     border-radius: 3px;
 }
@@ -36,5 +36,4 @@
   height: 100%;
   text-transform: uppercase;
   margin: 50px;
-  background-color: #FFF;
 }
