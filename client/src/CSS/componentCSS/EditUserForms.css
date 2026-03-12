@@ -1,4 +1,7 @@
 /* EDITUSERFORMS.css */
+/* EditUserForm: PATCH 
+EditPasswordForm: PATCH
+*/
 #editUserForm{
     display: flex;
     flex-direction: column;
