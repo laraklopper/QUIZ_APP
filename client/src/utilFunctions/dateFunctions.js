@@ -24,3 +24,13 @@ export const timeDisplay = (dateObj) => {
         hour12: false,
     });
 };
+
+ export const currentDate = () => {
+    const options = { 
+      day: '2-digit', // Display day as two digit
+      month: '2-digit',  // Display month as two digits
+      year: 'numeric',// Display year as four digits
+      timeZone: 'Europe/Bucharest'// Set the timezone
+     };
+    return new Intl.DateTimeFormat('en-GB', options).format(new Date());// Format the current date
+  };
