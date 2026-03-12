@@ -203,10 +203,17 @@ export default function App() {
               />
             </ProtectedUserRoute>
           }/>
-          <Route path='/game' element={<ProtectedUserRoute currentUser={currentUser}>
+          <Route path='/game' element={
+            <ProtectedUserRoute currentUser={currentUser}>
             <Game
-             logout={logout}
-             currentUser={currentUser}
+              quizList={quizList}
+              fetchQuizzes={fetchQuizzes}
+              setQuizList={setQuizList}
+              setQuizName={setQuizName}
+              setQuestions={setQuestions}
+              setError={setError}
+              logout={logout}
+              currentUser={currentUser}
             />
           </ProtectedUserRoute>}/>
           <Route path='/addQuiz' element={<ProtectedUserRoute currentUser={currentUser}>

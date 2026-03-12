@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import '../css/pagesCSS/PageSetup.css'
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -7,7 +7,18 @@ import Col from 'react-bootstrap/Col';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import SelectQuizForm from '../components/SelectQuizForm';
-export default function Game({logout, currentUser, quizList, fetchQuizzes}) {
+
+
+export default function Game({
+  logout,
+  currentUser,
+  quizList,
+  fetchQuizzes,
+  setError,
+  setQuizList,
+  setQuizName,
+  setQuestions
+}) {
   const [selectedQuizId, setSelectedQuizId] = useState();
   // const [timer, setTimer] = useState(10);
   // const [quizTimer, setQuizTimer] = useState()
@@ -15,9 +26,76 @@ export default function Game({logout, currentUser, quizList, fetchQuizzes}) {
    //============USE EFFECT HOOK==================
   /* useEffect to fetch quizzes when the component 
   mounts or when fetchQuizzes changes*/
+  useEffect(() => {
+    let isMounted = true;
+    const loadQuizzes = async () => {//Define an async function
+      try {
+        fetchQuizzes()
+      } catch (error) {
+        if(isMounted) setError('Error fetching quizzes', error)
+          console.error('Failed to fetch quizzes');//Log an error message in the console for debugging purposes 
+      }
+    }
+    loadQuizzes();
+    return () => {isMounted = false}
+  },[fetchQuizzes, setError])
+
+  //===========
+  //Function to randomise answers
+
+ const shuffleArray = (array) => {
+    //  Use the JavaScript sort method to shuffle the array
+    // The comparison function returns a random value between -0.5 and 0.5
+    // This results in a random order for each array element
+    return array.sort(() => Math.random() - 0.5);
+  }
   //==========REQUEST===========
   //----------GET----------------
   // Function to fetch a single quiz by quizId
+  const fetchQuiz = useCallback(async (quizId) => {
+    try {
+      if(!quizId) return;
+
+      const token = localStorage.getItem('token');
+      const response = await fetch(`http://localhost:3001/quiz/findQuiz/${quizId}`, {
+        method: 'GET',
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        }
+      })
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch quiz');
+      }
+       const fetchedQuiz = await response.json(); // Parse the JSON response
+      console.log(fetchedQuiz)
+      // Conditional rendering to check if fetchedQuiz is valid
+      if (!fetchedQuiz || !fetchedQuiz.questions) {
+        throw new Error('Invalid quiz data');// Throw error if the data type is invalid
+      }
+       // Shuffle the questions to randomize their order
+      const shuffledQuestions = fetchedQuiz.questions.map(question => {
+        const optionsWithCorrectAnswer = [...question.options, question.correctAnswer];// Combine options and correct answer
+        const shuffledOptions = shuffleArray(optionsWithCorrectAnswer);// Shuffle the options
+        return { ...question, options: shuffledOptions }; // Return the question with shuffled options
+      });
+
+      // Update quiz list and set quiz details
+      setQuizList(prevQuizList =>
+        // Update the quiz list
+        prevQuizList.map((q) => (q._id === quizId ? fetchedQuiz : q))
+      );
+      setQuestions(shuffledQuestions);
+      setQuizName(fetchedQuiz.name);// Set the quiz name
+      console.log(fetchedQuiz.name);//Log the fetched quiz name in the console for  debugging purposes
+    } catch (error) {
+      
+    }
+  })
+
+
   //=========JSX RENDERING===============
   return (
     <Container id='pageContainer' role='main'>
