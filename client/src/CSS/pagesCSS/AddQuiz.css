@@ -1,18 +1,25 @@
+/* ADDQUIS.css */
 #quizList{
     width: 100%;
-            padding: 10px 0px;
+    padding: 10px 0px;
     margin: 10px 0px;
-        display: flex;
+    display: flex;
     background-color: olivedrab;
-        flex-direction: column;
+    flex-direction: column;
+}
+#quizListTableRow{
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+    display: flex;
 }
 #newQuizSection{
     width: 100%;
-        padding: 10px 0px;
-        margin: 0px;
-        display: flex;
+    padding: 10px 0px;
+    margin: 0px;
+    display: flex;
     background-color: olivedrab;
-        flex-direction: column;
+    flex-direction: column;
 }
 #quizListRow{
     display: flex;
@@ -45,6 +52,9 @@
 }
 #add-quiz-panal{
     padding: 10px;
+    width: 100%;
+    margin: 0px;
+    display: flex;
 }
 #toggleQuizListBtn, #toggleAddQuizBtn{
         display: flex;

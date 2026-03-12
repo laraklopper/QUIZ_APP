@@ -116,8 +116,8 @@ export default function AddQuiz(
         {/* Quiz list + edit quiz form */}
         {showQuizList && (
           <Row id='quizListTableRow' aria-live='polite'>
-            <Col xs={3} md={2}></Col>
-            <Col xs={12} md={8} id='quizListCol'>
+       
+            <Col  id='quizListCol'>
               <Table striped bordered hover responsive aria-label='Quiz list' id='quizListTable'>
                 <thead id='tableHeading'>
                   <tr id='tableRow'>
@@ -154,7 +154,6 @@ export default function AddQuiz(
                 </tbody>
               </Table>
             </Col>
-            <Col xs={3} md={2}></Col>
           </Row>
         )}
       </section>
@@ -163,7 +162,7 @@ export default function AddQuiz(
         <Row id='addQuizRow'>
         <Col xs={4} md={2} id='addQuizCol1'></Col>
         <Col xs={12} md={8} id='addQuizCol'>
-        <div id='toggle-btn-div'>
+        <div className='toggle-btn-div'>
           {/* Button to toggle AddQuizForm */}
           <h6 className='btnText'>CLICK HERE TO:</h6>
           <Button 
