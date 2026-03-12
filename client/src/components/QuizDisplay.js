@@ -3,6 +3,10 @@ import React from 'react'
 
 export default function QuizDisplay() {
   return (
-    <div>QuizDisplay</div>
+    <div>
+      {/* START QUIZ FORM */}
+      {/* QUIZ */}
+      {/* RESULT */}
+    </div>
   )
 }
