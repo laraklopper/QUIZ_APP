@@ -1,3 +1,4 @@
+//AddQuiz.js
 import React, { useState, useCallback, useEffect } from 'react'
 import '../css/pagesCSS/AddQuiz.css'
 import '../css/pagesCSS/PageSetup.css'
@@ -7,10 +8,12 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table';
+// CUSTOM COMPONENTS
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import AddQuizForm from '../components/AddQuizForm';
 
+//=============MAIN ADDQUIZ COMPONENT==============
 export default function AddQuiz(
   {//PROPS PASSED FROM PARENT COMPONENT (App.js)
     logout,

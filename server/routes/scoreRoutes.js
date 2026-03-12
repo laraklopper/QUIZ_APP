@@ -50,7 +50,7 @@ router.get('/fetchScores', checkJwtToken, async (req, res) => {
             if (username) {
                 quizScores = await Score.find({ username }).exec(); // Fetch scores for the specified username
             } else {
-                quizScores = await Score.find(req.body).exec(); // Fetch all scores if no username is provided
+                quizScores = await Score.find({}).exec(); // Fetch all scores if no username is provided
             }
 
           //Log the fetched scores in the console for debugging puroses
@@ -84,7 +84,6 @@ router.get('/findScores/:username', async (req, res) => {
         }
         // Fetch the user score based on the user id
         const result = await Score.find({ username: user.username })
-            .populate('title')// Populate the quiz title reference if it's a relationship
             .sort({createdAt: -1 })// Sort the scores by creation date (most recent first)
             .exec();// Execute the query
 
@@ -130,10 +129,6 @@ router.post('/submitScore', async (req, res) => {
             return res.status(400).json({ success: false, message: 'Invalid input. Username and quiz title must be strings, and score must be a number.' });
         }
 
-        if (typeof score !== 'number' || score < 0) {
-            return res.status(400).json({message: 'Score must be a integer'})
-        }
-
         // Check if the quiz exists
         const quiz = await Quiz.findOne({ title: quizTitle }).exec();
         //Conditional rendering to check if the quiz exists
@@ -149,18 +144,10 @@ router.post('/submitScore', async (req, res) => {
         if (existingScore) {
             console.error(`[scoreRoutes.js, /submitScore] Score already exists for user ${username} and quiz ${quizTitle}`);
             return res.status(400).json({ success: false, message: 'Score already exists for this user and quiz.' });
-        }else {
-            // If no existing score, create a new score document
-            // If a score exists, update it; otherwise, create a new score        
-            const newScore = existingScore
-                ? await Score.findByIdAndUpdate(
-                    existingScore._id,// Use the ID of the existing score
-                    { score, $inc: { attempts: 1 } },// Increment attempts
-                    { new: true }// Return the updated score
-                )
-                : await new Score({ username, quizTitle, score }).save();// Create a new score
-            res.status(201).json(newScore)// Save the score and return the result in JSON format
         }
+
+        const newScore = await new Score({ username, quizTitle, score }).save();// Create a new score
+        res.status(201).json(newScore);// Return the new score in JSON format
        
     //Log the score in the console for debugging purposes
         console.log(`Score submitted: ${username} scored ${score} on quiz ${quizTitle}`);
