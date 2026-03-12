@@ -187,7 +187,7 @@ export default function AddQuiz(
           aria-expanded={newQuizForm}
           aria-controls='add-quiz-panal'
           >
-          ADD NEW QUIZ
+          {newQuizForm ?'EXIT': 'ADD NEW QUIZ'}
           </Button>
         </div>
         {/* Conditional rendering Only display if form is displayed */}
