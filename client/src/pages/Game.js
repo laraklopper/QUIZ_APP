@@ -7,7 +7,7 @@ import Col from 'react-bootstrap/Col';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import SelectQuizForm from '../components/SelectQuizForm';
-export default function Game({logout, currentUser}) {
+export default function Game({logout, currentUser, quizList, fetchQuizzes}) {
   const [selectedQuizId, setSelectedQuizId] = useState();
   // const [timer, setTimer] = useState(10);
   // const [quizTimer, setQuizTimer] = useState()
@@ -27,12 +27,15 @@ export default function Game({logout, currentUser}) {
       <section className='quizSection'>
         {/* SELECT QUIZ FORM */}
          <Row>
-        <Col>1 of 3</Col>
-        <Col xs={6}>
-          <SelectQuizForm/>
-
-        </Col>
-        <Col>3 of 3</Col>
+          <Col></Col>
+          <Col xs={6}>
+            <SelectQuizForm
+              quizList={quizList}
+              selectedQuizId={selectedQuizId}
+              setSelectedQuizId={setSelectedQuizId}
+            />
+          </Col>
+          <Col></Col>
       </Row>
       </section>
       <section>
