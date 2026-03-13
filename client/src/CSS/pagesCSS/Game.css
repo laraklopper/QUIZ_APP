@@ -18,6 +18,14 @@
 #quizDisplayRow{
     width: 100%;
     display: flex;
+    margin: 0px;
+    padding: 0px;
+}
+#quizDisplayCol{
+    display: flex;
+    justify-content: center;
+    margin: 0px;
+    padding: 0px;
 }
 /* LAYOUT */
 #selectQuizRow{

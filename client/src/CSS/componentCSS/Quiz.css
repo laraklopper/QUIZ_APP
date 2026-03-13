@@ -5,6 +5,10 @@
     flex-direction: column;
     gap: 10px;
     border-radius: 10px;
+        padding: 20px;
+    background-color: #6c757d;
+    margin: 10px 0px;
+    border: solid;
 }
 /* TEXT */
 #questionText{
@@ -25,6 +29,14 @@
     margin: 0px;
     padding: 0px;
     color: #393e43;
+}
+#resultText{
+        margin: 0px;
+    padding: 5px 0px;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-decoration: underline;
+        font-family: 'Roboto Mono';
 }
 /* FEEDBACK */
 .correctFeedback{
@@ -51,6 +63,29 @@
 
 
 /* BUTTONS */
+#navBtn{
+        display: flex;
+    justify-content: center;
+    width: 80px;
+    height: 40px;
+    align-items: center;
+    color: #000;
+    font-weight: 700;
+border: solid #323A42 3px;
+font-family: "Roboto Mono", monospace;
+}
+#navBtn:hover{
+        display: flex;
+    justify-content: center;
+    width: 80px;
+    height: 40px;
+    align-items: center;
+    color: #E8F0F6;
+    font-weight: 700;
+border: solid #323A42 3px;
+background-color: #323A42;
+font-family: "Roboto Mono", monospace;
+}
 #answerOption{
     display: flex;
     justify-content: center;

@@ -152,9 +152,9 @@ export default function Quiz(
               {/* Display feedback message */}
               {feedback && <div id='feedbackOutput'>{feedback}</div>}
         </div>        
-        <div className="p-2" id='currentResultBlock'>              
+        <div id='currentResultBlock'>              
            {/* Display the current score */}
-              <h6 id='resultText'>RESULT: {currentScore} of {quiz.questions.length}</h6>
+           <h6 id='resultText'>RESULT: {currentScore} of {quiz.questions.length}</h6>
         </div>
        </Stack> 
          <Stack gap={2} className="col-md-5 mx-auto">

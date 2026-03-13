@@ -47,13 +47,19 @@ font-family: "Noto Serif", serif;
 ```
 #000000;
 #FFFFFF;
+```
+```
 <!-- BODY/HTML/ROOT -->
 #709625;
+```
+```
 <!-- WARNINGS/ERROR -->
 #C22419
 #dc3545
 #D41E11
-<!-- FORMS -->
+```
+`FORMS`
+```
 #6c757d
 #A8AEB3
 #808080
@@ -72,6 +78,7 @@ font-family: "Noto Serif", serif;
 #323A42
 #E8F0F6
 <!-- QUIZ -->
+#efefef
 <!-- QUIZ BUTTONS -->
 #3a500e
 #698C23
