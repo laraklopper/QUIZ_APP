@@ -41,7 +41,6 @@ export default function AddQuiz(
   const [description, setDescription] = useState('');
   //EditQuizDetails
   const [editQuizId, setEditQuizId] = useState(null);
-  const [editForm, setEditForm] = useState(false);// Toggle between edit mode and normal mode 
   const [newQuizName, setNewQuizName] = useState('');// State to store new quiz name
   const [newDescription, setNewDescription] = useState('')
   const [newQuestions, setNewQuestions] = useState([])  // State to store new questions when editing a quiz
@@ -150,13 +149,11 @@ export default function AddQuiz(
   const handleEditToggle = useCallback((quiz) => {
     if (editQuizId === quiz._id) {
       setEditQuizId(null);
-      setEditForm(false);
       setQuizName('');
       setDescription('');
       setQuestions([]);
     } else {
       setEditQuizId(quiz._id);
-      setEditForm(true);
       setQuizName(quiz.title);
       setDescription(quiz.description);
       setQuestions(quiz.questions);
@@ -206,8 +203,6 @@ export default function AddQuiz(
   //===============EVENT LISTENERS====================
   //Function to toggle Add Quiz form
   const toggleAddQuiz =  () => setNewQuizForm((prev) => !prev);
-  //Function to toggle Edit Quiz form
-  const toggleEditForm = () => setEditForm((prev) => !prev);
   
   //=============JSX RENDERING=======================
   return (
@@ -279,37 +274,20 @@ export default function AddQuiz(
           <Row id='editQuizRow' aria-live='polite'>
             <Col xs={4} md={2}></Col>
             <Col xs={12} md={8} id='editQuizCol'>
-              <div className='toggle-btn-div'>
-                <h6 className='btnText'>CLICK HERE TO:</h6>
-                <Button
-                  variant='warning'
-                  type='button'
-                  id='toggleEditQuizFormBtn'
-                  onClick={toggleEditForm}
-                  aria-label='Button to toggle edit quiz form'
-                  aria-pressed={editForm}
-                  aria-expanded={editForm}
-                  aria-controls='edit-quiz-panal'
-                >
-                  {editForm ? 'EXIT' : 'EDIT QUIZ'}
-                </Button>
+              <div id='edit-quiz-panal'>
+                <EditQuizForm
+                  editQuiz={editQuiz}
+                  currentUser={currentUser}
+                  error={error}
+                  quizName={quizName}
+                  setQuizName={setQuizName}
+                  description={description}
+                  setDescription={setDescription}
+                  questions={questions}
+                  setQuestions={setQuestions}
+                  editQuizId={editQuizId}
+                />
               </div>
-              {editForm && (
-                <div id='edit-quiz-panal'>
-                  <EditQuizForm
-                    editQuiz={editQuiz}
-                    currentUser={currentUser}
-                    error={error}
-                    quizName={quizName}
-                    setQuizName={setQuizName}
-                    description={description}
-                    setDescription={setDescription}
-                    questions={questions}
-                    setQuestions={setQuestions}
-                    editQuizId={editQuizId}
-                  />
-                </div>
-              )}
             </Col>
             <Col xs={4} md={2}></Col>
           </Row>
