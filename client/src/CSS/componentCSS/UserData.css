@@ -1,12 +1,12 @@
 /* USER DATA.css */
 /* EditUserData.js */
-#userDetails{
+/* #userDetails{
     display: flex;
     margin: 0px 0px 10px 0px;
     padding: 10px;
     flex-direction: column;
     background-color: #83AE2C;
-}
+} */
 #userDetailsDiv{
     display: flex;
     margin: 0px 5px;
@@ -111,6 +111,9 @@
     width: 100%;
     border-collapse: collapse;
     background-color: #F7F7F7;
+    overflow-y: scroll;
+    margin: 0px;
+    padding: 0px;
 }
 #userListTable thead tr {
     background-color: #323A42;

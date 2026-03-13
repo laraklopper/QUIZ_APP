@@ -1,11 +1,12 @@
 /* ADDQUIZ.css */
 /* AddQuiz.js */
+/* SECTION 1 */
 #quizList{
     width: 100%;
     padding: 10px 0px;
     margin: 10px 0px;
     display: flex;
-    background-color: olivedrab;
+    background-color: #0095C7;
     flex-direction: column;
 }
 /* LAYOUT */
@@ -15,12 +16,13 @@
     width: 100%;
     display: flex;
 }
+/* SECTION 2: New Quiz */
 #newQuizSection{
     width: 100%;
     padding: 10px 0px;
     margin: 0px;
     display: flex;
-    background-color: olivedrab;
+    background-color: #0095C7;
     flex-direction: column;
 }
 /* Layout */

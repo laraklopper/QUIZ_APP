@@ -5,7 +5,7 @@ html, #body{
     background-position: center;
     background-repeat: no-repeat;
     overflow: visible;
-    background-color: #709625;
+    background-color: #006080;
     margin: 0px;
     padding: 0px;
     width: 100%;
@@ -14,7 +14,7 @@ html, #body{
   width: 100%;
   display: flex;
   justify-content: center;
-  background-color: #709625;
+  background-color: #006080;
   margin: 0px;
   padding: 0px;
 }

@@ -2,7 +2,7 @@
 /* Game.js */
 #quizSection, #scoresSection{
     width: 100%;
-    background-color: #4A7A39;
+    background-color: #0095C7;;
     display: flex;
     flex-direction: column;
     align-items: center;

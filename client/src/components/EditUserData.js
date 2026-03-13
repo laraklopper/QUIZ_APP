@@ -99,35 +99,35 @@ export default function EditUserData({currentUser, setError}) {
             User account details
           </h2>
           <Row id='userDetailsRow1'>
-            <Col xs={6} md={4}>
+            <Col xs={6} md={4} id='userDetailsCol1'>
               {/* Username */}
               <span className='userDetailsLabel'>
                   <h5 className='dataTextHead'>USERNAME:</h5>
                   <h5 id='usernameDataText'>{username}</h5>
               </span>
             </Col>
-            <Col xs={12} md={8}>
+            <Col xs={12} md={8} id='userdetailsCol2'>
                 {/* User Full Name */}
                 <span className='userDetailsLabel'>
                     <h5 className='dataTextHead'>NAME:</h5>
-                    <h5 className='userFullName'>{`${firstName} ${lastName}`} </h5>
+                    <h5 className='currentUserFullName'>{`${firstName} ${lastName}`} </h5>
                 </span>
             </Col>
           </Row>
           <Row id='userDetailsRow2'>
-            <Col xs={6} md={4}>
+            <Col xs={6} md={4} id='userDetailsCol3'>
                   <span className='userDetailsLabel'>
                         <h5 className='dataTextHead'>EMAIL: </h5>
                         <h5 className='emailData'>{email}</h5>
                     </span>
             </Col>
-            <Col xs={6} md={4}>
+            <Col xs={6} md={4} id='userDetailsCol4'>
                   <span className='userDetailsLabel'>
                     <h5 className='dataTextHead'>DATE OF BIRTH: </h5>
                     <h5 className='dataText'>{dateDisplay(dateOfBirth)}</h5>
                 </span>
             </Col>
-            <Col xs={6} md={4}>
+            <Col xs={6} md={4} id='userDetailsCol5'>
               {/* User admin status*/}
                 <span className='userDetailsLabel'>
                     <h5 className='dataTextHead'>ADMIN: </h5>

@@ -23,7 +23,7 @@
     font-family: "Playpen Sans", cursive;
         font-size: 20px;
 }
-#adminDataText, #usernameDataText,.userFullName{
+#adminDataText, #usernameDataText,.currentUserFullName{
     text-transform: uppercase;
     font-family: "Playpen Sans", cursive;
     font-size: 20px,

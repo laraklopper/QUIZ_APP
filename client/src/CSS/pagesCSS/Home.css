@@ -8,8 +8,8 @@
     padding: 0px 0px 10px 0px;
 }
 /* SECTION 1: welcome message*/
-#welcomeSection{
-    background-color: #698C23;
+#welcomeSection, #userProfile{
+    background-color: #0095C7;
     margin: 0px 0px 10px 0px;
     padding: 0px;
     display: flex;
@@ -58,6 +58,11 @@
     font-size: 32px;
     font-weight: 800;
 }
-#userProfile{
-    background-color: olivedrab;
+#userDetails{
+    display: flex;
+    margin: 0px 0px 10px 0px;
+    padding: 10px;
+    flex-direction: column;
+    background-color: #0095C7;
+
 }
