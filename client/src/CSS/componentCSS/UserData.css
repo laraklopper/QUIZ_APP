@@ -132,7 +132,7 @@
 #userListTable tbody tr:nth-child(odd) {
     background-color: #F7F7F7;
 }
-#userListTable td {
+#userListTable td, .userUsername, .userFullName {
     text-align: center;
     text-transform: uppercase;
     font-family: "Roboto Mono", monospace;
@@ -140,7 +140,14 @@
     padding: 8px;
     vertical-align: middle;
 }
-
+#userListTable td, .userEmail{
+    text-align: center;
+    text-transform: lowercase;
+    font-family: "Roboto Mono", monospace;
+    font-size: 13px;
+    padding: 8px;
+    vertical-align: middle;
+}
 /* ADMIN BADGE */
 #adminBadge {
     background-color: #698C23 !important;

@@ -68,9 +68,9 @@ export default function Users({logout, currentUser, users, setUsers}) {
               <tbody>
                 {users.map((user) => (
                   <tr key={user._id}>
-                    <td>{user.username}</td>
-                    <td>{user.fullName?.firstName} {user.fullName?.lastName}</td>
-                    <td>{user.email}</td>
+                    <td className='userUsername'>{user.username}</td>
+                    <td className='userFullName'>{user.fullName?.firstName} {user.fullName?.lastName}</td>
+                    <td className='userEmail'>{user.email}</td>
                     <td>{dateDisplay(user.dateOfBirth)}</td>
                     <td>
                       {user.admin && (
