@@ -148,3 +148,10 @@
     font-weight: 700;
     text-transform: uppercase;
 }
+#selectQuiz{
+        border: solid #323A42;
+    margin: 0px;
+    padding: 10px;
+    display: flex;
+    background-color: #B7B7B7;
+}

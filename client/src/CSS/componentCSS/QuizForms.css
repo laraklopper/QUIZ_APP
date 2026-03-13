@@ -111,6 +111,8 @@ Form.select, #selectQuizForm{
     width: 200px;
         text-align: center;
         font-family: "Roboto Mono", monospace;
+            border: solid 2px;
+    font-weight: 700;
 }
 #selectQuizBlock{
     margin: 0px;
