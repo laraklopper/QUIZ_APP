@@ -47,10 +47,26 @@ font-family: "Noto Serif", serif;
 ```
 #000000;
 #FFFFFF;
+#0095C7
+ #053444
+  #3fb2d9
+  #006080
 ```
 ```
 <!-- BODY/HTML/ROOT -->
+
 #709625;
+```
+```
+<!-- SECTION -->
+<!-- section1 -->
+#006080
+<!-- section2 -->
+#0095C7
+```
+```
+<!-- TABLES -->
+
 ```
 ```
 <!-- WARNINGS/ERROR -->
