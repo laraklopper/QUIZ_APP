@@ -196,14 +196,15 @@ export default function QuizDisplay({
   },[quizTimer, handleQuizStart, setTimer])
   //=============JSX RENDERING========
   return (
-    <div id='quizDisplay'>
+    <div id='quizDisplay' role='main'>
+    {/* ------------SCREEN READER HEADING--------- */}
+    <p className='visually-hidden'>QUIZ DISPLAY</p>
     {/* Show the quiz start form if a quiz is selected but not started */}
-    {loading && <div><p>Loading...</p></div>}
+    {loading && <div id='loadingBlock'><p id='loadingMsg'>Loading...</p></div>}
        <Row id='startQuizRow'>
-        
         <Col  md={12} id='quizStartCol'>
         {/* Render child components only when loading is complete */}
-        <div>
+        <div id='startQuizBlock' aria-label=''>
         {!loading && selectedQuizId && (
           <div id='start-quiz-panal'>
           <StartQuizForm
