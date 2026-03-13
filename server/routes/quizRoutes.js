@@ -88,7 +88,7 @@ router.post('/createQuiz', checkJwtToken, async (req, res) => {
 });
 //--------PUT---------------
 // Route to update an existing quiz by its ID
-router.put('/editQuiz/:id', async (req, res) => {
+router.put('/editQuiz/:id', checkJwtToken, async (req, res) => {
         console.log(req.body);//Log the request body in the console for debugging purposes
 
     try {
@@ -136,7 +136,7 @@ router.put('/editQuiz/:id', async (req, res) => {
             //Update the quizTitle in the Score collection if the quizTitle is updated
             await Score.updateMany(
                 {quizTitle: quiz.title.toUpperCase()},//The existing quiz title
-                {$set: {quizTitle: title}}//Set the new quiz title
+                {$set: {quizTitle: title.toUpperCase()}}//Set the new quiz title (uppercased to match schema)
             )
         }
         // Update the quiz in the database
@@ -159,7 +159,7 @@ router.put('/editQuiz/:id', async (req, res) => {
 });
 //--------PATCH------------
 // Route to partially update an existing quiz by its ID
-router.patch('/updateQuiz/:id', async (req, res) => {
+router.patch('/updateQuiz/:id', checkJwtToken, async (req, res) => {
     console.log(req.body);//Log the request body in the console for debugging purposes  
     try {
         const { id } = req.params; // Extract quiz Id from the request parameters
@@ -199,7 +199,7 @@ router.patch('/updateQuiz/:id', async (req, res) => {
             //Update the quizTitle in the Score collection if the quizTitle is updated
             await Score.updateMany(
                 {quizTitle: quiz.title.toUpperCase()},//The existing quiz title
-                {$set: {quizTitle: title}}//Set the new quiz title
+                {$set: {quizTitle: title.toUpperCase()}}//Set the new quiz title (uppercased to match schema)
             )
         }
         // Update the quiz in the database

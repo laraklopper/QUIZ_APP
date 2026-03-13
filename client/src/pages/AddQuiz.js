@@ -29,6 +29,7 @@ export default function AddQuiz(
   //=============STATE VARIABLES===================
   const [newQuizForm, setNewQuizForm] = useState(false)
   const [showQuizList, setShowQuizList] = useState(false)
+  const [editQuizId, setEditQuizId] = useState(null)
   const [currentQuestion, setCurrentQuestion] = useState({
     questionText: '',
     correctAnswer: '',
@@ -97,6 +98,91 @@ export default function AddQuiz(
       setError(error.message);
     }
   }, [quizName, description, questions, currentUser, setQuizName, setQuestions, fetchQuizzes]);
+
+  // Function to delete a quiz by ID
+  const deleteQuiz = useCallback(async (quizId) => {
+    try {
+      setError(null);
+      const token = localStorage.getItem('token');
+      const response = await fetch(`http://localhost:3001/quizzes/deleteQuiz/${quizId}`, {
+        method: 'DELETE',
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+      });
+      if (!response.ok) {
+        const data = await response.json().catch(() => ({}));
+        throw new Error(data.message || 'Failed to delete quiz.');
+      }
+      if (editQuizId === quizId) {
+        setEditQuizId(null);
+        setQuizName('');
+        setDescription('');
+        setQuestions([]);
+      }
+      fetchQuizzes();
+    } catch (error) {
+      console.error('[ERROR: AddQuiz.js, deleteQuiz]', error.message);
+      setError(error.message);
+    }
+  }, [editQuizId, fetchQuizzes, setQuizName, setQuestions]);
+
+  // Function to toggle the edit form for a quiz
+  const handleEditToggle = useCallback((quiz) => {
+    if (editQuizId === quiz._id) {
+      setEditQuizId(null);
+      setQuizName('');
+      setDescription('');
+      setQuestions([]);
+    } else {
+      setEditQuizId(quiz._id);
+      setQuizName(quiz.title);
+      setDescription(quiz.description);
+      setQuestions(quiz.questions);
+      setNewQuizForm(false);
+    }
+  }, [editQuizId, setQuizName, setQuestions]);
+
+  // Function to submit edits to an existing quiz
+  const editQuiz = useCallback(async () => {
+    try {
+      setError(null);
+      if (!editQuizId) return;
+      if (!quizName) { setError('Please enter a quiz name.'); return; }
+      if (!description) { setError('Please enter a quiz description.'); return; }
+      if (questions.length < 5) { setError('Please add 5 questions before submitting.'); return; }
+      const token = localStorage.getItem('token');
+      const response = await fetch(`http://localhost:3001/quizzes/updateQuiz/${editQuizId}`, {
+        method: 'PATCH',
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          title: quizName,
+          description,
+          username: currentUser.username,
+          questions,
+        }),
+      });
+      const data = await response.json().catch(() => ({}));
+      if (response.ok) {
+        setEditQuizId(null);
+        setQuizName('');
+        setDescription('');
+        setQuestions([]);
+        fetchQuizzes();
+      } else {
+        throw new Error(data.message || 'Failed to update quiz.');
+      }
+    } catch (error) {
+      console.error('[ERROR: AddQuiz.js, editQuiz]', error.message);
+      setError(error.message);
+    }
+  }, [editQuizId, quizName, description, questions, currentUser, setQuizName, setQuestions, fetchQuizzes]);
 
   //===============EVENT LISTENERS====================
   //Function to toggle Add Quiz form

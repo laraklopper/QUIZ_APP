@@ -1,3 +1,5 @@
+/* QuizData.css */
+/* QUIZ TABLE */
 #quizListTable .table-responsive{
     width: 100%;
     margin: 0px;
@@ -25,6 +27,7 @@ td{
 #quizListTitle{
     width: 200px;
 }
+/* BUTTONS */
 #toggleEditQuizBtn, #deleteQuizBtn{
      height: 40px;
     width: 150px;
