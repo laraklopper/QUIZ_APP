@@ -150,11 +150,13 @@ export default function AddQuiz(
   const handleEditToggle = useCallback((quiz) => {
     if (editQuizId === quiz._id) {
       setEditQuizId(null);
+      setEditForm(false);
       setQuizName('');
       setDescription('');
       setQuestions([]);
     } else {
       setEditQuizId(quiz._id);
+      setEditForm(true);
       setQuizName(quiz.title);
       setDescription(quiz.description);
       setQuestions(quiz.questions);
@@ -204,6 +206,8 @@ export default function AddQuiz(
   //===============EVENT LISTENERS====================
   //Function to toggle Add Quiz form
   const toggleAddQuiz =  () => setNewQuizForm((prev) => !prev);
+  //Function to toggle Edit Quiz form
+  const toggleEditForm = () => setEditForm((prev) => !prev);
   
   //=============JSX RENDERING=======================
   return (
