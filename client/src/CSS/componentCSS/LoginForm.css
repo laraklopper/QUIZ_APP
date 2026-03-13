@@ -2,23 +2,22 @@
 LoginForm.js
 */
 #loginForm{
-        display: flex;
+    display: flex;
     justify-content: center;
-        width: 404px;
+    width: 404px;
     background-color: #808080;
-        border: solid #323A42;
-         border-radius: 10px;
+    border-radius: 10px;
 }
 /* Layout */
 #loginDetails{
-        display: flex;
+    display: flex;
     flex-direction: column;
     align-items: center;
-        padding: 10px;
-     border-radius: 5px;
-     width: 300px;
-        margin: 5px 0px;
-        background-color: #A8AEB3;
+    padding: 10px;
+    border-radius: 5px;
+    width: 300px;
+    margin: 5px 0px;
+    background-color: #A8AEB3;
 }
 /* BOOTSTRAP */
 /* Stack */
