@@ -1,8 +1,9 @@
 // Quiz.js
 import React, { useEffect, useState } from 'react'
+// CSS Stylesheets
 import '../css/componentCSS/FormSetup.css'
 import '../css/componentCSS/Quiz.css'
-import '../css/componentCSS/QuizData.css'
+// Bootstrap
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
 import { ArrowBigRightDash, RotateCcw, X ,Check, MessageCircleQuestionMark    } from 'lucide-react';

@@ -36,7 +36,7 @@ export default function PastScores({
                     id='scoreList'
                   >
                     {/* Default option */}
-                    <option value=" " className='scoresOption'>SELECT SCORES</option>
+                    <option value=" " className='input'>SELECT SCORES</option>
                     {/* Map through the user scores and display 
                     them in the select dropdown */}
                     {userScores.map((score, index) => (

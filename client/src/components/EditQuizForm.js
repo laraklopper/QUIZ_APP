@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import '../css/componentCSS/FormSetup.css'
 import '../css/componentCSS/QuizForms.css'
-import '../css/componentCSS/QuizData.css'
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
 import { ArrowBigLeftDash, ArrowBigRightDash, FileQuestionMark } from 'lucide-react';

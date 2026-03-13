@@ -3,7 +3,6 @@ import React, { useState, useCallback, useEffect } from 'react'
 // CSS Stylesheets
 import '../css/pagesCSS/AddQuiz.css'
 import '../css/pagesCSS/PageSetup.css'
-import '../css/componentCSS/QuizData.css'
 // Bootstrap
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';

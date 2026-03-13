@@ -260,7 +260,7 @@ export default function QuizDisplay({
       </Row>
       <Row id='quizResultsRow'>
         <Col></Col>
-        <Col xs={6}>
+        <Col xs={3} md={2} id='quizDisplayCol'>
           {/* RESULT */}
           {!loading && quizCompleted && (
             <div id='quiz-results-panal'>
