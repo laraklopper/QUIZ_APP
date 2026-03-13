@@ -12,6 +12,7 @@ import Table from 'react-bootstrap/Table';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import AddQuizForm from '../components/AddQuizForm';
+import EditQuizForm from '../components/EditQuizForm';
 
 //=============MAIN ADDQUIZ COMPONENT==============
 export default function AddQuiz(
@@ -258,9 +259,11 @@ export default function AddQuiz(
         <Col ></Col>
           <Col xs={12} md={8} id='editQuizCol'>
             <div id='edit-quiz-panal'>
+            <EditQuizForm/>
 
             </div>
           </Col>
+          <Col ></Col>
         </Row>
       </section>
       {/* EDIT QUIZ FORM */}
