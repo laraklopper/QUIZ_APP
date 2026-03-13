@@ -259,40 +259,16 @@ export default function AddQuiz(
         <Col ></Col>
           <Col xs={12} md={8} id='editQuizCol'>
             <div id='edit-quiz-panal'>
-            <EditQuizForm/>
+            <EditQuizForm
+              editQuiz={editQuiz}
+            />
 
             </div>
           </Col>
           <Col ></Col>
         </Row>
       </section>
-      {/* EDIT QUIZ FORM */}
-      {editQuizId && (
-        <section id='editQuizSection'>
-          <Row id='editQuizRow'>
-            <Col xs={4} md={2}></Col>
-            <Col xs={12} md={8} id='editQuizCol'>
-              <div id='add-quiz-panal'>
-                <AddQuizForm
-                  questions={questions}
-                  setQuestions={setQuestions}
-                  currentUser={currentUser}
-                  quizName={quizName}
-                  setCurrentQuestion={setCurrentQuestion}
-                  setQuizName={setQuizName}
-                  currentQuestion={currentQuestion}
-                  description={description}
-                  setDescription={setDescription}
-                  error={error}
-                  setError={setError}
-                  addQuiz={editQuiz}
-                />
-              </div>
-            </Col>
-            <Col xs={4} md={2}></Col>
-          </Row>
-        </section>
-      )}
+      
       <section id='newQuizSection'>
         {/* ADD QUIZ FORM */}
         <Row id='addQuizRow'>
