@@ -1,5 +1,6 @@
 // Game.js
 import React, { useCallback, useEffect, useState } from 'react'
+// CSS Stylesheets
 import '../css/pagesCSS/PageSetup.css'
 import '../css/pagesCSS/Game.css'
 // Bootstrap
@@ -14,7 +15,9 @@ import QuizDisplay from '../components/QuizDisplay';
 import Button from 'react-bootstrap/Button';
 import PastScores from '../components/PastScores';
 
-export default function Game({
+//===========MAIN GAME FUNCTION COMPONENT==========
+export default function Game(
+  {//PROPS PASSED FROM PARENT COMPONENT (App.js)
   logout,
   currentUser,
   quizList,
@@ -34,9 +37,13 @@ export default function Game({
   quizName,
   questions,
 }) {
+  // ==========STATE VARIABLES============
+  // Quiz variables
   const [selectedQuizId, setSelectedQuizId] = useState();
+  // Timer variables
   const [timer, setTimer] = useState(10);
   const [quizTimer, setQuizTimer] = useState()
+  // Score variables
   const [showPastScores, setShowPastScores] = useState(false)
 
    //============USE EFFECT HOOK==================
