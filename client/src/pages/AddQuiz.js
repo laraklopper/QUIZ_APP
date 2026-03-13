@@ -8,7 +8,6 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
-import Table from 'react-bootstrap/Table';
 // CUSTOM COMPONENTS
 import Footer from '../components/Footer';
 import Header from '../components/Header';
@@ -224,7 +223,7 @@ export default function AddQuiz(
           <Row id='quizListTableRow' aria-live='polite'>
        
             <Col  id='quizListCol'>
-              <Table striped bordered hover responsive aria-label='Quiz list' id='quizListTable'>
+              <table aria-label='Quiz list' id='quizListTable'>
                 <thead id='tableHeading'>
                   <tr id='tableRow'>
                     <th id='quizListTitle'>Title</th>
@@ -260,7 +259,7 @@ export default function AddQuiz(
                     ))
                   )}
                 </tbody>
-              </Table>
+              </table>
             </Col>
           </Row>
         )}

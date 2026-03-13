@@ -76,6 +76,41 @@
     display: flex;
     justify-content: center; 
 }
+/* QUIZ LIST TABLE */
+#quizListTable {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #F7F7F7;
+    margin: 0px;
+    padding: 0px;
+}
+#quizListTable thead tr {
+    background-color: #323A42;
+    color: #fff;
+}
+#quizListTable th {
+    text-align: center;
+    text-transform: uppercase;
+    font-family: "Roboto Mono", monospace;
+    font-weight: 700;
+    font-size: 13px;
+    padding: 10px 8px;
+}
+#quizListTable tbody tr:nth-child(even) {
+    background-color: #D6D6D6;
+}
+#quizListTable tbody tr:nth-child(odd) {
+    background-color: #F7F7F7;
+}
+#quizListTable td {
+    text-align: center;
+    text-transform: uppercase;
+    font-family: "Roboto Mono", monospace;
+    font-size: 13px;
+    padding: 8px;
+    vertical-align: middle;
+}
+
 /* BUTTONS */
 #toggleQuizListBtn, #toggleAddQuizBtn{
     display: flex;

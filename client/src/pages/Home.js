@@ -1,21 +1,30 @@
+// Home.js
 import React from 'react'
+//CSS Stylesheets
 import '../css/pagesCSS/Home.css'
 import '../css/pagesCSS/PageSetup.css'
+// Bootst
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+// Custom components
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+import EditUserData from '../components/EditUserData';
 // Import icons from lucide-react
 import { FileUser } from 'lucide-react';
-import EditUserData from '../components/EditUserData';
-
-export default function Home({logout, currentUser, setError}) {
+export default function Home(
+  {//PROPS PASSED FROM PARENT COMPONENT (App.js)
+    logout, 
+    currentUser, 
+    setError
+  }) {
 
    // SAFE DISPLAY VALUES FOR UI
   const firstName = currentUser?.fullName?.firstName || 'First name not provided';
   const lastName = currentUser?.fullName?.lastName || 'Last name not provided';
 
+  //================JSX RENDERING==============
   return (
     <Container id='pageContainer' role='main'>
     {/* Render the Header componenent with HOME as the heading */}

@@ -232,7 +232,7 @@ export default function QuizDisplay({
       
       </Row>
       <Row id='quizDisplayRow'>
-        <Col></Col>
+        <Col xs={3} md={2}></Col>
         <Col md={8} id='quizDisplayCol'>
           {/* QUIZ */}
           <div aria-labelledby='quiz-display-panal'>
@@ -256,7 +256,7 @@ export default function QuizDisplay({
           </div>
              
         </Col>
-        <Col></Col>
+        <Col xs={3} md={2}></Col>
       </Row>
       <Row id='quizResultsRow'>
         <Col></Col>
