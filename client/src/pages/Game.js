@@ -1,6 +1,8 @@
+// Game.js
 import React, { useCallback, useEffect, useState } from 'react'
 import '../css/pagesCSS/PageSetup.css'
 import '../css/pagesCSS/Game.css'
+// Bootstrap
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';

@@ -109,8 +109,8 @@ router.put('/editQuiz/:id', checkJwtToken, async (req, res) => {
             return res.status(404).json({ success: false, message: 'Quiz not found' });// If the quiz doesn't exist, return a 404(Not found)response
         }
 
-        // Conditional rendering to ensure the user editing the quiz is the one who created it
-        if (quiz.username !== username) {
+        // Conditional rendering to ensure the user editing the quiz is the one who created it, or is an admin
+        if (quiz.username !== username && !req.user.isAdmin) {
             console.error('[ERROR: quizRoutes.js, /editQuiz/:id] Unauthorized edit attempt by:', username);
             return res.status(403).json({ success: false, message: 'You are not authorized to edit this quiz.' });
         }
@@ -175,8 +175,8 @@ router.patch('/updateQuiz/:id', checkJwtToken, async (req, res) => {
             console.error('Quiz not found');//Log an error message in the console for debugging purposes
             return res.status(404).json({ success: false, message: 'Quiz not found' });// If the quiz doesn't exist, return a 404(Not found)response
         }
-        // Conditional rendering to ensure the user editing the quiz is the one who created it
-        if (quiz.username !== username) {
+        // Conditional rendering to ensure the user editing the quiz is the one who created it, or is an admin
+        if (quiz.username !== username && !req.user.isAdmin) {
             console.error('[ERROR: quizRoutes.js, /updateQuiz/:id] Unauthorized update attempt by:', username);
             return res.status(403).json({ success: false, message: 'You are not authorized to update this quiz.' });
         }
