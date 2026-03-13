@@ -327,7 +327,7 @@ const fetchUserScores = useCallback(async () => {
           </ProtectedUserRoute>} />
           <Route path='/users' element={
             <ProtectedAdminRoute currentUser={currentUser}>
-            <Users logout={logout} users={users} currentUser={currentUser}/>
+            <Users logout={logout} users={users} setUsers={setUsers} currentUser={currentUser}/>
           </ProtectedAdminRoute>}/>
         </>
       ):(
