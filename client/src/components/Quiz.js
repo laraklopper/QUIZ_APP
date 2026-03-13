@@ -102,7 +102,7 @@ export default function Quiz(
 
   //============JSX RENDERING================
   return (
-    <div id='quiz' aria-labelledby='current'>
+    <div id='quiz' aria-labelledby='currentQuiz'>
     {/* ---------------SCREEN READER MESSAGE------------- */}
     <p className='visually-hidden' id='currentQuiz'>{quiz.name}</p>
     <Stack gap={3} id='quizStack1'>
@@ -142,6 +142,7 @@ export default function Quiz(
                   name='options'
                   checked={selectedOption=== option}
                   type='button'
+                  variant='success'
                   onClick={() => handleOptionClick(option)}//Call the handle option click fucntion
                 >
                   {option}

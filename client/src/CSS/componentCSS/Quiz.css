@@ -1,5 +1,39 @@
 /* Quiz */
-
+#questionText{
+    margin: 0px;
+    padding: 0px;
+    font-size: 18px;
+    font-weight: 800;
+    font-family: "Winky Rough", sans-serif;
+}
+#quizNumberLabel{
+    font-family: "Alkatra", system-ui;
+}
+.number{
+    font-family: "Alkatra", system-ui;
+    font-size: 16px;
+    text-decoration: underline;
+    font-weight: 700;
+    margin: 0px;
+    padding: 0px;
+    color: #393e43;
+}
+#questionsBlock{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+#answerOption{
+    height: 40px;
+    width: 180px;
+    font-size: 18px;
+    font-weight: 700px;
+    color: #000;
+    font-family: "Playpen Sans", cursive;
+        width: 300px;
+    background-color: #adb5bd;
+    border-radius: 5px;
+}
 /* FEEDBACK */
 .correctFeedback{
     margin: 0px;

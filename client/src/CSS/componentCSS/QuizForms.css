@@ -118,3 +118,14 @@ Form.select, #selectQuizForm{
     display: flex;
     justify-content: center;
 }
+#startQuizBtn{
+    width: 180px;
+    font-weight: 700;
+    color: #000;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0px;
+    padding: 0px;
+}

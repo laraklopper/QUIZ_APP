@@ -61,3 +61,7 @@
     background-color: #323A42;
     border: solid #323A42 3px;
 }
+#quiz-display-panal{
+    border: solid;
+    background-color: #efefef;
+}
