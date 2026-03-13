@@ -5,6 +5,10 @@ import '../css/componentCSS/QuizData.css'
 
 export default function EditQuizForm() {
   return (
-    <div>EditQuizForm</div>
+    <form>
+        <div>
+            
+        </div>
+    </form>
   )
 }

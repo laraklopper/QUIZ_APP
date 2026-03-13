@@ -254,6 +254,13 @@ export default function AddQuiz(
             </Col>
           </Row>
         )}
+        <Row>
+          <Col>
+            <div id='edit-quiz-panal'>
+
+            </div>
+          </Col>
+        </Row>
       </section>
       {/* EDIT QUIZ FORM */}
       {editQuizId && (
@@ -261,7 +268,7 @@ export default function AddQuiz(
           <Row id='editQuizRow'>
             <Col xs={4} md={2}></Col>
             <Col xs={12} md={8} id='editQuizCol'>
-              <div id='edit-quiz-panal'>
+              <div id='add-quiz-panal'>
                 <AddQuizForm
                   questions={questions}
                   setQuestions={setQuestions}
