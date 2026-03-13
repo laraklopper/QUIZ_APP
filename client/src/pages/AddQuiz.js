@@ -24,22 +24,37 @@ export default function AddQuiz(
     setQuizName,
     setQuestions,
     fetchQuizzes,
-    quizList
+    quizList,
+    error,
+    setError
   }
 ) {
   //=============STATE VARIABLES===================
-  const [newQuizForm, setNewQuizForm] = useState(false)
   const [showQuizList, setShowQuizList] = useState(false)
-  const [editQuizId, setEditQuizId] = useState(null)
+  // New quiz variables
+  const [newQuizForm, setNewQuizForm] = useState(false)
   const [currentQuestion, setCurrentQuestion] = useState({
     questionText: '',
     correctAnswer: '',
     options: ['', '', ''],
   })
   const [description, setDescription] = useState('');
-  const [error, setError] = useState(null);
+  //EditQuizDetails
+  const [editQuizId, setEditQuizId] = useState(null);
+  const [editForm, setEditForm] = useState(false);// Toggle between edit mode and normal mode 
+  const [newQuizName, setNewQuizName] = useState('');// State to store new quiz name
+  const [newQuestions, setNewQuestions] = useState([])  // State to store new questions when editing a quiz
+  const [editQuizIndex, setEditQuizIndex] = useState({// State for edit details
+    questionText: '',
+    correctAnswer: '',
+    options: ['', '', ''],
+  })
+  //---------FORM ERROR-----------------
+  const [formError, setFormError] = useState(null);// Form error for validation
 
   //===============REACT HOOKS=============
+   /* useEffect to fetch quizzes when the component mounts
+ or when fetchQuizzes function changes*/
   useEffect(() => {
     fetchQuizzes();// Call the function to fetch quizzes
   },[fetchQuizzes])

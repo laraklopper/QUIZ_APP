@@ -321,6 +321,8 @@ const fetchUserScores = useCallback(async () => {
               currentUser={currentUser}
               quizList={quizList}
               fetchQuizzes={fetchQuizzes}
+              setError={setError}
+              error={error}
             />
           </ProtectedUserRoute>} />
           <Route path='/users' element={

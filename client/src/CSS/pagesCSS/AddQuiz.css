@@ -60,6 +60,13 @@
     display: flex;
     justify-content: center;
 }
+#edit-quiz-panal{
+   padding: 10px;
+    width: 100%;
+    margin: 0px;
+    display: flex;
+    justify-content: center; 
+}
 /* BUTTONS */
 #toggleQuizListBtn, #toggleAddQuizBtn{
     display: flex;

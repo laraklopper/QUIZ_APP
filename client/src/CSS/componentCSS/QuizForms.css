@@ -14,6 +14,7 @@ AddQuizForm.js
     display: flex;
     flex-direction: column;
     align-items: center;
+    
 }
 
 #newQuizStack1{
@@ -120,14 +121,71 @@ Form.select, #selectQuizForm{
     display: flex;
     justify-content: center;
 }
+
 #startQuizBtn{
+      height: 40px;
     width: 180px;
+    margin: 10px;
+    text-transform: uppercase;
     font-weight: 700;
-    color: #000;
-    height: 40px;
+    font-family: "Roboto Mono", monospace;
+    font-size: 14px;
     display: flex;
     justify-content: center;
     align-items: center;
+    color: #000;
+    border: solid #323A42 3px;
+}
+#startQuizBtn:hover{
+      height: 40px;
+    width: 180px;
+    margin: 10px;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-family: "Roboto Mono", monospace;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #000;
+    border: solid #323A42 3px;
+}
+#editQuizForm{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+        width: 500px;
+    border: solid;
+
+}
+#editQuizStack1, #editQuizStack2{
+    display: flex;
+    width: 100%;
     margin: 0px;
     padding: 0px;
+    justify-content: center;
+    align-items: center;
+}
+#editQuizStack3{
+    display: flex;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    justify-content: center;
+    align-items: center;
+}
+
+#editQuizBtn{
+     height: 40px;
+    width: 180px;
+    margin: 10px;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-family: "Roboto Mono", monospace;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #000;
+    border: solid #323A42 3px;
 }
