@@ -58,7 +58,7 @@ export default function EditQuizForm({
                     {error && <div className='error-message' role='alert'>{error}</div>}
                 </div>
                 <div className="p-2" id='editCreatedByBlock'>
-                    <h6 className='formText'>CREATED BY: {currentUser?.fullName}</h6>
+                    <h6 className='formText'>CREATED BY: {currentUser?.fullName?.firstName} {currentUser?.fullName?.lastName}</h6>
                 </div>
             </Stack>
             <div id='editQuizDetails'>
