@@ -82,9 +82,9 @@ export default function Quiz(
   const handleAnswerClick = (isCorrect) => {
     if (isCorrect) {
       setCurrentScore(currentScore + 1)
-      setFeedback(<p className='correctFeedback'>CORRECT <Check /></p>)
+      setFeedback(<p className='correctFeedback'>CORRECT <Check fontWeight={700} aria-hidden='true'/></p>)
     } else {
-      setFeedback(<p className='incorrectFeedback'>INCORRECT <X /> </p>);
+      setFeedback(<p className='incorrectFeedback'>INCORRECT <X fontWeight={700} aria-hidden='true' /> </p>);
     }
     setTimeout(() => setFeedback(''), 1000)
   }
