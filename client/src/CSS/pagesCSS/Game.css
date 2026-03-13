@@ -7,6 +7,18 @@
     flex-direction: column;
     align-items: center;
 }
+#startQuizRow{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+#quizDisplayRow{
+    width: 100%;
+    display: flex;
+}
 /* LAYOUT */
 #selectQuizRow{
     display: flex;
@@ -18,6 +30,17 @@
     display: flex;
     margin: 0px;
     padding: 10px 0px;
+}
+#quizDisplay{
+    display: flex;
+    width: 100%;
+        flex-direction: column;
+}
+#quiz-display-panal, #start-quiz-panal{
+    display: flex;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
 }
 /* PastScores */
 #pastScoresRow{
@@ -64,4 +87,5 @@
 #quiz-display-panal{
     border: solid;
     background-color: #efefef;
+    width: 100%;
 }

@@ -199,12 +199,13 @@ export default function QuizDisplay({
     <div id='quizDisplay'>
     {/* Show the quiz start form if a quiz is selected but not started */}
     {loading && <div><p>Loading...</p></div>}
-       <Row id='quizStartRow'>
-        <Col xs={3} md={2}></Col>
-        <Col xs={12} md={8} id='quizStartCol'>
+       <Row id='startQuizRow'>
+        
+        <Col  md={12} id='quizStartCol'>
         {/* Render child components only when loading is complete */}
+        <div>
         {!loading && selectedQuizId && (
-          <div id='quiz-display-form'>
+          <div id='start-quiz-panal'>
           <StartQuizForm
             quiz={quiz}
             timer={timer}
@@ -214,10 +215,12 @@ export default function QuizDisplay({
           />
           </div>
         )}
+        </div>
+       
         </Col>
-        <Col xs={3} md={2}></Col>
+      
       </Row>
-      <Row id='quizDisplayCol'>
+      <Row id='quizDisplayRow'>
         <Col></Col>
         <Col xs={6} id='quizDisplayCol'>
           {/* QUIZ */}
