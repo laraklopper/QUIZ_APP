@@ -30,7 +30,6 @@
     flex-direction: column;
     align-items: center;
 }
-
 #editUserBtnStack{
     background-color: #BFBFBF;
     display: flex;
@@ -48,7 +47,6 @@
     padding: 10px 5px;
     align-items: center;
 }
-
 #edit-user-details,
 #edit-user-password{
     display: flex;
@@ -162,27 +160,29 @@
 
 /* DELETE BUTTON */
 #deleteUserBtn {
-    height: 34px;
-    width: 90px;
+    height: 40px;
+    width: 150px;
     font-weight: 700;
     font-family: "Roboto Mono", monospace;
-    font-size: 12px;
+    font-size: 14px;
     display: flex;
     align-items: center;
     justify-content: center;
     color: #000;
     border: solid #3D0F13 2px;
-    background-color: transparent;
+    background-color: #dc3545;
     margin: auto;
 }
 #deleteUserBtn:hover {
     color: #fff;
+    height: 40px;
+    width: 150px;
     background-color: #3D0F13;
     border: solid #3D0F13 2px;
 }
 #deleteUserBtn:disabled {
-    color: #999;
-    background-color: transparent;
+    color: #000;
+    background-color: #dc3545;
     border: solid #999 2px;
     cursor: not-allowed;
     opacity: 0.5;
