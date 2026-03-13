@@ -43,3 +43,14 @@ Quiz.js
     gap: 5px;
     padding: 5px 0px;
 }
+/* PAST SCORES */
+
+.form-select
+#scoresList{
+    width: 200px;
+    display: flex;
+}
+#pastScoresDisplay{
+    display: flex;
+    width: 100%;
+}

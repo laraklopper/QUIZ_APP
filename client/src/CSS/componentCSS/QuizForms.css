@@ -18,7 +18,7 @@ EditQuizForm.js: PATCH
 #selectQuizOption, #quizOptions{
     width: 200px;
 }
-Form.select, #selectQuizForm{
+.form-select, #selectQuizForm{
     width: 200px;
         text-align: center;
         font-family: "Roboto Mono", monospace;
