@@ -1,14 +1,19 @@
+// Registration.js
 import React, { useCallback, useState } from 'react'
+//CSS Stylesheet
 import '../css/pagesCSS/Register.css'
 import '../css/pagesCSS/PageSetup.css'
+// Bootstrap
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
+// Custom components
 import MainHeader from '../components/MainHeader';
 import RegistrationForm from '../components/RegistrationForm';
 import PageFooter from '../components/PageFooter';
+// Import react-route-dom components
 import { useNavigate } from 'react-router-dom';
 import { Form } from 'lucide-react';
 import { ClipboardList, Pencil  } from 'lucide-react';
