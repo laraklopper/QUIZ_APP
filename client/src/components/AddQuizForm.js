@@ -1,11 +1,15 @@
 // AddQuizForm.js
 import React, { useCallback } from 'react'
+// CSS Stylesheet
 import '../css/componentCSS/FormSetup.css'
 import '../css/componentCSS/AddQuizForm.css'
+// Bootstrap
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
-import { Asterisk} from 'lucide-react';
+// Custom components
 import NewQuestionsList from './NewQuestionsList';
+// Import Icons from lucide-react
+import { Asterisk} from 'lucide-react';
 
 export default function AddQuizForm(
   {
