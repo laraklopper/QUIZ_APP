@@ -277,24 +277,41 @@ export default function AddQuiz(
         )}
         {editQuizId && (
           <Row id='editQuizRow' aria-live='polite'>
-          <Col></Col>
+            <Col xs={4} md={2}></Col>
             <Col xs={12} md={8} id='editQuizCol'>
-              <div id='edit-quiz-panal'>
-                <EditQuizForm
-                  editQuiz={editQuiz}
-                  currentUser={currentUser}
-                  error={error}
-                  quizName={quizName}
-                  setQuizName={setQuizName}
-                  description={description}
-                  setDescription={setDescription}
-                  questions={questions}
-                  setQuestions={setQuestions}
-                  editQuizId={editQuizId}
-                />
+              <div className='toggle-btn-div'>
+                <h6 className='btnText'>CLICK HERE TO:</h6>
+                <Button
+                  variant='warning'
+                  type='button'
+                  id='toggleEditQuizFormBtn'
+                  onClick={toggleEditForm}
+                  aria-label='Button to toggle edit quiz form'
+                  aria-pressed={editForm}
+                  aria-expanded={editForm}
+                  aria-controls='edit-quiz-panal'
+                >
+                  {editForm ? 'EXIT' : 'EDIT QUIZ'}
+                </Button>
               </div>
+              {editForm && (
+                <div id='edit-quiz-panal'>
+                  <EditQuizForm
+                    editQuiz={editQuiz}
+                    currentUser={currentUser}
+                    error={error}
+                    quizName={quizName}
+                    setQuizName={setQuizName}
+                    description={description}
+                    setDescription={setDescription}
+                    questions={questions}
+                    setQuestions={setQuestions}
+                    editQuizId={editQuizId}
+                  />
+                </div>
+              )}
             </Col>
-            <Col></Col>
+            <Col xs={4} md={2}></Col>
           </Row>
         )}
       </section>
