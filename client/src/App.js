@@ -170,7 +170,7 @@ export default function App() {
         if (!token || !loggedIn) return;// If no token is found, exit the function
 
         //Send a GET request to the server
-        const response = await fetch ('http://localhost:3001/scores/findScores', {
+        const response = await fetch ('http://localhost:3001/scores/fetchScores', {
           method: 'GET',//HTTP request method
           mode: 'cors',//Enable Cross-Origin Resource Sharing 
           headers: {

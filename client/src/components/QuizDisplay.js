@@ -13,12 +13,11 @@ export default function QuizDisplay({
   quizTimer,
   setQuizTimer,
   currentUser,
-  setError, 
+  setError,
   selectedQuizId,
   setSelectedQuizId,
   fetchQuiz,
   quizName,
-  userScores,
   setUserScores,
   questions
 }) {
@@ -59,40 +58,32 @@ export default function QuizDisplay({
         console.error(`[ERROR: QuizDisplay.js, checkExistingScore]: Authentication required`);
         return null;
       }
-      const response = await fetch(`http://localhost:3001/scores/findQuizScores/${quizName}/${currentUser.username}`,{
+      const response = await fetch(`http://localhost:3001/scores/findScore/${currentUser.username}/${quizName}`,{
         method: 'GET',
         mode: 'cors',
         headers: {
-          'Content-Type': 'application/json',  
-          'Authorization': `Bearer ${token}`, 
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
         }
       })
-         /* Conditional rendering to check if the response
-          is not successful (status code is not in the range 200-299)*/
+
+        // 404 means no score exists yet — return null without throwing
+        if (response.status === 404) {
+          return null;
+        }
+
         if (!response.ok) {
-          throw new Error ('Error fetching scores for the quiz');//Throw an error message if the GET request is unsuccessful
+          throw new Error ('Error fetching scores for the quiz');
         }
 
         const result = await response.json();
-        // console.log("userScores test", userScores);//Log the user Scores in the console for debugging purposes
-        // console.log(`results: ${result}`)//Log the JSON response in the console for debugging purposes
-
-        if (Array.isArray(userScores)) {
-          const existingScore = result.userScores.find(score => score.name === quizName);// Find the existing score for the current quiz
-           if (!existingScore) {
-              console.error('No existing score was found for this quiz');
-              } 
-        } else {
-         console.error('Invalid data structure for userScores');
-         return null;// Return null if not found
-        }
+        return result.userScore || null;
 
     } catch (error) {
-        // console.error('Error fetching scores:', error.message);//Log an error message in the console for debugging purposes
-        setError('Error fetching scores');// Update the error state to display an error message in the UI
-        return null;//Return null in the case of an error
+        setError('Error fetching scores');
+        return null;
     }
-  },[setError, currentUser.username, userScores, quizName])
+  },[setError, currentUser.username, quizName])
   //----------------PUT-----------------------
     /*Function to update score if a score for the quiz already 
     exists and is better than the prevous result/score*/
@@ -134,20 +125,39 @@ export default function QuizDisplay({
     const addScore = useCallback(async () => {
       try {
         const token = localStorage.getItem('token');
-         if (!token) {
-        console.log(`[ERROR: QuizDisplay.js, addScore]: Authentication required`);//Log a message in the console for debugging purposes
-        return;//Exit the function if the token is missing
-      }
-      const existingScore = await checkExistingScore()
+        if (!token) {
+          console.log(`[ERROR: QuizDisplay.js, addScore]: Authentication required`);
+          return;
+        }
+        const existingScore = await checkExistingScore()
 
-      if (existingScore) {
-        await updateScore(existingScore)
-      }
-
+        if (existingScore) {
+          await updateScore(existingScore._id)
+        } else {
+          const response = await fetch('http://localhost:3001/scores/submitScore', {
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+              username: currentUser.username,
+              quizTitle: quizName,
+              score: currentScore,
+            })
+          })
+          if (!response.ok) {
+            throw new Error('Error submitting score');
+          }
+          const result = await response.json();
+          setUserScores(prevScores => [result, ...prevScores])
+        }
       } catch (error) {
-        
+        console.error('Error saving score', error.message);
+        setError('Error saving score');
       }
-    },[checkExistingScore, updateScore])
+    },[checkExistingScore, updateScore, currentUser.username, quizName, currentScore, setUserScores, setError])
   //================EVENT LISTENERS================
   const handleQuizStart = useCallback(async (e) => {
     e.preventDefault()

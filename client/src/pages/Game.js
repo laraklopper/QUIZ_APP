@@ -35,6 +35,7 @@ export default function Game({
   const [selectedQuizId, setSelectedQuizId] = useState();
   const [timer, setTimer] = useState(10);
   const [quizTimer, setQuizTimer] = useState()
+  const [showPastScores, setShowPastScores] = useState(false)
 
    //============USE EFFECT HOOK==================
   /* useEffect to fetch quizzes when the component 
@@ -145,7 +146,6 @@ export default function Game({
               quizTimer={quizTimer}
               fetchQuiz={fetchQuiz}
               quizName={quizName}
-              userScores={userScores}
               setUserScores={setUserScores}
               questions={questions}
             />
@@ -159,9 +159,13 @@ export default function Game({
         <Col></Col>
         <Col xs={6} id='pastScoresCol'>
         <div className='toggle-btn-div'>
-          <h6 className='btnText'>CLICK HERE TO:</h6> <Button id='togglePastScoresBtn' variant='primary'>VIEW PAST SCORES</Button>
+          <h6 className='btnText'>CLICK HERE TO:</h6>
+          <Button id='togglePastScoresBtn' variant='primary' onClick={() => setShowPastScores(prev => !prev)}>
+            {showPastScores ? 'HIDE PAST SCORES' : 'VIEW PAST SCORES'}
+          </Button>
         </div>
-          <div id='past-results panal'>
+          {showPastScores && (
+          <div id='past-results-panal'>
           <PastScores
             userScores={userScores}
             fetchUserScores={fetchUserScores}
@@ -169,8 +173,8 @@ export default function Game({
             setSelectedQuiz={setSelectedQuiz}
             selectedQuiz={selectedQuiz}
           />
-
           </div>
+          )}
         </Col>
         <Col></Col>
       </Row>

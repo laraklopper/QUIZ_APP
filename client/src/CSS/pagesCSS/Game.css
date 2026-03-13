@@ -119,3 +119,32 @@
     background-color: #efefef;
     width: 100%;
 }
+#scoreDisplay{
+    
+    margin: 10px 0px 0px 0px;
+    padding: 10px;
+    background-color: aliceblue;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+}
+.pastScoreField{
+    display: flex;
+    margin: 0px;
+    padding: 0px;
+    gap: 10px;
+}
+.scoreLabel{
+    display: flex;
+    margin: 0px;
+    padding: 0px;
+    font-weight: 700;
+}
+.scoreText{
+    display: flex;
+    margin: 0px;
+    font-weight: 700;
+    text-transform: uppercase;
+}

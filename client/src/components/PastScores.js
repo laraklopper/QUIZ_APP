@@ -18,7 +18,7 @@ export default function PastScores({
       // Filter the results by the selected quiz name
   const quizResults = selectedQuiz
     // Filter the scores based on the selected quiz
-    ? userScores.filter(score => score.name === selectedQuiz)  
+    ? userScores.filter(score => score.quizTitle === selectedQuiz)
     : [];//If no quiz is selected return an empty array
 
     // ========================================
@@ -40,8 +40,8 @@ export default function PastScores({
                     {/* Map through the user scores and display 
                     them in the select dropdown */}
                     {userScores.map((score, index) => (
-                      <option key={score._id || index} value={score.name}>
-                        {score.name}
+                      <option key={score._id || index} value={score.quizTitle}>
+                        {score.quizTitle}
                       </option>
                     ))}
                   </FormSelect>
@@ -52,7 +52,7 @@ export default function PastScores({
                           <div className='pastScoreField'> 
                             {/* Quiz Name */}
                             <label className='scoreLabel'>QUIZ NAME:</label>
-                            <p className='scoreText'>{score.name}</p>
+                            <p className='scoreText'>{score.quizTitle}</p>
                         </div>
                         <div className='pastScoreField'>
                           {/* Display Highest Score for selected quiz */}
@@ -63,7 +63,7 @@ export default function PastScores({
                           {/* Date of highest score */}
                           <label className='scoreLabel'>DATE:</label>
                           <p className='scoreText'>
-                            {new Date(score.date).toLocaleDateString()}
+                            {new Date(score.attemptDate).toLocaleDateString()}
                           </p>
                         </div>
                         <div className='pastScoreField'>
