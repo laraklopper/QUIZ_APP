@@ -48,10 +48,11 @@ export default function AddQuizForm(
   //Function to resetQuestions
   const resetQuestionsForm = useCallback(() => {
     setQuizName('');
+    setDescription('');
     setQuestions([]);
     setCurrentQuestion({ questionText: '', correctAnswer: '', options: ['', '', ''] });
     setError?.(null);
-  }, [setQuizName, setQuestions, setCurrentQuestion, setError])
+  }, [setQuizName, setDescription, setQuestions, setCurrentQuestion, setError])
   
   //================JSX RENDERING======================
   return (
@@ -173,8 +174,8 @@ export default function AddQuizForm(
             {/* --------ALTERNATIVE ANSWERS------------- */}
             <Stack gap={3} id='newQuizStack3'>
             {/* -----Alternative Answer 1------------ */}
-            <div className="p-2" id='altAns1'>
-              <label className='newQuizLabel'>
+            <div className="p-2" id='altAns1Block'>
+              <label className='newQuizLabel' htmlFor='altAns1'>
                   <p className='labelText'>1. ALTERNATIVE ANSWER:</p>
                   <input
                     type='text'
