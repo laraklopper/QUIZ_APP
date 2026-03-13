@@ -1,5 +1,6 @@
 # QUIZ_APP
 
+## TABLE OF CONTENTS
 ## REFERENCES
 
 - https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods/PATCH
