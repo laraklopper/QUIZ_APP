@@ -1,6 +1,6 @@
 /* REGISTER */
 #regisSection{
-    background-color: olive;
+    background-color: #0095C7;
     margin: 0px;
     padding: 0px;
     width: 100%;
@@ -12,13 +12,15 @@
     display: flex;
     margin: 10px 0px;
     padding: 5px;
+    background-color: #6c757d;
 }
 /* SECTION 2 */
 #infoSection{
-    background-color: olive;
+    background-color: #0095C7;
     margin: 10px 0px;
     padding: 10px 5px;
     width: 100%;
+    
 }
 /* REGISTRATION RULES */
 #regisRequire{

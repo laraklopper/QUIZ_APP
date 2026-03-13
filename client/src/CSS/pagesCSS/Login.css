@@ -1,13 +1,31 @@
+/* Login.css 
+Login.js
+*/
+/* SECTION 1: LOGIN SECTION */
 #loginSection{
-    background-color: olive;
+    background-color: #0095C7;
     margin: 0px;
     padding: 0px;
     width: 100%;
 }
+/* Layout */
+#loginRow{
+    display: flex;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+#loginCol{
+    margin: 0px;
+    width: 50%;
+    padding: 0px;
+}
+/* Login Form Panal */
 #login-panel{
     display: flex;
     margin: 10px 0px;
     justify-content: center;
     width: 100%;
-    padding: 0px;
+    padding: 15px 0px;       
+    background-color: #6c757d;
 }

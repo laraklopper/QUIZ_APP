@@ -65,8 +65,10 @@ font-family: "Noto Serif", serif;
 #0095C7
 ```
 ```
-<!-- TABLES -->
-
+<!-- HEADER -->
+#0B7DA2
+<!-- FOOTER -->
+#0E97C4
 ```
 ```
 <!-- WARNINGS/ERROR -->
@@ -98,14 +100,6 @@ font-family: "Noto Serif", serif;
 <!-- QUIZ BUTTONS -->
 #3a500e
 #698C23
-<!--  -->
-#A3D936
-#506A1B
-#698C23
-#83AE2C
-#9CD034
-#8AB82E
-#709625
 <!--  -->
  #5c7b1e
  #3d5214
