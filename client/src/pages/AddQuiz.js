@@ -43,16 +43,6 @@ export default function AddQuiz(
   const [description, setDescription] = useState('');
   //EditQuizDetails
   const [editQuizId, setEditQuizId] = useState(null);
-  const [newQuizName, setNewQuizName] = useState('');// State to store new quiz name
-  const [newDescription, setNewDescription] = useState('')
-  const [newQuestions, setNewQuestions] = useState([])  // State to store new questions when editing a quiz
-  const [editQuizIndex, setEditQuizIndex] = useState({// State for edit details
-    questionText: '',
-    correctAnswer: '',
-    options: ['', '', ''],
-  })
-  //---------FORM ERROR-----------------
-  const [formError, setFormError] = useState(null);// Form error for validation
 
   //===============REACT HOOKS=============
    /* useEffect to fetch quizzes when the component mounts
@@ -115,7 +105,7 @@ export default function AddQuiz(
       console.error('[ERROR: AddQuiz.js]', error.message);
       setError(error.message);
     }
-  }, [quizName, description, questions, currentUser, setQuizName, setQuestions, fetchQuizzes]);
+  }, [quizName, description, questions, currentUser, setQuizName, setQuestions, fetchQuizzes, setError]);
 
   // Function to delete a quiz by ID
   const deleteQuiz = useCallback(async (quizId) => {
@@ -162,7 +152,7 @@ export default function AddQuiz(
       setQuestions(quiz.questions);
       setNewQuizForm(false);
     }
-  }, [editQuizId, setQuizName, setQuestions]);
+  }, [editQuizId, setQuizName, setDescription, setQuestions]);
 
   // Function to submit edits to an existing quiz
   const editQuiz = useCallback(async () => {
@@ -201,7 +191,7 @@ export default function AddQuiz(
       console.error('[ERROR: AddQuiz.js, editQuiz]', error.message);
       setError(error.message);
     }
-  }, [editQuizId, quizName, description, questions, currentUser, setQuizName, setQuestions, fetchQuizzes]);
+  }, [editQuizId, quizName, description, questions, currentUser, setQuizName, setDescription, setQuestions, fetchQuizzes, setError]);
 
   //===============EVENT LISTENERS====================
   //Function to toggle Add Quiz form
