@@ -12,8 +12,10 @@ export default function EditQuizForm() {
   return (
     <form id='editQuizForm' aria-labelledby='editQuizData'>
         {/* -----Screen Reader Heading-------- */}
-        <p className='visually-hidden' id='editQuizData'>EDIT QUIZ</p>
-        {/*  */}
+        <p className='visually-hidden' id='editQuizData'>EDIT QUIZ FORM</p>
+          <div>
+            <h3 className='formHeading'>EDIT QUIZ</h3>
+          </div>
         <div id='editQuizDetails'>
                 <Stack gap={3} id='editQuizStack1'>
                     
@@ -37,18 +39,14 @@ export default function EditQuizForm() {
 
                     </div>
                 </Stack>
-                 <Stack gap={3} id='editQuizStack2'>
-                    <div className="p-2">First item</div>
-                    <div className="p-2">Second item</div>
-                    <div className="p-2">Third item</div>
-                </Stack>
         </div>
         <div id='editQuizBtnBlock'>
-            <Stack gap={2} className="col-md-5 mx-auto" id='editQuizStack3'>
+            <Stack gap={2} className="col-md-5 mx-auto" id='editQuizStack2'>
                 <Button variant="secondary">Save changes</Button>
                 <Button variant="outline-secondary">Cancel</Button>
             </Stack>
-        </div>      
+        </div>    
+      
     </form>
   )
 }
