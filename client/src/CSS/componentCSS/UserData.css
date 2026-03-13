@@ -108,3 +108,78 @@
     background-color: #323A42;
 }
 /* USER LIST TABLE */
+/* Users.js */
+#userListTable {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #F7F7F7;
+}
+#userListTable thead tr {
+    background-color: #323A42;
+    color: #fff;
+}
+#userListTable th {
+    text-align: center;
+    text-transform: uppercase;
+    font-family: "Roboto Mono", monospace;
+    font-weight: 700;
+    font-size: 13px;
+    padding: 10px 8px;
+}
+#userListTable tbody tr:nth-child(even) {
+    background-color: #D6D6D6;
+}
+#userListTable tbody tr:nth-child(odd) {
+    background-color: #F7F7F7;
+}
+#userListTable td {
+    text-align: center;
+    text-transform: uppercase;
+    font-family: "Roboto Mono", monospace;
+    font-size: 13px;
+    padding: 8px;
+    vertical-align: middle;
+}
+
+/* ADMIN BADGE */
+#adminBadge {
+    background-color: #698C23 !important;
+    color: #fff;
+    font-family: "Roboto Mono", monospace;
+    font-weight: 700;
+    font-size: 11px;
+    padding: 5px 8px;
+    text-transform: uppercase;
+    border-radius: 3px;
+}
+
+/* DELETE BUTTON */
+#deleteUserBtn {
+    height: 34px;
+    width: 90px;
+    font-weight: 700;
+    font-family: "Roboto Mono", monospace;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000;
+    border: solid #3D0F13 2px;
+    background-color: transparent;
+    margin: auto;
+}
+#deleteUserBtn:hover {
+    color: #fff;
+    background-color: #3D0F13;
+    border: solid #3D0F13 2px;
+}
+
+/* NO USERS MESSAGE */
+#noUsersMsg {
+    font-family: "Roboto Mono", monospace;
+    font-weight: 700;
+    text-align: center;
+    color: #3D0F13;
+    text-transform: uppercase;
+    margin: 20px 0px;
+}
