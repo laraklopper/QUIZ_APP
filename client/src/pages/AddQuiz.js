@@ -43,6 +43,7 @@ export default function AddQuiz(
   const [editQuizId, setEditQuizId] = useState(null);
   const [editForm, setEditForm] = useState(false);// Toggle between edit mode and normal mode 
   const [newQuizName, setNewQuizName] = useState('');// State to store new quiz name
+  const [newDescription, setNewDescription] = useState('')
   const [newQuestions, setNewQuestions] = useState([])  // State to store new questions when editing a quiz
   const [editQuizIndex, setEditQuizIndex] = useState({// State for edit details
     questionText: '',
@@ -276,6 +277,8 @@ export default function AddQuiz(
             <div id='edit-quiz-panal'>
             <EditQuizForm
               editQuiz={editQuiz}
+              currentUser={currentUser}
+              error={error}
             />
 
             </div>

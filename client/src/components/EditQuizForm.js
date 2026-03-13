@@ -5,7 +5,7 @@ import '../css/componentCSS/QuizData.css'
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
 import { ArrowBigLeftDash, ArrowBigRightDash } from 'lucide-react';
-export default function EditQuizForm({editQuiz, error}) {
+export default function EditQuizForm({editQuiz, error, currentUser, newQuizName, setNewQuizName, quiz}) {
     //=====STATE VARIABLES=================
     const [currentQuestionIndex, setCurrentQuestionIndex] =useState(0)
     const [successMessage, setSuccessMessage] = useState(null);
@@ -39,27 +39,39 @@ export default function EditQuizForm({editQuiz, error}) {
                 </div>
                 <div className="p-2" id='editCreatedByBlock'>
                     {/* CREATED BY */}
-                    <h6 className='formText'>CREATED BY:{/*FULL NAME*/}</h6>
+                    <h6 className='formText'>CREATED BY:{currentUser?.fullName}</h6>
                 </div>
              </Stack>
                  <div id='editQuizDetails'>
                     <Stack gap={3} id='editQuizStack2'>
-                    
                     {/* TITLE:QuizName */}
-                    <div className="p-2">
-                        <label>
+                    <div className="p-2" id='editQuizNameBlock'>
+                        <label className='editQuizLabel' htmlFor='editQuizNameInput'>
                             <p className='labelText'>QUIZ NAME:</p>
                         </label>
                         <input
                             className='input'
-                            
+                            type='text'
+                            name='newQuizName'
+                            value={newQuizName}
+                            onChange={(e) => setNewQuizName(e.target.value)}
+                            placeholder={quiz.name || ''}
+                            id='editQuizNameInput'
+                            autoComplete='off'
+                            aria-required='false'
+                            aria-label='Edit New Quiz Name Input'
                         />
                     </div>
                     {/* QUIZ DESCRIPTION */}
                     <div className="p-2">
                          <label>
-                            <p className='labelText'></p>
+                            <p className='labelText'>QUIZ DESCRIPTION:</p>
                         </label>
+                        <input
+                        type='text'
+                        className='input'
+                        name='newDescription'    
+                        />
                     </div>
                     {/* Questions */}
                     <div id='editQuestionsBlock'>
@@ -67,8 +79,8 @@ export default function EditQuizForm({editQuiz, error}) {
                             <p className='labelText'></p>
                         </label>
                         <div id='editQuizNavBtns'>
-                            <Button size='sm' ><ArrowBigLeftDash fontWeight={700} /></Button>
-                            <Button size='sm'><ArrowBigRightDash fontWeight={700}/></Button>
+                            <Button size='sm' type='button'><ArrowBigLeftDash fontWeight={700} /></Button>
+                            <Button size='sm' type='button'><ArrowBigRightDash fontWeight={700}/></Button>
                         </div>
 
                     </div>
