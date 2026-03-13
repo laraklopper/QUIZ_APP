@@ -119,34 +119,34 @@
     background-color: #efefef;
     width: 100%;
 }
-#scoreDisplay{
-    
-    margin: 10px 0px 0px 0px;
-    padding: 10px;
-    background-color: aliceblue;
-    border-radius: 5px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-
+#scoresTable{
+    margin-top: 10px;
+    border-collapse: collapse;
+    width: 100%;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.85rem;
 }
-.pastScoreField{
-    display: flex;
-    margin: 0px;
-    padding: 0px;
-    gap: 10px;
+#scoresTable thead tr{
+    background-color: #323A42;
+    color: #fff;
 }
-.scoreLabel{
-    display: flex;
-    margin: 0px;
-    padding: 0px;
+#scoresTable th{
+    padding: 8px 12px;
+    text-align: left;
     font-weight: 700;
+    letter-spacing: 0.05em;
 }
-.scoreText{
-    display: flex;
-    margin: 0px;
-    font-weight: 700;
+#scoresTable td{
+    padding: 7px 12px;
+    font-weight: 600;
     text-transform: uppercase;
+    border-bottom: 1px solid #ccc;
+}
+#scoresTable tbody tr:nth-child(even){
+    background-color: aliceblue;
+}
+#scoresTable tbody tr:hover{
+    background-color: #d6eaf8;
 }
 #selectQuiz{
         border: solid #323A42;
