@@ -238,7 +238,7 @@ export default function AddQuiz(
                         <td>{quiz.username}</td>
                         <td id='quizTableBtns'>
                         <div id='tableBtnsDiv'>
-  {/* Delete quiz button: only available to user who created the quiz and admin users */}
+                        {/* Delete quiz button: only available to user who created the quiz and admin users */}
                         <Button variant='danger' type='button' id='deleteQuizBtn' onClick={() => deleteQuiz(quiz._id)}>DELETE QUIZ</Button>
                           {/*Toggle Edit quiz button: only available to user who created the quiz and admin users */}
                           {/* Display edit quiz if the form is not active and exit if the form is active */}
@@ -254,8 +254,9 @@ export default function AddQuiz(
             </Col>
           </Row>
         )}
-        <Row>
-          <Col>
+        <Row id='editQuizRow' aria-live='polite'>
+        <Col ></Col>
+          <Col xs={12} md={8} id='editQuizCol'>
             <div id='edit-quiz-panal'>
 
             </div>
