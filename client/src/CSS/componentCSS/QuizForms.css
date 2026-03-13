@@ -96,8 +96,21 @@ Form.select, #selectQuizForm{
     justify-content: center;
     align-items: center;
 }
+#editQuestionsStack{
+        display: flex;
+    margin: 10px;
+    background-color: aliceblue;
+    padding: 10px;
+    border-radius: 10px;
+}
 #editQuestions{
     background-color: #808080;
+    border: solid;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 300px;
+    padding: 10px;
 }
 #editQuizNavBtns{
     display: flex;
@@ -123,4 +136,10 @@ Form.select, #selectQuizForm{
     align-items: center;
     color: #000;
     border: solid #323A42 3px;
+}
+.editQuestion,.editQuesCorrectAnswer, #editAltOptions{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
 }

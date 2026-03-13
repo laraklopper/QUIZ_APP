@@ -110,8 +110,9 @@ export default function EditQuizForm({
                         />
                     </div>
                     {/*-------- QUESTIONS ----------------- */}
-                    <div id='editQuestions'>
+                    <div id='editQuestions' aria-labelledby='editQuizQuestions'>
                     {/* -------Screen Reader Heading */}
+                    <p className='visually-hidden' id='editQuizQuestions'>EDIT QUIZ QUESTIONS</p>
                      <h4 className='formSectionHeading'><FileQuestionMark aria-hidden='true'/>QUESTIONS</h4>
                     {questions.length > 0 && currentQuestion && (
                         <div
@@ -145,8 +146,8 @@ export default function EditQuizForm({
                                     <ArrowBigRightDash fontWeight={700} color='#000' aria-hidden='true' />
                                 </Button>
                             </div>
-                            <Stack gap={2}>
-                                <div>
+                            <Stack gap={2} id='editQuestionsStack'>
+                                <div className='editQuestion'>
                                     <label htmlFor='editQuestionText'>
                                         <p className='labelText'>QUESTION:</p>
                                     </label>
@@ -162,7 +163,7 @@ export default function EditQuizForm({
                                         disabled={loadingEdit}
                                     />
                                 </div>
-                                <div>
+                                <div className='editQuesCorrectAnswer'>
                                     <label htmlFor='editCorrectAnswer'>
                                         <p className='labelText'>CORRECT ANSWER:</p>
                                     </label>
@@ -179,7 +180,7 @@ export default function EditQuizForm({
                                     />
                                 </div>
                                 {currentQuestion.options.map((opt, i) => (
-                                    <div key={i}>
+                                    <div key={i} id='editAltOptions'>
                                         <label htmlFor={`editOption${i}`}>
                                             <p className='labelText'>{i + 1}. ALTERNATIVE ANSWER:</p>
                                         </label>

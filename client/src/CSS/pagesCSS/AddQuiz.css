@@ -53,6 +53,13 @@
     align-items: center;
     background-color: #6c757d;
 }
+#editQuizCol{
+        display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0px;
+    padding: 0px;
+}
 #add-quiz-panal{
     padding: 10px;
     width: 100%;
