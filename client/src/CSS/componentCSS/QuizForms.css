@@ -99,7 +99,12 @@ Form.select, #selectQuizForm{
 #editQuestions{
     background-color: #808080;
 }
-#editQuestionsBlack{
+#editQuizNavBtns{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+#editQuestionsBlock{
         width: 100%;
     display: flex;
     justify-content: center;
