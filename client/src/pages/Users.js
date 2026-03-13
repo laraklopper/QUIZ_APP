@@ -1,6 +1,7 @@
 import React from 'react'
 import '../css/pagesCSS/PageSetup.css'
 import '../css/pagesCSS/Users.css'
+import '../css/componentCSS/UserData.css'
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
