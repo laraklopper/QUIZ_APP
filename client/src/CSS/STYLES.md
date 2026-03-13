@@ -78,11 +78,18 @@ font-family: "Noto Serif", serif;
 ```
 `FORMS`
 ```
+<!-- FORM-PANAL -->
 #6c757d
+<!-- FORM -->
+#808080
+<!-- DETAILS -->
+#B7B7B7
+<!-- FORM BORDER -->
 #A8AEB3
 #808080
 #D6D6D6
 #BFBFBF
+
 #E8F0F6
 #c0c0c0;
 #B7B7B7
@@ -94,6 +101,9 @@ font-family: "Noto Serif", serif;
 #a9a9a9;
 <!-- BUTTONS -->
 #323A42
+<!-- BTN TEXT -->
+#000000
+<!-- BTN HOVER TEXT -->
 #E8F0F6
 <!-- QUIZ -->
 #efefef
