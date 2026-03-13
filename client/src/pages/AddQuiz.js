@@ -239,12 +239,12 @@ export default function AddQuiz(
                         <td id='quizTableBtns'>
                         <div id='tableBtnsDiv'>
   {/* Delete quiz button: only available to user who created the quiz and admin users */}
-                        <Button variant='danger' type='button' id='deleteQuizBtn'>DELETE QUIZ</Button>
+                        <Button variant='danger' type='button' id='deleteQuizBtn' onClick={() => deleteQuiz(quiz._id)}>DELETE QUIZ</Button>
                           {/*Toggle Edit quiz button: only available to user who created the quiz and admin users */}
                           {/* Display edit quiz if the form is not active and exit if the form is active */}
-                          <Button variant='warning' type='button' id='toggleEditQuizBtn'>EDIT QUIZ/EXIT</Button>
+                          <Button variant='warning' type='button' id='toggleEditQuizBtn' onClick={() => handleEditToggle(quiz)}>{editQuizId === quiz._id ? 'EXIT' : 'EDIT QUIZ'}</Button>
                         </div>
-                      
+
                         </td>
                       </tr>
                     ))
@@ -255,6 +255,33 @@ export default function AddQuiz(
           </Row>
         )}
       </section>
+      {/* EDIT QUIZ FORM */}
+      {editQuizId && (
+        <section id='editQuizSection'>
+          <Row id='editQuizRow'>
+            <Col xs={4} md={2}></Col>
+            <Col xs={12} md={8} id='editQuizCol'>
+              <div id='edit-quiz-panal'>
+                <AddQuizForm
+                  questions={questions}
+                  setQuestions={setQuestions}
+                  currentUser={currentUser}
+                  quizName={quizName}
+                  setCurrentQuestion={setCurrentQuestion}
+                  setQuizName={setQuizName}
+                  currentQuestion={currentQuestion}
+                  description={description}
+                  setDescription={setDescription}
+                  error={error}
+                  setError={setError}
+                  addQuiz={editQuiz}
+                />
+              </div>
+            </Col>
+            <Col xs={4} md={2}></Col>
+          </Row>
+        </section>
+      )}
       <section id='newQuizSection'>
         {/* ADD QUIZ FORM */}
         <Row id='addQuizRow'>
