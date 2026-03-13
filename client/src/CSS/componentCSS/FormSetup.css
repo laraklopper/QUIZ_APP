@@ -10,6 +10,7 @@
 .labelText{
     margin: 0px;
     padding: 5px;
+    display: flex;
     font-weight: 700;
     font-family: "Roboto Mono", monospace;
 }

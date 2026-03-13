@@ -5,7 +5,7 @@ import '../css/componentCSS/Quiz.css'
 import '../css/componentCSS/QuizData.css'
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
-import { ArrowBigRightDash, RotateCcw, X ,Check   } from 'lucide-react';
+import { ArrowBigRightDash, RotateCcw, X ,Check, MessageCircleQuestionMark    } from 'lucide-react';
 
 export default function Quiz(
   {
@@ -127,7 +127,8 @@ export default function Quiz(
            {/* Display current question text */}
               <label className='questionLabel'>
                 <h6 id='questionText'>
-                  {questions[quizIndex].questionText}
+                  {questions[quizIndex].questionText}<MessageCircleQuestionMark  aria-hidden='true'/>
+
                   </h6>
               </label>
       </div>
@@ -168,7 +169,7 @@ export default function Quiz(
       >
         NEXT <ArrowBigRightDash />
       </Button>
-      <Button variant="danger" id='clearFormBtn' type='button' onClick={handleRestart}>RESTART <RotateCcw /></Button>
+      <Button variant="danger" id='restartBtn' type='button' onClick={handleRestart}>RESTART <RotateCcw /></Button>
 
     </Stack>
     </div>

@@ -108,9 +108,9 @@
 #registerBtn{
     height: 40px;
     width: 180px;
-        margin: 5px;
-padding: 0px;
-align-items: center;
+    margin: 5px;
+    padding: 0px;
+    align-items: center;
     font-weight: 700;
     font-family: "Roboto Mono", monospace;
     font-size: 14px;
@@ -122,14 +122,14 @@ align-items: center;
 #registerBtn:hover{
     height: 40px;
     width: 180px;
-       margin: 5px;
-padding: 0px;
+    margin: 5px;
+    padding: 0px;
     font-weight: 700;
     font-family: "Roboto Mono", monospace;
     font-size: 14px;
     display: flex;
     justify-content: center;
-    color: #fff;
+    color: #E8F0F6;
     border: solid #323A42 3px;
     background-color: #323A42;
 }

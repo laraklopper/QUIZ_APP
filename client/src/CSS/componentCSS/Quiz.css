@@ -1,13 +1,17 @@
 /* Quiz */
+/* LAYOUT */
+#questionsBlock{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+/* TEXT */
 #questionText{
     margin: 0px;
     padding: 0px;
     font-size: 18px;
     font-weight: 800;
     font-family: "Winky Rough", sans-serif;
-}
-#quizNumberLabel{
-    font-family: "Alkatra", system-ui;
 }
 .number{
     font-family: "Alkatra", system-ui;
@@ -17,22 +21,6 @@
     margin: 0px;
     padding: 0px;
     color: #393e43;
-}
-#questionsBlock{
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-#answerOption{
-    height: 40px;
-    width: 180px;
-    font-size: 18px;
-    font-weight: 700px;
-    color: #000;
-    font-family: "Playpen Sans", cursive;
-        width: 300px;
-    background-color: #adb5bd;
-    border-radius: 5px;
 }
 /* FEEDBACK */
 .correctFeedback{
@@ -46,4 +34,51 @@
     padding: 0px;
     text-align: center;
     font-family: "Noto Serif", serif;    
+}
+
+
+/* BUTTONS */
+#answerOption{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #000;
+    font-family: "Playpen Sans", cursive;
+        width: 200px;
+    background-color: #698C23;
+    border-radius: 5px;
+     text-transform: uppercase;
+     border: solid #323A42 3px;
+}
+#answerOption:hover{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    font-size: 16px;
+    font-weight: 700px;
+    color: #E8F0F6;
+    font-family: "Playpen Sans", cursive;
+        width: 200px;
+    background-color: #3a500e;
+    border-radius: 5px;
+     text-transform: uppercase;
+     border: solid #3a500e 3px;
+}
+#restartBtn{
+       height: 40px;
+    width: 180px;
+    margin: 10px;
+    font-weight: 700;
+    font-family: "Roboto Mono", monospace;
+    font-size: 14px;
+    padding: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000;
+    border: solid #323A42 3px; 
 }

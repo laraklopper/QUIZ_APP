@@ -3,6 +3,7 @@ import '../css/componentCSS/FormSetup.css'
 import '../css/componentCSS/QuizForms.css'
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
+import { Hourglass } from 'lucide-react';
 
 //StartQuizForm function component
 export default function StartQuizForm(
@@ -29,10 +30,10 @@ export default function StartQuizForm(
              <h3 className='quizName'>{quiz ? quiz.name : ''}</h3> 
              {/* If the quiz does not exist display an empty string */}
             </div>                    
-                 <div className="p-2" id='addTimerBlock'>
+                 <div id='addTimerBlock'>
                       <label id='addTimerLabel' htmlFor='addQuizTimer'>
-                      <p className='labelText'>ADD TIMER:</p>
-                  </label>
+                        <p className='labelText'>ADD TIMER:</p>
+                      </label>
                   {/* Checkbox to add timer based on the quizTimer state */}
                   <input
                       type='checkbox'
@@ -44,6 +45,7 @@ export default function StartQuizForm(
                       disabled={quizStarted} 
                       aria-label='Add timer checkbox'
                   />
+                  <Hourglass aria-hidden='true' fill='#eadd61'/>
           </div>
           <div className="p-2" id='startQuizBtnBlock'>
           {/* Button to start quiz */}
