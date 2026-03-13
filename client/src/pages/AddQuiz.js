@@ -129,6 +129,7 @@ export default function AddQuiz(
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`,
         },
+        body: JSON.stringify({ username: currentUser.username }),
       });
       if (!response.ok) {
         const data = await response.json().catch(() => ({}));
@@ -145,7 +146,7 @@ export default function AddQuiz(
       console.error('[ERROR: AddQuiz.js, deleteQuiz]', error.message);
       setError(error.message);
     }
-  }, [editQuizId, fetchQuizzes, setQuizName, setQuestions]);
+  }, [editQuizId, fetchQuizzes, setQuizName, setQuestions, currentUser, setError]);
 
   // Function to toggle the edit form for a quiz
   const handleEditToggle = useCallback((quiz) => {
@@ -256,13 +257,15 @@ export default function AddQuiz(
                         <td>{quiz.username}</td>
                         <td id='quizTableBtns'>
                         <div id='tableBtnsDiv'>
-                        {/* Delete quiz button: only available to user who created the quiz and admin users */}
-                        <Button variant='danger' type='button' id='deleteQuizBtn' onClick={() => deleteQuiz(quiz._id)}>DELETE QUIZ</Button>
-                          {/*Toggle Edit quiz button: only available to user who created the quiz and admin users */}
-                          {/* Display edit quiz if the form is not active and exit if the form is active */}
-                          <Button variant='warning' type='button' id='toggleEditQuizBtn' onClick={() => handleEditToggle(quiz)}>{editQuizId === quiz._id ? 'EXIT' : 'EDIT QUIZ'}</Button>
+                        {(currentUser?.admin || quiz.username === currentUser?.username) && (
+                          <>
+                            {/* Delete quiz button: only available to user who created the quiz and admin users */}
+                            <Button variant='danger' type='button' id='deleteQuizBtn' onClick={() => deleteQuiz(quiz._id)}>DELETE QUIZ</Button>
+                            {/* Toggle Edit quiz button: only available to user who created the quiz and admin users */}
+                            <Button variant='warning' type='button' id='toggleEditQuizBtn' onClick={() => handleEditToggle(quiz)}>{editQuizId === quiz._id ? 'EXIT' : 'EDIT QUIZ'}</Button>
+                          </>
+                        )}
                         </div>
-
                         </td>
                       </tr>
                     ))

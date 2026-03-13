@@ -221,6 +221,7 @@ router.patch('/updateQuiz/:id', checkJwtToken, async (req, res) => {
 // Route to delete a quiz by its ID
 router.delete('/deleteQuiz/:id' , checkJwtToken,  async (req, res) => {
     const { id } = req.params;// Extract quiz ID from the request parameters
+    const { username } = req.body;// Extract username from the request body for authorization
     try {
         const quiz = await Quiz.findById(id)// Find the quiz by its ID to check if the quiz exists
         //Conditional rendering to check if the quiz exists
@@ -229,7 +230,13 @@ router.delete('/deleteQuiz/:id' , checkJwtToken,  async (req, res) => {
             return res.status(404).json( // If the quiz is not found, respond with a 404 Not Found status and an error message
                 {success: false, message: 'Quiz not found' }
             );
-        }     
+        }
+
+        // Only the quiz creator or an admin can delete the quiz
+        if (quiz.username !== username && !req.user.isAdmin) {
+            console.error('[ERROR: quizRoutes.js, /deleteQuiz/:id] Unauthorized delete attempt by:', username);
+            return res.status(403).json({ success: false, message: 'You are not authorized to delete this quiz.' });
+        }
 
         const deletedQuiz = await Quiz.findByIdAndDelete(id);// Find the quiz by its ID and delete it from the database
 
