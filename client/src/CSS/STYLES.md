@@ -49,12 +49,10 @@ font-family: "Noto Serif", serif;
 #FFFFFF;
 <!-- BODY/HTML/ROOT -->
 #709625;
-
 <!-- WARNINGS/ERROR -->
 #C22419
 #dc3545
 #D41E11
-
 <!-- FORMS -->
 #6c757d
 #A8AEB3
