@@ -78,15 +78,19 @@ export default function Users({logout, currentUser, users, setUsers}) {
                       )}
                     </td>
                     <td>
-                      {!user.admin && (
-                        <Button
-                          id='deleteUserBtn'
-                          size='sm'
-                          onClick={() => handleDeleteUser(user._id)}
-                        >
-                          DELETE
-                        </Button>
-                      )}
+                      {(() => {
+                        const isDisabled = user.admin || user._id === currentUser?._id;
+                        return (
+                          <Button
+                            id='deleteUserBtn'
+                            size='sm'
+                            disabled={isDisabled}
+                            onClick={() => !isDisabled && handleDeleteUser(user._id)}
+                          >
+                            DELETE
+                          </Button>
+                        );
+                      })()}
                     </td>
                   </tr>
                 ))}

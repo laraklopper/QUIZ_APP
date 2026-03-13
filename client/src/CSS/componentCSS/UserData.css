@@ -180,6 +180,13 @@
     background-color: #3D0F13;
     border: solid #3D0F13 2px;
 }
+#deleteUserBtn:disabled {
+    color: #999;
+    background-color: transparent;
+    border: solid #999 2px;
+    cursor: not-allowed;
+    opacity: 0.5;
+}
 
 /* NO USERS MESSAGE */
 #noUsersMsg {
