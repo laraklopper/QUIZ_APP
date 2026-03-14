@@ -11,8 +11,9 @@ import NewQuestionsList from './NewQuestionsList';
 // Import Icons from lucide-react
 import { Asterisk} from 'lucide-react';
 
-export default function AddQuizForm(
-  {
+//AddQuizForm function component
+export default function AddQuizForm(//Export default AddQuizForm function component
+  {//PROPS PASSED FROM PARENT COMPONENT (AddQuiz.js)
     currentUser, 
     quizName, 
     setQuizName, 
@@ -25,38 +26,39 @@ export default function AddQuizForm(
     setDescription, 
     error, 
     addQuiz
-  }) {
-  
+  }
+  ) {
+
     //============EVENT LISTENERS=========================
-  //Function to add a new question
-  const handleAddQuestion = useCallback (() => {
-    //Conditional rendering to ensure that the quiz has 5 questions
-    if (questions.length >= 5) {
-      console.log('You must add up to 5 questions.');//Log a message in the console for debugging purporses
-      return; // Exit the function if max questions reached
-    }
-    /*Conditional rendering to check that all fields of the 
-    current question (text, correct answer, and options) are filled*/
-    if (!currentQuestion.questionText || !currentQuestion.correctAnswer || currentQuestion.options.some(opt => !opt)) {
-      // setErrorMessage('Please fill in all fields before adding a question.');// Set the error state to display the error in the UI
-      setError('Please fill in all fields before adding a question.');// Set the error state to display the error in the UI
-      return;// Exit the function to prevent adding incomplete questions
-    }
-    // Add the current question to the questions array
-    setQuestions([...questions, currentQuestion]);
-    // Reset the current question fields to their initial state
-    setCurrentQuestion({ questionText: '', correctAnswer: '', options: ['', '', ''] })
+    //Function to add a new question
+    const handleAddQuestion = useCallback (() => {
+      //Conditional rendering to ensure that the quiz has 5 questions
+      if (questions.length >= 5) {
+        console.log('You must add up to 5 questions.');//Log a message in the console for debugging purporses
+        return; // Exit the function if max questions reached
+      }
+      /*Conditional rendering to check that all fields of the 
+      current question (text, correct answer, and options) are filled*/
+      if (!currentQuestion.questionText || !currentQuestion.correctAnswer || currentQuestion.options.some(opt => !opt)) {
+        // setErrorMessage('Please fill in all fields before adding a question.');// Set the error state to display the error in the UI
+        setError('Please fill in all fields before adding a question.');// Set the error state to display the error in the UI
+        return;// Exit the function to prevent adding incomplete questions
+      }
+      // Add the current question to the questions array
+      setQuestions([...questions, currentQuestion]);
+      // Reset the current question fields to their initial state
+      setCurrentQuestion({ questionText: '', correctAnswer: '', options: ['', '', ''] })
 
-  },[currentQuestion, questions, setCurrentQuestion, setError, setQuestions])
+    },[currentQuestion, questions, setCurrentQuestion, setError, setQuestions])
 
-  //Function to resetQuestions
-  const resetQuestionsForm = useCallback(() => {
-    setQuizName('');
-    setDescription('');
-    setQuestions([]);
-    setCurrentQuestion({ questionText: '', correctAnswer: '', options: ['', '', ''] });
-    setError?.(null);
-  }, [setQuizName, setDescription, setQuestions, setCurrentQuestion, setError])
+    //Function to resetQuestions
+    const resetQuestionsForm = useCallback(() => {
+      setQuizName('');
+      setDescription('');
+      setQuestions([]);
+      setCurrentQuestion({ questionText: '', correctAnswer: '', options: ['', '', ''] });
+      setError?.(null);
+    }, [setQuizName, setDescription, setQuestions, setCurrentQuestion, setError])
   
   //================JSX RENDERING======================
   return (
