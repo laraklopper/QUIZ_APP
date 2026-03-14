@@ -12,6 +12,7 @@ AddQuizForm.js: POST
     flex-direction: column;
     align-items: center;
 }
+/* FORM */
 #addQuizForm{
     display: flex;
     flex-direction: column;
@@ -21,6 +22,8 @@ AddQuizForm.js: POST
     padding: 0px;
 }
 /* LAYOUT */
+/* BOOTSTRAP LAYOUT */
+/* STACK */
 #newQuizStack1{
     display: flex;
     flex-direction: column;
@@ -66,6 +69,7 @@ AddQuizForm.js: POST
     padding: 0px;
     width: 530px;
 }
+/* HEADING */
 .addQuestionHeading{
     font-size: 24px;
     font-family: "Playpen Sans", cursive;
@@ -74,6 +78,7 @@ AddQuizForm.js: POST
     padding: 0px;
     text-decoration: underline;
 }
+/* FORM INPUT */
 .addQuizInput{
     width: 230px;
     text-align: center;
@@ -85,31 +90,33 @@ AddQuizForm.js: POST
     font-family: "Roboto Mono", monospace;
     font-weight: 700;
 }
+/* TEXT */
 .newQuizLabel{
     display: flex;
     align-items: center;
     gap: 10px;
 }
 .newQuestionText{
-        margin: 0px;
+    margin: 0px;
     padding: 0px;
-        font-size: 15px;
+    font-size: 15px;
     text-decoration: underline;
     text-transform: uppercase;
     font-weight: 700;
     font-family: 'Playpen Sans';
 }
+/* OUTPUT TEXT */
 .newAnswerOutput{
-        font-size: 15px;
+    font-size: 15px;
     text-decoration: underline;
-        margin: 0px;
+    margin: 0px;
     padding: 0px;
     text-transform: uppercase;
     font-weight: 700;
     font-family: 'Playpen Sans';
 }
 .newOptionsOutput{
-        font-size: 15px;
+    font-size: 15px;
     text-decoration: underline;
     font-weight: 700;
     font-family: 'Playpen Sans';
@@ -119,27 +126,29 @@ AddQuizForm.js: POST
 }
 /* NEW QUESTIONS LIST */
 #newQuiz{
-        width: 700px;
-        display: flex;
+    width: 700px;
+    display: flex;
     flex-direction: column;
     margin: 10px 0px;
     padding: 10px 0px;
 }
 #newQuizOutput{
-       margin: 10px 0px;
+    margin: 10px 0px;
     padding: 5px 0px;
     background-color: #A8AEB3;
     display: flex;
     flex-direction: column;
 }
+/* BOOTSTRAP LAYOUT */
+/* Stack */
 #newQuestionStack{
     display: flex;
-        border-radius: 5px;
-        flex-direction: row;
+    border-radius: 5px;
+    flex-direction: row;
     align-items: baseline;
     width: 100%;
     justify-content: space-evenly;
-        margin: 5px 0px;
+    margin: 5px 0px;
     padding: 0px;
     background-color: #E8F0F6;
 }
@@ -151,7 +160,7 @@ AddQuizForm.js: POST
 }
 /* BUTTONS */
 #newQuestionBtn,#deleteQuesBtn, #addQuizBtn{
-      height: 40px;
+    height: 40px;
     width: 180px;
     margin: 10px;
     text-transform: uppercase;
