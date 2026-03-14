@@ -10,7 +10,7 @@ import Quiz from './Quiz';
 import Results from './Results';
 
 // QuizDisplay Function component
-export default function QuizDisplay(
+export default function QuizDisplay(//Export default QuizDisplay function component
   {//PROPS PASSED FROM PARENT COMPONENT (Game.js)
   quiz,
   setQuiz,
