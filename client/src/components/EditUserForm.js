@@ -29,7 +29,7 @@ export default function EditUserForm(//Export the EditUserForm function componen
       console.log('[EditUserForm.js]: Edit user account');//Log a message in the console for debugging purposes
       editUserProfile()
   }
-  // 
+  // Function to handle Input Change
  const handleInputChange = (event) => {
   const {name, value} = event.target;
 
@@ -132,7 +132,7 @@ export default function EditUserForm(//Export the EditUserForm function componen
           id='editLastNameInput'
           name='fullName.lastName'
           value={editUserData.fullName.lastName}
-          onClick={handleInputChange}
+          onChange={handleInputChange}
           placeholder={currentUser?.fullName?.lastName || 'LAST NAME'}
           autoComplete='family-name'
           // ARIA ATTRIBUTES
@@ -153,7 +153,7 @@ export default function EditUserForm(//Export the EditUserForm function componen
           name='email'
           value={editUserData.email}
           placeholder={currentUser?.email}
-          onClick={handleInputChange}
+          onChange={handleInputChange}
           autoComplete='email'
           // ARIA ATTRIBUTES
           aria-label='Email input field'
@@ -172,7 +172,15 @@ export default function EditUserForm(//Export the EditUserForm function componen
           >
           EDIT USER <UserRoundPen aria-hidden='true' forntweight={700}/>
           </Button>
-        <Button variant="danger" id='clearFormBtn' type='button' onClick={clearForm} aria-label='Button to clear edit user profile form'>CLEAR FORM</Button>
+        <Button 
+        variant="danger" 
+        id='clearFormBtn' 
+        type='button' 
+        onClick={clearForm} 
+        aria-label='Button to clear edit user profile form'
+        >
+        CLEAR FORM
+        </Button>
       </Stack>   
     </form>
   )
