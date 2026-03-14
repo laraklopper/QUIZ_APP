@@ -1,15 +1,19 @@
+// PageFooter.js
 import React, { useEffect, useState } from 'react'
+//CSS stylesheets
 import '../css/componentCSS/Footer.css';
+// Bootstrap
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Stack from 'react-bootstrap/Stack';
 import ListGroup from 'react-bootstrap/ListGroup';
-import { Calendar, Clock8 } from 'lucide-react';
-import { Copyright } from 'lucide-react';
+// Import Icons from Lucide-React
+import { Calendar, Clock8, Copyright } from 'lucide-react';
+// Import Utility Functions
 import { dateDisplay, timeDisplay } from '../utilFunctions/dateFunctions';
 
 //*PageFooter component: Displays the footer of the application, including the current date and time, and copyright information.*/
-export default function PageFooter() {
+export default function PageFooter() {//Export default PageFooter component
     //========STATE VARIABLES================
     const [footerDate, setFooterDate] = useState(new Date())
 

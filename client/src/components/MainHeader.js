@@ -1,5 +1,9 @@
+// MainHeader.js
+// Import necessary modules and packages
 import React, {useState, useEffect} from 'react'
+//CSS STYLESHEETS
 import '../css/componentCSS/Header.css';
+// Bootstrap
 import Row from 'react-bootstrap/Row'; // Import the Row component from react-bootstrap
 import Col from 'react-bootstrap/Col'; // Import the Col component from react-bootstrap
 import ListGroup from 'react-bootstrap/ListGroup';// Import the ListGroup component from react-bootstrap
@@ -11,7 +15,10 @@ import { dateDisplay, timeDisplay } from '../utilFunctions/dateFunctions';
 
 /*MainHeader component: Displays the main header of the application, 
 including the current date and time, navigation links, and page heading.*/
-export default function MainHeader({mainHeading}) {
+export default function MainHeader(
+    {//PROPS PASSED TO PARENT COMPONENT(Login.js, Registration.js)
+        mainHeading}) {
+    //=================STATE VARIABLES================
     const [headerDate, setHeaderDate] = useState()
 
     useEffect(() => {
@@ -84,6 +91,7 @@ export default function MainHeader({mainHeading}) {
         {/* Header Row 3: Event Bar */}
         <Row id='headerEventRow' role='presentation' aria-hidden='true'>
             <Col id='headerEventCol' aria-live='polite'>
+            {/* ------------EVENT ANIMATION-------------- */}
                 <div className='header-event-bar'>
                     <div className='event-track'>
                         <UserLock className='user-slide' />

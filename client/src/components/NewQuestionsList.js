@@ -1,8 +1,20 @@
+//NewQuestionsList.js
+// Import necessary modules and packages
 import React, {useCallback} from 'react'
+//Bootstrap
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
 
-export default function NewQuestionsList({addNewQuiz, quizName, questions, setQuestions, setQuizName, setErrorMessage}) {
+//NewQuestionsList function component
+export default function NewQuestionsList(//Export default NewQuestionsList function component
+  {// PROPS PASSED FROM PARENT COMPONENT (AddQuizForm.js)
+    addNewQuiz, 
+    quizName, 
+    questions, 
+    setQuestions, 
+    setQuizName, 
+    setErrorMessage
+  }) {
 
      //============EVENT LISTENERS===================
   // Function to delete a question new questuion
