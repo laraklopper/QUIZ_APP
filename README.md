@@ -7,7 +7,8 @@ The web application is a quiz application. The intended users who will benefit f
 ## TABLE OF CONTENTS
 1. [HOW TO USE THE APPLICATION](#how-to-use-the-application)
 2. [HOW TO RUN THE APPLICTION](#how-to-run-the-application)
-3. [REFERENCES](#references)
+3. [REQUESTS](#requests)
+4. [REFERENCES](#references)
 ## HOW TO USE THE APPLICATION
 
 To use the application users are required to register(sign up) and login. Users are also able to register as admin users subject to certain age restrictions controlled by custom middleware. After login users are able to add quizzes and play quizzes. Users are also able to edit their user account.
