@@ -118,6 +118,8 @@
 #userListTable thead tr {
     background-color: #323A42;
     color: #fff;
+    font-family: "Roboto Mono", monospace;
+    font-weight: 800;
 }
 #userListTable th {
     text-align: center;
@@ -139,6 +141,7 @@
     font-family: "Roboto Mono", monospace;
     font-size: 13px;
     padding: 8px;
+    font-weight: 700;
     vertical-align: middle;
 }
 #userListTable td, .userEmail{
@@ -146,6 +149,7 @@
     text-transform: lowercase;
     font-family: "Roboto Mono", monospace;
     font-size: 13px;
+     font-weight: 700;
     padding: 8px;
     vertical-align: middle;
 }

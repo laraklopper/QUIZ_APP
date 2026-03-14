@@ -79,6 +79,7 @@
 #dateTimeBlock{
     margin: 0px;
     display: flex;
+    background-color: #E8F0F6;
 }
 #dateTimeList{
     display: flex;

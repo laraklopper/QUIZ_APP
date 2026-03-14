@@ -124,7 +124,7 @@
 #footerDetailsBlock{
     display: flex;
     justify-content: flex-start;
-    padding: 10px 0px 10px 10px;
+    padding: 10px;
     background-color: #E8F0F6;
     margin: 0px 5px;
 }
@@ -141,13 +141,13 @@
     margin: 0px;
     padding: 0px;
     text-transform: uppercase;
-    font-size: 18px;
+        font-size: 14px;
     font-family: "Playpen Sans", cursive;
     font-weight: 600;
 }
 .footerStatusLabel{
     display: flex;
-    font-size: 18px;
+        font-size: 14px;
     font-family: "Playpen Sans", cursive;
     font-weight: 600;
     text-transform: uppercase;
@@ -155,7 +155,7 @@
 }
 #footerUsername{
     display: flex;
-    font-size: 18px;
+        font-size: 14px;
     gap: 10px;
     margin: 0px;
     padding: 0px;
@@ -169,14 +169,14 @@
     padding: 0px;
     font-family: "Playpen Sans", cursive;
     font-weight: 600;
-    font-size: 18px;
+        font-size: 14px;
     gap: 10px;
     text-decoration: underline;
 }
 #adminStatus{
     display: flex;
     font-weight: 600;
-    font-size: 18px;
+       font-size: 14px;
     font-family: "Playpen Sans", cursive;
     text-transform: uppercase;
 }
