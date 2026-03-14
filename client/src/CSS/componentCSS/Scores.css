@@ -1,0 +1,21 @@
+/* SCORES */
+#pastScoresOutput{
+        width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#pastScoresDisplay{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+/* TAbLE */
+#scoresTable {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #F7F7F7;
+    margin: 0px;
+    padding: 0px;
+}
