@@ -165,7 +165,7 @@ export default function Game(
         {/* PAST QUIZ RESULTS*/}
         <Row id='pastScoresRow'>
         
-        <Col xs={12} md={8} id='pastScoresCol'>
+        <Col id='pastScoresCol'>
         <div className='toggle-btn-div'>
           <h6 className='btnText'>CLICK HERE TO:</h6>
           <Button id='togglePastScoresBtn' variant='primary' onClick={() => setShowPastScores(prev => !prev)}>
