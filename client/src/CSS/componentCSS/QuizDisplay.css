@@ -2,9 +2,7 @@
 QuizDisplay.js
 Quiz.js
 */
-.form-select, #scoresList{
-    width: 200px;
-}
+
 /* BUTTONS */
 #toggleEditQuizBtn, #deleteQuizBtn{
      height: 40px;
@@ -45,12 +43,21 @@ Quiz.js
 }
 /* PAST SCORES */
 
-.form-select
-#scoresList{
+select#scoresList.form-select
+{
     width: 200px;
     display: flex;
 }
 #pastScoresDisplay{
     display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+#pastScoresOutput{
+        display: flex;
+    flex-direction: column;
+    gap: 10px;
     width: 100%;
 }

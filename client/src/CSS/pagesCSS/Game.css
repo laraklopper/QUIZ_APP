@@ -75,13 +75,10 @@
     display: flex;
     padding: 0px;
     justify-content: center;
+    width: 100%;
+    gap: 10px;
 }
-#pastScoresOutput{
-        display: flex;
-    justify-content: center;
-    margin: 0px;
-    padding: 0px;
-}
+
 .scoreError{
         display: flex;
     align-items: center;

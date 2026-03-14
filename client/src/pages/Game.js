@@ -162,8 +162,7 @@ export default function Game(
        
       </section>
       <section id='scoresSection'>
-        {/* PAST QUIZ RESULTS
-        */}
+        {/* PAST QUIZ RESULTS*/}
         <Row id='pastScoresRow'>
         <Col xs={3} md={2} ></Col>
         <Col xs={12} md={8} id='pastScoresCol'>
