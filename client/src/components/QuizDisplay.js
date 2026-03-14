@@ -5,6 +5,7 @@ import Col from 'react-bootstrap/Col';
 import StartQuizForm from './StartQuizForm';
 import Quiz from './Quiz';
 import Results from './Results';
+
 export default function QuizDisplay({
   quiz,
   setQuiz,
