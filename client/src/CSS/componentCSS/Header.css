@@ -7,6 +7,8 @@
     background-color: #a9a9a9;
 }
 /* Layout */
+/* BOOTSTRAP LAYOUT */
+/* ROW + COL */
 #headerRow1,
 #headerRow2{
     display: flex;
@@ -27,6 +29,7 @@
     margin: 0px;
     padding: 0px;
 }
+/* STACK */
 #headerStack{
     display: flex;
     width: 100%;
@@ -49,6 +52,7 @@
     text-decoration: underline;
     font-size: 48px;
 }
+/* TEXT */
 #pageHeading{
     font-family: "Alkatra", system-ui;
     font-weight: 700;
@@ -72,12 +76,16 @@
 }
 
 /* DATE AND TIME LIST */
+#dateTimeBlock{
+    margin: 0px;
+    display: flex;
+}
 #dateTimeList{
     display: flex;
     align-items: flex-start;
     gap: 10px;
     margin: 0px;
-    padding: 0px;
+    padding: 10px 0px 5px 10px;
     width: 150px;
     background-color: transparent;
 }
