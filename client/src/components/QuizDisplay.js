@@ -1,12 +1,17 @@
 // QuizDisplay.js
 import React, { useCallback, useState, useEffect } from 'react'
+import '../css/componentCSS/QuizDisplay.css'
+// Bootstrap
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+// Custom Components
 import StartQuizForm from './StartQuizForm';
 import Quiz from './Quiz';
 import Results from './Results';
 
-export default function QuizDisplay({
+// QuizDisplay Function component
+export default function QuizDisplay(
+  {//PROPS PASSED FROM PARENT COMPONENT (Game.js)
   quiz,
   setQuiz,
   timer,

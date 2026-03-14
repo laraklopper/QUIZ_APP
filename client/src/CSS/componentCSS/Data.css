@@ -1,3 +1,4 @@
+/* Data.css */
 .btnText{
     font-weight: 500;
     margin: 0px;
@@ -7,7 +8,7 @@
 .userDetailsLabel{
     display: flex;
     padding: 10px;
-        gap: 10px;
+    gap: 10px;
 }
 .dataTextHead{
     text-transform: uppercase;
@@ -17,11 +18,10 @@
     text-transform: uppercase;
     font-family: "Playpen Sans", cursive
 }
-
 .emailData{
     text-transform: lowercase;
     font-family: "Playpen Sans", cursive;
-        font-size: 20px;
+    font-size: 20px;
 }
 #adminDataText, #usernameDataText,.currentUserFullName{
     text-transform: uppercase;
