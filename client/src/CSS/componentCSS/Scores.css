@@ -11,6 +11,35 @@
     align-items: center;
     width: 100%;
 }
+#scoresStack{
+        margin: 0px;
+    padding: 10px 0px;
+    display: flex;
+    width: 100%;
+}
+#scoresHeadingBlock{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+#scoresHeading{
+    font-family: "Playpen Sans", cursive;
+    font-weight: 800;
+    font-size: 28px;
+    text-transform: uppercase;
+    text-decoration: underline;
+    color: #3D0F13;
+    margin: 0px;
+    padding: 0px;
+}
+#selectScoresBlock{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+#selectScoresForm{
+    width: 200px;
+}
 /* TAbLE */
 #scoresTable {
     width: 100%;

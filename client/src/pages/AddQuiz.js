@@ -290,8 +290,7 @@ export default function AddQuiz(
       <section id='newQuizSection'>
         {/* ADD QUIZ FORM */}
         <Row id='addQuizRow'>
-        <Col xs={4} md={2} id='addQuizCol1'></Col>
-        <Col xs={12} md={8} id='addQuizCol'>
+        <Col xs={12} md={12} id='addQuizCol'>
         <div className='toggle-btn-div'>
           {/* Button to toggle AddQuizForm */}
           <h6 className='btnText'>CLICK HERE TO:</h6>
@@ -328,7 +327,6 @@ export default function AddQuiz(
             </div>
         )}           
         </Col>
-        <Col xs={4} md={2} id='addQuizCol2'></Col>
         </Row>
       </section>
       {/* FOOTER */}

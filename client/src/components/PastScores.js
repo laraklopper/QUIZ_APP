@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import '../css/componentCSS/Scores.css'
-// import Stack from 'react-bootstrap/Stack';
+import Stack from 'react-bootstrap/Stack';
 import FormSelect from 'react-bootstrap/FormSelect'; //Import Formselect component from react-bootstrap
 
 export default function PastScores({
@@ -28,7 +28,15 @@ export default function PastScores({
               {/* Conditional rendering to check if the user has any scores */}
               {userScores.length > 0 ? (
                 <div id='pastScoresDisplay'>
-                  {/* Select dropdown form for quiz selection */}
+                  <Stack gap={3} id='scoresStack'>
+                   <div className="p-2" id='scoresHeadingBlock'>
+                    <h2 id='scoresHeading'>USER SCORES</h2>
+                   </div>
+                  <div id='selectScoresBlock'>
+                  <div id='selectScoresForm'>
+
+                  
+                   {/* Select dropdown form for quiz selection */}
                   <FormSelect
                     title={selectedQuiz || 'SELECT'}
                     aria-label="Select a Quiz"
@@ -46,7 +54,9 @@ export default function PastScores({
                       </option>
                     ))}
                   </FormSelect>
-                  {/* Display quizResults scores for the selected quiz */}
+                  </div>
+      </div>
+      <div className="p-2"> {/* Display quizResults scores for the selected quiz */}
                   {selectedQuiz && quizResults.length > 0 ? (
                     <table id='scoresTable'>
                       <thead>
@@ -72,7 +82,10 @@ export default function PastScores({
                     //Message if no scores are available for the specific quiz
                     selectedQuiz && <p className="scoreError"></p>
                   )}
-                </div>
+                  </div>
+     
+                  </Stack>   
+              </div>
               ) : (
                 // Message if no scores are found               
                 <p className="scoreError">NO SCORES AVAILABLE</p>
