@@ -11,6 +11,7 @@ import ListGroup from 'react-bootstrap/ListGroup';
 // Import Icons from Lucide-React
 import { Calendar, Clock8, LogOut, ShieldUser, User} from 'lucide-react';
 import { Copyright } from 'lucide-react';
+// Import Utility Functions
 import { dateDisplay, timeDisplay } from '../utilFunctions/dateFunctions';
 
 //*PageFooter component: Displays the footer of the application, including the current date and time, logout Button and copyright information.*/
