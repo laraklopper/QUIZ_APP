@@ -225,7 +225,7 @@ export default function QuizDisplay(
           <div id='start-quiz-panal'>
           <StartQuizForm
             quiz={quiz}
-            timer={timer}
+            quizTimer={quizTimer}
             setQuizTimer={setQuizTimer}
             quizStarted={quizStarted}
             handleQuizStart={handleQuizStart}

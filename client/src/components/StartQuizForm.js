@@ -1,4 +1,6 @@
+//StartQuiz.js
 import React from 'react'
+// CSS
 import '../css/componentCSS/FormSetup.css'
 import '../css/componentCSS/QuizForms.css'
 import Stack from 'react-bootstrap/Stack';
@@ -27,7 +29,7 @@ export default function StartQuizForm(
          <Stack gap={3} id='startQuizStack' aria-live='polite'>
            <div className="p-2" id='selectedQuizNameBlock'>   
            {/* SELECTED QUIZ NAME */}
-             <h3 className='quizName'>{quiz ? quiz.name : ''}</h3> 
+             <h3 className='quizName'>{quiz ? quiz.title : ''}</h3>
              {/* If the quiz does not exist display an empty string */}
             </div>                    
                  <div id='addTimerBlock'>
