@@ -26,8 +26,11 @@ const EMPTY_FORM = {
   password: '',
 }
 
-export default function Registration() {
+//==========MAIN REGISTRATION COMPONENT============
+export default function Registration() {//Export the default Registration component
+  //==========================
   const navigate = useNavigate()
+  // ===========STATE VARIABLES====================
   const [newUserData, setNewUserData] = useState(EMPTY_FORM)
   const [error, setError] = useState(null)
 
@@ -91,7 +94,7 @@ export default function Registration() {
     <Container id='pageContainer' role='main'>
       <MainHeader mainHeading={'REGISTRATION'}/>
       {/* ---------EVENT/ANIMATION---------- */}
-      <Row id='regisEventRow' role='presentation'>
+      <Row id='regisEventRow' role='presentation' aria-hidden='true'>
         <Col id='regisEventCol'>
           <div className='event-bar'>
             <div className='event-track'>
