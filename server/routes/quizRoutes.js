@@ -29,20 +29,22 @@ router.get('/findQuizzes', checkJwtToken, async (req, res) => {
 //send a GET request to /findQuiz/:id to retrieve a quiz by its ID from the database
 router.get('/findQuiz/:id', checkJwtToken, async (req, res) => {
     try {
-        const {id} = req.params;
+        const {id} = req.params;// Retrieve the quiz ID from the request parameters
+
 
         //Conditional rendering to check if the quiz id exists in the database
         if (!id || !mongoose.Types.ObjectId.isValid(id)) {
             console.error('[ERROR: quizRoutes.js, /findQuiz/:id] Invalid quiz ID provided:', id);
-            
-            return res.status(400).json({success: false, message: 'Invalid quiz ID.'});
+            return res.status(400).json({success: false, message: 'Invalid quiz ID.'});// Respond with a 400 (Bad Request) status and an error message
         }
+
         const quiz = await Quiz.findById(id);//find the quiz by its ID in the database and populate the userId field with the 'username'
         if (!quiz) {
             console.error('[ERROR: quizRoutes.js, /findQuiz/:id] Quiz not found:', id);
+            // If the quiz is not found, respond with a 404 (Not Found) status and an error message
             return res.status(404).json({success: false, message: 'Quiz not found.'});
         }
-        res.status(200).json({success: true, quiz: quiz});
+        res.status(200).json({success: true, quiz: quiz});// If the quiz is found, send it as the JSON response
         console.log(`[SUCCESS: quizRoutes.js, /findQuiz/:id] Quiz found: ${quiz}`);
         
     } catch (error) {
