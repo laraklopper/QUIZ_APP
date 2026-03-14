@@ -1,5 +1,11 @@
 /* USER DATA.css */
 /* EditUserData.js */
+#userDetailsRow1, #userDetailsR{
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+}
 #userDetailsDiv{
     display: flex;
     margin: 0px 5px;

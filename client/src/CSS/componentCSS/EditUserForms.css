@@ -16,6 +16,8 @@ EditPasswordForm: PATCH
 }
 #editUserDetails{
     display: flex;
+    margin: 10px 0px;
+    padding: 10px;
 }
 #editUserFormStack{
     display: flex;
