@@ -1,6 +1,6 @@
 //StartQuiz.js
 import React from 'react'
-// CSS
+// CSS Stylesheets
 import '../css/componentCSS/FormSetup.css'
 import '../css/componentCSS/QuizForms.css'
 import Stack from 'react-bootstrap/Stack';
