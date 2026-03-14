@@ -41,11 +41,12 @@ Quiz.js
     gap: 5px;
     padding: 5px 0px;
 }
-/* PAST SCORES */
-
-select#scoresList.form-select
-{
-    width: 200px;
-    display: flex;
+#startQuizCol{
+        display: flex;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    justify-content: center;
 }
+
 
