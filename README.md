@@ -1,6 +1,31 @@
 # QUIZ_APP
 
+**OVERVIEW**
+
+The web application is a quiz application. The intended users who will benefit from the application are individuals who enjoy quiz games for recreational purposes. The application is written using MERN stack which is a popular open source JavaScript-based developer friendly web stack. MERN stack uses MongoDB (a NoSQL database), to handle the database, React.js to create the front-end, Express.js to create the backend and uses Node.js as the runtime environment.
+
 ## TABLE OF CONTENTS
+1. [HOW TO USE THE APPLICATION](#how-to-use-the-application)
+2. [HOW TO RUN THE APPLICTION](#how-to-run-the-application)
+3. [REFERENCES](#references)
+## HOW TO USE THE APPLICATION
+
+To use the application users are required to register(sign up) and login. Users are also able to register as admin users subject to certain age restrictions controlled by custom middleware. After login users are able to add quizzes and play quizzes. Users are also able to edit their user account.
+
+The application also allows users to edit and delete quizzes subject to certain requirements based on whether the user is a normal endpoint or an admin user. Admin users are allowed certain privileges such as the ability to edit or delete any quiz and also view all users and remove users.
+
+## HOW TO RUN THE APPLICATION
+
+A proxy server is included in the front-end to allow the front and back-end to run together. The application uses ‘nodemon’ third-party middleware in the backend to allow the application to run the backend and front-end in the command line interface(CLI) or terminal using npm start. The folders must, however, be run separately. The server is started (listens) on the port specified in the .env file using app.listen() in the app.js file or defaults to Port 3001.
+
+The application is connected to the MongoDB database using mongoose third-party middleware in the app.js file in the back end (server) folder. The code uses mongoose.connect() to establish a connection between the application and the MongoDB database.
+
+The MongoDB connection URI is constructed using the username, password, cluster URL and the database name. These are stored as environmental variables in the .env file. The .env file is configured using dotenv middleware.
+
+The application is connected to the MongoDB database using mongoose third party middleware in the backend. The code uses mongoose.connect() to connect to establish a connection with the MongoDB database.
+
+The MongoDB connection URI is constructed using the username, password, cluster URL and the database name. these are stored in the .env file which stores sensitive information. The application does not include any third-party API. All API requests in the application are REST API requests made from the front end to the backend.
+
 ## REFERENCES
 
 - https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods/PATCH
