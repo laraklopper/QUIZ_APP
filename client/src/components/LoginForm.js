@@ -1,12 +1,22 @@
+// LoginForm.js
 import React, { useMemo, useState } from 'react'
+// CSS Stylesheets
 import '../css/componentCSS/LoginForm.css'
 import '../css/componentCSS/FormSetup.css'
+// Bootstrap
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
+// Import Icons from Lucide-React
 import { Eye, EyeOff, LogIn } from 'lucide-react';
 
-
-export default function LoginForm({userData, setUserData, submitLogin}) {
+//LoginForm function component
+export default function LoginForm(//Export default LoginForm function component
+  {//PROPS PASSED FROM PARENT COMPONENT(Login.js)
+    userData, 
+    setUserData, 
+    submitLogin
+  }) {
+    // ===========STATE VARIABLES=============
   const [showPassword, setShowPassword] = useState(false)
   const [passwordMsg, setPasswordMsg] = useState(false)
   const [touched, setTouched] = useState({username: false, password: false})

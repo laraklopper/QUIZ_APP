@@ -1,17 +1,32 @@
+// Header.js
 import React, { useEffect, useState } from 'react'
+// CSS Stylesheets
 import '../css/componentCSS/Header.css'
-import Row from 'react-bootstrap/Row'; // Import the Row component from react-bootstrap
-import Col from 'react-bootstrap/Col'; // Import the Col component from react-bootstrap
+// Bootstrap
+import Row from 'react-bootstrap/Row'; 
+import Col from 'react-bootstrap/Col'; 
 import Stack from 'react-bootstrap/Stack';
-import ListGroup from 'react-bootstrap/ListGroup';// Import the ListGroup component from react-bootstrap
+import ListGroup from 'react-bootstrap/ListGroup';
+// Import Icons from Lucide-React
 import { Clock8, Calendar, User } from 'lucide-react';
+// Utility Functions
 import { dateDisplay, timeDisplay } from '../utilFunctions/dateFunctions';
+// Import Link from react-router-dom for navigation
 import { Link } from 'react-router-dom';
 
 
-export default function Header({currentUser, heading}) {
+export default function Header(
+    {//PROPS PASSED FROM PARENT COMPONENT (Home.js, Game.js, AddQuiz.js, Users.js)
+        currentUser, 
+        //PROPS PASSED TO PARENT COMPONENTS (Home.js, Game.js, AddQuiz.js, Users.js)
+        heading
+    }
+) {
+    //============STATE VARIABLES=============
     const [date, setDate] = useState()
 
+    //===========USE EFFECT HOOK===============
+    //useEffect hook to display date and time
     useEffect(() => {
         const timer = setInterval(() => {
             setDate(new Date())
@@ -19,6 +34,7 @@ export default function Header({currentUser, heading}) {
         return () => clearInterval(timer)
     },[])
 
+    //==================JSX RENDERING==================
   return (
     <header id='header' role='banner' aria-labelledby='loggedInHeader'>
     {/* -----SCREEN READER HEADING----------- */}

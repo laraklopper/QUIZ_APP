@@ -1,8 +1,12 @@
+// EditUserForm.js
 import React from 'react'
+// CSS STYLESHEETS
 import '../css/componentCSS/FormSetup.css'
 import '../css/componentCSS/EditUserForms.css'
+// Bootstrap
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
+// Import Icons from Lucide-React
 import { UserRoundPen } from 'lucide-react';
 
 export default function EditUserForm(

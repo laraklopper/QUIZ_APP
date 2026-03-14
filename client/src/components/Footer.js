@@ -10,9 +10,17 @@ import { Copyright } from 'lucide-react';
 import { dateDisplay, timeDisplay } from '../utilFunctions/dateFunctions';
 
 //*PageFooter component: Displays the footer of the application, including the current date and time, logout Button and copyright information.*/
-export default function Footer({currentUser, logout}) {
+export default function Footer(
+  {//PROPS PASSED FROM PARENT COMPONENT (Home.js, Game.js, AddQuiz.js, Users.js)
+    currentUser, 
+    logout
+  }
+) {
+  //=============STATE VARIABLES=============
   const [date, setDate] = useState(new Date())
 
+  //===========USE EFFECT HOOK===============
+    //useEffect hook to display date and time
   useEffect(() => {
     const timer = setInterval(() => {
       setDate(new Date())
@@ -23,6 +31,7 @@ export default function Footer({currentUser, logout}) {
   //===============JSX RENDERING===========
   return (
     <footer id='footer' role='banner'>
+    {/* FOOTER ROW 1 */}
      <Row id='footerRow1'>
         <Col id='footerCol1'>
             <Stack direction="horizontal" gap={3} id='footerStack1'>
@@ -75,26 +84,26 @@ export default function Footer({currentUser, logout}) {
             </Stack>
         </Col>
       </Row>
+      {/* FOOTER ROW 2 : Logout Button */}
       <Row id='footerRow2'>
         <Col id='footerCol2'>
             <Stack direction="horizontal" gap={3} id='footerStack2'>
                 <div className="p-2"></div>
                 <div className="p-2 ms-auto"></div>
-                <div >
-
+                <div id='logoutBlock'>
                  <Button 
                   variant="warning" 
                   onClick={logout} 
                   id='logoutBtn' 
                   type='button' 
                   aria-label='Logout Button'>
-                  LOGOUT <LogOut/>
+                  LOGOUT <LogOut aria-hidden='true'/>
                   </Button>
                 </div>
             </Stack>
         </Col>
       </Row>
-       {/* COPYRIGHT INFORMATION */}
+       {/*FOOTER ROW 3: COPYRIGHT INFORMATION */}
        <Row id='footerRow3'>
            <Col id='footerCol3'></Col>
             {/* COPYRIGHT INFORMATION */}
