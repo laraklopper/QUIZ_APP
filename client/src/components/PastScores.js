@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import '../css/componentCSS/Scores.css'
 // import Stack from 'react-bootstrap/Stack';
 import FormSelect from 'react-bootstrap/FormSelect'; //Import Formselect component from react-bootstrap
 
