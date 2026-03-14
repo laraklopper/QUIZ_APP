@@ -1,4 +1,5 @@
 // Quiz.js
+// Import necessary modules and packages
 import React, { useEffect, useState } from 'react'
 // CSS Stylesheets
 import '../css/componentCSS/FormSetup.css'
@@ -6,10 +7,12 @@ import '../css/componentCSS/Quiz.css'
 // Bootstrap
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
-import { ArrowBigRightDash, RotateCcw, X ,Check, MessageCircleQuestionMark    } from 'lucide-react';
+// Import Icons from Lucide-React
+import { ArrowBigRightDash, RotateCcw, X ,Check, MessageCircleQuestionMark} from 'lucide-react';
 
-export default function Quiz(
-  {
+// Quiz function component
+export default function Quiz(//Export default Quiz function component
+  {//PROPS PASSED FROM PARENT COMPONENT (QuizDisplay.js)
     quiz,
     quizIndex,
     setQuizIndex,
@@ -24,6 +27,7 @@ export default function Quiz(
 
   }
 ) {
+  //============STATE VARIABLES================
   const [selectedOption, setSelectedOption] = useState(null)
   const [feedback, setFeedback] = useState('')
   const [timeLeft, setTimeLeft] = useState(10)
@@ -37,8 +41,6 @@ export default function Quiz(
     }
   },[questions, setQuizIndex])
   
-
-
   // Effect to manage the timer countdown
   useEffect(() => {
     if(!quizTimer) return;
@@ -77,6 +79,7 @@ export default function Quiz(
     // Pad seconds with a leading zero if less than 10
     return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
   };
+  
   // ============EVENT LISTENERS=================
   /* Function to handle answer selection and 
   update the score if correct */
