@@ -15,7 +15,7 @@ import AddQuizForm from '../components/AddQuizForm';
 import EditQuizForm from '../components/EditQuizForm';
 
 //=============MAIN ADDQUIZ COMPONENT==============
-export default function AddQuiz(
+export default function AddQuiz(//Export default addQuiz function component
   {//PROPS PASSED FROM PARENT COMPONENT (App.js)
     logout,
     currentUser,

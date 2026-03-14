@@ -7,12 +7,23 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Badge from 'react-bootstrap/Badge';
 import Button from 'react-bootstrap/Button';
+// CUSTOM COMPONENTS
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+//Utility Functions
 import { dateDisplay } from '../utilFunctions/dateFunctions';
 
-export default function Users({logout, currentUser, users, setUsers}) {
+// ========MAIN USERS COMPONENT===========
+export default function Users(//Export default Users function component 
+  {//PROPS PASSED FROM PARENT COMPONENT (App.js)
+    logout, 
+    currentUser, 
+    users, 
+    setUsers
+  }) {
 
+      //============REQUESTS===============
+  //Function to delete a user
   const handleDeleteUser = async (userId) => {
     try {
       const token = localStorage.getItem('token');
@@ -37,9 +48,12 @@ export default function Users({logout, currentUser, users, setUsers}) {
     }
   };
 
+  // ================JSX RENDERING======================
+
   return (
-    <Container id='pageContainer'>
+    <Container id='pageContainer' role='main'>
      {/* HEADER */}
+     {/* Render the HeaderComponent with USERS as the Heading */}
      <Header heading='USERS' currentUser={currentUser}/>
      {/* SECTION 1: User List */}
      <section id='userList'>
@@ -53,6 +67,7 @@ export default function Users({logout, currentUser, users, setUsers}) {
       <Row id='userListRow'>
         <Col xs={3} md={2} id='userListCol1'></Col>
         <Col xs={12} md={8} id='userListCol'>
+        {/* TABLE DISPLAYING THE USERS LIST */}
           {users && users.length > 0 ? (
             <table id='userListTable'>
               <thead>

@@ -3,7 +3,7 @@ import React from 'react'
 //CSS Stylesheets
 import '../css/pagesCSS/Home.css'
 import '../css/pagesCSS/PageSetup.css'
-// Bootst
+// Bootstrap
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -13,7 +13,9 @@ import Header from '../components/Header';
 import EditUserData from '../components/EditUserData';
 // Import icons from lucide-react
 import { FileUser } from 'lucide-react';
-export default function Home(
+
+//=======MAIN HOME FUNCTION COMPONENT=========
+export default function Home(//Export default Home function component
   {//PROPS PASSED FROM PARENT COMPONENT (App.js)
     logout, 
     currentUser, 

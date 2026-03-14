@@ -16,7 +16,7 @@ import Button from 'react-bootstrap/Button';
 import PastScores from '../components/PastScores';
 
 //===========MAIN GAME FUNCTION COMPONENT==========
-export default function Game(
+export default function Game(//Export default Game function component
   {//PROPS PASSED FROM PARENT COMPONENT (App.js)
   logout,
   currentUser,
@@ -133,6 +133,7 @@ export default function Game(
          <Row id='selectQuizRow'>
           <Col></Col>
           <Col xs={6} id='selectQuizCol'>
+          {/* Render the Select QuizForm function component */}
             <SelectQuizForm
               quizList={quizList}
               selectedQuizId={selectedQuizId}
@@ -142,6 +143,7 @@ export default function Game(
           <Col></Col>
       </Row>
           <div id='display-quiz-panal'>
+          {/* Render the QuizDisplay Function component */}
             <QuizDisplay
               quiz={quiz}
               setQuiz={setQuiz}
@@ -169,7 +171,15 @@ export default function Game(
         <Col xs={12} md={8} id='pastScoresCol'>
         <div className='toggle-btn-div'>
           <h6 className='btnText'>CLICK HERE TO:</h6>
-          <Button id='togglePastScoresBtn' variant='primary' onClick={() => setShowPastScores(prev => !prev)}>
+          <Button 
+          id='togglePastScoresBtn' 
+          variant='primary' 
+          onClick={() => setShowPastScores(prev => !prev)}
+          aria-label='Button to toggle the past scores'
+          aria-pressed={showPastScores}
+          aria-expanded={showPastScores}
+          aria-controls='past-results-panal'
+          >
             {showPastScores ? 'HIDE PAST SCORES' : 'VIEW PAST SCORES'}
           </Button>
         </div>

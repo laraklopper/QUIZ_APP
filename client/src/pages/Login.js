@@ -1,16 +1,28 @@
+// Login.js
 import React, {useCallback} from 'react'
+//CSS stylesheets
 import '../css/pagesCSS/Login.css'
 import '../css/pagesCSS/PageSetup.css'
+// Bootstrap
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+// Custom Components
 import LoginForm from '../components/LoginForm';
 import MainHeader from '../components/MainHeader';
 import PageFooter from '../components/PageFooter';
+// Import Icons from Lucide-React
 import { IdCard } from 'lucide-react';
 
 //=========MAIN LOGIN COMPONENT=========
-export default function Login({userData, setUserData, setError, setLoggedIn}) {
+export default function Login(//Export the default Login function component
+    {//PROPS PASSED FROM PARENT COMPONENT (App.js)
+        userData, 
+        setUserData, 
+        setError, 
+        setLoggedIn
+    }
+    ) {
 
     //=============REQUESTS==================
     //Function for user login
