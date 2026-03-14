@@ -29,15 +29,59 @@ The MongoDB connection URI is constructed using the username, password, cluster 
 ## REQUESTS
 
 ### USER
+Base path: `/users`
+
 #### GET
-- `/user/me`: Route to Get current user details
-- `user/find`
+- `GET /users/me` - Get current user details *(requires JWT)*
+- `GET /users/findUsers` - Get all users or filter by username *(requires JWT)*
+
 #### POST
+- `POST /users/login` - User login; returns JWT token
+- `POST /users/register` - Register a new user *(requires valid password strength)*
+
 #### PATCH
-### DELETE
+- `PATCH /users/editUser/:id` - Update user profile (username, fullName, email)
+- `PATCH /users/editPassword` - Change user password *(requires JWT)*
+
+#### DELETE
+- `DELETE /users/deleteUser/:id` - Delete a user *(requires JWT, admin only)*
+
+---
+
 ### QUIZ
+Base path: `/quizzes`
+
+#### GET
+- `GET /quizzes/findQuizzes` - Get all quizzes *(requires JWT)*
+- `GET /quizzes/findQuiz/:id` - Get a specific quiz by ID *(requires JWT)*
+
+#### POST
+- `POST /quizzes/createQuiz` - Create a new quiz *(requires JWT)*
+
+#### PUT
+- `PUT /quizzes/editQuiz/:id` - Full update of a quiz *(requires JWT, creator or admin only)*
+
+#### PATCH
+- `PATCH /quizzes/updateQuiz/:id` - Partial update of a quiz *(requires JWT, creator or admin only)*
+
+#### DELETE
+- `DELETE /quizzes/deleteQuiz/:id` - Delete a quiz *(requires JWT, creator or admin only)*
+
+---
 
 ### SCORES
+Base path: `/scores`
+
+#### GET
+- `GET /scores/fetchScores` - Get all scores, optionally filtered by username *(requires JWT)*
+- `GET /scores/findScores/:username` - Get all scores for a specific user
+- `GET /scores/findScore/:username/:quizTitle` - Get a specific score for a user and quiz
+
+#### POST
+- `POST /scores/submitScore` - Submit a new quiz score
+
+#### PUT
+- `PUT /scores/updateScore/:id` - Update an existing score if new score is higher *(requires JWT)*
 
 
 
