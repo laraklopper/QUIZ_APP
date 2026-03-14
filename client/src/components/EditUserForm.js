@@ -9,7 +9,8 @@ import Button from 'react-bootstrap/Button';
 // Import Icons from Lucide-React
 import { UserRoundPen } from 'lucide-react';
 
-export default function EditUserForm(
+//EditUserForm function component
+export default function EditUserForm(//Export the EditUserForm function component
   {//PROPS PASSED FROM PARENT COMPONENT (EditUserData.js)
     currentUser,
     editUserData,

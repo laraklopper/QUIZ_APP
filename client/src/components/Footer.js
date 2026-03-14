@@ -1,10 +1,14 @@
+// Footer.js
 import React, { useEffect, useState } from 'react'
+// CSS STYLESHEETS
 import '../css/componentCSS/Footer.css'
+// Bootstrap
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
+// Import Icons from Lucide-React
 import { Calendar, Clock8, LogOut, ShieldUser, User} from 'lucide-react';
 import { Copyright } from 'lucide-react';
 import { dateDisplay, timeDisplay } from '../utilFunctions/dateFunctions';

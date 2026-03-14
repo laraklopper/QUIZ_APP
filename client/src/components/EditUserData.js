@@ -1,15 +1,27 @@
+// EditUserData.js
 import React, { useCallback, useState } from 'react'
+// CSS STYLESHEETS
 import '../css/componentCSS/UserData.css'
-import '../css/componentCSS/Data.css'
+import '../css/componentCSS/Data.css';
+// Bootstrap
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
+// Import Utility Functions
 import {dateDisplay} from '../utilFunctions/dateFunctions'
+// Import Custom Components
 import EditPasswordForm from './EditPasswordForm';
 import EditUserForm from './EditUserForm';
 
-export default function EditUserData({currentUser, setError}) {
+//EditUserData Function Component
+export default function EditUserData(//Export the EditUserData function component
+  {//PROPS PASSED FROM PARENT COMPONENT (Home.js)
+    currentUser, 
+    setError
+  }
+  ) {
+    //==============STATE VARIABLES===========
   const [editUserData, setEditUserDate]= useState({
     username: '',
     fullName: {
