@@ -48,16 +48,4 @@ select#scoresList.form-select
     width: 200px;
     display: flex;
 }
-#pastScoresDisplay{
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-}
-#pastScoresOutput{
-        display: flex;
-    flex-direction: column;
-    gap: 10px;
-    width: 100%;
-}
+
