@@ -1,15 +1,20 @@
-import React, { useEffect } from 'react'
+//PastScores.js
+import React, { useEffect } from 'react';
+// CSS STYLESHEETS
 import '../css/componentCSS/Scores.css'
+// Bootstrap
 import Stack from 'react-bootstrap/Stack';
 import FormSelect from 'react-bootstrap/FormSelect'; //Import Formselect component from react-bootstrap
 
-export default function PastScores({
+export default function PastScores(
+  {//PROPS PASSED FROM PARENT COMPONENT (GAME.js)
     userScores,
     fetchUserScores,
     loggedIn,
     setSelectedQuiz,
     selectedQuiz
 }) {
+  //============USE EFFECT HOOK============
     useEffect(() => {
         if (loggedIn === true) {
             fetchUserScores()
@@ -22,7 +27,7 @@ export default function PastScores({
     ? userScores.filter(score => score.quizTitle === selectedQuiz)
     : [];//If no quiz is selected return an empty array
 
-    // ========================================
+    // ===================JSX RENDERING=====================
   return (
      <div id="pastScoresOutput">
               {/* Conditional rendering to check if the user has any scores */}
