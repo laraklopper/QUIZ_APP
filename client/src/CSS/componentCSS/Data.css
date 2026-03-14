@@ -1,9 +1,5 @@
 /* Data.css */
-.btnText{
-    font-weight: 500;
-    margin: 0px;
-    padding: 0px;
-}
+
 
 .userDetailsLabel{
     display: flex;
@@ -12,6 +8,9 @@
 }
 .dataTextHead{
     text-transform: uppercase;
+        margin: 0px;
+    padding: 0px;
+    font-weight: 600;
     font-family: "Playpen Sans", cursive
 }
 .dataText{

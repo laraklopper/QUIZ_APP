@@ -2,10 +2,17 @@
 /* EditUserForm: PATCH 
 EditPasswordForm: PATCH
 */
+#editUserFormHeadingBlock{
+    margin: 10px 0px;
+    padding: 0px;
+        display: flex;
+    justify-content: center;
+}
 #editUserForm{
     display: flex;
     flex-direction: column;
     width: 100%;
+    background-color: #808080;
 }
 #editUserDetails{
     display: flex;

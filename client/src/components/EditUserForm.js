@@ -76,7 +76,7 @@ export default function EditUserForm(//Export the EditUserForm function componen
     {/* ---------SCREEN READER HEADING-------- */}
     <p className='visually-hidden' id='editUserProfileForm'>EDIT USER PROFILE</p>
     {/* FORM HEADING */}
-    <div id='formHeadingBlock'>
+    <div id='editUserFormHeadingBlock'>
       <h3 className='formHeading'>EDIT USER PROFILE</h3>
     </div>
     {/* EDIT DETAILS */}
