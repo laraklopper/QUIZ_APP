@@ -1,13 +1,26 @@
+// RegistrationForm.js
 import React, { useMemo, useState } from 'react'
+//CSS STYLESHEETS
 import '../css/componentCSS/FormSetup.css';
 import '../css/componentCSS/RegistrationForm.css';
+// BOOTSTRAP
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
+// Import Icons from Lucide-React
 import { Asterisk, Eye, EyeOff } from 'lucide-react';
 
-export default function RegistrationForm({newUserData, setNewUserData, addUser, onClearForm}) {
+//RegistrationForm function component
+export default function RegistrationForm(//Export the default RegistrationForm component
+    {//PROPS PASSED FROM PARENT COMPONENT (Registration.js)
+        newUserData, 
+        setNewUserData, 
+        addUser, 
+        onClearForm
+    }
+) {
+    //===========STATE VARIABLE====================            
     const [showPassword, setShowPassword] = useState(false)
     const [passwordMsg, setPasswordMsg] = useState(false)
     const [emailMsg, setEmailMsg] = useState(false)
@@ -50,12 +63,17 @@ export default function RegistrationForm({newUserData, setNewUserData, addUser, 
     const passwordErrorId = 'regisPasswordError'
 
     //==================EVENT LISTENERS=======================
+    // Function to handle Registration
     const handleRegistration = (e) => {
         e.preventDefault();
         addUser()
     }
+    //Function to handle input change
     const handleInputChange = (event) => {
+        // Extract the properties from the event.target
         const { name, value, type, checked } = event.target
+        // Determine the new value based on the input type
+        // If the input type is 'checkbox', use `checked`, otherwise use `value`
         const fieldValue = type === 'checkbox' ? checked : value
 
         // Handle nested fields like 'fullName.firstName'
@@ -69,6 +87,7 @@ export default function RegistrationForm({newUserData, setNewUserData, addUser, 
                 },
             }))
         } else {
+            // Handle non nested fields 
             setNewUserData((prev) => ({
                 ...prev,
                 [name]: fieldValue,
@@ -81,17 +100,19 @@ export default function RegistrationForm({newUserData, setNewUserData, addUser, 
         setTouched((prev) => ({ ...prev, [field]: true }))
     }
 
-    //===============================================
+    //=================JSX RENDERING==============================
     return (
         <form id='registrationForm' onSubmit={handleRegistration} method='POST' aria-labelledby={formTitleId}>
             <div id='registrationDetails'>
                 {/* Screen-reader form title */}
                 <h2 id={formTitleId} className='visually-hidden'>Registration form</h2>
+                {/* HEADING ROW: Heading */}
                 <Row id='regisHeadingRow'>
                 {/* Col 1 */}
                     <Col id='regisCol1'></Col>
                     {/* Col 2: HEADING */}
                     <Col xs={5} id='regisCol2'>
+                    {/* FORM HEADING */}
                         <div id='formHeadingBlock'>
                             <h3 className='formHeading'>SIGN UP</h3>
                         </div>
@@ -103,7 +124,7 @@ export default function RegistrationForm({newUserData, setNewUserData, addUser, 
                 <Row id='regisRow1'>
                 {/* Col 4: username */}
                     <Col xs={6} md={4} id='regisCol4'>
-                    {/* USERNAME */}
+                    {/* ---------USERNAME--------- */}
                         <label className='regisLabel' htmlFor='regisUsername'>
                             <p className='labelText'>USERNAME:</p>
                             <input
@@ -117,7 +138,7 @@ export default function RegistrationForm({newUserData, setNewUserData, addUser, 
                                 inputMode='text'
                                 onChange={handleInputChange}
                                 onBlur={() => handleBlur('username')}
-                                // ARIA:
+                                // ARIA ATTRIBUTES:
                                 aria-label='Registration username input'
                                 aria-required='true'
                                 aria-invalid={usernameEmpty ? 'true' : 'false'}
@@ -134,7 +155,7 @@ export default function RegistrationForm({newUserData, setNewUserData, addUser, 
                     </Col>
                     {/* Col 5: Full Name */}
                     <Col xs={12} md={8} id='regisCol5'>
-                    {/* FULL NAME */}
+                    {/* =======FULL NAME========== */}
                         <div id='regisName'>
                             {/* -------- FIRST NAME -------- */}
                             <label className='regisLabel' htmlFor='regisFirstName'>
@@ -150,7 +171,7 @@ export default function RegistrationForm({newUserData, setNewUserData, addUser, 
                                     onBlur={() => handleBlur('firstName')}
                                     placeholder='FIRST NAME'
                                     inputMode='text'
-                                    // ARIA:
+                                    // ARIA ATTRIBUTES:
                                     aria-label='First name input'
                                     aria-required='true'
                                     aria-invalid={firstNameEmpty ? 'true' : 'false'}
@@ -178,7 +199,7 @@ export default function RegistrationForm({newUserData, setNewUserData, addUser, 
                                     onChange={handleInputChange}
                                     onBlur={() => handleBlur('lastName')}
                                     inputMode='text'
-                                    // ARIA:
+                                    // ARIA ATTRIBUTES:
                                     aria-label='Last name input'
                                     aria-required='true'
                                     aria-invalid={lastNameEmpty ? 'true' : 'false'}
@@ -218,7 +239,7 @@ export default function RegistrationForm({newUserData, setNewUserData, addUser, 
                                         setEmailMsg(false)
                                         handleBlur('email')
                                     }}
-                                    // ARIA:
+                                    // ARIA ATTRIBUTES:
                                     aria-label='Email input'
                                     aria-required='true'
                                     aria-invalid={emailEmpty ? 'true' : 'false'}
@@ -262,7 +283,7 @@ export default function RegistrationForm({newUserData, setNewUserData, addUser, 
                                 value={newUserData.dateOfBirth}
                                 onChange={handleInputChange}
                                 onBlur={() => handleBlur('dateOfBirth')}
-                                // ARIA:
+                                // ARIA ATTRIBUTES:
                                 aria-label='Date of birth input'
                                 aria-required='true'
                                 aria-invalid={dateOfBirthEmpty ? 'true' : 'false'}
@@ -288,7 +309,7 @@ export default function RegistrationForm({newUserData, setNewUserData, addUser, 
                                 name='admin'
                                 checked={newUserData.admin}
                                 onChange={handleInputChange}
-                                // ARIA:
+                                // ARIA ATTRIBUTES:
                                 aria-label='Register as admin checkbox'
                                 aria-describedby='regisAdminHelp'
                             />
@@ -301,6 +322,7 @@ export default function RegistrationForm({newUserData, setNewUserData, addUser, 
                 </Row>
                 {/* ======== ROW 3 — PASSWORD + Buttons ======== */}
                 <Row id='regisRow3'>
+                {/* Col 9: Password */}
                     <Col  md={8} id='regisCol9'>
                         <div id='regisPassword'>
                             <label className='regisLabel' htmlFor='regisPasswordInput'>
@@ -319,7 +341,7 @@ export default function RegistrationForm({newUserData, setNewUserData, addUser, 
                                         setPasswordMsg(false)
                                         handleBlur('password')
                                     }}
-                                    // ARIA:
+                                    // ARIA ATTRIBUTES:
                                     aria-label='Password input'
                                     aria-required='true'
                                     aria-invalid={passwordEmpty ? 'true' : 'false'}
@@ -331,15 +353,16 @@ export default function RegistrationForm({newUserData, setNewUserData, addUser, 
                                 <Asterisk size={16} color='red' aria-hidden='true'/>
                                 <div>
                                     <Button
-                                variant='warning'
-                                id='showPasswordBtn'
-                                type='button'
-                                onClick={() => setShowPassword((s) => !s)}
-                                // ARIA for toggle buttons:
-                                aria-label={showPassword ? 'Hide password' : 'Show password'}
-                                aria-pressed={showPassword}
-                                aria-controls='regisPasswordInput'
-                            >
+                                        variant='warning'
+                                        id='showPasswordBtn'
+                                        type='button'
+                                        onClick={() => setShowPassword((s) => !s)}
+                                        // ARIA for toggle buttons:
+                                        aria-label={showPassword ? 'Hide password' : 'Show password'}
+                                        aria-pressed={showPassword}
+                                        aria-controls='regisPasswordInput'
+                                 >
+                                 {/* Toggle Button Text based on ShowPassword State */}
                                 {showPassword ? (
                                     <>
                                         HIDE PASSWORD
@@ -383,6 +406,7 @@ export default function RegistrationForm({newUserData, setNewUserData, addUser, 
                         </div>
                     </Col>
                     <Col xs={6} md={4} id='regisCol10'>
+                    {/* --------REGISTRATION FORM BUTTON STACK: Register Button, Clear Form Button--------*/}
                     <Stack id='regisBtnStack'>
                             <Button
                                 variant='light'
@@ -403,8 +427,7 @@ export default function RegistrationForm({newUserData, setNewUserData, addUser, 
                             </Button>
                         </Stack>
                     </Col>
-                </Row>
-            
+                </Row>           
             </div>
         </form>
     )
