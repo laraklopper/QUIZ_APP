@@ -26,6 +26,21 @@ The application is connected to the MongoDB database using mongoose third party 
 
 The MongoDB connection URI is constructed using the username, password, cluster URL and the database name. these are stored in the .env file which stores sensitive information. The application does not include any third-party API. All API requests in the application are REST API requests made from the front end to the backend.
 
+## REQUESTS
+
+### USER
+#### GET
+- `/user/me`: Route to Get current user details
+- `user/find`
+#### POST
+#### PATCH
+### DELETE
+### QUIZ
+
+### SCORES
+
+
+
 ## REFERENCES
 
 - https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods/PATCH
