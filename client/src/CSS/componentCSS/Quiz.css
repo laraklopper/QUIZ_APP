@@ -5,7 +5,7 @@
     flex-direction: column;
     gap: 10px;
     border-radius: 10px;
-        padding: 20px;
+    padding: 20px;
     background-color: #6c757d;
     margin: 10px 0px;
     border: solid;
@@ -31,12 +31,13 @@
     color: #393e43;
 }
 #resultText{
-        margin: 0px;
+    background-color: #AB9D00;
+    margin: 0px 5px 6px 5px;
     padding: 5px 0px;
     text-transform: uppercase;
     font-weight: 700;
     text-decoration: underline;
-        font-family: 'Roboto Mono';
+    font-family: 'Roboto Mono';
 }
 /* FEEDBACK */
 .correctFeedback{
