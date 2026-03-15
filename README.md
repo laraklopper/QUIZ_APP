@@ -1,6 +1,6 @@
-# QUIZ_APP
+# **QUIZ APP**
 
-## **OVERVIEW**
+## OVERVIEW
 
 The web application is a quiz application. The intended users who will benefit from the application are individuals who enjoy quiz games for recreational purposes. The application is written using MERN stack which is a popular open source JavaScript-based developer friendly web stack. MERN stack uses MongoDB (a NoSQL database), to handle the database, React.js to create the front-end, Express.js to create the backend and uses Node.js as the runtime environment.
 
@@ -29,7 +29,15 @@ The MongoDB connection URI is constructed using the username, password, cluster 
 The application is connected to the MongoDB database using mongoose third party middleware in the backend. The code uses mongoose.connect() to connect to establish a connection with the MongoDB database.
 
 The MongoDB connection URI is constructed using the username, password, cluster URL and the database name. these are stored in the .env file which stores sensitive information. The application does not include any third-party API. All API requests in the application are REST API requests made from the front end to the backend.
+## CONNECTION
 
+## DNS CONNECTION 
+
+## APPLICATION FEATURES
+
+## APPLICATION SECURITY
+
+### PASSWORD HASHING
 ## REQUESTS
 
 | **HTTP verb** | **CRUD OPERATION** | **DESCRIPTION**|
