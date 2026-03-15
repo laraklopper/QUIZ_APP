@@ -1,4 +1,5 @@
 // Home.js
+// Import Required modules and packages
 import React from 'react'
 //CSS Stylesheets
 import '../css/pagesCSS/Home.css'
@@ -33,19 +34,19 @@ export default function Home(//Export default Home function component
      <Header heading='HOME' currentUser={currentUser}/>
      {/* Section 1: Welcome Message + Animation */}
       <section id='welcomeSection'>
-     <Row id='welcomeRow'>
-        <Col></Col>
-        <Col xs={6} id='welcomeMsg' aria-live='polite'>
-            {/* welcome msg */}
-            <div id='welcomeDiv'>
-              <span className='welcomeLabel'>
-                <h2 id='welcomeHeading'>WELCOME:</h2>
-                <h2 id='welcomeUser'>{`${firstName} ${lastName}`}</h2>
-              </span>
-            </div> 
-        </Col>
-        <Col></Col>
-      </Row>
+      <Row id='welcomeRow'>
+          <Col id='welcomeCol1'></Col>
+          <Col xs={6} id='welcomeMsg' aria-live='polite'>
+              {/* welcome msg */}
+              <div id='welcomeDiv'>
+                <span className='welcomeLabel'>
+                  <h2 id='welcomeHeading'>WELCOME:</h2>
+                  <h2 id='welcomeUser'>{`${firstName} ${lastName}`}</h2>
+                </span>
+              </div> 
+          </Col>
+          <Col id='welcomeCol2'></Col>
+        </Row>
       {/* ===========EVENT/ANIMATION============*/}
         <Row id='homeEventRow' aria-hidden='true' role='presentation' aria-live='polite'>
           <Col id='homeEventCol' aria-live='polite'>
