@@ -1,5 +1,22 @@
 /* Quiz */
+#quiz{
+    width: 100%;
+    margin: 0px;
+}
 /* LAYOUT */
+#quizStack1{
+        border-radius: 5px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+        background-color: #b39800;
+        padding: 10px;
+        height: fit-content;
+}
+#quizStack2{
+    display: flex;
+    align-items: center;
+}
 #questionsBlock{
     display: flex;
     flex-direction: column;
@@ -9,6 +26,8 @@
     background-color: #6c757d;
     margin: 10px 0px;
     border: solid;
+    width: 250px;
+    align-items: center;
 }
 /* TEXT */
 #questionText{

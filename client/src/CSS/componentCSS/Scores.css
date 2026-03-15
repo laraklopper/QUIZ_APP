@@ -46,9 +46,28 @@
 
 /* TAbLE */
 #scoresTable {
+    overflow-y: scroll;
     width: 100%;
     border-collapse: collapse;
     background-color: #F7F7F7;
     margin: 0px;
     padding: 0px;
+}
+#scoresTable thead tr {
+    background-color: #323A42;
+    color: #fff;
+}
+#scoresTable th {
+    text-align: center;
+    text-transform: uppercase;
+    font-family: "Roboto Mono", monospace;
+    font-weight: 700;
+    font-size: 13px;
+    padding: 10px 8px;
+}
+#scoresTable tbody tr:nth-child(even) {
+    background-color: #D6D6D6;
+}
+#scoresTable tbody tr:nth-child(odd) {
+    background-color: #F7F7F7;
 }
