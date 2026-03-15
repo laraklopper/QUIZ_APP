@@ -107,6 +107,7 @@ font-family: "Noto Serif", serif;
 #E8F0F6
 <!-- QUIZ -->
 #efefef
+#5c7b1e
 <!-- QUIZ BUTTONS -->
 #3a500e
 #698C23
