@@ -1,4 +1,5 @@
 // Registration.js
+//Import required modules and packages
 import React, { useCallback, useState } from 'react'
 //CSS Stylesheet
 import '../css/pagesCSS/Register.css'

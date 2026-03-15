@@ -1,6 +1,8 @@
 // connect.js
 require('dotenv').config();
+//Import required modules and packages
 const mongoose = require('mongoose');
+// Extract the enviromental variables
 const uri = process.env.DATABASE_URL
 const database = process.env.DATABASE_NAME
 
@@ -22,11 +24,11 @@ const connectDB = async () => {
             serverSelectionTimeoutMS: 5000,// How long to try finding a server
             connectTimeoutMS: 10000, // How long to wait before failing connection
         })
-        console.log('[SUCCESS: connect.js]: Successfully connected to MongoDB');
+        console.log('[SUCCESS: connect.js]: Successfully connected to MongoDB');//Log a message in the console for debugging purposes
         
     } catch (error) {
-        console.error('[ERROR: connect.js] Error connecting to MongoDB', error);
-        process.exit(1);  
+        console.error('[ERROR: connect.js] Error connecting to MongoDB', error);//Log an error message in the console for debugging purposes
+        process.exit(1);  // Exit the process with a failure code
     }
 }
 
