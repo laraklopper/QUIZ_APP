@@ -29,6 +29,15 @@ The MongoDB connection URI is constructed using the username, password, cluster 
 
 ## REQUESTS
 
+| **HTTP verb** | **CRUD OPERATION** | **DESCRIPTION**|
+|--------|-------|------|
+| POST| CREATE| Used to submit data about a specific entity to the server |
+| GET |READ |Used to fetch `GET` information from the database|
+|PUT | UPDATE| Updates data on the database |
+|DELETE | DELETE | Deletes a specific resource |
+
+The application also uses  `PATCH` requests to update a resource. In comparison with `PUT`, a `PATCH` serves as a set of instructions for modifying a resource, whereas PUT represents a complete replacement of the resource. 
+
 ### USER
 Base path: `/users`
 
