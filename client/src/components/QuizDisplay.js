@@ -233,15 +233,13 @@ export default function QuizDisplay(//Export default QuizDisplay function compon
           </div>
         )}
         </div>
-       
         </Col>
-      
       </Row>
       <Row id='quizDisplayRow'>
         <Col xs={3} md={2}></Col>
         <Col md={8} id='quizDisplayCol'>
           {/* QUIZ */}
-          <div aria-labelledby='quiz-display-panal'>
+          <div id='quizDisplayBlock' aria-labelledby='quiz-display-panal'>
             {!loading && quiz && quizStarted && (
               <div id='quiz-display-panal'>
                 <Quiz
@@ -259,8 +257,7 @@ export default function QuizDisplay(//Export default QuizDisplay function compon
                 />
             </div>
           )}  
-          </div>
-             
+          </div>             
         </Col>
         <Col xs={3} md={2}></Col>
       </Row>
