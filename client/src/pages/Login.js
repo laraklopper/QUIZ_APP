@@ -47,9 +47,9 @@ export default function Login(//Export the default Login function component
             if (response.ok) {
                 localStorage.setItem('token', data.token);
                 localStorage.setItem('username', userData.username);
-            localStorage.setItem('loggedIn', 'true');
-            setError(null);
-            setLoggedIn(true);
+                localStorage.setItem('loggedIn', 'true');
+                setError(null);
+                setLoggedIn(true);
             }else{
                 throw new Error(data.message || 'Login failed');
             }

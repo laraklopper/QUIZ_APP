@@ -37,16 +37,18 @@ export default function Registration() {//Export the default Registration compon
   //Function to registerNewUser
   const addUser = useCallback(async () => {
     try {
+      //Send a POST request to the server 
       const response = await fetch('http://localhost:3001/users/register', {
-        method: 'POST',
-        mode: 'cors',
+        method: 'POST',//Request method
+        mode: 'cors',//Enable CORS for Cross-Origin-Resource Sharing 
         headers: { 
-          'Content-Type': 'application/json' 
+          'Content-Type': 'application/json' //Specify the Content-Type as JSON
         },
-        body: JSON.stringify(newUserData),
+        body: JSON.stringify(newUserData),// Convert newUserData to JSON string
       })
       const data = await response.json().catch(() => ({}));// Safely parse JSON (avoid crash if server returns non-JSON)
-            /* Conditional rendering to check if the response
+           
+      /* Conditional rendering to check if the response
          is not successful (status code is not in the range 200-299)*/
       if (!response.ok) {
         throw new Error(data.message || `Error adding user (Status: ${response.status})`);//Throw an error message if the POST request is unsuccessful

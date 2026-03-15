@@ -11,13 +11,16 @@ if (!uri || !database) {
     process.exit(1);// Exit the process with a failure code
 }
 
-//==================== CONNECT FUNCTION ====================
+//==================MONGODB CONNECTION SETUP==================//
+mongoose.Promise = global.Promise// Use native JavaScript promises for Mongoose
+
+//Function to connect to MongoDB using Mongoose
 const connectDB = async () => {
     try {
         await mongoose.connect(uri, {
-            dbName: database,
-            serverSelectionTimeoutMS: 5000,
-            connectTimeoutMS: 10000,
+            dbName: database,// Explicit database selection
+            serverSelectionTimeoutMS: 5000,// How long to try finding a server
+            connectTimeoutMS: 10000, // How long to wait before failing connection
         })
         console.log('[SUCCESS: connect.js]: Successfully connected to MongoDB');
         
