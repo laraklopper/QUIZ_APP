@@ -8,7 +8,7 @@
 .toggle-btn-div{
     display: flex;
     justify-content: center;
-    align-items: baseline;
+    align-items: center;
     gap: 10px;
     margin: 0px;
     padding: 5px 10px;

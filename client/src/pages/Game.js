@@ -14,6 +14,7 @@ import SelectQuizForm from '../components/SelectQuizForm';
 import QuizDisplay from '../components/QuizDisplay';
 import Button from 'react-bootstrap/Button';
 import PastScores from '../components/PastScores';
+import { CircleQuestionMark, Trophy  } from 'lucide-react';
 
 //===========MAIN GAME FUNCTION COMPONENT==========
 export default function Game(//Export default Game function component
@@ -128,6 +129,7 @@ export default function Game(//Export default Game function component
       {/* HEADER */}
       {/* Render the Header component with GAME as the heading */}
       <Header currentUser={currentUser} heading='GAME'/>
+      {/* SECTION 1:  */}
       <section id='quizSection'>
         {/* SELECT QUIZ FORM */}
          <Row id='selectQuizRow'>
@@ -142,6 +144,19 @@ export default function Game(//Export default Game function component
           </Col>
           <Col></Col>
       </Row>
+      {/* ============EVENT/ANIMATION=============== */}
+      {/* Only display after quiz is selected */}
+      <Row  id='selectQuizEventRow' aria-hidden='true' role='presentation' aria-live='polite'>
+       <Col id='selectQuizEventCol'>
+          <div id='event-bar'>
+            <div className='event-track'>
+              <CircleQuestionMark className='event-slide' size={32} aria-hidden='true' focusable="false"/>
+            </div>
+          </div>
+       </Col>
+      </Row>
+      {/* ===========QUIZ DISPLAY============= */}
+      {/* START QUIZ FORM + QUIZ  */}
           <div id='display-quiz-panal'>
           {/* Render the QuizDisplay Function component */}
             <QuizDisplay
@@ -161,8 +176,8 @@ export default function Game(//Export default Game function component
               questions={questions}
             />
           </div>
-       
       </section>
+      {/* SECTION 2:  */}
       <section id='scoresSection'>
         {/* PAST QUIZ RESULTS*/}
         <Row id='pastScoresRow'>
@@ -170,6 +185,7 @@ export default function Game(//Export default Game function component
         </Col>
         <Col xs={12} md={8} id='pastScoresCol'>
         <div className='toggle-btn-div'>
+        {/* BUTTON TO TOGGLE PAST SCORES */}
           <h6 className='btnText'>CLICK HERE TO:</h6>
           <Button 
           id='togglePastScoresBtn' 
@@ -181,8 +197,9 @@ export default function Game(//Export default Game function component
           aria-controls='past-results-panal'
           >
             {showPastScores ? 'HIDE PAST SCORES' : 'VIEW PAST SCORES'}
-          </Button>
+          </Button><Trophy />
         </div>
+        {/* TOGGLE PAST SCORES */}
           {showPastScores && (
           <div id='past-results-panal'>
           <PastScores
