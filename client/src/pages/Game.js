@@ -197,7 +197,7 @@ export default function Game(//Export default Game function component
           aria-controls='past-results-panal'
           >
             {showPastScores ? 'HIDE PAST SCORES' : 'VIEW PAST SCORES'}
-          </Button><Trophy />
+          </Button><Trophy fill='#AA9000' aria-hidden='true'/>
         </div>
         {/* TOGGLE PAST SCORES */}
           {showPastScores && (

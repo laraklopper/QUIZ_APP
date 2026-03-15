@@ -110,9 +110,8 @@ font-family: "Noto Serif", serif;
 <!-- QUIZ BUTTONS -->
 #3a500e
 #698C23
-<!--  -->
- #5c7b1e
- #3d5214
+<!-- SCORES -->
+#AA9000
 ```
 
 ## REFERENCES
