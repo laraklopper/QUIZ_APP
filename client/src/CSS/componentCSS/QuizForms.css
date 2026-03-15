@@ -27,10 +27,11 @@ EditQuizForm.js: PATCH
 }
 .form-select, #selectQuizForm{
     width: 200px;
-        text-align: center;
-        font-family: "Roboto Mono", monospace;
-            border: solid 2px;
+    text-align: center;
+    font-family: "Roboto Mono", monospace;
+    border: solid 2px;
     font-weight: 700;
+    text-transform: uppercase;
 }
 #selectQuizBlock{
     margin: 0px;
