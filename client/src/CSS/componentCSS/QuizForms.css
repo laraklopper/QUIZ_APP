@@ -8,11 +8,11 @@ EditQuizForm.js: PATCH
     display: flex;
     justify-content: center;
 }
-.quizName{
+.quizTitle{
         text-align: center;
     text-decoration: underline;
     font-weight: 800;
-    font-family: 'Alkatra';
+    font-family: "Playpen Sans", cursive;
     text-transform: uppercase;
 }
 #selectQuizLabelBlock{

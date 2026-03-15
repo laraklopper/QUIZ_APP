@@ -109,9 +109,11 @@ export default function Quiz(//Export default Quiz function component
     <div id='quiz' aria-labelledby='currentQuiz'>
     {/* ---------------SCREEN READER MESSAGE------------- */}
     <p className='visually-hidden' id='currentQuiz'>{quiz.name}</p>
-    <Stack gap={3} id='quizStack1'>
-      <div className="p-2">{/* Display quiz name */}
-          <h3 className='quizName'>{quiz.name}</h3></div>
+    <Stack id='quizStack1'>
+      <div id='quizNameBlock'>
+      {/* Display quiz name */}
+          <h3 className='quizName'>{quiz.title}</h3>
+          </div>
       <div className="p-2">
          {/* Display question number */}
             <div id='questionNumber'>
