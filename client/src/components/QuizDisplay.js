@@ -217,8 +217,9 @@ export default function QuizDisplay(//Export default QuizDisplay function compon
     <p className='visually-hidden'>QUIZ DISPLAY</p>
     {/* Show the quiz start form if a quiz is selected but not started */}
     {loading && <div id='loadingBlock'><p id='loadingMsg'>Loading...</p></div>}
-       <Row id='startQuizRow'>
-        <Col  md={12} id='quizStartCol'>
+    {/* --START QUIZ ROW: StartQuizRow-------- */}
+       <Row id='startQuizRow' aria-live='polite'>
+        <Col  md={12} id='quizStartCol' aria-live='polite'>
         {/* Render child components only when loading is complete */}
         <div id='startQuizBlock' aria-label=''>
         {!loading && selectedQuizId && (
