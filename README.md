@@ -103,11 +103,13 @@ The application also uses  `PATCH` requests to update a resources. In comparison
 
 |**HTTP METHOD** | **OPERATION** | **ENDPOINT** | **DESCRIPTION**|
 |--------|-------|------|------------|
-| POST | CREATE | `POST /users/login`|User login; returns JWT token |
-| POST | CREATE | `POST /users/register`| Register a new user *(requires valid password strength)*|
-| GET | READ |
-| GET | READ |
-| PATCH | UPDATE |
+| POST | CREATE | `POST /users/login` | User login; returns JWT token |
+| POST | CREATE | `POST /users/register` | Register a new user *(requires valid password strength)* |
+| GET | READ | `GET /users/me` | Get current user details *(requires JWT)* |
+| GET | READ | `GET /users/findUsers` | Get all users or filter by username *(requires JWT)* |
+| PATCH | UPDATE | `PATCH /users/editUser/:id` | Update user profile (username, fullName, email) |
+| PATCH | UPDATE | `PATCH /users/editPassword` | Change user password *(requires JWT)* |
+| DELETE | DELETE | `DELETE /users/deleteUser/:id` | Delete a user *(requires JWT, admin only)* |
 
 _Base path: `/users`_
 
@@ -115,11 +117,12 @@ _Base path: `/users`_
 
 |**HTTP METHOD** | **OPERATION** | **ENDPOINT** | **DESCRIPTION**|
 |--------|-------|------|------------|
-| POST | CREATE |`POST /quizzes/createQuiz` | Create a new quiz *(requires JWT)* |
-| GET | READ |
-| PUT | UPDATE |
-| PATCH | UPDATE |
-| DELETE 
+| POST | CREATE | `POST /quizzes/createQuiz` | Create a new quiz *(requires JWT)* |
+| GET | READ | `GET /quizzes/findQuizzes` | Get all quizzes *(requires JWT)* |
+| GET | READ | `GET /quizzes/findQuiz/:id` | Get a specific quiz by ID *(requires JWT)* |
+| PUT | UPDATE | `PUT /quizzes/editQuiz/:id` | Full update of a quiz *(requires JWT, creator or admin only)* |
+| PATCH | UPDATE | `PATCH /quizzes/updateQuiz/:id` | Partial update of a quiz *(requires JWT, creator or admin only)* |
+| DELETE | DELETE | `DELETE /quizzes/deleteQuiz/:id` | Delete a quiz *(requires JWT, creator or admin only)* |
 
 _Base path: `/quizzes`_
 
@@ -127,9 +130,11 @@ _Base path: `/quizzes`_
 
 |**HTTP METHOD** | **OPERATION** | **ENDPOINT** | **DESCRIPTION**|
 |--------|-------|------|------------|
-| POST | CREATE |`POST /quizzes/createQuiz` | Create a new quiz *(requires JWT)* |
-| GET | READ |
-| PUT | UPDATE |
+| POST | CREATE | `POST /scores/submitScore` | Submit a new quiz score |
+| GET | READ | `GET /scores/fetchScores` | Get all scores, optionally filtered by username *(requires JWT)* |
+| GET | READ | `GET /scores/findScores/:username` | Get all scores for a specific user |
+| GET | READ | `GET /scores/findScore/:username/:quizTitle` | Get a specific score for a user and quiz |
+| PUT | UPDATE | `PUT /scores/updateScore/:id` | Update an existing score if new score is higher *(requires JWT)* |
 
 
 _Base path: `/scores`_
