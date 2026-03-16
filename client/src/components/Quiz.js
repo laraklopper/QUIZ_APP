@@ -134,7 +134,6 @@ export default function Quiz(//Export default Quiz function component
               <label className='questionLabel'>
                 <h6 id='questionText'>
                   {questions[quizIndex].questionText}<MessageCircleQuestionMark  aria-hidden='true'/>
-
                   </h6>
               </label>
       </div>

@@ -50,7 +50,7 @@ export default function Results(//Export default Results function component
         {/* ========QUIZ RESULTS FORM================= */}
         <form onSubmit={handleSubmitScore} id='quizResultsForm' aria-labelledby='resultsHeading'>
         {/* -------------SCREEN READER HEADING------------------ */}
-        <p className='visually-hidden' id='resultHeading'>QUIZ RESULTS</p>
+        <p className='visually-hidden' id='resultsHeading'>QUIZ RESULTS</p>
             <div id='quizResultDetails'>
             <div id='resultsScoreHeadingBlock'>
               <h3 className='formHeading'>{quizName}: RESULTS</h3>
@@ -82,9 +82,11 @@ export default function Results(//Export default Results function component
                       <input
                         id='resultOutput'
                         type='text'
-                        value={`RESULT: ${currentScore} OF ${totalQuestions}`} // Display score and total questions
+                        value={`RESULT: ${currentScore} OF ${totalQuestions}`}
                         readOnly
                         className='input'
+                        aria-label={`Your score: ${currentScore} out of ${totalQuestions}`}
+                        aria-readonly='true'
                       />
                       <input
                         type='text'

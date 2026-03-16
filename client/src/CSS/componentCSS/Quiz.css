@@ -8,6 +8,8 @@
     background-color: #5c7b1e;
 }
 /* LAYOUT */
+/* Boootstrap Layout */
+
 #quizStack1{
     border-radius: 5px;
     width: 100%;
@@ -29,13 +31,7 @@
     margin: 0px;
 
 }
-.quizName{
-    display: flex;
-    text-transform: uppercase;
-    font-family: "Playpen Sans", cursive;
-    text-decoration: underline;
-    font-weight: 800;
-}
+
 #questionsBlock{
     display: flex;
     flex-direction: column;
@@ -48,7 +44,23 @@
     width: 250px;
     align-items: center;
 }
+#quizBtnsStack{
+    display: flex;
+    margin: 0px;
+    padding: 0px;
+    align-items: center;
+    width: 100%;
+}
 /* TEXT */
+.quizName{
+    display: flex;
+    text-transform: uppercase;
+    font-family: "Playpen Sans", cursive;
+    text-decoration: underline;
+    font-weight: 800;
+    margin: 0px;
+    padding: 0px;
+}
 #questionText{
     display: flex;
     align-items: center;
@@ -86,6 +98,8 @@
     font-family: 'Roboto Mono';
 }
 /* FEEDBACK */
+/* CSS DISPLAYED BASED ON FEEDBACK */
+/* Correct Answer */
 .correctFeedback{
     margin: 0px;
     padding: 0px;
@@ -97,6 +111,7 @@
     justify-content: center;
     font-family: "Playpen Sans", cursive;
 }
+/* Incorrect Answer */
 .incorrectFeedback{
     margin: 0px;
     color: #000;
@@ -107,9 +122,8 @@
     justify-content: center;
     font-family: "Noto Serif", serif;    
 }
-
-
 /* BUTTONS */
+/* Quiz Navigation Btn */
 #navBtn{
         display: flex;
     justify-content: center;
@@ -122,17 +136,18 @@ border: solid #323A42 3px;
 font-family: "Roboto Mono", monospace;
 }
 #navBtn:hover{
-        display: flex;
+    display: flex;
     justify-content: center;
     width: 80px;
     height: 40px;
     align-items: center;
     color: #E8F0F6;
     font-weight: 700;
-border: solid #323A42 3px;
-background-color: #323A42;
-font-family: "Roboto Mono", monospace;
+    border: solid #323A42 3px;
+    background-color: #323A42;
+    font-family: "Roboto Mono", monospace;
 }
+/* Answer/Option Buttons */
 #answerOption{
     display: flex;
     justify-content: center;
@@ -142,19 +157,13 @@ font-family: "Roboto Mono", monospace;
     font-weight: 700;
     color: #000;
     font-family: "Playpen Sans", cursive;
-        width: 200px;
+    width: 200px;
     background-color: #698C23;
     border-radius: 5px;
-     text-transform: uppercase;
-     border: solid #323A42 3px;
+    text-transform: uppercase;
+    border: solid #323A42 3px;
 }
-#quizBtnsStack{
-        display: flex;
-    margin: 0px;
-    padding: 0px;
-    align-items: center;
-    width: 100%;
-}
+
 #answerOption:hover{
     display: flex;
     justify-content: center;
@@ -164,14 +173,15 @@ font-family: "Roboto Mono", monospace;
     font-weight: 700px;
     color: #E8F0F6;
     font-family: "Playpen Sans", cursive;
-        width: 200px;
+    width: 200px;
     background-color: #3a500e;
     border-radius: 5px;
      text-transform: uppercase;
      border: solid #3a500e 3px;
 }
+/* Restart Quiz Button */
 #restartBtn{
-       height: 40px;
+    height: 40px;
     width: 180px;
     margin: 10px;
     font-weight: 700;
@@ -200,7 +210,7 @@ font-family: "Roboto Mono", monospace;
     border: solid #323A42 3px; 
 }
 #quizResultsRow{
-        width: 100%;
+    width: 100%;
     margin: 0px;
     padding: 0px;
     justify-content: center;
