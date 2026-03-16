@@ -163,7 +163,7 @@ export default function Quiz(//Export default Quiz function component
            <h6 id='resultText'>RESULT: {currentScore} of {quiz.questions.length}</h6>
         </div>
        </Stack> 
-         <Stack gap={2} className="col-md-5 mx-auto">
+         <Stack gap={2} id='quizBtnStack'>
       <Button 
       variant="primary"
       onClick={handleNextQuestion}

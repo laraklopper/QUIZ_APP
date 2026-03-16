@@ -50,7 +50,11 @@ export default function StartQuizForm(//Export the default StartQuizForm functio
                       disabled={quizStarted} 
                       aria-label='Add timer checkbox'
                   />
-                  <Hourglass aria-hidden='true' fill='#eadd61'/>
+                  <Hourglass
+                      aria-hidden='true'
+                      fill='#eadd61'
+                      className={quizTimer ? 'hourglassActive' : 'hourglassInactive'}
+                  />
           </div>
           <div className="p-2" id='startQuizBtnBlock'>
           {/* Button to start quiz */}

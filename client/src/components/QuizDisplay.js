@@ -263,8 +263,8 @@ export default function QuizDisplay(//Export default QuizDisplay function compon
         <Col xs={3} md={2}></Col>
       </Row>
       <Row id='quizResultsRow'>
-        <Col></Col>
-        <Col xs={3} md={2} id='quizDisplayCol'>
+        
+        <Col  id='quizDisplayCol'>
           {/* RESULT */}
           {!loading && quizCompleted && (
             <div id='quiz-results-panal'>
@@ -282,7 +282,7 @@ export default function QuizDisplay(//Export default QuizDisplay function compon
             </div>
           )}
         </Col>
-        <Col></Col>
+     
       </Row>
     </div>
   )

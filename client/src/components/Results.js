@@ -61,6 +61,7 @@ export default function Results(//Export default Results function component
           <input
           id='quizUser'
           className='input'
+          hidden
           type='text'
           value={`USERNAME: ${currentUser?.username || ''}`}
           readOnly
@@ -72,15 +73,16 @@ export default function Results(//Export default Results function component
           {/* Display the result with the score and total questions */}
                 <input
                   id='resultOutput'
-                  className='resultFormInput'
                   type='text'
                   value={`RESULT: ${currentScore} OF ${totalQuestions}`} // Display score and total questions
                   readOnly
+                  className='input'
                 />
                 <input
                   type='text'
                   value={currentDate()}// Display the current date
                   name='date'
+                  hidden
                   readOnly
                   className='input'
                   aria-readonly='true'
