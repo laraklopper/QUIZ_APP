@@ -9,12 +9,12 @@ const quizSchema = new mongoose.Schema({
         required: [true, 'Quiz title is required'],
         trim: true,
         minlength: [2, 'Quiz title must be at least 2 characters long'],
-        maxlength: [100, 'Quiz title cannot exceed 100 characters'],
+        maxlength: [5, 'Quiz title cannot exceed 100 characters'],
     },
     description: {
         type: String,
         trim: true,
-        maxlength: [500, 'Quiz description cannot exceed 500 characters'],
+        maxlength: [10, 'Quiz description cannot exceed 500 characters'],
         required: [true, 'Quiz description is required'],
     },
     username: {
@@ -31,7 +31,7 @@ const quizSchema = new mongoose.Schema({
                     required: [true, 'Question text is required'],
                     trim: true,
                     set: (v) => v.toUpperCase(), // Convert question text to uppercase
-                    minlength: [5, 'Question text must be at least 5 characters long'],
+                    minlength: [2, 'Question text must be at least 5 characters long'],
                 },
                 //Specify the correct answer as a string, which will be compared to the user's answer
                 correctAnswer: {

@@ -130,21 +130,30 @@
     text-transform: uppercase;
     font-family: "Roboto Mono", monospace;
     font-weight: 700;
-    font-size: 13px;
+    font-size: 20px;
     padding: 10px 8px;
 }
 #quizListTable tbody tr:nth-child(even) {
     background-color: #D6D6D6;
+    height: 35px;
+    text-align: center;
+        font-weight: 500px;
+        font-family: "Playpen Sans", cursive;
 }
 #quizListTable tbody tr:nth-child(odd) {
     background-color: #F7F7F7;
+    height: 35px;
+        font-weight: 500px;
+        text-align: center;
+        font-family: "Playpen Sans", cursive;
 }
 #quizListTable td {
     text-align: center;
     text-transform: uppercase;
-    font-family: "Roboto Mono", monospace;
-    font-size: 13px;
+    font-family: "Playpen Sans", cursive;
+    font-size: 16px;
     padding: 8px;
+    font-weight: 500;
     vertical-align: middle;
 }
 

@@ -182,13 +182,13 @@ export default function AddQuizForm(//Export default AddQuizForm function compon
             {/* --------ALTERNATIVE ANSWERS------------- */}
             <Stack gap={3} id='newQuizStack3'>
             {/* -----Alternative Answer 1------------ */}
-            <div className="p-2" id='altAns1Block'>
-              <label className='newQuizLabel' htmlFor='altAns1'>
+            <div className="p-2" id='altAns1'>
+              <label className='newQuizLabel' htmlFor='option1'>
                   <p className='labelText'>1. ALTERNATIVE ANSWER:</p>
                   <input
                     type='text'
                     className='addQuizInput'
-                    id='altAns1'
+                    id='option1'
                     placeholder='ALTERNATIVE ANSWER 1'
                     name='options[0]'
                     value={currentQuestion.options[0]}
