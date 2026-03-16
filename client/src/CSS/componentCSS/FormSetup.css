@@ -6,7 +6,9 @@
     margin: 0px;
     padding: 0px;
     text-decoration: underline;
+    text-transform: uppercase;
 }
+/* TEXT */
 .labelText{
     margin: 0px;
     padding: 5px;
@@ -14,6 +16,7 @@
     font-weight: 700;
     font-family: "Roboto Mono", monospace;
 }
+/* INPUT */
 .input{
     width: 200px;
     text-align: center;
@@ -25,15 +28,18 @@
     font-family: "Roboto Mono", monospace;
     font-weight: 700;
 }
+/* icon */
 .inputIcon{
     margin: 0px;
     padding: 0px;
 }
+
+
+/* MESSAGES */
 #required{
     display: flex;
     align-self: center;
 }
-/* MESSAGES */
 .infoMsg{
     font-family: "Alkatra", system-ui;
     font-weight: 700;
@@ -41,6 +47,7 @@
  #passwordMsgBlock{
     display: flex;
     justify-content: center;
+    text-transform: uppercase;
 }
 
 .msgText{
@@ -50,6 +57,7 @@
     font-family: "Roboto Mono", monospace;
     font-weight: 700;
     text-align: center;
+    text-transform: uppercase;
  }
 .visibleMsg{
     margin: 0px;

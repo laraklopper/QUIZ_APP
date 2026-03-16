@@ -1,5 +1,23 @@
 /* SCORES */
 /* RESULTS FORM */
+#quizResultsForm{
+        display: flex;
+    align-items: center;
+    background-color: #b39800;
+    flex-direction: column;
+    margin: 0px;
+    padding: 15px;
+    border-radius: 5px;
+}
+#quizResultsDetails{
+        display: flex;
+    align-items: center;
+    background-color: #b39800;
+    flex-direction: column;
+    margin: 0px;
+    padding: 0px;
+    border-radius: 5px;
+}
 /* INPUT */
 #resultOutput{
     border: none;
