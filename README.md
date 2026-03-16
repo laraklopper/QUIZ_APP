@@ -4,38 +4,43 @@ The web application is a quiz application. The intended users who will benefit f
 
 ##### ORIGINAL
 
-The current application is an updated verion of the following Github Repo:
+The current application is an updated version of the following Github Repo:
 
 https://github.com/laraklopper/QUIZ-APPLICATION.git
 
 ## TABLE OF CONTENTS
 
 1. [HOW TO USE THE APPLICATION](#how-to-use-the-application)
-2. [HOW TO RUN THE APPLICTION](#how-to-run-the-application)
-3. [REQUESTS](#requests)
-4. [REFERENCES](#references)
+2. [HOW TO RUN THE APPLICATION](#how-to-run-the-application)
+3. [CONNECTION](#connection)
+4. [DNS CONNECTION](#dns-connection)
+5. [APPLICATION FEATURES](#application-features)
+6. [APPLICATION SECURITY](#application-security)
+7. [REFERENCES](#references)
 
 ## HOW TO USE THE APPLICATION
 
-To use the application users are required to register(sign up) and login. Users are also able to register as admin users subject to certain age restrictions controlled by custom middleware. After login users are able to add quizzes and play quizzes. Users are also able to edit their user account.
+To use the application users are required to register (sign up) and login. Users are also able to register as admin users subject to certain age restrictions controlled by custom middleware. After login users are able to add quizzes and play quizzes. Users are also able to edit their user account.
 
-The application also allows users to edit and delete quizzes subject to certain requirements based on whether the user is a normal endpoint or an admin user. Admin users are allowed certain privileges such as the ability to edit or delete any quiz and also view all users and remove users.
+The application also allows users to edit and delete quizzes subject to certain requirements based on whether the user is a normal user or an admin user. Admin users are allowed certain privileges such as the ability to edit or delete any quiz and also view all users and remove users.
 
 ## HOW TO RUN THE APPLICATION
 
-A proxy server is included in the front-end to allow the front and back-end to run together. The application uses ‘nodemon’ third-party middleware in the backend to allow the application to run the backend and front-end in the command line interface(CLI) or terminal using npm start. The folders must, however, be run separately. The server is started (listens) on the port specified in the .env file using app.listen() in the app.js file or defaults to Port 3001.
+A proxy server is included in the front-end to allow the front and back-end to run together. The application uses `nodemon` third-party middleware in the backend to allow the application to run in the command line interface (CLI) or terminal using `npm start`. The folders must, however, be run separately. The server listens on the port specified in the `.env` file via `app.listen()` in `app.js`, or defaults to port `3001`.
 
+The MongoDB connection URI is constructed using the username, password, cluster URL, and database name, which are stored as environment variables and configured using the `dotenv` middleware. The application does not include any third-party API — all API requests are REST API requests made from the front end to the backend.
 
+| Layer | Port | Start Command |
+|---|---|---|
+| **React Client** | `3000` | `cd client && npm start` |
+| **Express Server** | `3001` | `cd server && npm start` |
+| **MongoDB Atlas** | Cloud | Direct connection string (see [DNS CONNECTION](#dns-connection)) |
 
-The MongoDB connection URI is constructed using the username, password, cluster URL and the database name. These are stored as environmental variables in the .env file. The .env file is configured using dotenv middleware.
-
-The MongoDB connection URI is constructed using the username, password, cluster URL and the database name. these are stored in the .env file which stores sensitive information. The application does not include any third-party API. All API requests in the application are REST API requests made from the front end to the backend.
 ## CONNECTION
 
-The application is connected to the MongoDB database using mongoose third-party middleware in the `connect.js` file in the back end (server) folder. The code uses mongoose.connect() to establish a connection between the application and the MongoDB database.
+The application is connected to the MongoDB database using mongoose third-party middleware in the `connect.js` file in the back end (server) folder. The code uses `mongoose.connect()` to establish a connection between the application and the MongoDB database.
 
-
-```
+```js
 //==================MONGODB CONNECTION SETUP==================//
 mongoose.Promise = global.Promise// Use native JavaScript promises for Mongoose
 
@@ -47,10 +52,10 @@ const connectDB = async () => {
             serverSelectionTimeoutMS: 5000,// How long to try finding a server
             connectTimeoutMS: 10000, // How long to wait before failing connection
         })
-        console.log('[SUCCESS: connect.js]: Successfully connected to MongoDB');//Log a message in the console for debugging purposes
-        
+        console.log('[SUCCESS: connect.js]: Successfully connected to MongoDB');
+
     } catch (error) {
-        console.error('[ERROR: connect.js] Error connecting to MongoDB', error);//Log an error message in the console for debugging purposes
+        console.error('[ERROR: connect.js] Error connecting to MongoDB', error);
         process.exit(1);  // Exit the process with a failure code
     }
 }
@@ -76,6 +81,7 @@ mongoose.connection.once('open', async () => {
     console.log("[SUCCESS: connectDB.JS] Database connection established");
 });
 ```
+
 ## DNS CONNECTION
 
 DNS (`Domain Name System`) translates human-readable domain names into IP addresses that computers use to communicate. This project connects to **MongoDB Atlas** using a direct connection string rather than the standard `mongodb+srv://` protocol.
@@ -84,7 +90,7 @@ DNS (`Domain Name System`) translates human-readable domain names into IP addres
 
 `mongodb+srv://` triggers two DNS lookups inside Node.js via its internal **c-ares** resolver — an SRV lookup and a TXT lookup. On Windows, c-ares may fail with `querySrv ECONNREFUSED` even when `nslookup` succeeds, because c-ares attempts a TCP fallback for large DNS responses that Windows Firewall can block.
 
-Mongoose connects directly to the three Atlas replica set nodes on port `27017`, with a server selection timeout of 5000ms and connection timeout of 10000ms.
+The fix is to bypass SRV entirely by using a direct connection string with the actual cluster hostnames. Mongoose connects directly to the three Atlas replica set nodes on port `27017`, with a server selection timeout of 5000ms and connection timeout of 10000ms.
 
 ### Common DNS Troubleshooting
 
@@ -92,25 +98,36 @@ Mongoose connects directly to the three Atlas replica set nodes on port `27017`,
 |---|---|---|
 | `querySrv ECONNREFUSED` | c-ares SRV lookup blocked | Switch to direct connection string |
 | Connection timeout | Cluster paused or IP not whitelisted | Check Atlas cluster status and Network Access |
-| Port `27017` blocked | Firewall | Test with `Test-NetConnection -ComputerName <host> -Port 27017` |
+| Port `27017` blocked | Firewall | Test connectivity with `Test-NetConnection` |
+
+> For full DNS background, SRV record details, and DNS commands see [Docs/DNS-connections.md](Docs/DNS-connections.md).
+
 ## APPLICATION FEATURES
-#### REQUESTS
 
-| **HTTP verb** | **CRUD OPERATION** | **DESCRIPTION**|
+The application provides the following features:
+
+- **User registration and login** — users register with a username, full name, email, date of birth, and password. Login returns a JWT token used to authenticate subsequent requests.
+- **Admin accounts** — users can register as admins. Admin registration requires the user to be 18 or older, enforced by custom middleware. Admins can edit or delete any quiz, view all users, and remove non-admin users.
+- **Quiz management** — authenticated users can create, view, edit, and delete quizzes. Each quiz requires a title, description, and exactly 5 questions. Only the quiz creator or an admin can edit or delete a quiz.
+- **Score tracking** — users can submit a score after completing a quiz. Scores are stored per user per quiz. An existing score can be updated only if the new score is higher.
+
+### REQUESTS
+
+| **HTTP verb** | **CRUD OPERATION** | **DESCRIPTION** |
 |--------|-------|------|
-| POST| CREATE| Used to submit data about a specific entity to the server |
-| GET |READ |Used to fetch `GET` information from the database|
-|PUT | UPDATE| Updates data on the database |
-|DELETE | DELETE | Deletes a specific resource |
+| POST | CREATE | Used to submit data about a specific entity to the server |
+| GET | READ | Used to fetch information from the database |
+| PUT | UPDATE | Full replacement update of a resource on the database |
+| PATCH | UPDATE | Partial update of a resource on the database |
+| DELETE | DELETE | Deletes a specific resource |
 
-The application also uses  `PATCH` requests to update a resources. In comparison with `PUT`, a `PATCH` serves as a set of instructions for modifying a resource, whereas PUT represents a complete replacement of the resource. 
+The application uses both `PUT` and `PATCH` requests to update resources. A `PATCH` serves as a set of instructions for modifying a resource, whereas `PUT` represents a complete replacement of the resource.
 
-##### **ROUTES**
+### ROUTES
 
 `userRoutes.js`
 
-
-|**HTTP METHOD** | **OPERATION** | **ENDPOINT** | **DESCRIPTION**|
+| **HTTP METHOD** | **OPERATION** | **ENDPOINT** | **DESCRIPTION** |
 |--------|-------|------|------------|
 | POST | CREATE | `POST /users/login` | User login; returns JWT token |
 | POST | CREATE | `POST /users/register` | Register a new user *(requires valid password strength)* |
@@ -124,7 +141,7 @@ _Base path: `/users`_
 
 `quizRoutes.js`
 
-|**HTTP METHOD** | **OPERATION** | **ENDPOINT** | **DESCRIPTION**|
+| **HTTP METHOD** | **OPERATION** | **ENDPOINT** | **DESCRIPTION** |
 |--------|-------|------|------------|
 | POST | CREATE | `POST /quizzes/createQuiz` | Create a new quiz *(requires JWT)* |
 | GET | READ | `GET /quizzes/findQuizzes` | Get all quizzes *(requires JWT)* |
@@ -135,9 +152,9 @@ _Base path: `/users`_
 
 _Base path: `/quizzes`_
 
-`scoreRoute.js`
+`scoreRoutes.js`
 
-|**HTTP METHOD** | **OPERATION** | **ENDPOINT** | **DESCRIPTION**|
+| **HTTP METHOD** | **OPERATION** | **ENDPOINT** | **DESCRIPTION** |
 |--------|-------|------|------------|
 | POST | CREATE | `POST /scores/submitScore` | Submit a new quiz score |
 | GET | READ | `GET /scores/fetchScores` | Get all scores, optionally filtered by username *(requires JWT)* |
@@ -145,18 +162,42 @@ _Base path: `/quizzes`_
 | GET | READ | `GET /scores/findScore/:username/:quizTitle` | Get a specific score for a user and quiz |
 | PUT | UPDATE | `PUT /scores/updateScore/:id` | Update an existing score if new score is higher *(requires JWT)* |
 
-
 _Base path: `/scores`_
 
-### APPLICATION SECURITY
-- JWT
-- Helmet (`helmet()`)
-- CORS (`cors()`)
-- PasswordHashing (`bcrypt`)
-- dotenv `(('dotenv').config())`
-- ensureJwtSecret.js (`ensureJwtSecret();`)
-- Role-based access control (`RBAC`)
-#### PASSWORD HASHING
+## APPLICATION SECURITY
+
+The application uses multiple layers of security:
+
+| Mechanism | Package / Module | Purpose |
+|---|---|---|
+| **JWT authentication** | `jsonwebtoken` | Signs and verifies tokens on protected routes; tokens expire after 12 hours |
+| **HTTP security headers** | `helmet` | Sets secure HTTP response headers to protect against common web vulnerabilities |
+| **CORS** | `cors` | Controls which origins can make requests to the API |
+| **Environment variables** | `dotenv` | Keeps sensitive configuration (JWT secret, DB credentials) out of source code |
+| **JWT secret check** | `ensureJwtSecret.js` | Exits the process at startup if `JWT_SECRET_KEY` is not set |
+| **Role-based access control** | Custom middleware (`checkAdmin`) | Restricts certain routes to admin users only |
+| **Password strength validation** | Custom middleware (`checkPasswordStrength`) | Enforces a minimum of 8 characters and at least one special character |
+
+### PASSWORD HASHING
+
+Password hashing is handled using the `bcrypt` third-party package. The `hashPassword` middleware in `middleware.js` hashes passwords before they are stored, using a salt round value of `10` — an industry-standard balance between security and performance.
+
+```js
+const SALT_ROUNDS = 10;
+
+const hashPassword = async (req, res, next) => {
+    const { password, newPassword } = req.body || {};
+
+    if (password && !newPassword) {
+        req.body.password = await bcrypt.hash(password, SALT_ROUNDS);
+    } else if (newPassword) {
+        req.body.newPassword = await bcrypt.hash(newPassword, SALT_ROUNDS);
+    }
+    next();
+};
+```
+
+Password strength is validated before hashing via the `checkPasswordStrength` middleware, which rejects any password that does not meet the minimum requirements: at least 8 characters and at least one special character (`!@#$%^&*` etc.).
 
 ## REFERENCES
 
