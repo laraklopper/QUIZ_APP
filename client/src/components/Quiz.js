@@ -124,8 +124,8 @@ export default function Quiz(//Export default Quiz function component
               </label>
             </div>
              {/* Display timer if enabled */}
-            {quizTimer && 
-            <div id='timer'>
+            {quizTimer &&
+            <div id='timer' role='timer' aria-live='polite' aria-label={`Time remaining: ${formatTimer(timeLeft)}`}>
               TIMER: {formatTimer(timeLeft)}
             </div>}
       </div>
@@ -141,41 +141,51 @@ export default function Quiz(//Export default Quiz function component
     </Stack>
     {/* ---------QUIZ OPTIONS + FEEDBACK MESSAGE + CURRENT SCORE======= */}
        <Stack  gap={3} id='quizStack2'>
-        <div className="p-2" id='questionsBlock'>
+        <div className="p-2" id='questionsBlock' role='group' aria-labelledby='questionText'>
            {questions[quizIndex].options.map((option, index) => (
                 <Button
-                  key={index} 
+                  key={index}
                   id='answerOption'
                   name='options'
                   checked={selectedOption=== option}
                   type='button'
                   variant='success'
+                  aria-describedby='questionText'
                   onClick={() => handleOptionClick(option)}//Call the handle option click fucntion
                 >
                   {option}
                 </Button>
               ))}
               {/* Display feedback message */}
-              {feedback && <div id='feedbackOutput'>{feedback}</div>}
+              <div id='feedbackOutput' role='status' aria-live='polite' aria-atomic='true'>
+                {feedback}
+              </div>
         </div>        
         <div id='currentResultBlock'>              
            {/* Display the current score */}
-           <h6 id='resultText'>RESULT: {currentScore} of {quiz.questions.length}</h6>
+           <h6 id='resultText' aria-live='polite' aria-atomic='true'>RESULT: {currentScore} of {quiz.questions.length}</h6>
         </div>
        </Stack> 
-         <Stack gap={2} id='quizBtnStack'>
-      <Button 
+         <Stack id='quizBtnStack'>
+      <Button
       variant="primary"
       onClick={handleNextQuestion}
       type='button'
       size='sm'
       id='navBtn'
-      // aria-pressed={}
-      aria-label='Next Question Button'
+      aria-label={`Next question (${quizIndex + 1} of ${quiz.questions.length})`}
+      aria-describedby='questionNumber'
       >
-        NEXT <ArrowBigRightDash />
+        NEXT <ArrowBigRightDash aria-hidden='true' />
       </Button>
-      <Button variant="danger" id='restartBtn' type='button' onClick={handleRestart}>RESTART <RotateCcw /></Button>
+      <Button 
+      variant="danger" 
+      id='restartBtn' 
+      type='button' 
+      aria-label='Restart Quiz' 
+      onClick={handleRestart}>
+      RESTART <RotateCcw aria-hidden='true' />
+      </Button>
 
     </Stack>
     </div>
