@@ -91,12 +91,12 @@ export default function MainHeader(
             <Col></Col>
         </Row>
         {/* Header Row 3: Event Bar */}
-        <Row id='headerEventRow' role='presentation' aria-hidden='true'>
-            <Col id='headerEventCol' aria-live='polite'>
+        <Row id='headerEventRow' className='g-0' role='presentation' aria-hidden='true'>
+            <Col id='headerEventCol'>
             {/* ------------EVENT ANIMATION-------------- */}
                 <div className='header-event-bar'>
                     <div className='event-track'>
-                        <UserLock className='user-slide' />
+                        <UserLock className='user-slide' size={32} focusable='false' aria-hidden='true' />
                     </div>
                 </div>
             </Col>
