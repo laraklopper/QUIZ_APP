@@ -45,6 +45,12 @@
     flex-direction: column;
     align-items: center;
 }
+#headerClockStack{
+    width: 100%;
+    margin: 0px;
+    padding: 10px 0px 0px 10px;
+    display: flex;
+}
 /* HEADINGS */
 #appHeading{
     font-family: "Winky Rough", sans-serif;
