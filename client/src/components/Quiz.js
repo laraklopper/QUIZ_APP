@@ -9,7 +9,9 @@ import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
 // Import Icons from Lucide-React
 import { ArrowBigRightDash, RotateCcw, X ,Check, MessageCircleQuestionMark} from 'lucide-react';
+// Import Utility Functions
 import { formatTimer } from '../utilFunctions/quizFunctions';
+
 // Quiz function component
 export default function Quiz(//Export default Quiz function component
   {//PROPS PASSED FROM PARENT COMPONENT (QuizDisplay.js)
