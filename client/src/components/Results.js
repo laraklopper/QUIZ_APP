@@ -66,7 +66,7 @@ export default function Results(//Export default Results function component
                   aria-readonly='true'
                   hidden
                 />
-                {/* USERNAME */}
+                {/* USERNAME: HIDDEN: readonly */}
                 <input
                 id='quizUser'
                 className='input'
