@@ -2,17 +2,7 @@
 Header.js
 StartQuizForm.js
 */
-  #headerEventRow{
-    width: 100%;
-    margin: 10px 0px 5px 0px;
-    padding: 0px;
-    overflow: hidden;
-   }
-   #headerEventCol{
-    width: 100%;
-    margin: 0px;
-    padding: 0px;
-}
+
 
 /* =============================================
    HEADER ANIMATIONS

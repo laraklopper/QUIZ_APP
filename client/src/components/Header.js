@@ -44,7 +44,7 @@ export default function Header(
     {/* HEADER ROW 1: Clock*/}
     <Row id='headerRow1'>
         <Col id='headerCol1' aria-live='polite' >
-            <Stack direction="horizontal" gap={3} id='clockStack'>
+            <Stack direction="horizontal" gap={3} id='headerClockStack'>
             {/* CLOCK */}
             <div className="p-2" id='dateTimeBlock'>          
                  <ListGroup variant="flush" id='dateTimeList'>
