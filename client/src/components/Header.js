@@ -2,6 +2,8 @@
 import React, { useEffect, useState } from 'react'
 // CSS Stylesheets
 import '../css/componentCSS/Header.css'
+// Animations CSS
+import '../css/componentCSS/ComponentAnimations.css'
 // Bootstrap
 import Row from 'react-bootstrap/Row'; 
 import Col from 'react-bootstrap/Col'; 

@@ -3,6 +3,8 @@ import React, { useMemo, useState } from 'react'
 // CSS Stylesheets
 import '../css/componentCSS/LoginForm.css'
 import '../css/componentCSS/FormSetup.css'
+// Animations CSS
+import '../css/componentCSS/ComponentAnimations.css'
 // Bootstrap
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';

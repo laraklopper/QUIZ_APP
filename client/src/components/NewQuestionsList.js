@@ -1,6 +1,8 @@
 //NewQuestionsList.js
 // Import necessary modules and packages
 import React, {useCallback} from 'react'
+// Animations CSS
+import '../css/componentCSS/ComponentAnimations.css'
 //Bootstrap
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';

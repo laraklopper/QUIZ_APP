@@ -2,6 +2,8 @@
 import React, { useEffect } from 'react';
 // CSS STYLESHEETS
 import '../css/componentCSS/Scores.css'
+// Animations CSS
+import '../css/componentCSS/ComponentAnimations.css'
 // Bootstrap
 import Stack from 'react-bootstrap/Stack';
 import FormSelect from 'react-bootstrap/FormSelect'; //Import Formselect component from react-bootstrap

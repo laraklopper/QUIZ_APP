@@ -3,6 +3,8 @@
 import React, {useState, useEffect} from 'react'
 //CSS STYLESHEETS
 import '../css/componentCSS/Header.css';
+// Animations CSS
+import '../css/componentCSS/ComponentAnimations.css'
 // Bootstrap
 import Row from 'react-bootstrap/Row'; // Import the Row component from react-bootstrap
 import Col from 'react-bootstrap/Col'; // Import the Col component from react-bootstrap
