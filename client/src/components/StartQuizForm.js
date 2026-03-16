@@ -25,7 +25,9 @@ export default function StartQuizForm(//Export the default StartQuizForm functio
     <form 
       onSubmit={handleQuizStart} 
       id='startQuizForm' 
-      aria-labelledby='startQuizHeading'>
+      aria-labelledby='startQuizHeading'
+      method='put'
+      >
     {/* -----------SCREEN READER HEADING------------- */}
     <p className='visually-hidden' id='startQuizHeading'>START QUIZ FORM</p>
     {/* ----------FORM INPUT------------ */}

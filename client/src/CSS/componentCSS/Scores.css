@@ -1,4 +1,52 @@
 /* SCORES */
+/* RESULTS FORM */
+/* INPUT */
+#resultOutput{
+    border: none;
+    background-color: transparent;
+    width: 200px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    height: 40px;
+    font-family: "Roboto Mono", monospace;
+    font-weight: 700;
+}
+#resultsFormBtnBlock{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+#saveScoreBtn{
+    width: 200px;
+     gap: 10px;
+    font-weight: 700;
+    color: black;
+    display: flex;
+    height: 40px;
+    text-align: center;
+    font-size: 14px;
+    justify-content: center;
+    font-family: "Roboto Mono", monospace;
+    border: #323A42 3px solid;
+    align-items: center;
+}
+#saveScoreBtn:hover {
+    gap: 10px;
+    align-items: center;
+    width: 200px;
+    background-color: #323A42;
+    font-weight: 700;
+    height: 40px;
+    color: #FFF;
+    border: #323A42 solid;
+    display: flex;
+    text-align: center;
+    font-size: 14px;
+    justify-content: center;
+    font-family: "Roboto Mono", monospace;
+}
+/*PAST SCORES*/
 #pastScoresOutput{
         width: 100%;
     display: flex;
@@ -15,7 +63,7 @@
 }
 
 #scoresStack{
-        margin: 0px;
+    margin: 0px;
     padding: 10px 0px;
     display: flex;
     width: 100%;
@@ -70,38 +118,4 @@
 }
 #scoresTable tbody tr:nth-child(odd) {
     background-color: #F7F7F7;
-}
-#resultsFormBtnBlock{
-    display: flex;
-    justify-content: center;
-    width: 100%;
-}
-#saveScoreBtn{
-    width: 200px;
-     gap: 10px;
-    font-weight: 700;
-    color: black;
-    display: flex;
-    height: 40px;
-    text-align: center;
-    font-size: 14px;
-    justify-content: center;
-    font-family: "Roboto Mono", monospace;
-    border: #323A42 3px solid;
-    align-items: center;
-}
-#saveScoreBtn:hover {
-    gap: 10px;
-    align-items: center;
-    width: 200px;
-    background-color: #323A42;
-    font-weight: 700;
-    height: 40px;
-    color: #FFF;
-    border: #323A42 solid;
-    display: flex;
-    text-align: center;
-    font-size: 14px;
-    justify-content: center;
-    font-family: "Roboto Mono", monospace;
 }
