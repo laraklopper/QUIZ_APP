@@ -1,6 +1,8 @@
 import React from 'react'
 import '../css/componentCSS/FormSetup.css'
 import '../css/componentCSS/QuizForms.css'
+// Animations CSS
+import '../css/componentCSS/ComponentAnimations.css'
 import Stack from 'react-bootstrap/Stack';
 import Form from 'react-bootstrap/Form';
 

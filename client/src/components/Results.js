@@ -2,6 +2,8 @@
 import React, { useCallback, useState } from 'react'
 // CSS STYLESHEETS
 import '../css/componentCSS/Scores.css'
+// Animations CSS
+import '../css/componentCSS/ComponentAnimations.css'
 // Bootstrap
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';

@@ -3,6 +3,8 @@ import React, { useCallback, useState } from 'react'
 // CSS STYLESHEETS
 import '../css/componentCSS/FormSetup.css'
 import '../css/componentCSS/EditUserForms.css'
+// Animations CSS
+import '../css/componentCSS/ComponentAnimations.css'
 //Bootstrap
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';

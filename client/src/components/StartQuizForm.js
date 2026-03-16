@@ -4,6 +4,8 @@ import React from 'react'
 // CSS Stylesheets
 import '../css/componentCSS/FormSetup.css'
 import '../css/componentCSS/QuizForms.css'
+// Animations CSS
+import '../css/componentCSS/ComponentAnimations.css'
 // Bootstrap
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
