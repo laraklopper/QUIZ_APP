@@ -16,7 +16,8 @@ https://github.com/laraklopper/QUIZ-APPLICATION.git
 4. [DNS CONNECTION](#dns-connection)
 5. [APPLICATION FEATURES](#application-features)
 6. [APPLICATION SECURITY](#application-security)
-7. [REFERENCES](#references)
+7. [ARIA](#aria)
+8. [REFERENCES](#references)
 
 ## HOW TO USE THE APPLICATION
 
@@ -90,7 +91,6 @@ DNS (`Domain Name System`) translates human-readable domain names into IP addres
 
 `mongodb+srv://` triggers two DNS lookups inside Node.js via its internal **c-ares** resolver — an SRV lookup and a TXT lookup. On Windows, c-ares may fail with `querySrv ECONNREFUSED` even when `nslookup` succeeds, because c-ares attempts a TCP fallback for large DNS responses that Windows Firewall can block.
 
-The fix is to bypass SRV entirely by using a direct connection string with the actual cluster hostnames. Mongoose connects directly to the three Atlas replica set nodes on port `27017`, with a server selection timeout of 5000ms and connection timeout of 10000ms.
 
 ### Common DNS Troubleshooting
 
@@ -100,7 +100,7 @@ The fix is to bypass SRV entirely by using a direct connection string with the a
 | Connection timeout | Cluster paused or IP not whitelisted | Check Atlas cluster status and Network Access |
 | Port `27017` blocked | Firewall | Test connectivity with `Test-NetConnection` |
 
-> For full DNS background, SRV record details, and DNS commands see [Docs/DNS-connections.md](Docs/DNS-connections.md).
+
 
 ## APPLICATION FEATURES
 
@@ -110,6 +110,8 @@ The application provides the following features:
 - **Admin accounts** — users can register as admins. Admin registration requires the user to be 18 or older, enforced by custom middleware. Admins can edit or delete any quiz, view all users, and remove non-admin users.
 - **Quiz management** — authenticated users can create, view, edit, and delete quizzes. Each quiz requires a title, description, and exactly 5 questions. Only the quiz creator or an admin can edit or delete a quiz.
 - **Score tracking** — users can submit a score after completing a quiz. Scores are stored per user per quiz. An existing score can be updated only if the new score is higher.
+
+The application also includs Security features and Accessible Rich Internet Applications (`ARIA`).
 
 ### REQUESTS
 
@@ -171,6 +173,7 @@ The application uses multiple layers of security:
 | Mechanism | Package / Module | Purpose |
 |---|---|---|
 | **JWT authentication** | `jsonwebtoken` | Signs and verifies tokens on protected routes; tokens expire after 12 hours |
+| **checkJwtToken custom middleware**|`middleware.js`| Custom middleware function to check `JWT` tokens|
 | **HTTP security headers** | `helmet` | Sets secure HTTP response headers to protect against common web vulnerabilities |
 | **CORS** | `cors` | Controls which origins can make requests to the API |
 | **Environment variables** | `dotenv` | Keeps sensitive configuration (JWT secret, DB credentials) out of source code |
@@ -199,10 +202,68 @@ const hashPassword = async (req, res, next) => {
 
 Password strength is validated before hashing via the `checkPasswordStrength` middleware, which rejects any password that does not meet the minimum requirements: at least 8 characters and at least one special character (`!@#$%^&*` etc.).
 
-## REFERENCES
+## Accessible Rich Internet Applications ARIA
 
+ARIA (Accessible Rich Internet Applications) is a set of HTML attributes defined by the WAI-ARIA specification that improve accessibility for users of assistive technologies such as screen readers. The front end of this application uses ARIA attributes throughout its React components to communicate structure, state, and meaning to assistive technology.
+
+### ARIA Attributes Used
+
+| Attribute | Purpose | Where Used |
+|---|---|---|
+| `aria-label` | Provides an accessible name for an element that has no visible text label | Buttons, inputs, icons across most form components |
+| `aria-labelledby` | Associates an element with a visible heading or label element by ID | Form sections, fieldsets, page regions |
+| `aria-describedby` | Links an input to a helper or error message element | `LoginForm`, `RegistrationForm` |
+| `aria-required` | Indicates a field must be filled before submission | Form inputs in `AddQuizForm`, `EditQuizForm`, `RegistrationForm` |
+| `aria-invalid` | Indicates a field's current value is invalid | `LoginForm`, `RegistrationForm` |
+| `aria-live` | Marks a region that updates dynamically so screen readers announce changes | Status messages, loading states, feedback regions |
+| `aria-atomic` | Tells screen readers to announce the entire live region when it updates | Error/status regions in `EditQuizForm` |
+| `aria-busy` | Signals that a region is loading or updating | `EditQuizForm`, `EditPasswordForm` |
+| `aria-hidden` | Hides decorative elements from the accessibility tree | Decorative SVG icons and asterisks across form components |
+| `aria-expanded` | Communicates whether a collapsible section or control is open or closed | Toggle controls in `AddQuiz`, `EditUserData`, `GamePage` |
+| `aria-controls` | Associates a control with the element it expands or toggles | Toggle buttons in `AddQuiz`, `EditPasswordForm`, `LoginForm` |
+| `aria-pressed` | Indicates the toggled state of a button (e.g. show/hide password) | Password visibility buttons in `EditPasswordForm`, `RegistrationForm` |
+| `aria-disabled` | Marks an element as disabled without removing it from the accessibility tree | `Results` component |
+| `aria-readonly` | Indicates a field is read-only | Result fields in `Results` component |
+
+### ARIA Roles Used
+
+| Role | Purpose | Where Used |
+|---|---|---|
+| `role="main"` | Identifies the primary content region of the page | Page-level components (`HomePage`, `AddQuiz`, `GamePage`, etc.) |
+| `role="banner"` | Identifies the site header | `Header`, `Footer` |
+| `role="alert"` | Announces error or status messages immediately to screen readers | Error messages in `LoginForm`, `RegistrationForm`, `EditPasswordForm`, `EditQuizForm` |
+| `role="region"` | Marks a significant named section of the page | Sections in `EditUserData` |
+| `role="group"` | Groups related form controls | Question groups in `EditQuizForm` |
+| `role="toolbar"` | Identifies a group of action controls | Action bars in `EditQuizForm`, `EditUserForm` |
+| `role="navigation"` | Identifies a navigation landmark | Navigation area in `EditQuizForm` |
+| `role="button"` | Applied to non-button elements styled and used as buttons | Custom button elements in `EditPasswordForm`, `EditUserData` |
+| `role="presentation"` | Removes semantic meaning from a purely decorative element | Decorative images and containers in page components |
+
+## REFERENCES
+- https://www.geeksforgeeks.org/mern/understand-mern-stack/
+- https://developer.mozilla.org/en-US/docs/Web/HTTP
 - https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods/PATCH
 - https://mongoosejs.com/docs/connections.html
 - https://mongoosejs.com/docs/api/query.html#Query.prototype.exec()
 - https://mongoosejs.com/docs/api/query.html#Query.prototype.populate()
 - https://mongoosejs.com/docs/api/query.html#Query.prototype.deleteMany()
+- https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA
+- https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes
+
+ ### FRAMEWORKS AND MIDDLEWARE
+ _SERVER_
+  - https://expressjs.com/
+  - https://www.npmjs.com/package/dotenv 
+  - https://www.npmjs.com/package/nodemon
+  - https://www.npmjs.com/package/mongoose
+  - https://www.npmjs.com/package/cors
+  - https://www.npmjs.com/package/helmet
+  - https://www.npmjs.com/package/bcrypt
+
+
+ _CLIENT_
+
+ - https://react-bootstrap.netlify.app/
+ - https://react.dev/reference/react
+ - https://www.npmjs.com/package/react-router-dom 
+ - https://lucide.dev/guide/installation
