@@ -1,4 +1,5 @@
 // Game.js
+//Import required modules and packages
 import React, { useCallback, useEffect, useState } from 'react'
 // CSS Stylesheets
 import '../css/pagesCSS/PageSetup.css'
@@ -14,6 +15,7 @@ import SelectQuizForm from '../components/SelectQuizForm';
 import QuizDisplay from '../components/QuizDisplay';
 import Button from 'react-bootstrap/Button';
 import PastScores from '../components/PastScores';
+// Import icons from lucide-react
 import { CircleQuestionMark, Trophy  } from 'lucide-react';
 
 //===========MAIN GAME FUNCTION COMPONENT==========

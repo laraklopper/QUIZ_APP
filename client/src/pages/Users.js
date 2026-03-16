@@ -1,7 +1,10 @@
+// Users.js
 import React from 'react'
+// CSS Stylesheets
 import '../css/pagesCSS/PageSetup.css'
 import '../css/pagesCSS/Users.css'
 import '../css/componentCSS/UserData.css'
+// Bootstrap
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -10,6 +13,8 @@ import Button from 'react-bootstrap/Button';
 // CUSTOM COMPONENTS
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+// Import icons from lucide-react
+import { BookUser } from 'lucide-react';
 //Utility Functions
 import { dateDisplay } from '../utilFunctions/dateFunctions';
 
@@ -63,6 +68,16 @@ export default function Users(//Export default Users function component
           <h2 id='userListHeading'>USERS:</h2>
         </Col>
         <Col id='userListHeadCol2'></Col>
+      </Row>
+      {/* =========EVENT/ANIMATION=========== */}
+      <Row id='usersEventRow' role='presentation'>
+        <Col id='usersEventCol'>
+          <div id='event-bar'>
+            <div id='event-track'>
+               <BookUser className='event-slide' size={32} aria-hidden='true' focusable="false" />
+            </div>
+          </div>
+        </Col>
       </Row>
       <Row id='userListRow'>
         <Col xs={3} md={2} id='userListCol1'></Col>

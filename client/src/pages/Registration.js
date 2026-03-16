@@ -16,8 +16,9 @@ import RegistrationForm from '../components/RegistrationForm';
 import PageFooter from '../components/PageFooter';
 // Import react-route-dom components
 import { useNavigate } from 'react-router-dom';
-import { Form } from 'lucide-react';
-import { ClipboardList, Pencil  } from 'lucide-react';
+// Import icons from lucide-react
+import {Form, ClipboardList, Pencil  } from 'lucide-react';
+
 const EMPTY_FORM = {
   username: '',
   fullName: { firstName: '', lastName: '' },
