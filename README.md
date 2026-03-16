@@ -124,6 +124,16 @@ _Base path: `/users`_
 _Base path: `/quizzes`_
 
 `scoreRoute.js`
+
+|**HTTP METHOD** | **OPERATION** | **ENDPOINT** | **DESCRIPTION**|
+|--------|-------|------|------------|
+| POST | CREATE |`POST /quizzes/createQuiz` | Create a new quiz *(requires JWT)* |
+| GET | READ |
+| PUT | UPDATE |
+
+
+_Base path: `/scores`_
+
 ### USER
 
 
@@ -166,14 +176,7 @@ Base path: `/quizzes`
 ---
 
 ### SCORES
-|**HTTP METHOD** | **OPERATION** | **ENDPOINT** | **DESCRIPTION**|
-|--------|-------|------|------------|
-| POST | CREATE |`POST /quizzes/createQuiz` | Create a new quiz *(requires JWT)* |
-| GET | READ |
-| PUT | UPDATE |
 
-
-_Base path: `/scores`_
 
 #### GET
 - `GET /scores/fetchScores` - Get all scores, optionally filtered by username *(requires JWT)*
