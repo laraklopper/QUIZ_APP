@@ -23,30 +23,18 @@ The application also allows users to edit and delete quizzes subject to certain 
 
 ## HOW TO RUN THE APPLICATION
 
-A proxy server is included in the front-end to allow the front and back-end to run together. The application uses `nodemon` third-party middleware in the backend to allow the application to run the backend and front-end in the command line interface(CLI) or terminal using npm start. The folders must, however, be run separately. 
+A proxy server is included in the front-end to allow the front and back-end to run together. The application uses ‘nodemon’ third-party middleware in the backend to allow the application to run the backend and front-end in the command line interface(CLI) or terminal using npm start. The folders must, however, be run separately. The server is started (listens) on the port specified in the .env file using app.listen() in the app.js file or defaults to Port 3001.
 
-The server is started (listens) on the port specified in the .env file using app.listen() in the app.js file or defaults to Port 3001.
+
 
 The MongoDB connection URI is constructed using the username, password, cluster URL and the database name. These are stored as environmental variables in the .env file. The .env file is configured using dotenv middleware.
 
-The application is connected to the MongoDB database using mongoose third party middleware in the backend. The code uses mongoose.connect() to connect to establish a connection with the MongoDB database.
+The MongoDB connection URI is constructed using the username, password, cluster URL and the database name. these are stored in the .env file which stores sensitive information. The application does not include any third-party API. All API requests in the application are REST API requests made from the front end to the backend.
+## CONNECTION
 
- The application does not include any third-party API. All API requests in the application are REST API requests made from the front end to the backend.
-
-#### CONNECTION
+The application is connected to the MongoDB database using mongoose third-party middleware in the `connect.js` file in the back end (server) folder. The code uses mongoose.connect() to establish a connection between the application and the MongoDB database.
 
 
-The application is connected to the MongoDB database using `mongoose` third-party middleware in the `connect.js` file in the back end (server) folder. The code uses mongoose.connect() to establish a connection between the application and the MongoDB database.
-The MongoDB connection URI is constructed using the username, password, cluster URL and the database name. These are stored in the `.env` file which stores sensitive information.
-
-Enviromental variables are stored in the `.env` file and are extracted using `dotenv` middleware
-```
-require('dotenv').config();
-```
-
-__CONNECTION FUNCTION__
-
-`connect.js`
 ```
 //==================MONGODB CONNECTION SETUP==================//
 mongoose.Promise = global.Promise// Use native JavaScript promises for Mongoose
@@ -96,7 +84,7 @@ DNS (`Domain Name System`) translates human-readable domain names into IP addres
 
 `mongodb+srv://` triggers two DNS lookups inside Node.js via its internal **c-ares** resolver — an SRV lookup and a TXT lookup. On Windows, c-ares may fail with `querySrv ECONNREFUSED` even when `nslookup` succeeds, because c-ares attempts a TCP fallback for large DNS responses that Windows Firewall can block.
 
-**Fix:** bypass SRV entirely by using a direct connection string with the actual cluster hostnames. Mongoose connects directly to the three Atlas replica set nodes on port `27017`, with a server selection timeout of 5000ms and connection timeout of 10000ms.
+Mongoose connects directly to the three Atlas replica set nodes on port `27017`, with a server selection timeout of 5000ms and connection timeout of 10000ms.
 
 ### Common DNS Troubleshooting
 
@@ -105,15 +93,8 @@ DNS (`Domain Name System`) translates human-readable domain names into IP addres
 | `querySrv ECONNREFUSED` | c-ares SRV lookup blocked | Switch to direct connection string |
 | Connection timeout | Cluster paused or IP not whitelisted | Check Atlas cluster status and Network Access |
 | Port `27017` blocked | Firewall | Test with `Test-NetConnection -ComputerName <host> -Port 27017` |
-
-> For full DNS background, SRV record details, and DNS commands see [Docs/DNS-connections.md](Docs/DNS-connections.md).
-
 ## APPLICATION FEATURES
-
-## APPLICATION SECURITY
-
-### PASSWORD HASHING
-## REQUESTS
+#### REQUESTS
 
 | **HTTP verb** | **CRUD OPERATION** | **DESCRIPTION**|
 |--------|-------|------|
@@ -124,7 +105,7 @@ DNS (`Domain Name System`) translates human-readable domain names into IP addres
 
 The application also uses  `PATCH` requests to update a resources. In comparison with `PUT`, a `PATCH` serves as a set of instructions for modifying a resource, whereas PUT represents a complete replacement of the resource. 
 
-### ROUTES
+##### **ROUTES**
 
 `userRoutes.js`
 
@@ -166,6 +147,16 @@ _Base path: `/quizzes`_
 
 
 _Base path: `/scores`_
+
+### APPLICATION SECURITY
+- JWT
+- Helmet (`helmet()`)
+- CORS (`cors()`)
+- PasswordHashing (`bcrypt`)
+- dotenv `(('dotenv').config())`
+- ensureJwtSecret.js (`ensureJwtSecret();`)
+- Role-based access control (`RBAC`)
+#### PASSWORD HASHING
 
 ## REFERENCES
 
