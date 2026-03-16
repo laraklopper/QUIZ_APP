@@ -80,8 +80,7 @@ export default function Users(//Export default Users function component
         </Col>
       </Row>
       <Row id='userListRow'>
-        <Col xs={3} md={2} id='userListCol1'></Col>
-        <Col xs={12} md={8} id='userListCol'>
+        <Col id='userListCol'>
         {/* TABLE DISPLAYING THE USERS LIST */}
           {users && users.length > 0 ? (
             <table id='userListTable'>
@@ -130,7 +129,6 @@ export default function Users(//Export default Users function component
             <p id='noUsersMsg'>NO USERS FOUND</p>
           )}
         </Col>
-        <Col xs={3} md={2} id='userListCol2'></Col>
       </Row>
      </section>
      {/* FOOTER */}
