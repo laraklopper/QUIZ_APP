@@ -68,6 +68,14 @@
     padding: 0px;
     color: #393e43;
 }
+#quizBtnStack{
+    display: flex;
+    align-items: center;
+    margin: 0px;
+    padding: 0px;
+
+
+}
 #resultText{
     background-color: #AB9D00;
     margin: 0px 5px 6px 5px;
