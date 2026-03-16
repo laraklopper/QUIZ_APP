@@ -6,11 +6,12 @@ StartQuizForm.js
     width: 100%;
     margin: 10px 0px 5px 0px;
     padding: 0px;
+    overflow: hidden;
    }
    #headerEventCol{
     width: 100%;
-    margin: 10px 10px 5px 10px;
-    padding: 5px 10px;
+    margin: 0px;
+    padding: 0px;
 }
 
 /* =============================================
@@ -22,7 +23,7 @@ StartQuizForm.js
     background-color: #338F27;
     border-top: 2px solid #000;
     border-bottom: 2px solid #000;
-    margin: 0px 5px;
+    margin: 0px;
     padding: 0px;
     height: 40px;
 }

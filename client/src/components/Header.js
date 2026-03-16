@@ -117,7 +117,7 @@ export default function Header(
         </Col>
       </Row>
       {/* HEADER EVENT ROW */}
-        <Row id='headerEventRow' role='presentation' aria-hidden='true'>
+        <Row id='headerEventRow' className='g-0' role='presentation' aria-hidden='true'>
         <Col id='headerEventCol'>
         {/* ---------EVENT/ANIMATION--------------- */}
             <div className='header-event-bar'>
