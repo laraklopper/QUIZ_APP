@@ -17,7 +17,7 @@ import Button from 'react-bootstrap/Button';
 import PastScores from '../components/PastScores';
 // Import icons from lucide-react
 import { CircleQuestionMark, Trophy  } from 'lucide-react';
-
+import { shuffleArray } from '../utilFunctions/quizFunctions';
 //===========MAIN GAME FUNCTION COMPONENT==========
 export default function Game(//Export default Game function component
   {//PROPS PASSED FROM PARENT COMPONENT (App.js)
@@ -66,15 +66,7 @@ export default function Game(//Export default Game function component
     return () => {isMounted = false}
   },[fetchQuizzes, setError])
 
-  //===========
-  //Function to randomise answers
-
- const shuffleArray = (array) => {
-    //  Use the JavaScript sort method to shuffle the array
-    // The comparison function returns a random value between -0.5 and 0.5
-    // This results in a random order for each array element
-    return array.sort(() => Math.random() - 0.5);
-  }
+ 
   //==========REQUEST===========
   //----------GET----------------
   // Function to fetch a single quiz by quizId

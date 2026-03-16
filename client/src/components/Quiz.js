@@ -9,7 +9,7 @@ import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
 // Import Icons from Lucide-React
 import { ArrowBigRightDash, RotateCcw, X ,Check, MessageCircleQuestionMark} from 'lucide-react';
-
+import { formatTimer } from '../utilFunctions/quizFunctions';
 // Quiz function component
 export default function Quiz(//Export default Quiz function component
   {//PROPS PASSED FROM PARENT COMPONENT (QuizDisplay.js)
@@ -70,16 +70,7 @@ export default function Quiz(//Export default Quiz function component
     return <div>Loading...</div>;
   }
 
-  //=============UTILITY FUNCTION==============
-    // Function to format the timer into mm:ss format
-  const formatTimer = (seconds) => {
-    const minutes = Math.floor(seconds / 60);  // Calculate the number of minutes
-    const secs = seconds % 60; // Calculate the remaining seconds
-    // Return the formatted time as a string in mm:ss format
-    // Pad seconds with a leading zero if less than 10
-    return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
-  };
-  
+
   // ============EVENT LISTENERS=================
   /* Function to handle answer selection and 
   update the score if correct */

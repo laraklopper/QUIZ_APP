@@ -174,6 +174,7 @@ export default function QuizDisplay(//Export default QuizDisplay function compon
       setQuizStarted(true)
       setQuizIndex(0);
       setCurrentScore(0);
+      setQuizCompleted(false);
 
       if (quizTimer) {
         setTimer(10)
