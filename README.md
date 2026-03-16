@@ -145,3 +145,4 @@ _Base path: `/scores`_
 - https://mongoosejs.com/docs/connections.html
 - https://mongoosejs.com/docs/api/query.html#Query.prototype.exec()
 - https://mongoosejs.com/docs/api/query.html#Query.prototype.populate()
+- https://mongoosejs.com/docs/api/query.html#Query.prototype.deleteMany()
