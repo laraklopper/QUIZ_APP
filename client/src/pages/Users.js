@@ -72,8 +72,8 @@ export default function Users(//Export default Users function component
       {/* =========EVENT/ANIMATION=========== */}
       <Row id='usersEventRow' role='presentation'>
         <Col id='usersEventCol'>
-          <div id='event-bar'>
-            <div id='event-track'>
+          <div className='event-bar'>
+            <div className='event-track'>
                <BookUser className='event-slide' size={32} aria-hidden='true' focusable="false" />
             </div>
           </div>

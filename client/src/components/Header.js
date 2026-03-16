@@ -122,7 +122,7 @@ export default function Header(
         {/* ---------EVENT/ANIMATION--------------- */}
             <div className='header-event-bar'>
                 <div className='event-track'>
-                    <User className='user-slide' size={32} />
+                    <User className='user-slide' size={32} focusable='false' aria-hidden='true' />
                 </div>
             </div>
         </Col>
