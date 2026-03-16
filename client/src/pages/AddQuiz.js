@@ -13,7 +13,7 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 import AddQuizForm from '../components/AddQuizForm';
 import EditQuizForm from '../components/EditQuizForm';
-
+import { FileQuestionMark } from 'lucide-react';
 //=============MAIN ADDQUIZ COMPONENT==============
 export default function AddQuiz(//Export default addQuiz function component
   {//PROPS PASSED FROM PARENT COMPONENT (App.js)
@@ -286,7 +286,16 @@ export default function AddQuiz(//Export default addQuiz function component
           </Row>
         )}
       </section>
-      
+      {/*--------- EVENT/ANIMATION---------- */}
+      <Row id='addQuizEventRow' role='presentation' aria-hidden='true' >
+        <Col id='addQuizEventCol'>
+          <div className='event-bar'>
+            <div className='event-track'>
+              <FileQuestionMark className='event-slide' size={32} aria-hidden='true' focusable="false"  />
+            </div>
+          </div>
+        </Col>
+      </Row>
       <section id='newQuizSection'>
         {/* ADD QUIZ FORM */}
         <Row id='addQuizRow'>
