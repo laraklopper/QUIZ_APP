@@ -2,11 +2,30 @@
 Header.js
 StartQuizForm.js
 */
+  #headerEventRow{
+    width: 100%;
+    margin: 10px 0px 5px 0px;
+    padding: 0px;
+   }
+   #headerEventCol{
+    width: 100%;
+    margin: 10px 10px 5px 10px;
+    padding: 5px 10px;
+}
 
 /* =============================================
    HEADER ANIMATIONS
    ============================================= */
-
+   /* HEADER */
+   .header-event-bar {
+    width: 100%;
+    background-color: #338F27;
+    border-top: 2px solid #000;
+    border-bottom: 2px solid #000;
+    margin: 0px 5px;
+    padding: 0px;
+    height: 40px;
+}
 @keyframes headerSlideDown {
     from {
         opacity: 0;
