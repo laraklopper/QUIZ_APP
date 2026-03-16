@@ -80,7 +80,7 @@ export default function EditQuizForm({
                             <p className='labelText'>QUIZ NAME:</p>
                         </label>
                         <input
-                            className='input'
+                            className='editQuizInput'
                             type='text'
                             id='editQuizNameInput'
                             name='quizName'
@@ -98,7 +98,7 @@ export default function EditQuizForm({
                             <p className='labelText'>QUIZ DESCRIPTION:</p>
                         </label>
                         <input
-                            className='input'
+                            className='editQuizInput'
                             type='text'
                             id='editQuizDescriptionInput'
                             name='description'
@@ -153,7 +153,7 @@ export default function EditQuizForm({
                                         <p className='labelText'>QUESTION:</p>
                                     </label>
                                     <input
-                                        className='input'
+                                        className='editQuizInput'
                                         type='text'
                                         id='editQuestionText'
                                         value={currentQuestion.questionText}
