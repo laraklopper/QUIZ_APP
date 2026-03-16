@@ -39,53 +39,20 @@ EditQuizForm.js: PATCH
     display: flex;
     justify-content: center;
 }
-/* START QUIZ ANIMATIONS */
-@keyframes startFormEntrance {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-@keyframes titleReveal {
-    0% {
-        opacity: 0;
-        letter-spacing: 6px;
-    }
-    100% {
-        opacity: 1;
-        letter-spacing: normal;
-    }
-}
-@keyframes btnPulse {
-    0%   { transform: scale(1); box-shadow: none; }
-    50%  { transform: scale(1.06); box-shadow: 0 0 10px #323a4266; }
-    100% { transform: scale(1); box-shadow: none; }
-}
-@keyframes hourglassSpin {
-    0%   { transform: rotate(0deg); }
-    100% { transform: rotate(180deg); }
-}
 /* START QUIZ */
+/* Animations: see ComponentAnimations.css */
 #startQuizForm{
     width: 500px;
     background-color: #B7B7B7;
     border: solid 3px;
     display: flex;
     justify-content: center;
-    animation: startFormEntrance 10s ease-out both;
 }
 #startQuizStack{
     width: 300px;
     display: flex;
     margin: 10px;
     align-items: center;
-}
-#startQuizStack .quizTitle {
-    animation: titleReveal 0.6s ease-out 0.2s both;
 }
 /* BUTTONS */
 #startQuizBtn{
@@ -104,19 +71,8 @@ EditQuizForm.js: PATCH
     transition: background-color 0.2s ease, color 0.2s ease;
 }
 #startQuizBtn:hover{
-    animation: btnPulse 0.4s ease-in-out;
     background-color: #323A42;
     color: #fff;
-}
-#startQuizBtn:active {
-    transform: scale(0.95);
-}
-/* HOURGLASS */
-.hourglassActive {
-    animation: hourglassSpin 0.5s ease-in-out forwards;
-}
-.hourglassInactive {
-    animation: hourglassSpin 0.5s ease-in-out reverse forwards;
 }
 /* EDIT QUIZ FORM */
 #editQuizForm{

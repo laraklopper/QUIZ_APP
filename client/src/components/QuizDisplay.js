@@ -1,5 +1,6 @@
 // QuizDisplay.js
 import React, { useCallback, useState, useEffect } from 'react'
+// CSS STYLESHEETS
 import '../css/componentCSS/QuizDisplay.css'
 // Bootstrap
 import Row from 'react-bootstrap/Row';
