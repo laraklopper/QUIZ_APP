@@ -1,5 +1,7 @@
 // Results.js
 import React, { useCallback, useState } from 'react'
+// CSS STYLESHEETS
+import '../css/componentCSS/Scores.css'
 // Bootstrap
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
