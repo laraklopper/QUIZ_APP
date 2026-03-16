@@ -125,7 +125,7 @@
     text-transform: uppercase;
     font-family: "Roboto Mono", monospace;
     font-weight: 700;
-    font-size: 13px;
+    font-size: 20px;
     padding: 10px 8px;
 }
 #userListTable tbody tr:nth-child(even) {

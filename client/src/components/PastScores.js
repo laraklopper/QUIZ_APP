@@ -23,11 +23,10 @@ export default function PastScores(
         }
     }, [fetchUserScores, loggedIn])
 
-      // Filter the results by the selected quiz name
-  const quizResults = selectedQuiz
-    // Filter the scores based on the selected quiz
+      // Filter the results by the selected quiz name, or show all if none selected
+  const quizResults = selectedQuiz && selectedQuiz.trim()
     ? userScores.filter(score => score.quizTitle === selectedQuiz)
-    : [];//If no quiz is selected return an empty array
+    : userScores;
 
     // ===================JSX RENDERING=====================
   return (
@@ -51,8 +50,8 @@ export default function PastScores(
                     onChange={(e) => setSelectedQuiz(e.target.value)}// Handle quiz selection
                     id='scoreList'
                   >
-                    {/* Default option */}
-                    <option value=" " className='scoresOption'>SELECT SCORES</option>
+                    {/* Default option — shows all scores */}
+                    <option value="" className='scoresOption'>ALL SCORES</option>
                     {/* Map through the user scores and display 
                     them in the select dropdown */}
                     {userScores.map((score, index) => (
@@ -63,8 +62,8 @@ export default function PastScores(
                   </FormSelect>
                   </div>
       </div>
-      <div className="p-2"> {/* Display quizResults scores for the selected quiz */}
-                  {selectedQuiz && quizResults.length > 0 ? (
+      <div className="p-2"> {/* Display quizResults scores */}
+                  {quizResults.length > 0 ? (
                     <table id='scoresTable'>
                       <thead>
                         <tr>
@@ -86,8 +85,7 @@ export default function PastScores(
                       </tbody>
                     </table>
                   ) : (
-                    //Message if no scores are available for the specific quiz
-                    selectedQuiz && <p className="scoreError"></p>
+                    <p className="scoreError">NO SCORES FOR THIS QUIZ</p>
                   )}
                   </div>
      

@@ -128,12 +128,18 @@
     text-transform: uppercase;
     font-family: "Roboto Mono", monospace;
     font-weight: 700;
-    font-size: 13px;
+    font-size: 20px;
     padding: 10px 8px;
 }
 #scoresTable tbody tr:nth-child(even) {
     background-color: #D6D6D6;
+        height: 35px;
+        font-family: "Playpen Sans", cursive;
+        font-weight: 500;
 }
 #scoresTable tbody tr:nth-child(odd) {
     background-color: #F7F7F7;
+        height: 35px;
+        font-weight: 500px;
+        font-family: "Playpen Sans", cursive;
 }

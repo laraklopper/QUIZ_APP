@@ -58,11 +58,3 @@
     margin: 0px;
     padding: 0px;
 }
-/* USERS TABLE DATA */
-/* Capitalise all table cell text except email */
-#userListTable td {
-    text-transform: uppercase;
-}
-#userListTable td.userEmail {
-    text-transform: none;
-}

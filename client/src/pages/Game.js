@@ -175,9 +175,8 @@ export default function Game(//Export default Game function component
       <section id='scoresSection'>
         {/* PAST QUIZ RESULTS*/}
         <Row id='pastScoresRow'>
-         <Col xs={3} md={2}>
-        </Col>
-        <Col xs={12} md={8} id='pastScoresCol'>
+        
+        <Col  id='pastScoresCol'>
         <div className='toggle-btn-div'>
         {/* BUTTON TO TOGGLE PAST SCORES */}
           <h6 className='btnText'>CLICK HERE TO:</h6>
@@ -206,8 +205,7 @@ export default function Game(//Export default Game function component
           </div>
           )}
         </Col>
-         <Col xs={3} md={2}>
-        </Col>
+      
       </Row>
       </section>
       <Footer logout={logout} currentUser={currentUser}/>
