@@ -8,8 +8,9 @@ import '../css/componentCSS/ComponentAnimations.css'
 import Stack from 'react-bootstrap/Stack';
 import Form from 'react-bootstrap/Form';
 
-export default function SelectQuizForm(
-    {
+// SelectQuizForm Function component
+export default function SelectQuizForm(//Export default QuizDisplay function component
+    {//PROPS PASSED FROM PARENT COMPONENT (Game.js)
         selectedQuizId, 
         setSelectedQuizId, 
         quizList
