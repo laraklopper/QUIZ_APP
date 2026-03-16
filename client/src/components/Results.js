@@ -43,7 +43,7 @@ export default function Results(//Export default Results function component
     },[addScore, currentScore])
 
     //=============JSX RENDERING====================
-
+// Display after the user complated the quiz
     return (
       showScore && (
         <div id='results'>
@@ -64,7 +64,7 @@ export default function Results(//Export default Results function component
                   type='text'
                   className='input'
                   aria-readonly='true'
-
+                  hidden
                 />
                 {/* USERNAME */}
                 <input
@@ -77,7 +77,7 @@ export default function Results(//Export default Results function component
                 aria-readonly='true'/>
               </div>
                 {/* SCORE AND TOTAL QUESTIONS */}
-              <div className="p-2">
+              <div className="p-2" id='totalScoreBlock'>
                 {/* Display the result with the score and total questions */}
                       <input
                         id='resultOutput'
@@ -100,22 +100,22 @@ export default function Results(//Export default Results function component
               </div>
               {/* BUTTON */}
               <div className="p-2" id='resultsFormBtnBlock'>
-              <Button 
-              variant='light' 
-              type='submit' 
-              disabled={submitted} 
-              id='saveScoreBtn' 
-              aria-label='BUTTON TO SAVE SCORE' 
+              <Button
+              variant='light'
+              type='submit'
+              disabled={submitted}
+              id='saveScoreBtn'
+              aria-label='BUTTON TO SAVE SCORE'
               aria-disabled={submitted}>
                 {/* Text bassed on the submission state */}
-                  {submitted ? 'Submitting...' : 'SAVE SCORE AND EXIT'}  
+                  {submitted ? 'Submitting...' : 'SAVE SCORE AND EXIT'}
               </Button>
               </div>
               </Stack>
             </div>
-            {/* Display error message if an error 
+            {/* Display error message if an error
             occurs when the score is submitted */}
-          {submissionError && <p>{submissionError}</p>}
+          {submissionError && <p role='alert' aria-live='assertive'>{submissionError}</p>}
         </form>
 
         </div>
