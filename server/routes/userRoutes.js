@@ -378,6 +378,10 @@ router.delete('/deleteUser/:id', checkJwtToken, checkAdmin, async (req, res) => 
             return res.status(404).json({ success: false, message: 'User not found (or cannot be deleted).' });
         }
 
+        // Delete all scores and quizzes associated with this user
+        await Score.deleteMany({ username: removedUser.username });
+        await Quiz.deleteMany({ username: removedUser.username });
+
         console.log(`[INFO: userRoutes.js, /deleteUser/:id] User with ID ${id} deleted successfully`);
         return res.status(200).json({ success: true, message: 'User deleted successfully' });
     } catch (error) {

@@ -242,6 +242,9 @@ router.delete('/deleteQuiz/:id' , checkJwtToken,  async (req, res) => {
 
         const deletedQuiz = await Quiz.findByIdAndDelete(id);// Find the quiz by its ID and delete it from the database
 
+        // Delete all scores associated with this quiz
+        await Score.deleteMany({ quizTitle: deletedQuiz.title.toUpperCase() });
+
         console.log('[SUCCESS: quizRoutes.js, /deleteQuiz/:id] Deleted Quiz:', deletedQuiz);// Log the deleted quiz in the console for debugging purposes
         res.status(200).json({ success: true, message: 'Quiz successfully deleted' });//Return a 200 OK status with a JSON object containing a success message
     } 
