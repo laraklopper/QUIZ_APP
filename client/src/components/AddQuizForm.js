@@ -4,7 +4,7 @@ import React, { useCallback } from 'react'
 // CSS Stylesheet
 import '../css/componentCSS/FormSetup.css'
 import '../css/componentCSS/AddQuizForm.css'
-// Animations CSS
+// ANIMATIONS CSS
 import '../css/componentCSS/ComponentAnimations.css'
 // Bootstrap
 import Stack from 'react-bootstrap/Stack';

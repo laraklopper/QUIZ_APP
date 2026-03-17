@@ -1,15 +1,15 @@
 // LoginForm.js
-//Import required modules and packages
+//IMPORT REQUIRED MODULES AND PACKAGES
 import React, { useMemo, useState } from 'react'
-// CSS Stylesheets
+// CSS STYLESHEETS
 import '../css/componentCSS/LoginForm.css'
 import '../css/componentCSS/FormSetup.css'
-// Animations CSS
+// ANIMATIONS CSS
 import '../css/componentCSS/ComponentAnimations.css'
-// Bootstrap
+// BOOTSTRAP
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
-// Import Icons from Lucide-React
+// IMPORT ICONS FROM LUCIDE-REACT
 import { Eye, EyeOff, LogIn } from 'lucide-react';
 
 //LoginForm function component

@@ -1,7 +1,7 @@
 //StartQuiz.js
 // Import necessary modules and packages
 import React from 'react'
-// CSS Stylesheets
+// CSS STYLESHEETS
 import '../css/componentCSS/FormSetup.css'
 import '../css/componentCSS/QuizForms.css'
 // Animations CSS
@@ -38,8 +38,7 @@ export default function StartQuizForm(//Export the default StartQuizForm functio
            {/* SELECTED QUIZ NAME */}
              <h3 className='quizTitle'>{quiz ? quiz.title : ''}</h3>
              {/* If the quiz does not exist display an empty string */}
-            </div>  
-                              
+            </div>                    
                  <div id='addTimerBlock'>
                       <label id='addTimerLabel' htmlFor='addQuizTimer'>
                         <p className='labelText'>ADD TIMER:</p>

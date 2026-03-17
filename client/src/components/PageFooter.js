@@ -1,7 +1,7 @@
 // PageFooter.js
 //Import required modules and packages
 import React, { useEffect, useState } from 'react'
-//CSS stylesheets
+// CSS STYLESHEETS
 import '../css/componentCSS/Footer.css';
 // Animations CSS
 import '../css/componentCSS/ComponentAnimations.css'

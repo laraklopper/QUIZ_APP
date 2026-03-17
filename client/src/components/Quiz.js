@@ -1,7 +1,7 @@
 // Quiz.js
 // Import necessary modules and packages
 import React, { useEffect, useState } from 'react'
-// CSS Stylesheets
+// CSS STYLESHEETS
 import '../css/componentCSS/FormSetup.css'
 import '../css/componentCSS/Quiz.css'
 // Bootstrap

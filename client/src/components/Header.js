@@ -1,7 +1,7 @@
 // Header.js
 //Import required modules and packages
 import React, { useEffect, useState } from 'react'
-// CSS Stylesheets
+// CSS STYLESHEETS
 import '../css/componentCSS/Header.css'
 // Animations CSS
 import '../css/componentCSS/ComponentAnimations.css'

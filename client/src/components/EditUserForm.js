@@ -1,5 +1,5 @@
 // EditUserForm.js
-//Import required modules and packages
+//IMPORT REQUIRED MODULES AND PACKAGES
 import React from 'react'
 // CSS STYLESHEETS
 import '../css/componentCSS/FormSetup.css'
