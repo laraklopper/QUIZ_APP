@@ -17,16 +17,17 @@ import { Asterisk, Eye, EyeOff } from 'lucide-react';
 // RegistrationForm function component
 export default function RegistrationForm(//Export default RegistrationForm function component
     {//PROPS PASSED FROM PARENT COMPONENT (Registration.js)
-        newUserData, 
-        setNewUserData, 
-        addUser, 
-        onClearForm
+        newUserData,   // Object storing all registration form field values
+        setNewUserData,// Function to update the registration form state
+        addUser,       // Function to submit the new user data to the server
+        onClearForm    // Function to reset all form fields back to empty
     }
 ) {
-    //===========STATE VARIABLE====================            
-    const [showPassword, setShowPassword] = useState(false)
-    const [passwordMsg, setPasswordMsg] = useState(false)
-    const [emailMsg, setEmailMsg] = useState(false)
+    //===========STATE VARIABLES====================
+    const [showPassword, setShowPassword] = useState(false)// State to toggle visibility of the password field
+    const [passwordMsg, setPasswordMsg] = useState(false)// State to toggle the password help text message
+    const [emailMsg, setEmailMsg] = useState(false)// State to toggle the email help text message
+    // State to track which fields the user has interacted with (for showing validation errors)
     const [touched, setTouched] = useState({
         username: false,
         firstName: false,

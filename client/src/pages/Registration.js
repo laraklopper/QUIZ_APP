@@ -39,61 +39,63 @@ export default function Registration() {//Export the default Registration compon
   const [newUserData, setNewUserData] = useState(EMPTY_FORM)// State to store the new user's registration form data
   const [error, setError] = useState(null)// State to store any error messages from the registration request
 
-  //Function to registerNewUser
+  //=============REQUESTS==================
+  //-----------POST-----------------------
+  // Function to submit the new user's registration data to the server
   const addUser = useCallback(async () => {
     try {
-      //Send a POST request to the server 
+      // Send a POST request to register the new user
       const response = await fetch('http://localhost:3001/users/register', {
-        method: 'POST',//Request method
-        mode: 'cors',//Enable CORS for Cross-Origin-Resource Sharing 
-        headers: { 
-          'Content-Type': 'application/json' //Specify the Content-Type as JSON
+        method: 'POST',// HTTP request method
+        mode: 'cors',// Enable Cross-Origin Resource Sharing
+        headers: {
+          'Content-Type': 'application/json'// Specify the Content-Type in the request payload
         },
-        body: JSON.stringify(newUserData),// Convert newUserData to JSON string
+        body: JSON.stringify(newUserData),// Convert the new user data to a JSON string
       })
       const data = await response.json().catch(() => ({}));// Safely parse JSON (avoid crash if server returns non-JSON)
-           
+
       /* Conditional rendering to check if the response
          is not successful (status code is not in the range 200-299)*/
       if (!response.ok) {
         throw new Error(data.message || `Error adding user (Status: ${response.status})`);//Throw an error message if the POST request is unsuccessful
       }
 
-      //5) Store token if the backend returns it
+      // Store the returned token in localStorage if the backend provides one
       if (data.token) {
-        localStorage.setItem('token', data.token);// Parse the response data as JSON
+        localStorage.setItem('token', data.token);
       }
 
-      //6) Reset form fields after successful registration
+      // Reset all form fields back to empty after a successful registration
       setNewUserData({
          username: '',
-          fullName: { 
-            firstName: '', 
-            lastName: '' 
+          fullName: {
+            firstName: '',
+            lastName: ''
           },
           email: '',
           dateOfBirth: '',
           admin: false,
           password: '',
       })
-      setError(null)
+      setError(null)// Clear any existing error messages
       alert('New user successfully registered');//Notify the user of successful registration
-      console.log('New user successfully registered');;//Log a message in the console for debugging purposes
+      console.log('New user successfully registered');//Log a message in the console for debugging purposes
 
-      navigate('/')
+      navigate('/')// Redirect the user to the login page after successful registration
     } catch (err) {
-      console.error('[ERROR: Registration.js]', err.message)
-      setError(err.message)
+      console.error('[ERROR: Registration.js]', err.message);//Log an error message in the console for debugging purposes
+      setError(err.message)// Set the error state to display the error in the UI
     }
   }, [newUserData, navigate])
 
   //=================EVENT LISTENERS=========================
-  //Function to clear form
+  // Function to reset all form fields back to their empty state
   const handleClearForm = useCallback(() => {
-    const confirmClear = window.confirm("Are you sure you want to clear the form?");
-    if (!confirmClear) return;
-    setNewUserData(EMPTY_FORM)
-    setError(null)
+    const confirmClear = window.confirm("Are you sure you want to clear the form?");// Prompt the user to confirm before clearing
+    if (!confirmClear) return;// Exit if the user cancels
+    setNewUserData(EMPTY_FORM)// Reset all form fields to the empty state
+    setError(null)// Clear any existing error messages
   }, [])
 
   //=====================JSX RENDERING=======================
@@ -115,6 +117,7 @@ export default function Registration() {//Export the default Registration compon
         {error && <p id='errorMessage'>{error}</p>}
         {/* Registration Form */}
         <div id='regis-panel'>
+        {/* Render the RegistrationForm Component */}
           <RegistrationForm
             newUserData={newUserData}
             setNewUserData={setNewUserData}
