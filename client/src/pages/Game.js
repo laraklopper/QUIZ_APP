@@ -17,7 +17,9 @@ import Button from 'react-bootstrap/Button';
 import PastScores from '../components/PastScores';
 // Import icons from lucide-react
 import { CircleQuestionMark, Trophy  } from 'lucide-react';
+// Import Utility functions
 import { shuffleArray } from '../utilFunctions/quizFunctions';
+
 //===========MAIN GAME FUNCTION COMPONENT==========
 export default function Game(//Export default Game function component
   {//PROPS PASSED FROM PARENT COMPONENT (App.js)

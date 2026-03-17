@@ -1,23 +1,30 @@
+//EditQuizForm.js
+//Import required modules and packages
 import React, { useState } from 'react'
+// CSS STYLESHEETS
 import '../css/componentCSS/FormSetup.css'
 import '../css/componentCSS/QuizForms.css'
 // Animations CSS
-import '../css/componentCSS/ComponentAnimations.css'
+import '../css/componentCSS/ComponentAnimations.css';
+// Bootstrap
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
+// Import icons from lucide-react
 import { ArrowBigLeftDash, ArrowBigRightDash, FileQuestionMark } from 'lucide-react';
 
-export default function EditQuizForm({
-    editQuiz,
-    error,
-    currentUser,
-    quizName,
-    setQuizName,
-    description,
-    setDescription,
-    questions,
-    setQuestions,
-    editQuizId,
+// EditQuizForm Function component
+export default function EditQuizForm(//Export default EditQuizForm function component 
+    {//PROPS PASSED FROM PARENT COMPONENT (AddQuiz.js)
+        editQuiz,
+        error,
+        currentUser,
+        quizName,
+        setQuizName,
+        description,
+        setDescription,
+        questions,
+        setQuestions,
+        editQuizId,
 }) {
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
     const [loadingEdit, setLoadingEdit] = useState(false)

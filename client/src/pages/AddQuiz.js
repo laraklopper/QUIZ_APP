@@ -14,6 +14,7 @@ import Header from '../components/Header';
 import AddQuizForm from '../components/AddQuizForm';
 import EditQuizForm from '../components/EditQuizForm';
 import { FileQuestionMark } from 'lucide-react';
+
 //=============MAIN ADDQUIZ COMPONENT==============
 export default function AddQuiz(//Export default addQuiz function component
   {//PROPS PASSED FROM PARENT COMPONENT (App.js)
