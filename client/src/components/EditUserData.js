@@ -113,6 +113,12 @@ export default function EditUserData(//Export default EditUserData function comp
           <h2 id="userDetailsHeading" className="visually-hidden">
             User account details
           </h2>
+          {/* PROFILE HEADING */}
+          <Row id='profileHeadingRow'>
+            <Col id='profileHeadingCol'>
+              <h2 id='userProfileHeading'>PROFILE</h2>
+            </Col>
+          </Row>
           {/* ROW 1: username + full name */}
           <Row id='userDetailsRow1'>
             <Col xs={6} md={4} id='userDetailsCol1'>

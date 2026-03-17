@@ -1,10 +1,31 @@
 /* USER DATA.css */
 /* EditUserData.js */
+/* TEXT */
+#userProfileHeading{
+    display: flex;
+    margin: 10px 0px;
+    padding: 0px;
+    justify-content: center;
+    font-family: "Playpen Sans", cursive;
+    font-weight: 700;
+    text-decoration: underline;
+}
+/* Layout */
+/* Bootstrap Layout */
+/* Grid */
+#profileHeadingRow,
 #userDetailsRow1, #userDetailsRow2{
     width: 100%;
     margin: 0px;
     padding: 0px;
     display: flex;
+}
+#profileHeadingCol{
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+    justify-content: center;
 }
 #userDetailsCol1, #userDetailsCol2, #userDetailsCol3, 
 #userDetailsCol4, #userDetailsCol5{
