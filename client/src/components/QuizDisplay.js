@@ -138,6 +138,7 @@ export default function QuizDisplay(//Export default QuizDisplay function compon
     const addScore = useCallback(async () => {
       try {
         const token = localStorage.getItem('token');// Retrieve JWT token from localStorage
+        //Conditional rendering to check if token exists
         if (!token) {
           console.log(`[ERROR: QuizDisplay.js, addScore]: Authentication required`);//Log an error message in the console for debugging purposes
           return;// Exit if no token is found
@@ -175,33 +176,35 @@ export default function QuizDisplay(//Export default QuizDisplay function compon
       }
     },[checkExistingScore, updateScore, currentUser.username, quizName, currentScore, setUserScores, setError])
   //================EVENT LISTENERS================
+  // Function to start the quiz — fetches the quiz data and resets all quiz state
   const handleQuizStart = useCallback(async (e) => {
-    e.preventDefault()
-    if(!selectedQuizId) return
+    e.preventDefault()// Prevent the default form submission behaviour
+    if(!selectedQuizId) return// Exit if no quiz has been selected
     try {
-      await fetchQuiz(selectedQuizId)
-      setQuizStarted(true)
-      setQuizIndex(0);
-      setCurrentScore(0);
-      setQuizCompleted(false);
+      await fetchQuiz(selectedQuizId)// Fetch the full quiz data for the selected quiz
+      setQuizStarted(true)// Mark the quiz as started
+      setQuizIndex(0);// Reset the question index to the first question
+      setCurrentScore(0);// Reset the score to zero
+      setQuizCompleted(false);// Ensure the completed flag is cleared
 
       if (quizTimer) {
-        setTimer(10)
+        setTimer(10)// Reset the timer to its default value if the timer is enabled
       }
 
     } catch (error) {
-      setError(`Error starting quiz: ${error.message}`)
-      console.error('Error starting quiz');
+      setError(`Error starting quiz: ${error.message}`)// Set the error state to display the error in the UI
+      console.error('Error starting quiz');//Log an error message in the console for debugging purposes
     }
   },[selectedQuizId, quizTimer, fetchQuiz, setTimer, setQuizIndex, setError])
 
-  // Function to move to the next question
+  // Function to advance to the next question, or end the quiz if on the last question
   const handleNextMove = useCallback(() => {
     if (quiz && quiz.questions && quizIndex < quiz.questions.length - 1) {
-      setQuizIndex(quizIndex + 1)
-      if (quizTimer) setTimer(10)
+      setQuizIndex(quizIndex + 1)// Move to the next question
+      if (quizTimer) setTimer(10)// Reset the timer for the new question
     }
   else{
+    // All questions answered — end the quiz and show the results screen
     setQuizStarted(false)
     setQuiz(null)
     setSelectedQuizId(null)
@@ -209,14 +212,15 @@ export default function QuizDisplay(//Export default QuizDisplay function compon
   }
   },[quiz, quizIndex, quizTimer, setQuizIndex, setQuizStarted, setQuiz, setSelectedQuizId, setTimer, setQuizCompleted])
 
+  // Function to restart the quiz from the beginning
   const handleRestart = useCallback(() => {
-    setQuizIndex(0)
-    setCurrentScore(0)
-    setQuizStarted(true)
-    setQuizCompleted(false)
+    setQuizIndex(0)// Reset to the first question
+    setCurrentScore(0)// Reset the score to zero
+    setQuizStarted(true)// Mark the quiz as started again
+    setQuizCompleted(false)// Clear the completed flag
     if (quizTimer) {
-      setTimer(10);
-      handleQuizStart({preventDefault: () => {}})
+      setTimer(10);// Reset the timer if it is enabled
+      handleQuizStart({preventDefault: () => {}})// Re-trigger the start flow to refetch and reshuffle questions
     } else {
       setTimer(null)
     }
