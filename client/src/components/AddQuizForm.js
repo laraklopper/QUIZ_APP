@@ -19,18 +19,18 @@ import NewQuestionsList from './NewQuestionsList';
 //AddQuizForm function component
 export default function AddQuizForm(//Export default AddQuizForm function component
   {//PROPS PASSED FROM PARENT COMPONENT (AddQuiz.js)
-    currentUser, 
-    quizName, 
-    setQuizName, 
-    currentQuestion, 
-    setCurrentQuestion, 
-    questions, 
-    setQuestions, 
-    setError,
-    description, 
-    setDescription, 
-    error, 
-    addQuiz
+    currentUser,        // Object containing the currently logged-in user's details
+    quizName,           // String storing the name of the new quiz
+    setQuizName,        // Function to update the quiz name state
+    currentQuestion,    // Object representing the question currently being built
+    setCurrentQuestion, // Function to update the current question state
+    questions,          // Array of completed question objects added so far
+    setQuestions,       // Function to update the questions array state
+    setError,           // Function to set the global error state
+    description,        // String storing the quiz description
+    setDescription,     // Function to update the quiz description state
+    error,              // Global error message string
+    addQuiz             // Function to submit the new quiz to the server
   }
   ) {
 
@@ -56,13 +56,13 @@ export default function AddQuizForm(//Export default AddQuizForm function compon
 
     },[currentQuestion, questions, setCurrentQuestion, setError, setQuestions])
 
-    //Function to resetQuestions
+    // Function to reset all quiz form fields back to their initial state
     const resetQuestionsForm = useCallback(() => {
-      setQuizName('');
-      setDescription('');
-      setQuestions([]);
-      setCurrentQuestion({ questionText: '', correctAnswer: '', options: ['', '', ''] });
-      setError?.(null);
+      setQuizName('');// Clear the quiz name
+      setDescription('');// Clear the quiz description
+      setQuestions([]);// Clear the questions array
+      setCurrentQuestion({ questionText: '', correctAnswer: '', options: ['', '', ''] });// Reset the current question fields
+      setError?.(null);// Clear any existing error messages
     }, [setQuizName, setDescription, setQuestions, setCurrentQuestion, setError])
   
   //================JSX RENDERING======================
@@ -144,6 +144,7 @@ export default function AddQuizForm(//Export default AddQuizForm function compon
                     name='questionText'
                     value={currentQuestion.questionText}
                     onChange={(e) =>
+                    // Update only the questionText field, preserving the rest of the current question
                     setCurrentQuestion({
                       ...currentQuestion,
                       questionText: e.target.value
@@ -166,6 +167,7 @@ export default function AddQuizForm(//Export default AddQuizForm function compon
                     name='correctAnswer'
                     value={currentQuestion.correctAnswer}
                     onChange={(e) =>
+                    // Update only the correctAnswer field, preserving the rest of the current question
                     setCurrentQuestion({
                       ...currentQuestion,
                       correctAnswer:
@@ -196,9 +198,9 @@ export default function AddQuizForm(//Export default AddQuizForm function compon
                     name='options[0]'
                     value={currentQuestion.options[0]}
                     onChange={(e) => {
-                      const options = [...currentQuestion.options];
-                      options[0] = e.target.value;
-                      setCurrentQuestion({ ...currentQuestion, options });
+                      const options = [...currentQuestion.options];// Copy the current options array
+                      options[0] = e.target.value;// Update the first alternative answer
+                      setCurrentQuestion({ ...currentQuestion, options });// Update state with the modified options
                     }}
                     required
                     aria-required='true'
@@ -218,11 +220,11 @@ export default function AddQuizForm(//Export default AddQuizForm function compon
                     placeholder='ALTERNATIVE ANSWER 2'
                     value={currentQuestion.options[1]}
                     onChange={(e) => {
-                      const options = [...currentQuestion.options];
-                      options[1] = e.target.value;
+                      const options = [...currentQuestion.options];// Copy the current options array
+                      options[1] = e.target.value;// Update the second alternative answer
                       setCurrentQuestion({
                         ...currentQuestion,
-                        options
+                        options// Update state with the modified options
                       });
                     }}
                     required
@@ -245,9 +247,9 @@ export default function AddQuizForm(//Export default AddQuizForm function compon
                       placeholder='ALTERNATIVE ANSWER 3'
                       value={currentQuestion.options[2]}
                       onChange={(e) => {
-                        const options = [...currentQuestion.options];
-                        options[2] = e.target.value;
-                        setCurrentQuestion({ ...currentQuestion, options });
+                        const options = [...currentQuestion.options];// Copy the current options array
+                        options[2] = e.target.value;// Update the third alternative answer
+                        setCurrentQuestion({ ...currentQuestion, options });// Update state with the modified options
                       }}
                       required
                       autoComplete='off'
@@ -265,8 +267,9 @@ export default function AddQuizForm(//Export default AddQuizForm function compon
         </p>
       </div>
      {/* BUTTONS */}
+              {/* Button to validate and add the current question to the questions array */}
               <div className="p-2" id='addQuestionBtnBlock'>
-                <Button 
+                <Button
                   variant="light"
                   type='button'
                   onClick={handleAddQuestion}
@@ -276,6 +279,7 @@ export default function AddQuizForm(//Export default AddQuizForm function compon
                   ADD QUESTION
                 </Button>
               </div>
+              {/* Button to reset all form fields back to their initial state */}
               <div className="p-2" id='clearQuestionBtnBlock'>
                 <Button
                   type='button'
@@ -286,7 +290,7 @@ export default function AddQuizForm(//Export default AddQuizForm function compon
                     CLEAR
                 </Button>
               </div>
-             
+              {/* Display the error message if an error exists */}
               {error && (
                 <div className="p-2" id='quizErrorBlock' role='alert' aria-live='polite'>
                   <p id='quizErrorMsg'>{error}</p>
@@ -295,6 +299,7 @@ export default function AddQuizForm(//Export default AddQuizForm function compon
             </Stack>
         </div>
       </form>
+      {/* Render the NewQuestionsList component */}
       <NewQuestionsList
         addNewQuiz={addQuiz}
         quizName={quizName}
