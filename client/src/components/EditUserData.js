@@ -91,7 +91,7 @@ export default function EditUserData(//Export default EditUserData function comp
           setError(error.message || 'Error updating account. Please try again.');// Set the error state to display the error in the UI
         alert(`Error updating account`)//Notify user if there is an error
       }
-    },[setEditUserDate, editUserData, setError, currentUser?._id])
+    },[setEditUserDate, setCurrentUser,editUserData, setError, currentUser?._id])
     //=============EVENT HANDLERS=================
 // If the same form is already open, close it; otherwise open it.
   // Toggle account form

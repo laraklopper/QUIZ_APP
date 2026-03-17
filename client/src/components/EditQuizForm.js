@@ -15,51 +15,58 @@ import Button from 'react-bootstrap/Button';
 import { ArrowBigLeftDash, ArrowBigRightDash, FileQuestionMark } from 'lucide-react';
 
 // EditQuizForm function component
-export default function EditQuizForm(//Export default EditQuizForm function component 
+export default function EditQuizForm(//Export default EditQuizForm function component
     {//PROPS PASSED FROM PARENT COMPONENT (AddQuiz.js)
-        editQuiz,
-        error,
-        currentUser,
-        quizName,
-        setQuizName,
-        description,
-        setDescription,
-        questions,
-        setQuestions,
-        editQuizId,
+        editQuiz,      // Function to submit the updated quiz to the server
+        error,         // Global error message string
+        currentUser,   // Object containing the currently logged-in user's details
+        quizName,      // String storing the name of the quiz being edited
+        setQuizName,   // Function to update the quiz name state
+        description,   // String storing the quiz description being edited
+        setDescription,// Function to update the quiz description state
+        questions,     // Array of question objects for the quiz being edited
+        setQuestions,  // Function to update the questions array state
+        editQuizId,    // ID of the quiz currently being edited
 }) {
-    const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
-    const [loadingEdit, setLoadingEdit] = useState(false)
+    // ==========STATE VARIABLES============
+    const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)// State to track which question is currently displayed in the form
+    const [loadingEdit, setLoadingEdit] = useState(false)// State to indicate if the edit request is in progress
 
+    //============EVENT LISTENERS=================
+    // Function to handle the form submission for editing a quiz
     const handleEdit = async (e) => {
-        e.preventDefault()
-        const confirmEdit = window.confirm('Are you sure you want to edit this quiz?')
-        if (!confirmEdit) return;
-        setLoadingEdit(true)
+        e.preventDefault()// Prevent the default form submission behaviour
+        const confirmEdit = window.confirm('Are you sure you want to edit this quiz?')// Prompt the user to confirm before editing
+        if (!confirmEdit) return;// Exit if the user cancels
+        setLoadingEdit(true)// Set loading state while request is in progress
         try {
-            await editQuiz()
+            await editQuiz()// Call the editQuiz function passed down from AddQuiz.js
         } finally {
-            setLoadingEdit(false)
+            setLoadingEdit(false)// Always reset loading state after the request completes
         }
     }
 
+    // Derive the current question object from the questions array using the current index
     const currentQuestion = questions[currentQuestionIndex]
 
+    // Function to update a single field of the currently displayed question
     const updateCurrentQuestion = (field, value) => {
         setQuestions(questions.map((q, i) =>
-            i === currentQuestionIndex ? { ...q, [field]: value } : q
+            i === currentQuestionIndex ? { ...q, [field]: value } : q// Replace only the question at the current index
         ))
     }
 
+    // Function to update a single alternative answer option of the currently displayed question
     const updateOption = (optIndex, value) => {
         setQuestions(questions.map((q, i) => {
-            if (i !== currentQuestionIndex) return q
-            const options = [...q.options]
-            options[optIndex] = value
-            return { ...q, options }
+            if (i !== currentQuestionIndex) return q// Leave other questions unchanged
+            const options = [...q.options]// Copy the options array to avoid direct mutation
+            options[optIndex] = value// Update the option at the given index
+            return { ...q, options }// Return the updated question
         }))
     }
 
+    // If no quiz is selected for editing, render nothing
     if (!editQuizId) return null
 
     return (
@@ -77,6 +84,7 @@ export default function EditQuizForm(//Export default EditQuizForm function comp
                 <div id='editQuizStatus' aria-live='polite' aria-atomic='true'>
                     {error && <div className='error-message' role='alert'>{error}</div>}
                 </div>
+                {/* Display the full name of the user who created the quiz */}
                 <div id='editCreatedByBlock' aria-label='Quiz creator'>
                     <h6 className='formText'>CREATED BY: {currentUser?.fullName?.firstName} {currentUser?.fullName?.lastName}</h6>
                 </div>
