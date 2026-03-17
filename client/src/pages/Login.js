@@ -1,18 +1,18 @@
 // Login.js
-//Import required modules and packages
+//IMPORT REQUIRED MODULES AND PACKAGES
 import React, {useCallback} from 'react'
-//CSS stylesheets
+// IMPORT CSS STYLESHEETS
 import '../css/pagesCSS/Login.css'
 import '../css/pagesCSS/PageSetup.css'
-// Bootstrap
+// IMPORT BOOTSTRAP COMPONENTS
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-// Custom Components
+// IMPORT CUSTOM COMPONENTS
 import LoginForm from '../components/LoginForm';
 import MainHeader from '../components/MainHeader';
 import PageFooter from '../components/PageFooter';
-// Import Icons from Lucide-React
+// IMPORT ICONS FROM LUCIDE-REACT
 import { IdCard } from 'lucide-react';
 
 //=========MAIN LOGIN COMPONENT=========

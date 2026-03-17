@@ -1,27 +1,28 @@
 //App.js (client)
+//IMPORT REQUIRED MODULES AND PACKAGES
 import React, { useCallback, useEffect, useState } from 'react'
-//Import css stylesheets
+// IMPORT CSS STYLESHEETS
 import './App.css';
+// IMPORT ANIMATIONS CSS
 import './css/pagesCSS/Animations.css'
-// Bootstrap components
+// IMPORT BOOTSTRAP COMPONENTS
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-// Import react router components
+// IMPORT REACT ROUTER COMPONENTS
 import {Route, Routes, useNavigate} from 'react-router-dom'
-// Import icons from lucide-react
-import { Bug } from 'lucide-react';
-// Pages
+// IMPORT PAGES
 import Login from './pages/Login';
 import Registration from './pages/Registration';
 import Home from './pages/Home';
 import Game from './pages/Game'
 import AddQuiz from './pages/AddQuiz';
 import Users from './pages/Users';
-//Protected Routes
+//IMPORT PROTECTED ROUTES
 import ProtectedUserRoute from './protectedRoutes/ProtectedUserRoute'
 import ProtectedAdminRoute from './protectedRoutes/ProtectedAdminRoute'
-
+// IMPORT ICONS FROM LUCIDE-REACT
+import { Bug } from 'lucide-react';
 //=====MAIN APP FUNCTION COMPONENT==============
 export default function App() {
   const [currentUser, setCurrentUser] = useState(null)

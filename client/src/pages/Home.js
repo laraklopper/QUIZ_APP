@@ -1,18 +1,18 @@
 // Home.js
-// Import Required modules and packages
+//IMPORT REQUIRED MODULES AND PACKAGES
 import React from 'react'
-//CSS Stylesheets
+// IMPORT CSS STYLESHEETS
 import '../css/pagesCSS/Home.css'
 import '../css/pagesCSS/PageSetup.css'
-// Bootstrap
+// IMPORT BOOTSTRAP COMPONENTS
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-// Custom components
+// CUSTOM COMPONENTS
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import EditUserData from '../components/EditUserData';
-// Import icons from lucide-react
+// IMPORT ICONS FROM LUCIDE-REACT
 import { FileUser } from 'lucide-react';
 
 //=======MAIN HOME FUNCTION COMPONENT=========

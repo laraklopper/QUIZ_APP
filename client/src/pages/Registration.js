@@ -1,22 +1,22 @@
 // Registration.js
-//Import required modules and packages
+//IMPORT REQUIRED MODULES AND PACKAGES
 import React, { useCallback, useState } from 'react'
-//CSS Stylesheet
+// IMPORT CSS STYLESHEETS
 import '../css/pagesCSS/Register.css'
 import '../css/pagesCSS/PageSetup.css'
-// Bootstrap
+// IMPORT BOOTSTRAP COMPONENTS
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
-// Custom components
+// CUSTOM COMPONENTS
 import MainHeader from '../components/MainHeader';
 import RegistrationForm from '../components/RegistrationForm';
 import PageFooter from '../components/PageFooter';
-// Import react-route-dom components
+// IMPORT REACT-ROUTER-DOM COMPONENTS
 import { useNavigate } from 'react-router-dom';
-// Import icons from lucide-react
+// IMPORT ICONS FROM LUCIDE-REACT
 import {Form, ClipboardList, Pencil  } from 'lucide-react';
 
 const EMPTY_FORM = {

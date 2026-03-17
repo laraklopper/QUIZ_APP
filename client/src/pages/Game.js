@@ -1,23 +1,23 @@
 // Game.js
-//Import required modules and packages
+//IMPORT REQUIRED MODULES AND PACKAGES
 import React, { useCallback, useEffect, useState } from 'react'
-// CSS Stylesheets
+// IMPORT CSS STYLESHEETS
 import '../css/pagesCSS/PageSetup.css'
 import '../css/pagesCSS/Game.css'
-// Bootstrap
+// IMPORT BOOTSTRAP COMPONENTS
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-// Custom components
+// CUSTOM COMPONENTS
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import SelectQuizForm from '../components/SelectQuizForm';
 import QuizDisplay from '../components/QuizDisplay';
 import Button from 'react-bootstrap/Button';
 import PastScores from '../components/PastScores';
-// Import icons from lucide-react
+// IMPORT ICONS FROM LUCIDE-REACT
 import { CircleQuestionMark, Trophy  } from 'lucide-react';
-// Import Utility functions
+// IMPORT UTILITY FUNCITON
 import { shuffleArray } from '../utilFunctions/quizFunctions';
 
 //===========MAIN GAME FUNCTION COMPONENT==========

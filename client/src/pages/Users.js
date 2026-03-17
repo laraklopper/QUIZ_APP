@@ -1,22 +1,22 @@
 // Users.js
-//Import required modules and packages
+//IMPORT REQUIRED MODULES AND PACKAGES
 import React from 'react'
-// CSS Stylesheets
+// IMPORT CSS STYLESHEETS
 import '../css/pagesCSS/PageSetup.css'
 import '../css/pagesCSS/Users.css'
 import '../css/componentCSS/UserData.css'
-// Bootstrap
+// IMPORT BOOTSTRAP COMPONENTS
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Badge from 'react-bootstrap/Badge';
 import Button from 'react-bootstrap/Button';
-// CUSTOM COMPONENTS
+// IMPORT CUSTOM COMPONENTS
 import Footer from '../components/Footer';
 import Header from '../components/Header';
-// Import icons from lucide-react
+// IMPORT ICONS FROM LUCIDE-REACT
 import { BookUser } from 'lucide-react';
-//Utility Functions
+//iMPORT UTILITY FUNCTIONS
 import { dateDisplay } from '../utilFunctions/dateFunctions';
 
 // ========MAIN USERS COMPONENT===========
