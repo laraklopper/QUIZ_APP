@@ -18,8 +18,7 @@ import { UserLock, ChartBarBig, LogIn, Calendar, Clock8 } from 'lucide-react';
 // IMPORT UTILITY FUNCTIONS
 import { dateDisplay, timeDisplay } from '../utilFunctions/dateFunctions';
 
-/*MainHeader function component: Displays the main header of the application,
-including the current date and time, navigation links, and page heading.*/
+//MainHeader function component
 export default function MainHeader(//Export default MainHeader function component
     {//PROPS PASSED TO PARENT COMPONENT(Login.js, Registration.js)
         mainHeading}) {

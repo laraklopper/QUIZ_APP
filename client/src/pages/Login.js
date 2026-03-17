@@ -18,26 +18,27 @@ import { IdCard } from 'lucide-react';
 //=========MAIN LOGIN COMPONENT=========
 export default function Login(//Export the default Login function component
     {//PROPS PASSED FROM PARENT COMPONENT (App.js)
-        userData, 
-        setUserData, 
-        setError, 
-        setLoggedIn
+        userData,   // Object storing the username and password input values
+        setUserData,// Function to update the userData state
+        setError,   // Function to set the global error state
+        setLoggedIn // Function to update the loggedIn state after a successful login
     }
     ) {
 
     //=============REQUESTS==================
-    //Function for user login
+    //-----------POST-----------------------
+    // Function to submit the user's login credentials to the server
     const submitLogin = useCallback(async () => {
-        // e.preventDefault();
         try {
-            setError?.(null);
+            setError?.(null);// Clear any previous error messages
+            // Send a POST request with the user's login credentials
             const response = await fetch('http://localhost:3001/users/login', {
-                method: 'POST',
-                mode: 'cors',
+                method: 'POST',// HTTP request method
+                mode: 'cors',// Enable Cross-Origin Resource Sharing
                 headers: {
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'application/json',// Specify the Content-Type in the request payload
                 },
-                body: JSON.stringify({
+                body: JSON.stringify({// Convert the credentials to a JSON string
                     username: userData.username,
                     password: userData.password,
                 }),
@@ -46,19 +47,19 @@ export default function Login(//Export the default Login function component
             const data = await response.json().catch(() => ({}));// Safely parse JSON (avoid crash if server returns non-JSON)
 
             if (response.ok) {
+                // Store the auth token, username and login flag in localStorage on success
                 localStorage.setItem('token', data.token);
                 localStorage.setItem('username', userData.username);
                 localStorage.setItem('loggedIn', 'true');
-                setError(null);
-                setLoggedIn(true);
+                setError(null);// Clear any error messages
+                setLoggedIn(true);// Update the loggedIn state to trigger the authenticated routes
             }else{
-                throw new Error(data.message || 'Login failed');
+                throw new Error(data.message || 'Login failed');//Throw an error message if the POST request is unsuccessful
             }
 
-            
         } catch (error) {
-            console.error('[ERROR: Login.js]', error.message);
-            setError(error.message);
+            console.error('[ERROR: Login.js]', error.message);//Log an error message in the console for debugging purposes
+            setError(error.message);// Set the error state to display the error in the UI
         }
     }, [userData, setError, setLoggedIn])
 

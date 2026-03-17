@@ -17,14 +17,14 @@ import { Eye, EyeOff, LogIn } from 'lucide-react';
 // LoginForm function component
 export default function LoginForm(//Export default LoginForm function component
   {//PROPS PASSED FROM PARENT COMPONENT(Login.js)
-    userData, 
-    setUserData, 
-    submitLogin
+    userData,    // Object storing the username and password input values
+    setUserData, // Function to update the userData state
+    submitLogin  // Function to submit the login credentials to the server
   }) {
     // ===========STATE VARIABLES=============
-  const [showPassword, setShowPassword] = useState(false)
-  const [passwordMsg, setPasswordMsg] = useState(false)
-  const [touched, setTouched] = useState({username: false, password: false})
+  const [showPassword, setShowPassword] = useState(false)// State to toggle visibility of the password field
+  const [passwordMsg, setPasswordMsg] = useState(false)// State to toggle the password help text message
+  const [touched, setTouched] = useState({username: false, password: false})// State to track which fields the user has interacted with
 
      // ========= SIMPLE CLIENT-SIDE VALIDATION STATE =========
   // Memoized "empty" checks (trimmed so "   " counts as empty).
@@ -42,27 +42,28 @@ export default function LoginForm(//Export default LoginForm function component
   const showPasswordError = touched.password && passwordEmpty;
 
   //==================EVENT LISTENERS=======================
+  // Function to handle the login form submission
   const handleLogin = (e) => {
-    e.preventDefault();
-    submitLogin();
+    e.preventDefault();// Prevent the default form submission behaviour
+    submitLogin();// Call the submitLogin function passed down from Login.js
   }
-    //Function for handling user login data changes
+  // Function to handle input changes and update the userData state
   const handleLoginInput = (event) => {
-    const { name, value } = event.target
-    // Update userData object immutably
+    const { name, value } = event.target// Destructure name and value from the input event
+    // Update the targeted field in userData immutably
     setUserData((prev) => ({
-      ...prev,
-      [name]: value,
+      ...prev,// Keep all other fields unchanged
+      [name]: value,// Update the targeted field
     }))
   }
 
     // ========= IDs USED BY aria-labelledby / aria-describedby =========
-  // Keeps ARIA references stable and readable
-  const formTitleId = 'loginFormTitle';
-  const passwordHelpId = 'loginPasswordHelp';
-  // error IDs (for aria-describedby)
-  const usernameErrorId = 'loginUsernameError';
-  const passwordErrorId = 'loginPasswordError';
+  // Stable ID constants to keep ARIA references readable and consistent
+  const formTitleId = 'loginFormTitle';// ID for the screen-reader form title
+  const passwordHelpId = 'loginPasswordHelp';// ID for the password help text element
+  // Error element IDs referenced by aria-describedby on the inputs
+  const usernameErrorId = 'loginUsernameError';// ID for the username validation error message
+  const passwordErrorId = 'loginPasswordError';// ID for the password validation error message
 
  
 
@@ -196,10 +197,11 @@ export default function LoginForm(//Export default LoginForm function component
             Password is required.
           </p>
         )}
+      {/* Button to submit the login form */}
       <div className="p-2" id='loginBtnBlock'>
-        <Button 
-        variant='light' 
-        id='loginBtn' 
+        <Button
+        variant='light'
+        id='loginBtn'
         type='submit'
         aria-label='Submit Login form button'
         >
