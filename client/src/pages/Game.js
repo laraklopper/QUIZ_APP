@@ -44,12 +44,12 @@ export default function Game(//Export default Game function component
 }) {
   // ==========STATE VARIABLES============
   // Quiz variables
-  const [selectedQuizId, setSelectedQuizId] = useState();
+  const [selectedQuizId, setSelectedQuizId] = useState();// State to store the selected quiz ID
   // Timer variables
-  const [timer, setTimer] = useState(10);
-  const [quizTimer, setQuizTimer] = useState()
+  const [timer, setTimer] = useState(10);// State to store Timer
+  const [quizTimer, setQuizTimer] = useState()//State to store quiz timer
   // Score variables
-  const [showPastScores, setShowPastScores] = useState(false)
+  const [showPastScores, setShowPastScores] = useState(false)//State to toggle past scores display
 
    //============USE EFFECT HOOK==================
   /* useEffect to fetch quizzes when the component 
@@ -78,7 +78,7 @@ export default function Game(//Export default Game function component
 
       const token = localStorage.getItem('token');
       const response = await fetch(`http://localhost:3001/quizzes/findQuiz/${quizId}`, {
-        method: 'GET',
+        method: 'GET',//HTTP request method
         mode: 'cors',
         headers: {
           'Content-Type': 'application/json',

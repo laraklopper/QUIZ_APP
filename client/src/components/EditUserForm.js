@@ -25,12 +25,12 @@ export default function EditUserForm(//Export default EditUserForm function comp
 
     //========EVENT LISTENENRS============
   const handleUpdate=(e) => {
+      e.preventDefault()//Prevent default form submission
   const confirmEdit = window.confirm('Are you sure you want to edit user details')
        //Conditional rendering: if user cancels, exit function
        if (!confirmEdit) {
         return// exit function
        }
-      e.preventDefault()//Prevent default form submission 
       console.log('[EditUserForm.js]: Edit user account');//Log a message in the console for debugging purposes
       editUserProfile()
   }

@@ -285,6 +285,7 @@ const fetchUserScores = useCallback(async () => {
               setError={setError}
                 logout={logout}
                 currentUser={currentUser}
+                setCurrentUser={setCurrentUser}
               />
             </ProtectedUserRoute>
           }/>

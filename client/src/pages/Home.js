@@ -18,8 +18,9 @@ import { FileUser } from 'lucide-react';
 //=======MAIN HOME FUNCTION COMPONENT=========
 export default function Home(//Export default Home function component
   {//PROPS PASSED FROM PARENT COMPONENT (App.js)
-    logout, 
-    currentUser, 
+    logout,
+    currentUser,
+    setCurrentUser,
     setError
   }) {
 
@@ -61,7 +62,7 @@ export default function Home(//Export default Home function component
       {/* SECTION 2 : user profile + edit user forms */}
       <section id='userProfile'>
         <div id='userProfileBlock'>
-          <EditUserData currentUser={currentUser} setError={setError}/>
+          <EditUserData currentUser={currentUser} setCurrentUser={setCurrentUser} setError={setError}/>
         </div>
       </section>
       <Footer logout={logout} currentUser={currentUser}/>

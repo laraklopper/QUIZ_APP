@@ -207,7 +207,7 @@ router.post('/register', checkPasswordStrength, async (req, res) => {
 //---------------------PATCH-------------------
 //Route to edit a user by ID
 //Send a patch request to the /editUser/:id endpoint
-router.patch('/editUser/:id', async (req, res) => {
+router.patch('/editUser/:id', checkJwtToken, async (req, res) => {
     try {
         const { id } = req.params;
         const { username, fullName, email } = req.body;
@@ -282,7 +282,7 @@ router.patch('/editUser/:id', async (req, res) => {
             username: user.username,
         });
 
-        return res.status(200).json({ success: true, message: 'User updated successfully' });
+        return res.status(200).json({ success: true, message: 'User updated successfully', updatedUser: user });
 
     } catch (error) {
         console.error('[ERROR: userRoutes.js] Edit User failed:', error.message);

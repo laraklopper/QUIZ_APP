@@ -22,7 +22,8 @@ import EditUserForm from './EditUserForm';
 /*EditUserData function component*/
 export default function EditUserData(//Export default EditUserData function component
   {//PROPS PASSED FROM PARENT COMPONENT (Home.js)
-    currentUser, 
+    currentUser,
+    setCurrentUser,
     setError
   }
   ) {
@@ -35,7 +36,7 @@ export default function EditUserData(//Export default EditUserData function comp
     },
     email: ''
   })
-  const [activeForm, setActiveForm] = useState('null')
+  const [activeForm, setActiveForm] = useState(null)
  // State to manage whether the user is in edit mode
   // Convenience booleans for conditional rendering + ARIA states
   const showAccountForm = activeForm === 'account'
@@ -81,16 +82,10 @@ export default function EditUserData(//Export default EditUserData function comp
       const data = await response.json();// Parse the JSON data from the response body
       const updated = data.updatedUser;
 
-      setEditUserDate(updated);// Update currentUser in App state (this refreshes the UI everywhere)
+      setCurrentUser(updated);// Update currentUser in App state (refreshes the profile display)
 
-      // Re-sync edit form with saved values (keep shape!)
-      setEditUserDate({
-        username: updated.username || '',
-        fullName: { ...updated.fullName },
-        companyName: updated.companyName || '',
-        email: updated.email || '',
-       
-      });
+      // Reset the edit form to empty
+      setEditUserDate({ username: '', fullName: { firstName: '', lastName: '' }, email: '' });
       } catch (error) {
          console.error(`[ERROR: EditUserData.js]: Error updating account ${error.message}`);
           setError(error.message || 'Error updating account. Please try again.');// Set the error state to display the error in the UI
