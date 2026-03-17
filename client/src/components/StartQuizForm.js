@@ -1,19 +1,22 @@
-//StartQuiz.js
-// Import necessary modules and packages
+// StartQuizForm.js
+/*StartQuizForm component: Displays a form that shows the selected quiz name, a timer
+checkbox toggle, and a button to start the quiz.*/
+//IMPORT REQUIRED MODULES AND PACKAGES
 import React from 'react'
-// CSS STYLESHEETS
+// IMPORT CSS STYLESHEETS
 import '../css/componentCSS/FormSetup.css'
 import '../css/componentCSS/QuizForms.css'
-// Animations CSS
+// IMPORT COMPONENT ANIMATIONS CSS
 import '../css/componentCSS/ComponentAnimations.css'
-// Bootstrap
+// IMPORT BOOTSTRAP COMPONENTS
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
-// Import Icons from Lucide-React
+// IMPORT ICONS FROM LUCIDE-REACT
 import { Hourglass } from 'lucide-react';
 
-//StartQuizForm function component
-export default function StartQuizForm(//Export the default StartQuizForm function component
+/*StartQuizForm function component: Displays a form that shows the selected quiz name, a timer
+checkbox toggle, and a button to start the quiz.*/
+export default function StartQuizForm(//Export default StartQuizForm function component
   {//PROPS PASSED FROM PARENT COMPONENT (QuizDisplay.js)
     quiz, 
     quizTimer, 

@@ -1,20 +1,23 @@
 // AddQuizForm.js
-//Import required modules and packages
+/*AddQuizForm component: Displays a form for creating a new quiz, including fields for the
+quiz name, description, questions, correct answers, and alternative answer options.*/
+//IMPORT REQUIRED MODULES AND PACKAGES
 import React, { useCallback } from 'react'
-// CSS Stylesheet
+// IMPORT CSS STYLESHEETS
 import '../css/componentCSS/FormSetup.css'
 import '../css/componentCSS/AddQuizForm.css'
-// ANIMATIONS CSS
+// IMPORT COMPONENT ANIMATIONS CSS
 import '../css/componentCSS/ComponentAnimations.css'
-// Bootstrap
+// IMPORT BOOTSTRAP COMPONENTS
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
-// Custom components
-import NewQuestionsList from './NewQuestionsList';
-// Import Icons from lucide-react
+// IMPORT ICONS FROM LUCIDE-REACT
 import { Asterisk} from 'lucide-react';
+// IMPORT CUSTOM COMPONENTS
+import NewQuestionsList from './NewQuestionsList';
 
-//AddQuizForm function component
+/*AddQuizForm function component: Displays a form for creating a new quiz, including fields for the
+quiz name, description, questions, correct answers, and alternative answer options.*/
 export default function AddQuizForm(//Export default AddQuizForm function component
   {//PROPS PASSED FROM PARENT COMPONENT (AddQuiz.js)
     currentUser, 

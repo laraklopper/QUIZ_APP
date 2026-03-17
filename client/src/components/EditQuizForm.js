@@ -1,18 +1,21 @@
-//EditQuizForm.js
-//Import required modules and packages
+// EditQuizForm.js
+/*EditQuizForm component: Displays a form that allows admin users to edit an existing
+quiz, including its name, description, and individual questions with navigation between them.*/
+//IMPORT REQUIRED MODULES AND PACKAGES
 import React, { useState } from 'react'
-// CSS STYLESHEETS
+// IMPORT CSS STYLESHEETS
 import '../css/componentCSS/FormSetup.css'
 import '../css/componentCSS/QuizForms.css'
-// Animations CSS
+// IMPORT COMPONENT ANIMATIONS CSS
 import '../css/componentCSS/ComponentAnimations.css';
-// Bootstrap
+// IMPORT BOOTSTRAP COMPONENTS
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
-// Import icons from lucide-react
+// IMPORT ICONS FROM LUCIDE-REACT
 import { ArrowBigLeftDash, ArrowBigRightDash, FileQuestionMark } from 'lucide-react';
 
-// EditQuizForm Function component
+/*EditQuizForm function component: Displays a form that allows admin users to edit an existing
+quiz, including its name, description, and individual questions with navigation between them.*/
 export default function EditQuizForm(//Export default EditQuizForm function component 
     {//PROPS PASSED FROM PARENT COMPONENT (AddQuiz.js)
         editQuiz,

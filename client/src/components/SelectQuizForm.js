@@ -1,17 +1,20 @@
 // SelectQuizForm.js
-//Import required modules and packages
+/*SelectQuizForm component: Displays a dropdown form that allows the user to select a quiz
+from the available quiz list before starting the game.*/
+//IMPORT REQUIRED MODULES AND PACKAGES
 import React from 'react'
-// CSS STYLESHEETS
+// IMPORT CSS STYLESHEETS
 import '../css/componentCSS/FormSetup.css'
 import '../css/componentCSS/QuizForms.css'
-// Animations CSS
+// IMPORT COMPONENT ANIMATIONS CSS
 import '../css/componentCSS/ComponentAnimations.css'
-// Bootstrap
+// IMPORT BOOTSTRAP COMPONENTS
 import Stack from 'react-bootstrap/Stack';
 import Form from 'react-bootstrap/Form';
 
-// SelectQuizForm Function component
-export default function SelectQuizForm(//Export default QuizDisplay function component
+/*SelectQuizForm function component: Displays a dropdown form that allows the user to select a quiz
+from the available quiz list before starting the game.*/
+export default function SelectQuizForm(//Export default SelectQuizForm function component
     {//PROPS PASSED FROM PARENT COMPONENT (Game.js)
         selectedQuizId, 
         setSelectedQuizId, 

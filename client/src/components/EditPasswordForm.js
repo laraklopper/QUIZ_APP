@@ -1,21 +1,23 @@
-//EditPasswordForm.js
-// Import icons from lucide-react
+// EditPasswordForm.js
+/*EditPasswordForm component: Displays a form that allows users to update their password,
+including fields for the current and new password with visibility toggles and strength validation.*/
+//IMPORT REQUIRED MODULES AND PACKAGES
 import React, { useCallback, useState } from 'react'
-// CSS STYLESHEETS
+// IMPORT CSS STYLESHEETS
 import '../css/componentCSS/FormSetup.css'
 import '../css/componentCSS/EditUserForms.css'
-// Animations CSS
+// IMPORT COMPONENT ANIMATIONS CSS
 import '../css/componentCSS/ComponentAnimations.css'
-//Bootstrap
+// IMPORT BOOTSTRAP COMPONENTS
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
-// Import Icons from Lucide-React
+// IMPORT ICONS FROM LUCIDE-REACT
 import { Eye, EyeOff, Asterisk, UserKey } from 'lucide-react';
 
-
-//EditPasswordForm Function Component
-export default function EditPasswordForm(//Export the EditPasswordForm function component
-    {//PROPS PASSED FROM PARENT COMPONENT (EditUser.js)
+/*EditPasswordForm function component: Displays a form that allows users to update their password,
+including fields for the current and new password with visibility toggles and strength validation.*/
+export default function EditPasswordForm(//Export default EditPasswordForm function component
+    {//PROPS PASSED FROM PARENT COMPONENT (EditUserData.js)
         setError
     }
     ) {

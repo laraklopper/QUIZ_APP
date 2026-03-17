@@ -1,4 +1,6 @@
 // Footer.js
+/*Footer component: Displays the footer of the application, 
+including the current date and time, logout Button and copyright information.*/
 //Import required modules and packages
 import React, { useEffect, useState } from 'react'
 // CSS STYLESHEETS
@@ -17,7 +19,7 @@ import { Copyright } from 'lucide-react';
 // Import Utility Functions
 import { dateDisplay, timeDisplay } from '../utilFunctions/dateFunctions';
 
-//*PageFooter component: Displays the footer of the application, including the current date and time, logout Button and copyright information.*/
+//*Footer component: Displays the footer of the application, including the current date and time, logout Button and copyright information.*/
 export default function Footer(
   {//PROPS PASSED FROM PARENT COMPONENT (Home.js, Game.js, AddQuiz.js, Users.js)
     currentUser, 

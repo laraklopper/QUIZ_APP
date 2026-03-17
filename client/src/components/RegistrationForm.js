@@ -1,19 +1,22 @@
 // RegistrationForm.js
-//Import required modules and packages
+/*RegistrationForm component: Displays the user registration form with fields for username,
+full name, email, date of birth, admin checkbox, and password, including client-side validation.*/
+//IMPORT REQUIRED MODULES AND PACKAGES
 import React, { useMemo, useState } from 'react'
-//CSS STYLESHEETS
+// IMPORT CSS STYLESHEETS
 import '../css/componentCSS/FormSetup.css';
 import '../css/componentCSS/RegistrationForm.css';
-// BOOTSTRAP
+// IMPORT BOOTSTRAP COMPONENTS
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
-// Import Icons from Lucide-React
+// IMPORT ICONS FROM LUCIDE-REACT
 import { Asterisk, Eye, EyeOff } from 'lucide-react';
 
-//RegistrationForm function component
-export default function RegistrationForm(//Export the default RegistrationForm component
+/*RegistrationForm function component: Displays the user registration form with fields for username,
+full name, email, date of birth, admin checkbox, and password, including client-side validation.*/
+export default function RegistrationForm(//Export default RegistrationForm function component
     {//PROPS PASSED FROM PARENT COMPONENT (Registration.js)
         newUserData, 
         setNewUserData, 

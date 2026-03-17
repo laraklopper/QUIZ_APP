@@ -1,24 +1,27 @@
 // EditUserData.js
-//Import required modules and packages
+/*EditUserData component: Displays the current user's account details and provides
+toggle buttons to show or hide forms for editing the account profile or password.*/
+//IMPORT REQUIRED MODULES AND PACKAGES
 import React, { useCallback, useState } from 'react'
-// CSS STYLESHEETS
+// IMPORT CSS STYLESHEETS
 import '../css/componentCSS/UserData.css'
 import '../css/componentCSS/Data.css';
-// Animations CSS
+// IMPORT COMPONENT ANIMATIONS CSS
 import '../css/componentCSS/ComponentAnimations.css'
-// Bootstrap
+// IMPORT BOOTSTRAP COMPONENTS
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
-// Import Utility Functions
+// IMPORT UTILITY FUNCTIONS
 import {dateDisplay} from '../utilFunctions/dateFunctions'
-// Import Custom Components
+// IMPORT CUSTOM COMPONENTS
 import EditPasswordForm from './EditPasswordForm';
 import EditUserForm from './EditUserForm';
 
-//EditUserData Function Component
-export default function EditUserData(//Export the EditUserData function component
+/*EditUserData function component: Displays the current user's account details and provides
+toggle buttons to show or hide forms for editing the account profile or password.*/
+export default function EditUserData(//Export default EditUserData function component
   {//PROPS PASSED FROM PARENT COMPONENT (Home.js)
     currentUser, 
     setError

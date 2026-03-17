@@ -1,15 +1,19 @@
-//PastScores.js
-//Import required modules and packages
+// PastScores.js
+/*PastScores component: Displays a table of the user's past quiz scores, with a dropdown
+to filter results by quiz name and a total attempts count per quiz.*/
+//IMPORT REQUIRED MODULES AND PACKAGES
 import React, { useEffect } from 'react';
-// CSS STYLESHEETS
+// IMPORT CSS STYLESHEETS
 import '../css/componentCSS/Scores.css'
-// Animations CSS
+// IMPORT COMPONENT ANIMATIONS CSS
 import '../css/componentCSS/ComponentAnimations.css'
-// Bootstrap
+// IMPORT BOOTSTRAP COMPONENTS
 import Stack from 'react-bootstrap/Stack';
-import FormSelect from 'react-bootstrap/FormSelect'; //Import Formselect component from react-bootstrap
+import FormSelect from 'react-bootstrap/FormSelect';
 
-export default function PastScores(
+/*PastScores function component: Displays a table of the user's past quiz scores, with a dropdown
+to filter results by quiz name and a total attempts count per quiz.*/
+export default function PastScores(//Export default PastScores function component
   {//PROPS PASSED FROM PARENT COMPONENT (GAME.js)
     userScores,
     fetchUserScores,

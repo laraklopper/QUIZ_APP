@@ -1,19 +1,22 @@
 // EditUserForm.js
+/*EditUserForm component: Displays a form that allows users to edit their profile details,
+including username, first name, last name, and email address.*/
 //IMPORT REQUIRED MODULES AND PACKAGES
 import React from 'react'
-// CSS STYLESHEETS
+// IMPORT CSS STYLESHEETS
 import '../css/componentCSS/FormSetup.css'
 import '../css/componentCSS/EditUserForms.css'
-// Animations CSS
+// IMPORT COMPONENT ANIMATIONS CSS
 import '../css/componentCSS/ComponentAnimations.css'
-// Bootstrap
+// IMPORT BOOTSTRAP COMPONENTS
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
-// Import Icons from Lucide-React
+// IMPORT ICONS FROM LUCIDE-REACT
 import { UserRoundPen } from 'lucide-react';
 
-//EditUserForm function component
-export default function EditUserForm(//Export the EditUserForm function component
+/*EditUserForm function component: Displays a form that allows users to edit their profile details,
+including username, first name, last name, and email address.*/
+export default function EditUserForm(//Export default EditUserForm function component
   {//PROPS PASSED FROM PARENT COMPONENT (EditUserData.js)
     currentUser,
     editUserData,

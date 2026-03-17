@@ -1,17 +1,20 @@
 // Results.js
-//Import required modules and packages
+/*Results component: Displays the user's quiz results after completion, showing the score
+and total questions, with a form to save the score to the database.*/
+//IMPORT REQUIRED MODULES AND PACKAGES
 import React, { useCallback, useState } from 'react'
-// CSS STYLESHEETS
+// IMPORT CSS STYLESHEETS
 import '../css/componentCSS/Scores.css'
-// Animations CSS
+// IMPORT COMPONENT ANIMATIONS CSS
 import '../css/componentCSS/ComponentAnimations.css'
-// Bootstrap
+// IMPORT BOOTSTRAP COMPONENTS
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
-// Import Utility Functions
+// IMPORT UTILITY FUNCTIONS
 import { currentDate } from '../utilFunctions/dateFunctions';
 
-// Result function component
+/*Results function component: Displays the user's quiz results after completion, showing the score
+and total questions, with a form to save the score to the database.*/
 export default function Results(//Export default Results function component
   {// PROPS PASSED FROM PARENT COMPONENT (QuizDisplay.js)
     currentScore,

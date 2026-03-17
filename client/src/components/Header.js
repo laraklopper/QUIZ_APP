@@ -1,24 +1,26 @@
 // Header.js
-//Import required modules and packages
+/*Header component: Displays the main navigation header for logged-in users, including the
+current date and time, page heading, username, navigation links, and an animated event bar.*/
+//IMPORT REQUIRED MODULES AND PACKAGES
 import React, { useEffect, useState } from 'react'
-// CSS STYLESHEETS
+// IMPORT CSS STYLESHEETS
 import '../css/componentCSS/Header.css'
-// Animations CSS
+// IMPORT COMPONENT ANIMATIONS CSS
 import '../css/componentCSS/ComponentAnimations.css'
-// Bootstrap
-import Row from 'react-bootstrap/Row'; 
-import Col from 'react-bootstrap/Col'; 
+// IMPORT BOOTSTRAP COMPONENTS
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import Stack from 'react-bootstrap/Stack';
 import ListGroup from 'react-bootstrap/ListGroup';
-// Import Icons from Lucide-React
-import { Clock8, Calendar, User } from 'lucide-react';
-// Utility Functions
-import { dateDisplay, timeDisplay } from '../utilFunctions/dateFunctions';
-// Import Link from react-router-dom for navigation
 import { Link } from 'react-router-dom';
+// IMPORT ICONS FROM LUCIDE-REACT
+import { Clock8, Calendar, User } from 'lucide-react';
+// IMPORT UTILITY FUNCTIONS
+import { dateDisplay, timeDisplay } from '../utilFunctions/dateFunctions';
 
-
-export default function Header(
+/*Header function component: Displays the main navigation header for logged-in users, including the
+current date and time, page heading, username, navigation links, and an animated event bar.*/
+export default function Header(//Export default Header function component
     {//PROPS PASSED FROM PARENT COMPONENT (Home.js, Game.js, AddQuiz.js, Users.js)
         currentUser, 
         //PROPS PASSED TO PARENT COMPONENTS (Home.js, Game.js, AddQuiz.js, Users.js)

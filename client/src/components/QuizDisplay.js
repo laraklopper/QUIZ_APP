@@ -1,17 +1,20 @@
 // QuizDisplay.js
-//Import required modules and packages
+/*QuizDisplay component: Manages and displays the full quiz flow, including the start form,
+active quiz questions, and results screen, while handling score submission and quiz state.*/
+//IMPORT REQUIRED MODULES AND PACKAGES
 import React, { useCallback, useState, useEffect } from 'react'
-// CSS STYLESHEETS
+// IMPORT CSS STYLESHEETS
 import '../css/componentCSS/QuizDisplay.css'
-// Bootstrap
+// IMPORT BOOTSTRAP COMPONENTS
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-// Custom Components
+// IMPORT CUSTOM COMPONENTS
 import StartQuizForm from './StartQuizForm';
 import Quiz from './Quiz';
 import Results from './Results';
 
-// QuizDisplay Function component
+/*QuizDisplay function component: Manages and displays the full quiz flow, including the start form,
+active quiz questions, and results screen, while handling score submission and quiz state.*/
 export default function QuizDisplay(//Export default QuizDisplay function component
   {//PROPS PASSED FROM PARENT COMPONENT (Game.js)
   quiz,

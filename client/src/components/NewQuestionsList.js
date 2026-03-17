@@ -1,13 +1,16 @@
-//NewQuestionsList.js
-// Import necessary modules and packages
+// NewQuestionsList.js
+/*NewQuestionsList component: Displays a list of new questions added to the quiz,
+allowing users to delete individual questions, clear the quiz form, or submit the new quiz.*/
+//IMPORT REQUIRED MODULES AND PACKAGES
 import React, {useCallback} from 'react'
-// Animations CSS
+// IMPORT COMPONENT ANIMATIONS CSS
 import '../css/componentCSS/ComponentAnimations.css'
-//Bootstrap
+// IMPORT BOOTSTRAP COMPONENTS
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
 
-//NewQuestionsList function component
+/*NewQuestionsList function component: Displays a list of new questions added to the quiz,
+allowing users to delete individual questions, clear the quiz form, or submit the new quiz.*/
 export default function NewQuestionsList(//Export default NewQuestionsList function component
   {// PROPS PASSED FROM PARENT COMPONENT (AddQuizForm.js)
     addNewQuiz, 
@@ -43,10 +46,12 @@ export default function NewQuestionsList(//Export default NewQuestionsList funct
     await addNewQuiz()//Call the addNewQuiz component
   },[addNewQuiz, questions.length, quizName, setErrorMessage])
 
-//============================
+//============JSX RENDERING================
+
   return (
     <div id='newQuiz'>
      <div id='newQuizOutput'>
+     {/* Map the New Questions*/}
         {questions.map((q, index)=>(
             <Stack gap={3} key={index} id='newQuestionStack'>
                 <div className="p-2">

@@ -1,23 +1,26 @@
 // MainHeader.js
-// Import necessary modules and packages
+/*MainHeader component: Displays the main header of the application,
+including the current date and time, navigation links, and page heading.*/
+//IMPORT REQUIRED MODULES AND PACKAGES
 import React, {useState, useEffect} from 'react'
-//CSS STYLESHEETS
+// IMPORT CSS STYLESHEETS
 import '../css/componentCSS/Header.css';
-// Animations CSS
+// IMPORT COMPONENT ANIMATIONS CSS
 import '../css/componentCSS/ComponentAnimations.css'
-// Bootstrap
-import Row from 'react-bootstrap/Row'; // Import the Row component from react-bootstrap
-import Col from 'react-bootstrap/Col'; // Import the Col component from react-bootstrap
-import ListGroup from 'react-bootstrap/ListGroup';// Import the ListGroup component from react-bootstrap
+// IMPORT BOOTSTRAP COMPONENTS
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import ListGroup from 'react-bootstrap/ListGroup';
 import Stack from 'react-bootstrap/Stack';
 import { Link } from 'react-router-dom';
-// Import icons from lucide-react
+// IMPORT ICONS FROM LUCIDE-REACT
 import { UserLock, ChartBarBig, LogIn, Calendar, Clock8 } from 'lucide-react';
+// IMPORT UTILITY FUNCTIONS
 import { dateDisplay, timeDisplay } from '../utilFunctions/dateFunctions';
 
-/*MainHeader component: Displays the main header of the application, 
+/*MainHeader function component: Displays the main header of the application,
 including the current date and time, navigation links, and page heading.*/
-export default function MainHeader(
+export default function MainHeader(//Export default MainHeader function component
     {//PROPS PASSED TO PARENT COMPONENT(Login.js, Registration.js)
         mainHeading}) {
     //=================STATE VARIABLES================

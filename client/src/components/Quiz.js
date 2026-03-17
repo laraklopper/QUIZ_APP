@@ -1,18 +1,21 @@
 // Quiz.js
-// Import necessary modules and packages
+/*Quiz component: Displays the active quiz, rendering each question with multiple-choice options,
+an optional countdown timer, answer feedback, current score, and navigation controls.*/
+//IMPORT REQUIRED MODULES AND PACKAGES
 import React, { useEffect, useState } from 'react'
-// CSS STYLESHEETS
+// IMPORT CSS STYLESHEETS
 import '../css/componentCSS/FormSetup.css'
 import '../css/componentCSS/Quiz.css'
-// Bootstrap
+// IMPORT BOOTSTRAP COMPONENTS
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
-// Import Icons from Lucide-React
+// IMPORT ICONS FROM LUCIDE-REACT
 import { ArrowBigRightDash, RotateCcw, X ,Check, MessageCircleQuestionMark} from 'lucide-react';
-// Import Utility Functions
+// IMPORT UTILITY FUNCTIONS
 import { formatTimer } from '../utilFunctions/quizFunctions';
 
-// Quiz function component
+/*Quiz function component: Displays the active quiz, rendering each question with multiple-choice options,
+an optional countdown timer, answer feedback, current score, and navigation controls.*/
 export default function Quiz(//Export default Quiz function component
   {//PROPS PASSED FROM PARENT COMPONENT (QuizDisplay.js)
     quiz,

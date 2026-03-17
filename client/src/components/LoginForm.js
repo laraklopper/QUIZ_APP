@@ -1,18 +1,21 @@
 // LoginForm.js
+/*LoginForm component: Displays the login form with username and password fields, password
+visibility toggle, and client-side validation before submitting credentials.*/
 //IMPORT REQUIRED MODULES AND PACKAGES
 import React, { useMemo, useState } from 'react'
-// CSS STYLESHEETS
+// IMPORT CSS STYLESHEETS
 import '../css/componentCSS/LoginForm.css'
 import '../css/componentCSS/FormSetup.css'
-// ANIMATIONS CSS
+// IMPORT COMPONENT ANIMATIONS CSS
 import '../css/componentCSS/ComponentAnimations.css'
-// BOOTSTRAP
+// IMPORT BOOTSTRAP COMPONENTS
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
 // IMPORT ICONS FROM LUCIDE-REACT
 import { Eye, EyeOff, LogIn } from 'lucide-react';
 
-//LoginForm function component
+/*LoginForm function component: Displays the login form with username and password fields, password
+visibility toggle, and client-side validation before submitting credentials.*/
 export default function LoginForm(//Export default LoginForm function component
   {//PROPS PASSED FROM PARENT COMPONENT(Login.js)
     userData, 
