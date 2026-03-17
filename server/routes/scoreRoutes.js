@@ -71,15 +71,18 @@ router.get('/findScores/:username', async (req, res) => {
 
         //Conditional rendering to check if the username field exists and is a string
         if (!username || typeof username !== 'string') {
-            console.error('[scoreRoutes.js, /findScores/:username] Invalid username format. Username must be a string.');
+            console.error(//Log an error message in the console for debugging purposes    
+                '[scoreRoutes.js, /findScores/:username] Invalid username format. Username must be a string.'
+            );
             return res.status(400).json({ success: false, message: 'Invalid username format. Username must be a string.' });
         }
         // Fetch the user document based on the username
-        const user = await User.findOne({ username }).exec();
+        const user = await User.findOne({ username })
+        .exec();//Execute the Query
 
         // Conditional rendering to check if the user exists
         if (!user) {
-            console.error(`[scoreRoutes.js, /findScores/:username] User not found: ${username}`);
+            console.error(`[scoreRoutes.js, /findScores/:username] User not found: ${username}`);//Log an error message in the console for debugging purposes    
             return res.status(404).json({ success: false, message: 'User not found.' });
         }
         // Fetch the user score based on the user id
@@ -90,8 +93,13 @@ router.get('/findScores/:username', async (req, res) => {
         res.status(200).json({userScores: result});
         console.log(result);//Log the results in the console for debugging purposes
     } catch (error) {
-        console.error('[ERROR: scoreRoutes.js, /findScores/:username] An error occurred while fetching user scores.', error);
-        res.status(500).json({ success: false, message: 'An error occurred while fetching user scores.', error: error.message });
+        console.error(// Log an error message in the console for debugging purposes
+            '[ERROR: scoreRoutes.js, /findScores/:username] An error occurred while fetching user scores.', error);
+        res.status(500).json(// Send 500(Internal server error) status code and error message in JSON response
+            { 
+                success: false, 
+                message: 'An error occurred while fetching user scores.', error: error.message 
+            });
     }
 })
 
@@ -106,13 +114,18 @@ router.get('/findScore/:username/:quizTitle', async (req, res) => {
 
         // Conditional rendering to check if the score exists
         if (!result) {
-            console.error(`[scoreRoutes.js, /findScore/:username/:quizTitle] Score not found for user ${username} and quiz ${quizTitle}`);
-            return res.status(404).json({ success: false, message: 'Score not found for this user and quiz.' });
+            console.error(// Log an error message in the console for debugging purposes
+                `[scoreRoutes.js, /findScore/:username/:quizTitle] Score not found for user ${username} and quiz ${quizTitle}`
+            );
+            return res.status(404).json(
+                { success: false, message: 'Score not found for this user and quiz.' }
+            );
         }
         res.status(200).json({ userScore: result });
         console.log(result);//Log the result in the console for debugging purposes
     } catch (error) {
-        console.error('[ERROR: scoreRoutes.js, /findScore/:username/:quizTitle] An error occurred while fetching the user score for the specified quiz.', error);
+        console.error(// Log an error message in the console for debugging purposes
+            '[ERROR: scoreRoutes.js, /findScore/:username/:quizTitle] An error occurred while fetching the user score for the specified quiz.', error);
         res.status(500).json({ success: false, message: 'An error occurred while fetching the user score for the specified quiz.', error: error.message });
     }
 })
@@ -153,8 +166,13 @@ router.post('/submitScore', async (req, res) => {
         console.log(`Score submitted: ${username} scored ${score} on quiz ${quizTitle}`);
     }
     catch (error) {
-        console.error('[ERROR: scoreRoutes.js, /submitScore] An error occurred while submitting the score.', error);
-        res.status(500).json({ success: false, message: 'An error occurred while submitting the score.', error: error.message });
+        console.error(// Log an error message in the console for debugging purposes
+            '[ERROR: scoreRoutes.js, /submitScore] An error occurred while submitting the score.', error);
+        res.status(500).json(// Respond with a 500 (Internal Server Error) status
+            { 
+                success: false, 
+                message: 'An error occurred while submitting the score.', error: error.message 
+            });
     }
 });
 //----------PUT----------------
@@ -167,7 +185,7 @@ router.put('/updateScore/:id', checkJwtToken, async (req, res) => {
 
         //Conditional rendering to check that the Id is a valid ObjectId
             if (!mongoose.Types.ObjectId.isValid(id)) {
-                console.error(`[scoreRoutes.js, /updateScore/:id] Invalid score ID format: ${id}`);
+                console.error(`[scoreRoutes.js, /updateScore/:id] Invalid score ID format: ${id}`);//Log an error message in the console for debugging purposes    
                 return res.status(400).json({ success: false, message: 'Invalid score ID format.' });
             }
 
@@ -182,6 +200,7 @@ router.put('/updateScore/:id', checkJwtToken, async (req, res) => {
          //Conditional rendering to check if the score was found
             if (!existingScore) {
                 console.error(`[scoreRoutes.js, /updateScore/:id] Score not found with ID: ${id}`);
+                // If no score is found, return a 404 (Not Found) error
                 return res.status(404).json({ success: false, message: 'Score not found.' });
             }
              // Conditional rendering to check if new score is higher
@@ -201,8 +220,8 @@ router.put('/updateScore/:id', checkJwtToken, async (req, res) => {
          console.log(`[scoreRoutes.js, /updateScore/:id] Updated score for user ${existingScore.username} on quiz ${existingScore.quizId}`);//Log the edited score in the console for debugging purposes              
         return res.status(200).json(editedScore); // Return the updated score in JSON format
     } catch (error) {
-        console.error('[ERROR: scoreRoutes.js, /updateScore/:id] An error occurred while updating the score.', error);
-        res.status(500).json({ success: false, message: 'An error occurred while updating the score.', error: error.message });
+        console.error('[ERROR: scoreRoutes.js, /updateScore/:id] An error occurred while updating the score.', error);//Log an error message in the console for debugging purposes    
+        res.status(500).json({ success: false, message: 'An error occurred while updating the score.', error: error.message });// Return 500 (Internal Server Error) status code for server error
     }
 })
 
