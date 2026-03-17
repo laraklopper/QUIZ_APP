@@ -32,9 +32,13 @@ export default function Header(//Export default Header function component
     //===========USE EFFECT HOOK===============
     //useEffect hook to display date and time
     useEffect(() => {
+        // Create an interval that updates the time every second
         const timer = setInterval(() => {
             setDate(new Date())
         }, 1000)
+        // Cleanup function:
+        // Clears interval when component unmounts
+      // Prevents memory leaks and duplicate timers
         return () => clearInterval(timer)
     },[])
 
