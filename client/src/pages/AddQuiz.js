@@ -33,17 +33,17 @@ export default function AddQuiz(//Export default addQuiz function component
   }
 ) {
   //=============STATE VARIABLES===================
-  const [showQuizList, setShowQuizList] = useState(false)
+  const [showQuizList, setShowQuizList] = useState(false);//State to toggle quizList
   // New quiz variables
-  const [newQuizForm, setNewQuizForm] = useState(false)
-  const [currentQuestion, setCurrentQuestion] = useState({
+  const [newQuizForm, setNewQuizForm] = useState(false);//State to toggle new quizForm
+  const [currentQuestion, setCurrentQuestion] = useState({// State to store data when a new question being added
     questionText: '',
     correctAnswer: '',
     options: ['', '', ''],
   })
-  const [description, setDescription] = useState('');
+  const [description, setDescription] = useState('');//State to store new quiz description
   //EditQuizDetails
-  const [editQuizId, setEditQuizId] = useState(null);
+  const [editQuizId, setEditQuizId] = useState(null);// State to store the quiz ID of the quiz being updated 
 
   //===============REACT HOOKS=============
    /* useEffect to fetch quizzes when the component mounts
@@ -54,36 +54,40 @@ export default function AddQuiz(//Export default addQuiz function component
 
   //=============REQUESTS=========================
   // Function to submit a new quiz to the server
-  const addQuiz = useCallback(async () => {
+  const addQuiz = useCallback(async () => {//Define an async function to add a new quiz
     try {
       setError(null);
-
+      // Conditional rendering to check if the currentUser is loggedIn
       if (!currentUser) {
         setError('You must be logged in to create a quiz.');
-        return;
+        return;// Exit the function to prevent further execution
       }
+      //Conditional rendering to check that the quizName is added
       if (!quizName) {
         setError('Please enter a quiz name.');
-        return;
+        return;// Exit the function to prevent further execution
       }
+      //Conditional rendering to check that the quiz description is added
       if (!description) {
         setError('Please enter a quiz description.');
-        return;
+        return;// Exit the function to prevent further execution
       }
+      //Conditional rendering to check that the quiz has exacly 5 questions
       if (questions.length < 5) {
         setError('Please add 5 questions before submitting.');
-        return;
+        return;// Exit the function to prevent further execution
       }
 
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem('token');// Retrieve the authentication token from localStorage
+      //Send a POST request to the backend URL to add a new quiz
       const response = await fetch('http://localhost:3001/quizzes/createQuiz', {
         method: 'POST',
         mode: 'cors',
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',//Specify the content-type as json
+          'Authorization': `Bearer ${token}`,// Attach the token in the Authorization header  
         },
-        body: JSON.stringify({
+        body: JSON.stringify({// Convert the quiz object to a JSON string before sending
           title: quizName,
           description,
           username: currentUser.username,
@@ -91,9 +95,11 @@ export default function AddQuiz(//Export default addQuiz function component
         }),
       });
 
-      const data = await response.json().catch(() => ({}));
+      const data = await response.json().catch(() => ({}));// Safely parse JSON (avoid crash if server returns non-JSON)
 
+      // Handle the response from the server
       if (response.ok) {
+        // Reset the quiz name and questions after successful quiz creation
         setQuizName('');
         setDescription('');
         setQuestions([]);
@@ -102,6 +108,8 @@ export default function AddQuiz(//Export default addQuiz function component
       } else {
         throw new Error(data.message || 'Failed to create quiz.');
       }
+      
+      alert('New Quiz successfully added');//Notify user
     } catch (error) {
       console.error('[ERROR: AddQuiz.js]', error.message);
       setError(error.message);
@@ -117,7 +125,7 @@ export default function AddQuiz(//Export default addQuiz function component
         method: 'DELETE',
         mode: 'cors',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json',//Specify the content-type as json
           'Authorization': `Bearer ${token}`,
         },
         body: JSON.stringify({ username: currentUser.username }),
@@ -134,8 +142,8 @@ export default function AddQuiz(//Export default addQuiz function component
       }
       fetchQuizzes();
     } catch (error) {
-      console.error('[ERROR: AddQuiz.js, deleteQuiz]', error.message);
-      setError(error.message);
+      console.error('[ERROR: AddQuiz.js, deleteQuiz]', error.message);//Log an error message in the console for debugging purposes
+      setError(`Error deleting quiz: ${error}`);// Set the error state to display the error in the UI
     }
   }, [editQuizId, fetchQuizzes, setQuizName, setQuestions, currentUser, setError]);
 
@@ -165,11 +173,11 @@ export default function AddQuiz(//Export default addQuiz function component
       if (questions.length < 5) { setError('Please add 5 questions before submitting.'); return; }
       const token = localStorage.getItem('token');
       const response = await fetch(`http://localhost:3001/quizzes/updateQuiz/${editQuizId}`, {
-        method: 'PATCH',
-        mode: 'cors',
+        method: 'PATCH',//HTTP request method
+        mode: 'cors',// Enable cross-origin resource sharing
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',//Specify the content-type as json
+          'Authorization': `Bearer ${token}`,// Attach the token in the Authorization header  
         },
         body: JSON.stringify({
           title: quizName,
@@ -200,7 +208,7 @@ export default function AddQuiz(//Export default addQuiz function component
   
   //=============JSX RENDERING=======================
   return (
-    <Container id='pageContainer'>
+    <Container id='pageContainer' role='main'>
       {/* HEADER */}
       <Header currentUser={currentUser} heading='ADD QUIZ'/>
       <section id='quizList'>
