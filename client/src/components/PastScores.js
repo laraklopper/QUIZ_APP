@@ -14,23 +14,24 @@ import FormSelect from 'react-bootstrap/FormSelect';
 //PastScores function component
 export default function PastScores(//Export default PastScores function component
   {//PROPS PASSED FROM PARENT COMPONENT (GAME.js)
-    userScores,
-    fetchUserScores,
-    loggedIn,
-    setSelectedQuiz,
-    selectedQuiz
+    userScores,     // Array of the current user's past quiz score objects
+    fetchUserScores,// Function to fetch the current user's scores from the server
+    loggedIn,       // Boolean indicating whether the user is logged in
+    setSelectedQuiz,// Function to update the selected quiz filter state
+    selectedQuiz    // String storing the currently selected quiz name for filtering
 }) {
   //============USE EFFECT HOOK============
+  // Fetch the user's scores when the component mounts or when loggedIn changes
     useEffect(() => {
         if (loggedIn === true) {
-            fetchUserScores()
+            fetchUserScores()// Only fetch scores if the user is logged in
         }
     }, [fetchUserScores, loggedIn])
 
-      // Filter the results by the selected quiz name, or show all if none selected
+  // Filter scores by the selected quiz name; show all scores if no quiz is selected
   const quizResults = selectedQuiz && selectedQuiz.trim()
-    ? userScores.filter(score => score.quizTitle === selectedQuiz)
-    : userScores;
+    ? userScores.filter(score => score.quizTitle === selectedQuiz)// Return only scores matching the selected quiz
+    : userScores;// Return all scores if no filter is applied
 
     // ===================JSX RENDERING=====================
   return (
@@ -66,7 +67,8 @@ export default function PastScores(//Export default PastScores function componen
                   </FormSelect>
                   </div>
       </div>
-      <div className="p-2"> {/* Display quizResults scores */}
+      <div className="p-2">
+                  {/* Display the filtered scores table, or a message if no results match */}
                   {quizResults.length > 0 ? (
                     <table id='scoresTable'>
                       <thead>
@@ -78,11 +80,12 @@ export default function PastScores(//Export default PastScores function componen
                         </tr>
                       </thead>
                       <tbody>
+                        {/* Map over the filtered scores to render a row for each result */}
                         {quizResults.map((score, index) => (
                           <tr key={score._id || index}>
                             <td>{score.quizTitle}</td>
                             <td>{score.score}</td>
-                            <td>{new Date(score.attemptDate).toLocaleDateString()}</td>
+                            <td>{new Date(score.attemptDate).toLocaleDateString()}</td>{/* Format the attempt date for display */}
                             <td>{score.attempts}</td>
                           </tr>
                         ))}

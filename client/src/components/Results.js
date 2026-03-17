@@ -16,32 +16,32 @@ import { currentDate } from '../utilFunctions/dateFunctions';
 // Results function component
 export default function Results(//Export default Results function component
   {// PROPS PASSED FROM PARENT COMPONENT (QuizDisplay.js)
-    currentScore,
-    quizName,
-    totalQuestions,
-    currentUser,
-    addScore
+    currentScore,  // Number representing the user's score for the completed quiz
+    quizName,      // String storing the name of the completed quiz
+    totalQuestions,// Number representing the total number of questions in the quiz
+    currentUser,   // Object containing the currently logged-in user's details
+    addScore       // Function to save the quiz score to the server
   }) {
     //===========STATE VARIABLES=================
-    const [showScore, setShowScore] = useState(true);
-    const [submitted, setSubmitted] = useState(false)
-    const [submissionError, setSubmissionError] = useState(null);
+    const [showScore, setShowScore] = useState(true);// State to control whether the results panel is visible
+    const [submitted, setSubmitted] = useState(false)// State to track whether the score submission is in progress
+    const [submissionError, setSubmissionError] = useState(null);// State to store any error that occurs during score submission
 
     //==========EVENT LISTENERS=================
-    // Function to submit score
+    // Function to handle the score submission form
     const handleSubmitScore = useCallback(async (e) => {
-      e.preventDefault()
-      setSubmitted(true)
-      setSubmissionError(null)
+      e.preventDefault()// Prevent the default form submission behaviour
+      setSubmitted(true)// Disable the submit button while the request is in progress
+      setSubmissionError(null)// Clear any previous submission errors
       try {
-        await addScore()
-        console.log(currentScore);
-        setShowScore(false)
+        await addScore()// Call the addScore function passed down from QuizDisplay.js
+        console.log(currentScore);//Log the current score in the console for debugging purposes
+        setShowScore(false)// Hide the results panel after a successful submission
       } catch (error) {
-        setSubmissionError('Failed to save score');
-        console.error('[ERROR: Results.js, handleSubmitScore]: Failed to save score', error.message);
+        setSubmissionError('Failed to save score');// Display an error message in the UI
+        console.error('[ERROR: Results.js, handleSubmitScore]: Failed to save score', error.message);//Log the error for debugging
       }finally{
-        setSubmitted(false);
+        setSubmitted(false);// Always re-enable the submit button after the request completes
       }
     },[addScore, currentScore])
 
