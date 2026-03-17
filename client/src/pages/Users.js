@@ -20,37 +20,42 @@ import { BookUser } from 'lucide-react';
 import { dateDisplay } from '../utilFunctions/dateFunctions';
 
 // ========MAIN USERS COMPONENT===========
-export default function Users(//Export default Users function component 
+export default function Users(//Export default Users function component
   {//PROPS PASSED FROM PARENT COMPONENT (App.js)
-    logout, 
-    currentUser, 
-    users, 
-    setUsers
+    logout,      // Function to log the user out
+    currentUser, // Object containing the currently logged-in user's details
+    users,       // Array of all registered users
+    setUsers     // Function to update the users list state
   }) {
 
       //============REQUESTS===============
-  //Function to delete a user
+  //----------DELETE----------------
+  // Function to delete a user by their ID
   const handleDeleteUser = async (userId) => {
     try {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem('token');// Retrieve JWT token from localStorage
+      // Send a DELETE request to remove the user with the given ID
       const response = await fetch(`http://localhost:3001/users/deleteUser/${userId}`, {
-        method: 'DELETE',
-        mode: 'cors',
+        method: 'DELETE', // HTTP request method
+        mode: 'cors',     // Enable Cross-Origin Resource Sharing
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
+          'Content-Type': 'application/json', // Specify the Content-Type in the request payload
+          'Authorization': `Bearer ${token}`  // Attach JWT token for authorization
         }
       });
 
+      /* Conditional rendering to check if the response
+      is not successful (status code is not in the range 200-299)*/
       if (!response.ok) {
-        const data = await response.json();
-        console.error('[ERROR: Users.js] Failed to delete user:', data.message);
+        const data = await response.json();// Parse the error response body
+        console.error('[ERROR: Users.js] Failed to delete user:', data.message);//Log an error message in the console for debugging purposes
         return;
       }
 
+      // Remove the deleted user from the local state to update the UI
       setUsers(prev => prev.filter(user => user._id !== userId));
     } catch (error) {
-      console.error('[ERROR: Users.js] Error deleting user:', error.message);
+      console.error('[ERROR: Users.js] Error deleting user:', error.message);//Log an error message in the console for debugging purposes
     }
   };
 
@@ -96,19 +101,22 @@ export default function Users(//Export default Users function component
                 </tr>
               </thead>
               <tbody>
+                {/* Map over the users array to render a table row for each user */}
                 {users.map((user) => (
                   <tr key={user._id}>
                     <td className='userUsername'>{user.username}</td>
                     <td className='userFullName'>{user.fullName?.firstName} {user.fullName?.lastName}</td>
                     <td className='userEmail'>{user.email}</td>
-                    <td>{dateDisplay(user.dateOfBirth)}</td>
+                    <td>{dateDisplay(user.dateOfBirth)}</td>{/* Format and display the date of birth */}
                     <td>
+                      {/* Display an ADMIN badge only if the user has admin privileges */}
                       {user.admin && (
                         <Badge id='adminBadge'>ADMIN</Badge>
                       )}
                     </td>
                     <td>
                       {(() => {
+                        // Disable delete for admins and for the currently logged-in user
                         const isDisabled = user.admin || user._id === currentUser?._id;
                         return (
                           <Button
