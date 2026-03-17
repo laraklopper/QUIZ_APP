@@ -249,6 +249,9 @@ ARIA (Accessible Rich Internet Applications) is a set of HTML attributes defined
 - https://mongoosejs.com/docs/api/query.html#Query.prototype.deleteMany()
 - https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA
 - https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes
+- https://webhint.io/docs/user-guide/hints/hint-apple-touch-icons/
+- https://www.w3schools.com/tags/tag_title.asp
+
 
  ### FRAMEWORKS AND MIDDLEWARE
  _SERVER_
