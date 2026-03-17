@@ -116,39 +116,7 @@ export default function AddQuiz(//Export default addQuiz function component
     }
   }, [quizName, description, questions, currentUser, setQuizName, setQuestions, fetchQuizzes, setError]);
 
-  // Function to delete a quiz by ID
-  const deleteQuiz = useCallback(async (quizId) => {
-    try {
-      setError(null);
-      const token = localStorage.getItem('token');
-      const response = await fetch(`http://localhost:3001/quizzes/deleteQuiz/${quizId}`, {
-        method: 'DELETE',
-        mode: 'cors',
-        headers: {
-          'Content-Type': 'application/json',//Specify the content-type as json
-          'Authorization': `Bearer ${token}`,
-        },
-        body: JSON.stringify({ username: currentUser.username }),
-      });
-      if (!response.ok) {
-        const data = await response.json().catch(() => ({}));
-        throw new Error(data.message || 'Failed to delete quiz.');
-      }
-      if (editQuizId === quizId) {
-        setEditQuizId(null);
-        setQuizName('');
-        setDescription('');
-        setQuestions([]);
-      }
-      fetchQuizzes();
-    } catch (error) {
-      console.error('[ERROR: AddQuiz.js, deleteQuiz]', error.message);//Log an error message in the console for debugging purposes
-      setError(`Error deleting quiz: ${error}`);// Set the error state to display the error in the UI
-    }
-  }, [editQuizId, fetchQuizzes, setQuizName, setQuestions, currentUser, setError]);
-
-
-
+  //--------------PATCH------------------
   // Function to submit edits to an existing quiz
   const editQuiz = useCallback(async () => {
     try {
@@ -187,6 +155,41 @@ export default function AddQuiz(//Export default addQuiz function component
       setError(error.message);
     }
   }, [editQuizId, quizName, description, questions, currentUser, setQuizName, setDescription, setQuestions, fetchQuizzes, setError]);
+  //---------------------DELETE------------------------
+  // Function to delete a quiz by ID
+  const deleteQuiz = useCallback(async (quizId) => {
+    try {
+      setError(null);
+      const token = localStorage.getItem('token');
+      const response = await fetch(`http://localhost:3001/quizzes/deleteQuiz/${quizId}`, {
+        method: 'DELETE',
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/json',//Specify the content-type as json
+          'Authorization': `Bearer ${token}`,
+        },
+        body: JSON.stringify({ username: currentUser.username }),
+      });
+      if (!response.ok) {
+        const data = await response.json().catch(() => ({}));
+        throw new Error(data.message || 'Failed to delete quiz.');
+      }
+      if (editQuizId === quizId) {
+        setEditQuizId(null);
+        setQuizName('');
+        setDescription('');
+        setQuestions([]);
+      }
+      fetchQuizzes();
+    } catch (error) {
+      console.error('[ERROR: AddQuiz.js, deleteQuiz]', error.message);//Log an error message in the console for debugging purposes
+      setError(`Error deleting quiz: ${error}`);// Set the error state to display the error in the UI
+    }
+  }, [editQuizId, fetchQuizzes, setQuizName, setQuestions, currentUser, setError]);
+
+
+
+  
 
   //===============EVENT LISTENERS====================
   //Function to toggle Add Quiz form
