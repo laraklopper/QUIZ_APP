@@ -122,8 +122,8 @@ export default function EditQuizForm(//Export default EditQuizForm function comp
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
                             autoComplete='off'
+                            // ARIA 
                             aria-label='Edit quiz description'
-                            aria-required='true'
                             disabled={loadingEdit}
                         />
                     </div>
@@ -132,6 +132,7 @@ export default function EditQuizForm(//Export default EditQuizForm function comp
                     {/* -------Screen Reader Heading */}
                     <p className='visually-hidden' id='editQuizQuestions'>EDIT QUIZ QUESTIONS</p>
                      <h4 className='formSectionHeading'><FileQuestionMark aria-hidden='true'/>QUESTIONS</h4>
+                    {/* Only render the question editor if questions exist and a current question is available */}
                     {questions.length > 0 && currentQuestion && (
                         <div
                             id='editQuestionsBlock'
@@ -197,6 +198,7 @@ export default function EditQuizForm(//Export default EditQuizForm function comp
                                         disabled={loadingEdit}
                                     />
                                 </div>
+                                {/* Map over the options array to render an input for each alternative answer */}
                                 {currentQuestion.options.map((opt, i) => (
                                     <div key={i} id='editAltOptions'>
                                         <label htmlFor={`editOption${i}`}>
@@ -207,7 +209,7 @@ export default function EditQuizForm(//Export default EditQuizForm function comp
                                             type='text'
                                             id={`editOption${i}`}
                                             value={opt}
-                                            onChange={(e) => updateOption(i, e.target.value)}
+                                            onChange={(e) => updateOption(i, e.target.value)}// Update the option at index i
                                             autoComplete='off'
                                             aria-label={`Alternative answer ${i + 1}`}
                                             aria-required='true'
@@ -233,11 +235,12 @@ export default function EditQuizForm(//Export default EditQuizForm function comp
                     aria-label={loadingEdit ? 'Saving quiz changes' : 'Submit edit quiz form'}
                 >{loadingEdit ? 'SAVING...' : 'EDIT QUIZ'}</Button>
                 {/* Clear Form Btn */}
+                {/* Button to clear the quiz name and description fields */}
                 <Button
                     variant="danger"
                     type='button'
                     id='clearFormBtn'
-                    onClick={() => { setQuizName(''); setDescription(''); }}
+                    onClick={() => { setQuizName(''); setDescription(''); }}// Reset quiz name and description to empty strings
                     aria-label='Clear quiz name and description fields'
                     disabled={loadingEdit}
                 >

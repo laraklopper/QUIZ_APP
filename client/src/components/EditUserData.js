@@ -22,13 +22,13 @@ import EditUserForm from './EditUserForm';
 /*EditUserData function component*/
 export default function EditUserData(//Export default EditUserData function component
   {//PROPS PASSED FROM PARENT COMPONENT (Home.js)
-    currentUser,
-    setCurrentUser,
-    setError
+    currentUser,   // Object containing the currently logged-in user's details
+    setCurrentUser,// Function to update the current user state in App.js
+    setError       // Function to set the global error state
   }
   ) {
     //==============STATE VARIABLES===========
-  const [editUserData, setEditUserDate]= useState({
+  const [editUserData, setEditUserDate] = useState({// State to store the edited user data form fields
     username: '',
     fullName: {
       firstName: '',
@@ -36,28 +36,31 @@ export default function EditUserData(//Export default EditUserData function comp
     },
     email: ''
   })
-  const [activeForm, setActiveForm] = useState(null)
- // State to manage whether the user is in edit mode
-  // Convenience booleans for conditional rendering + ARIA states
-  const showAccountForm = activeForm === 'account'
-  const showPasswordForm = activeForm === 'password'
+  const [activeForm, setActiveForm] = useState(null)// State to track which edit form is currently open ('account', 'password', or null)
 
+  // Convenience booleans derived from activeForm for conditional rendering and ARIA states
+  const showAccountForm = activeForm === 'account'// True when the edit account form is open
+  const showPasswordForm = activeForm === 'password'// True when the edit password form is open
+
+  // Derive display values from currentUser with fallbacks for missing data
     const username = currentUser?.username || 'Username Not provided'//User username
     const firstName = currentUser?.fullName?.firstName || 'First name not provided';//User First name
-    const lastName = currentUser?.fullName?.lastName || 'Last name not provided';//User Last 
+    const lastName = currentUser?.fullName?.lastName || 'Last name not provided';//User Last name
     const email = currentUser?.email || 'No email provided';//User Email
     const dateOfBirth = currentUser?.dateOfBirth || 'No date provided';//User Date of Birth
     const isAdmin = currentUser?.admin ? 'Yes' : 'No';//User Admin Status
 
     //============REQUESTS========================
     //-------PATCH-----------------
-    //EditUserProfile
+    // Function to submit the updated user profile data to the server
     const editUserProfile = useCallback(async () => {
       try {
-        const token = localStorage.getItem('token');
-        if (!token) throw new Error("User is not authenticated. Please log in again.");
-        const userId = currentUser?._id || localStorage.getItem('userId');
-        if (!userId) throw new Error('No user id available');
+        const token = localStorage.getItem('token');// Retrieve JWT token from localStorage
+        if (!token) throw new Error("User is not authenticated. Please log in again.");// Exit if no token found
+        const userId = currentUser?._id || localStorage.getItem('userId');// Retrieve the user ID from state or localStorage
+        if (!userId) throw new Error('No user id available');// Exit if no user ID found
+        // Send a PATCH request to update the user's profile details
+
         const response = await fetch(`http://localhost:3001/users/editUser/${userId}`, {
         method: 'PATCH',//HTTP Request method
         mode: 'cors',//Enable CORS for Cross-Origin-Resource Sharing
@@ -80,25 +83,25 @@ export default function EditUserData(//Export default EditUserData function comp
       }
 
       const data = await response.json();// Parse the JSON data from the response body
-      const updated = data.updatedUser;
+      const updated = data.updatedUser;// Extract the updated user object from the response
 
       setCurrentUser(updated);// Update currentUser in App state (refreshes the profile display)
 
-      // Reset the edit form to empty
+      // Reset the edit form fields back to empty strings after a successful update
       setEditUserDate({ username: '', fullName: { firstName: '', lastName: '' }, email: '' });
       } catch (error) {
-         console.error(`[ERROR: EditUserData.js]: Error updating account ${error.message}`);
+         console.error(`[ERROR: EditUserData.js]: Error updating account ${error.message}`);//Log the error for debugging
           setError(error.message || 'Error updating account. Please try again.');// Set the error state to display the error in the UI
-        alert(`Error updating account`)//Notify user if there is an error
+        alert(`Error updating account`)//Notify the user if there is an error
       }
-    },[setEditUserDate, setCurrentUser,editUserData, setError, currentUser?._id])
+    },[setEditUserDate, setCurrentUser, editUserData, setError, currentUser?._id])
     //=============EVENT HANDLERS=================
-// If the same form is already open, close it; otherwise open it.
-  // Toggle account form
+    // If the same form is already open, close it; otherwise open the selected one
+    // Function to toggle the edit account form open or closed
   const toggleAccountForm = useCallback(() => {
       setActiveForm(prevForm => (prevForm === 'account' ? null : 'account'));
     }, []);
-    // Toggle password form
+    // Function to toggle the edit password form open or closed
     const togglePasswordForm = useCallback(() => {
       setActiveForm(prevForm => (prevForm === 'password' ? null : 'password'));
     },[])
