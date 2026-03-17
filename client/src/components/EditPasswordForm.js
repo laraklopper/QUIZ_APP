@@ -158,8 +158,8 @@ export default function EditPasswordForm(//Export default EditPasswordForm funct
                         value={currentPassword}
                         // EVENTS
                         onChange={(e) => setCurrentPassword(e.target.value)}
-                        onFocus={() => setPasswordMsg(true)}
-                        onBlur={() => setPasswordMsg(false)}
+                        onFocus={() => setPasswordMsg(true)}// show password help text on focus
+                        onBlur={() => setPasswordMsg(false)}// hide password help text on blur
                          //ARIA attributes
                         aria-required='true'
                         aria-label="Current password input field"
@@ -282,11 +282,11 @@ export default function EditPasswordForm(//Export default EditPasswordForm funct
                 variant="light" 
                 id='editPswdBtn' 
                 type='submit'
-                 // ARIA attributes
+                 // ARIA ATTRIBUTES
                 role='button'   
                 aria-label='button to submit new password form'
                 >
-                {loading ? 'Saving…' : 'Save changes'} <UserKey />
+                {loading ? 'Saving…' : 'Save changes'} <UserKey aria-hidden='true' fontWeight={700}/>
                 </Button>
             </Stack>
     </form>
