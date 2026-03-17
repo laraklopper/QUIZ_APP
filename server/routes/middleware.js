@@ -15,10 +15,10 @@ const secretKey = rawSecretKey || 'secretkey';
 
 // Warn at startup if the secret key is missing from the environment
 if (!rawSecretKey) {
-    console.warn('JWT_SECRET_KEY is not set in the environment variables.');
+    console.warn('JWT_SECRET_KEY is not set in the environment variables.');// Log a warning message in the console for debugging purposes
 }
 // 10 salt rounds is the industry standard — balances security strength and hashing speed
-const SALT_ROUNDS = 10; // Number of hashing rounds
+const SALT_ROUNDS = 10; // Number of hashing rounds (can increase for more security)
 
 /*=============================
 JWT VERIFICATION MIDDLEWARE
@@ -28,21 +28,24 @@ JWT VERIFICATION MIDDLEWARE
 // can access the authenticated user's id, etc. without re-querying the DB.
 const checkJwtToken = (req, res, next) => {
     try {
-        let authHeader = req.headers.authorization || ''; // default to empty string so .startsWith() is safe to call
+        let authHeader = req.headers.authorization || ''; // Retrieve the authorization header from the request
+        // default to empty string so .startsWith() is safe to call
 
-        // Token must follow the "Bearer <token>" format
+        /*Conditional rendering to check if the header exists 
+        and follows "Bearer <token>" format*/
         if (!authHeader || !authHeader.startsWith('Bearer ')) {
-            console.warn('[WARN: middleware.js ,checkJwtToken] Authorization header missing or malformed');
-            return res.status(401).json( {// Respond with a 401 (Unauthorised) status code and a json errormessage
+            console.warn(// Log a warning message in the console for debugging purposes
+                '[WARN: middleware.js ,checkJwtToken] Authorization header missing or malformed');
+            return res.status(401).json( {// Respond with a 401 (Unauthorised) status code and a json error message
                     success: false,
                     message: 'Access denied. No token provided.'
                 });
         }
 
-        // Extract the token string after "Bearer "
-        const token = authHeader.split(' ')[1];
+        const token = authHeader.split(' ')[1];// Extract the actual token part after "Bearer "
+
         // Conditional rendering to check if the token exists
-        if (!token) {
+        if (!token) {// Extra safety check: ensure token string is not empty
             console.warn(//Log an waring message in the console for debugging purposes
                 '[WARN: middleware.js ,checkJwtToken] Token missing in Authorization header');
             return res.status(401).json( {// Respond with a 401 (Unauthorised) status code and an error message
@@ -52,11 +55,11 @@ const checkJwtToken = (req, res, next) => {
         }
 
         // Verify signature and expiry; throws if invalid
-        const decoded = jwt.verify(token, secretKey);
+        const decoded = jwt.verify(token, secretKey);// Verify and decode the JWT using the secret key
         req.user = decoded; // Attach decoded token payload to request object
-        console.log('[SUCCESS: middleware.js, checkJwtToken ]: Token provided');
+        console.log('[SUCCESS: middleware.js, checkJwtToken ]: Token provided');//Log a message in the console for debugging purposes
 
-        next(); // Token is valid — Call the next middleware or route handler
+        next(); // Call the next middleware or route handler if the token is valid
     } catch (error) {
          console.error('[ERROR: middleware.js] No token attatched to the request', error.message);
           // Provide specific error messages based on JWT error type
@@ -82,7 +85,8 @@ const checkJwtToken = (req, res, next) => {
 /*===============================
 PASSWORD VALIDATION MIDDLEWARE
 =========================*/
-//Middleware for password hashing
+/*Middleware to hash password before registration or password changes
+   Expects req.body.password to be present*/
 /* Hashes the plain-text password in req.body before it 
 reaches the route handler, so the database never 
 stores a plain-text password.*/
@@ -122,12 +126,13 @@ const checkPasswordStrength = (req, res, next) => {
     // Support both registration (password) and password change (newPassword)
     const pwd = req.body?.password ?? req.body?.newPassword; // ?? falls back to newPassword only if password is null/undefined
 
-    if (typeof pwd !== 'string') { // guards against missing body fields or non-string values (e.g. numbers)
+    //Conditional rendering to check if password input is provided and is a string
+    // guards against missing body fields or non-string values (e.g. numbers)
+    if (typeof pwd !== 'string') { 
         //Log an error message in the console for debugging purposes
         console.error('[ERROR: middleware.js, checkPasswordStrength]: Password is required and must be a string');
-        return res.status(400).json({// Respond with a 400 (Bad Request) status
-            success: false,
-            message: 'Password is required and must be a string'
+        return res.status(400).json({// Respond with a 400 (Bad Request) status and a json error message
+            success: false, message: 'Password is required and must be a string'
         });
     }
 
@@ -135,11 +140,11 @@ const checkPasswordStrength = (req, res, next) => {
     //   (?=.*[!@#$%^&*(),.?":{}|<>])  — lookahead: must contain at least one special character
     //   .{8,}                          — total length must be at least 8 characters
     const passwordRegex = /^(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/;
+    //Conditional rendering to test the password against the regular expression
     if (!passwordRegex.test(pwd)) {
-        return res.status(400).json({
-            success: false,
-            message: 'Password must be at least 8 characters long and contain at least one special character.'
-        });
+        console.error('[ERROR: middleware.js, checkPasswordStrength] Weak password');//Log an error message in the console for debugging purposes
+        return res.status(400).json(// Respond with a 400 (Bad Request) status and an error message
+            {success: false, message: 'Password must be at least 8 characters long and contain at least one special character.'});
     }
     next();// Call the next middleware or route handler
 };  
@@ -153,15 +158,15 @@ const checkAge = (req, res, next) => {
     try {
         const {dateOfBirth} = req.body || {};// Extract the date of birth from the request body
 
-        console.log('[DEBUG: middleware.js, checkAge] Received dateOfBirth:', dateOfBirth);
+        console.log(// Log user dateOfBirth and a message in the console for debugging purposes
+            '[DEBUG: middleware.js, checkAge] Received dateOfBirth:', dateOfBirth);
 
         // Conditional rendering to check if the date of birth is provided in the request body
         if (!dateOfBirth) {
             console.error('[ERROR: middleware.js, checkAge]: Date of birth is required');//Log an error message in the console for debugging purposes
-            return res.status(400).json({// Respond with a 400 (Bad Request) status code if missing
-                success: false,
-                message: 'Date of birth is required'
-            });
+            return res.status(400).json(// Respond with a 400 (Bad Request) status code if Date Of Birth is missing
+                {success: false,message: 'Date of birth is required'}
+            );
         }
 
         const dob = new Date(dateOfBirth);
@@ -169,20 +174,17 @@ const checkAge = (req, res, next) => {
         if (isNaN(dob.getTime())) {
             //Log an error message in the console for debugging purposes
             console.error('[ERROR: middleware.js, checkAge]: Invalid date format for dateOfBirth');
-            return res.status(400).json({// Respond with a 400 (Bad Request) status if date of birth is invalid
-                success: false,
-                message: 'Invalid date format for date of birth'
-            });
+            return res.status(400).json(// Respond with a 400 (Bad Request) status if date of birth is invalid
+                {success: false, message: 'Invalid date format for date of birth'}
+            );
         }
         const now = new Date();
         // Conditional rendering to ensure the Date
         if (dob > now) {
             //Log an error message in the console for debugging purposes
             console.error('[ERROR: middleware.js, checkAge]: Date of birth cannot be in the future');
-            return res.status(400).json({// Respond with a 400 (Bad Request) status if date of birth is invalid
-                success: false,
-                message: 'Date of birth cannot be in the future'
-            });
+            return res.status(400).json(// Respond with a 400 (Bad Request) status if future date
+                {success: false,message: 'Date of birth cannot be in the future'});
         }
 
         // Calculate exact age in years.
