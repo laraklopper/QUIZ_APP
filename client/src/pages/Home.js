@@ -1,4 +1,6 @@
 // Home.js
+/* Home component: display welcome message, userDetails, 
+editUser and editPasswordForm*/
 //IMPORT REQUIRED MODULES AND PACKAGES
 import React from 'react'
 // IMPORT CSS STYLESHEETS
