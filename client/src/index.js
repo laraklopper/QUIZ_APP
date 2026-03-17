@@ -16,6 +16,8 @@ import {BrowserRouter} from 'react-router-dom';//Import BrowserRouter from react
 // Create a root for rendering the React app using the element id
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
+//==============JSX RENDERING================
+
 root.render(
   <React.StrictMode>{/* Enable additional checks and warnings during development */}
     {/* Render the BrowserRouter */}
