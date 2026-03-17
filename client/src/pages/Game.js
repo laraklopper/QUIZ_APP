@@ -74,28 +74,37 @@ export default function Game(//Export default Game function component
   // Function to fetch a single quiz by quizId
   const fetchQuiz = useCallback(async (quizId) => {
     try {
+      //Conditional rendering to check if a quiz is selected
       if(!quizId) return;
 
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem('token');//Retrieve authentication token from localStorage
+
+      // Send a GET request to the server fetch quiz data from the server
       const response = await fetch(`http://localhost:3001/quizzes/findQuiz/${quizId}`, {
         method: 'GET',//HTTP request method
-        mode: 'cors',
+        mode: 'cors',//Enable Cors for cross-origin resourcing
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',//Specify the content-type in the payload as JSON
+          'Authorization': `Bearer ${token}`,//Attatch the token in the request Header
         }
       })
 
+      /* Conditional rendering to check if the response
+        is not successful (status code is not in the range 200-299)*/
       if (!response.ok) {
-        throw new Error('Failed to fetch quiz');
+        throw new Error('Failed to fetch quiz');//Throw an error message if the GET request is unsuccessful
       }
+
        const fetchedData = await response.json(); // Parse the JSON response
-      console.log(fetchedData)
+      console.log(fetchedData)//Log the Quiz Data in the console for debugging purposes
+
       // Conditional rendering to check if fetchedData is valid
       if (!fetchedData || !fetchedData.quiz || !fetchedData.quiz.questions) {
         throw new Error('Invalid quiz data');// Throw error if the data type is invalid
       }
-      const fetchedQuiz = fetchedData.quiz;
+
+      const fetchedQuiz = fetchedData.quiz; // Parse the JSON response
+
        // Shuffle the questions to randomize their order
       const shuffledQuestions = fetchedQuiz.questions.map(question => {
         const optionsWithCorrectAnswer = [...question.options, question.correctAnswer];// Combine options and correct answer
@@ -123,15 +132,16 @@ export default function Game(//Export default Game function component
   return (
     <Container id='pageContainer' role='main'>
       {/* HEADER */}
-      {/* Render the Header component with GAME as the heading */}
+      {/* Render the Header component with "GAME" as the heading */}
       <Header currentUser={currentUser} heading='GAME'/>
-      {/* SECTION 1:  */}
+      {/* SECTION 1: quizdisplay component and 
+      select quiz form component */}
       <section id='quizSection'>
         {/* SELECT QUIZ FORM */}
          <Row id='selectQuizRow'>
           <Col></Col>
           <Col xs={6} id='selectQuizCol'>
-          {/* Render the Select QuizForm function component */}
+          {/* Render the SelectQuizForm function component */}
             <SelectQuizForm
               quizList={quizList}
               selectedQuizId={selectedQuizId}
@@ -173,7 +183,7 @@ export default function Game(//Export default Game function component
             />
           </div>
       </section>
-      {/* SECTION 2:  */}
+      {/* SECTION 2: Past Quiz Results + Toggle Results  */}
       <section id='scoresSection'>
         {/* PAST QUIZ RESULTS*/}
         <Row id='pastScoresRow'>
@@ -207,9 +217,10 @@ export default function Game(//Export default Game function component
           </div>
           )}
         </Col>
-      
       </Row>
       </section>
+      {/* FOOTER */}
+      {/* Render the Footer Component */}
       <Footer logout={logout} currentUser={currentUser}/>
     </Container>
   )
