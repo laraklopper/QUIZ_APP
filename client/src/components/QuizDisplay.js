@@ -16,158 +16,162 @@ import Results from './Results';
 // QuizDisplay function component
 export default function QuizDisplay(//Export default QuizDisplay function component
   {//PROPS PASSED FROM PARENT COMPONENT (Game.js)
-  quiz,
-  setQuiz,
-  timer,
-  setTimer,
-  quizTimer,
-  setQuizTimer,
-  currentUser,
-  setError,
-  selectedQuizId,
-  setSelectedQuizId,
-  fetchQuiz,
-  quizName,
-  setUserScores,
-  questions
+  quiz,           // Object containing the full quiz data
+  setQuiz,        // Function to update the active quiz state
+  timer,          // Number representing the timer reset value (in seconds)
+  setTimer,       // Function to update the timer value
+  quizTimer,      // Boolean indicating whether the countdown timer is enabled
+  setQuizTimer,   // Function to toggle the countdown timer on or off
+  currentUser,    // Object containing the currently logged-in user's details
+  setError,       // Function to set the global error state
+  selectedQuizId, // String storing the ID of the quiz selected by the user
+  setSelectedQuizId,// Function to update the selected quiz ID state
+  fetchQuiz,      // Function to fetch a single quiz by ID from the server
+  quizName,       // String storing the name of the currently active quiz
+  setUserScores,  // Function to update the user's scores state
+  questions       // Array of shuffled question objects for the active quiz
 }) {
-  //======STATE VARIABLES=========== 
-  const [quizIndex, setQuizIndex] = useState(0);
-  // Boolean values to track whether the quiz has started or is completed 
-  const [quizStarted, setQuizStarted] = useState(false);
-  const [quizCompleted, setQuizCompleted] = useState(false);
-  const [currentScore, setCurrentScore] = useState(0); // State to store the user's score during the quiz
-  const [loading, setLoading] =useState(true);  // state to indicate whether or not the component is loading
+  //======STATE VARIABLES===========
+  const [quizIndex, setQuizIndex] = useState(0);// State to track the index of the currently displayed question
+  // Boolean values to track whether the quiz has started or is completed
+  const [quizStarted, setQuizStarted] = useState(false);// True when the user has started the quiz
+  const [quizCompleted, setQuizCompleted] = useState(false);// True when the user has answered all questions
+  const [currentScore, setCurrentScore] = useState(0);// State to store the user's running score during the quiz
+  const [loading, setLoading] = useState(true);// State to indicate whether quiz data is still being fetched
 
-   //==============USE EFFECT HOOK========================
-   //UseEffect to fetch and setup necessary data
-  //the useEffect hook ensures that when the QuizDisplay component is rendered 
- useEffect(() => {
+  //==============USE EFFECT HOOK========================
+  // Fetch the selected quiz whenever the selectedQuizId changes
+  useEffect(() => {
     const setup = async () => {
       try {
         if (selectedQuizId) {
-          await fetchQuiz(selectedQuizId)
+          await fetchQuiz(selectedQuizId)// Fetch the quiz data for the selected quiz ID
         }
       } catch (error) {
-        setError(`Error setting up quiz:${error.message}`)
-        console.error('Setup error:', error);
+        setError(`Error setting up quiz:${error.message}`)// Set the error state to display the error in the UI
+        console.error('Setup error:', error);//Log an error message in the console for debugging purposes
       }finally{
-        setLoading(false)
+        setLoading(false)// Always set loading to false after the fetch completes
       }
     }
-    setup();
+    setup();// Call the setup function when the component mounts or selectedQuizId changes
   },[selectedQuizId, fetchQuiz, setError])
 
-   //==============REQUESTS============
+  //==============REQUESTS============
   //--------------GET--------------------
-  //Function to check if a score for the Quiz already exists
+  // Function to check if the current user already has a saved score for this quiz
   const checkExistingScore = useCallback(async () => {
     try {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem('token');// Retrieve JWT token from localStorage
       if (!token) {
-        console.error(`[ERROR: QuizDisplay.js, checkExistingScore]: Authentication required`);
+        console.error(`[ERROR: QuizDisplay.js, checkExistingScore]: Authentication required`);//Log an error message in the console for debugging purposes
         return null;
       }
+      // Send a GET request to find an existing score for this user and quiz
       const response = await fetch(`http://localhost:3001/scores/findScore/${currentUser.username}/${quizName}`,{
-        method: 'GET',
-        mode: 'cors',
+        method: 'GET',// HTTP request method
+        mode: 'cors',// Enable Cross-Origin Resource Sharing
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',// Specify the Content-Type in the request payload
+          'Authorization': `Bearer ${token}`,// Attach JWT token for authorization
         }
       })
 
-        // 404 means no score exists yet — return null without throwing
+        // 404 means no score exists yet — return null without throwing an error
         if (response.status === 404) {
           return null;
         }
 
+        /* Conditional rendering to check if the response
+        is not successful (status code is not in the range 200-299)*/
         if (!response.ok) {
-          throw new Error ('Error fetching scores for the quiz');
+          throw new Error ('Error fetching scores for the quiz');//Throw an error message if the GET request is unsuccessful
         }
 
-        const result = await response.json();
-        return result.userScore || null;
+        const result = await response.json();// Parse the JSON response
+        return result.userScore || null;// Return the existing score or null if not found
 
     } catch (error) {
-        setError('Error fetching scores');
+        setError('Error fetching scores');// Set the error state to display the error in the UI
         return null;
     }
   },[setError, currentUser.username, quizName])
   //----------------PUT-----------------------
-    /*Function to update score if a score for the quiz already 
-    exists and is better than the prevous result/score*/
+  // Function to update an existing score if the user's new score is better than the previous one
     const updateScore = useCallback(async (scoreId) => {
       try {
-        const token = localStorage.getItem('token');
-        
-        if (!token) return;
+        const token = localStorage.getItem('token');// Retrieve JWT token from localStorage
+        if (!token) return;// Exit if no token is found
 
+        // Send a PUT request to update the score for the given score ID
         const response = await fetch(`http://localhost:3001/scores/updateScore/${scoreId}`, {
-          method: 'PUT',
-          mode: 'cors',
+          method: 'PUT',// HTTP method for full resource updates
+          mode: 'cors',// Enable Cross-Origin Resource Sharing
           headers: {
-             'Content-Type': 'application/json',
-             'Authorization': `Bearer ${token}`,
+             'Content-Type': 'application/json',// Specify the Content-Type in the request payload
+             'Authorization': `Bearer ${token}`,// Attach JWT token for authorization
           },
-          body: JSON.stringify({
+          body: JSON.stringify({// Send the new score as a JSON string
             score: currentScore
           })
         })
 
-         /* Conditional rendering to check if the response
-      is not successful (status code is not in the range 200-299)*/
-      if (!response.ok) {
-        throw new Error('Error updating score');//Throw and error message if the POST request is unsuccessful
-      }
-      const result = await response.json();// Parse the JSON response
+        /* Conditional rendering to check if the response
+        is not successful (status code is not in the range 200-299)*/
+        if (!response.ok) {
+          throw new Error('Error updating score');//Throw an error message if the PUT request is unsuccessful
+        }
+        const result = await response.json();// Parse the JSON response
 
-      // Only update state if the score was actually improved
-      if (result.success !== false) {
-        setUserScores(prevScores => prevScores.map(s => s._id === result._id ? result : s));
-      }
+        // Only update the local scores state if the score was actually improved on the server
+        if (result.success !== false) {
+          setUserScores(prevScores => prevScores.map(s => s._id === result._id ? result : s));
+        }
       } catch (error) {
          console.error('Error saving score', error.message);//Log an error message in the console for debugging purposes
-         setError('Error saving score', error.message)
+         setError('Error saving score', error.message)// Set the error state to display the error in the UI
       }
     },[currentScore, setError, setUserScores])
  
     //-------------POST---------------------------
-    // Function to add the user Score if a score does nor exist for the user
+    // Function to save the user's score — updates the existing score if one exists, or creates a new one
     const addScore = useCallback(async () => {
       try {
-        const token = localStorage.getItem('token');
+        const token = localStorage.getItem('token');// Retrieve JWT token from localStorage
         if (!token) {
-          console.log(`[ERROR: QuizDisplay.js, addScore]: Authentication required`);
-          return;
+          console.log(`[ERROR: QuizDisplay.js, addScore]: Authentication required`);//Log an error message in the console for debugging purposes
+          return;// Exit if no token is found
         }
-        const existingScore = await checkExistingScore()
+        const existingScore = await checkExistingScore()// Check if a score for this quiz already exists
 
         if (existingScore) {
-          await updateScore(existingScore._id)
+          await updateScore(existingScore._id)// Update the existing score if the new score is better
         } else {
+          // Send a POST request to create a new score entry
           const response = await fetch('http://localhost:3001/scores/submitScore', {
-            method: 'POST',
-            mode: 'cors',
+            method: 'POST',// HTTP request method
+            mode: 'cors',// Enable Cross-Origin Resource Sharing
             headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${token}`,
+              'Content-Type': 'application/json',// Specify the Content-Type in the request payload
+              'Authorization': `Bearer ${token}`,// Attach JWT token for authorization
             },
-            body: JSON.stringify({
+            body: JSON.stringify({// Convert the score data to a JSON string
               username: currentUser.username,
               quizTitle: quizName,
               score: currentScore,
             })
           })
+          /* Conditional rendering to check if the response
+          is not successful (status code is not in the range 200-299)*/
           if (!response.ok) {
-            throw new Error('Error submitting score');
+            throw new Error('Error submitting score');//Throw an error message if the POST request is unsuccessful
           }
-          const result = await response.json();
-          setUserScores(prevScores => [result, ...prevScores])
+          const result = await response.json();// Parse the JSON response
+          setUserScores(prevScores => [result, ...prevScores])// Prepend the new score to the scores list
         }
       } catch (error) {
-        console.error('Error saving score', error.message);
-        setError('Error saving score');
+        console.error('Error saving score', error.message);//Log an error message in the console for debugging purposes
+        setError('Error saving score');// Set the error state to display the error in the UI
       }
     },[checkExistingScore, updateScore, currentUser.username, quizName, currentScore, setUserScores, setError])
   //================EVENT LISTENERS================

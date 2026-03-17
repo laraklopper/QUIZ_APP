@@ -17,24 +17,23 @@ import { formatTimer } from '../utilFunctions/quizFunctions';
 // Quiz function component
 export default function Quiz(//Export default Quiz function component
   {//PROPS PASSED FROM PARENT COMPONENT (QuizDisplay.js)
-    quiz,
-    quizIndex,
-    setQuizIndex,
-    setCurrentScore,
-    currentScore,
-    questions,
-    quizTimer,
-    timer,
+    quiz,             // Object containing the full quiz data
+    quizIndex,        // Number representing the index of the currently displayed question
+    setQuizIndex,     // Function to update the current question index
+    setCurrentScore,  // Function to update the user's score
+    currentScore,     // Number representing the user's current score
+    questions,        // Array of shuffled question objects for the active quiz
+    quizTimer,        // Boolean indicating whether the countdown timer is enabled
+    timer,            // Number representing the timer reset value (in seconds)
     // FUNCTIONS
-    handleNextQuestion,
-    handleRestart
-
+    handleNextQuestion,// Function to advance to the next question or end the quiz
+    handleRestart      // Function to restart the quiz from the beginning
   }
 ) {
   //============STATE VARIABLES================
-  const [selectedOption, setSelectedOption] = useState(null)
-  const [feedback, setFeedback] = useState('')
-  const [timeLeft, setTimeLeft] = useState(10)
+  const [selectedOption, setSelectedOption] = useState(null)// State to store the option the user has selected
+  const [feedback, setFeedback] = useState('')// State to store the correct/incorrect feedback message
+  const [timeLeft, setTimeLeft] = useState(10)// State to store the remaining time for the current question
 
   // ========USE EFFECT HOOK==================
   /* Effect to reset the question index to the first 
@@ -45,27 +44,27 @@ export default function Quiz(//Export default Quiz function component
     }
   },[questions, setQuizIndex])
   
-  // Effect to manage the timer countdown
+  // Effect to manage the countdown timer for each question
   useEffect(() => {
-    if(!quizTimer) return;
+    if(!quizTimer) return;// Exit early if the timer is not enabled
 
-    setTimeLeft(timer)
-    let isMounted = true;
+    setTimeLeft(timer)// Reset the timer to the configured value for each new question
+    let isMounted = true;// Track whether the component is still mounted to prevent state updates after unmount
     const interval = setInterval(() => {
       if (isMounted) {
         setTimeLeft((prevTime) => {
-          if (prevTime <=1) {
-            clearInterval(interval);
-            handleNextQuestion()
+          if (prevTime <= 1) {
+            clearInterval(interval);// Stop the interval when time runs out
+            handleNextQuestion()// Automatically advance to the next question
             return 0
           }
-          return prevTime - 1
+          return prevTime - 1// Decrement the timer by 1 each second
         })
       }
     }, 1000);
     return() => {
-      isMounted = false
-      clearInterval(interval)
+      isMounted = false// Prevent state updates after the component unmounts
+      clearInterval(interval)// Clear the interval on cleanup to prevent memory leaks
     }
   },[timer, handleNextQuestion, quizTimer])
 
@@ -76,27 +75,23 @@ export default function Quiz(//Export default Quiz function component
 
 
   // ============EVENT LISTENERS=================
-  /* Function to handle answer selection and 
-  update the score if correct */
+  // Function to evaluate the selected answer and update the score and feedback
   const handleAnswerClick = (isCorrect) => {
     if (isCorrect) {
-      setCurrentScore(currentScore + 1)
-      setFeedback(<p className='correctFeedback'>CORRECT <Check fontWeight={700} aria-hidden='true'/></p>)
+      setCurrentScore(currentScore + 1)// Increment the score for a correct answer
+      setFeedback(<p className='correctFeedback'>CORRECT <Check fontWeight={700} aria-hidden='true'/></p>)// Show correct feedback
     } else {
-      setFeedback(<p className='incorrectFeedback'>INCORRECT <X fontWeight={700} aria-hidden='true' /> </p>);
+      setFeedback(<p className='incorrectFeedback'>INCORRECT <X fontWeight={700} aria-hidden='true' /> </p>);// Show incorrect feedback
     }
-    setTimeout(() => setFeedback(''), 1000)
+    setTimeout(() => setFeedback(''), 1000)// Clear the feedback message after 1 second
   }
 
-    /* Function to handle option click and 
-  update the selected option */
+  // Function to handle when the user clicks an answer option
   const handleOptionClick = (option) => {
-    setSelectedOption(option);  // Update the selected option
-    /*Check if the selected option is the correct 
-    answer and update the score accordingly*/
+    setSelectedOption(option);// Store the selected option in state
+    // Check if the selected option matches the correct answer and update the score
     handleAnswerClick(option === questions[quizIndex].correctAnswer);
-    //Call the handleNextQuestion function and move to the next question
-    handleNextQuestion();
+    handleNextQuestion();// Advance to the next question after an option is selected
   };
 
   //============JSX RENDERING================
@@ -136,16 +131,17 @@ export default function Quiz(//Export default Quiz function component
     {/* ---------QUIZ OPTIONS + FEEDBACK MESSAGE + CURRENT SCORE======= */}
        <Stack  gap={3} id='quizStack2'>
         <div className="p-2" id='questionsBlock' role='group' aria-labelledby='questionText'>
-           {questions[quizIndex].options.map((option, index) => (
+           {/* Map over the options array to render a button for each answer choice */}
+          {questions[quizIndex].options.map((option, index) => (
                 <Button
                   key={index}
                   id='answerOption'
                   name='options'
-                  checked={selectedOption=== option}
+                  checked={selectedOption === option}
                   type='button'
                   variant='success'
                   aria-describedby='questionText'
-                  onClick={() => handleOptionClick(option)}//Call the handle option click fucntion
+                  onClick={() => handleOptionClick(option)}// Call handleOptionClick with the selected option
                 >
                   {option}
                 </Button>
