@@ -10,7 +10,9 @@ const Score = require('../models/scoreSchema'); //Import the Score model
 const {checkJwtToken} = require('./middleware')// Import JWT authentication middleware to protect routes
 
 //=============ROUTES===============
-//-------GET---------------
+/*-----------GET----------------
+GET:READ : Used to fetch information from the database
+-----------------------------*/
 // Route to get all quizzes
 // Send a GET request to /findQuizzes to retrieve all quizzes from the database
 router.get('/findQuizzes', checkJwtToken, async (req, res) => {
@@ -53,7 +55,9 @@ router.get('/findQuiz/:id', checkJwtToken, async (req, res) => {
         res.status(500).json({success: false, message: 'Failed to retrieve quiz.'});// Send a 500 (Internal Server Error) status code with an error message
     }
 })
-//-------POST--------------
+/*-------POST--------------
+POST: CREATE: Used to submit data about a specific entity to the server
+-----------------------*/
 // Route to create a new quiz
 router.post('/createQuiz', checkJwtToken, async (req, res) => {
     console.log(req.body);// Log the request body to verify that the data is being received correctly from the client before processing it to create a new quiz in the database
@@ -89,7 +93,9 @@ router.post('/createQuiz', checkJwtToken, async (req, res) => {
         res.status(500).json({success: false, message: 'Failed to create quiz.'});// Send a 500 (Internal Server Error) status code with an error message
     }    
 });
-//--------PUT---------------
+/*----------PUT----------------
+PUT - UPDATE :Full replacement update of a resource on the database 
+-------------------------------------*/
 // Route to update an existing quiz by its ID
 router.put('/editQuiz/:id', checkJwtToken, async (req, res) => {
         console.log(req.body);//Log the request body in the console for debugging purposes
@@ -161,7 +167,11 @@ router.put('/editQuiz/:id', checkJwtToken, async (req, res) => {
         res.status(500).json({success: false, message: 'Failed to update quiz.'});// Send a 500 (Internal Server Error) status code with an error message
     }
 });
-//--------PATCH------------
+
+/*---------PATCH---------------
+PATCH: UPDATE: Partial update of a resource on the database
+----------------------------------*/
+
 // Route to partially update an existing quiz by its ID
 router.patch('/updateQuiz/:id', checkJwtToken, async (req, res) => {
     console.log(req.body);//Log the request body in the console for debugging purposes  
@@ -222,7 +232,9 @@ router.patch('/updateQuiz/:id', checkJwtToken, async (req, res) => {
         res.status(500).json({success: false, message: 'Failed to update quiz.'});// Send a 500 (Internal Server Error) status code with an error message
     }
 });
-//--------DELETE------------
+/*--------DELETE------------
+DELETE: DELETE:Deletes a specific resource
+-----------------------*/
 // Route to delete a quiz by its ID
 router.delete('/deleteQuiz/:id' , checkJwtToken,  async (req, res) => {
     const { id } = req.params;// Extract quiz ID from the request parameters

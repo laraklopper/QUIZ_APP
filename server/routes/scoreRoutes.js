@@ -11,8 +11,9 @@ const {checkJwtToken} = require('./middleware'); // Import the checkJwtToken mid
 const router = express.Router();// Create a new router instance to define the routes for handling quiz scores
 
 //===========ROUTES===============
-//-----------GET----------------
-//GET:READ : Used to fetch information from the database
+/*-----------GET----------------
+GET:READ : Used to fetch information from the database
+-----------------------------*/
 // -------Route 1: GET /fetchScores-------
 // Fetches all scores, or scores filtered by username if provided as a query param.
 // Also performs a cleanup pass — removing stale scores whose quiz or user no longer exists.
@@ -143,8 +144,9 @@ router.get('/findScore/:username/:quizTitle', async (req, res) => {
                 message: 'An error occurred while fetching the user score for the specified quiz.', error: error.message });
     }
 })
-//-----------POST---------------
-//POST: CREATE: Used to submit data about a specific entity to the server
+/*-------POST--------------
+POST: CREATE: Used to submit data about a specific entity to the server
+-----------------------*/
 // -------Route 4: POST /submitScore-------
 // Creates a new score record for a user on a specific quiz.
 // Validates input, confirms the quiz exists, and prevents duplicate entries
@@ -198,8 +200,9 @@ router.post('/submitScore', async (req, res) => {
     }
 });
 
-//----------PUT----------------
-// PUT - UPDATE :Full replacement update of a resource on the database 
+/*----------PUT----------------
+PUT - UPDATE :Full replacement update of a resource on the database 
+-------------------------------------*/
 // -------Route 5: PUT /updateScore/:id-------
 // Updates an existing score record identified by its MongoDB _id.
 // Only updates if the new score is strictly higher than the stored score —

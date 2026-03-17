@@ -25,7 +25,9 @@ if (!secretKey) {
 }
 
 //=================ROUTES==========================
-//---------------------GET-------------------
+/*------------------------GET----------------
+GET:READ : Used to fetch information from the database
+--------------------------------------------*/
 // Route to Get current user details
 router.get('/me', checkJwtToken, async (req, res) => {
     try {
@@ -74,7 +76,9 @@ router.get('/findUsers', checkJwtToken, async (req, res) => {
     }
 })
 
-//-----------POST-------------------
+/*---------------POST--------------
+POST: CREATE: Used to submit data about a specific entity to the server
+-----------------------*/
 // Route for user login
 router.post('/login', async (req, res) => {
     try {
@@ -208,7 +212,9 @@ router.post('/register', checkPasswordStrength, hashPassword, async (req, res) =
     }
 })
 
-//---------------------PATCH-------------------
+/*--------------PATCH---------------
+PATCH: UPDATE: Partial update of a resource on the database
+----------------------------------*/
 //Route to edit a user by ID
 //Send a patch request to the /editUser/:id endpoint
 router.patch('/editUser/:id', checkJwtToken, async (req, res) => {
@@ -349,7 +355,9 @@ router.patch('/editPassword', checkJwtToken, checkPasswordStrength, hashPassword
     }
 })
 
-//----------------------DELETE-------------------
+/*---------------DELETE------------
+DELETE: DELETE:Deletes a specific resource
+------------------------------------*/
 //Route to delete a user by ID
 //Send a delete request to the /deleteUser/:id endpoint
 router.delete('/deleteUser/:id', checkJwtToken, checkAdmin, async (req, res) => {
