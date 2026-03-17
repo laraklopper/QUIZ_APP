@@ -201,20 +201,22 @@ const checkAge = (req, res, next) => {
 /*========================
 ADMIN MIDDLEWARE
 ==========================*/
-//Middleware to allow admin users admin privilesges to access certain routes
-//Only allow users 18 or older to register as admins
+// Restricts a route to admin users only.
+// Must run after checkJwtToken so that req.user is already populated
+// with the decoded JWT payload (which includes the isAdmin flag).
 const checkAdmin = (req, res, next) => {
     console.log('[DEBUG: middleware.js, checkAdmin] Checking user role for admin access');
     try {
+        // isAdmin is embedded in the JWT payload at login time
         const isAdmin = req.user?.isAdmin;
         if (!isAdmin) {
             console.error('[ERROR: middleware.js, checkAdmin]: User is not an admin');
-            return res.status(403).json({
+            return res.status(403).json({ // 403 Forbidden — authenticated but not authorised
                 success: false,
                 message: 'Access denied. Admin privileges required.'
             });
         }
-        next();
+        next(); // User has admin privileges — proceed
     } catch (error) {
         console.error('[ERROR: middleware.js, checkAdmin]:', error.message);
         return res.status(500).json({
