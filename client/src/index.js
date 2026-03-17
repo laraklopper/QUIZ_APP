@@ -1,17 +1,28 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import {BrowserRouter} from 'react-router-dom'
+// index.js
+//IMPORT REQUIRED MODULES AND PACKAGES
+import React from 'react';// Import the React module to use React functionalities
+import ReactDOM from 'react-dom/client';// Import the ReactDOM library, to provide a method rendering React components into the DOM
+// IMPORT CSS STYLESHEETS
+import './index.css';//Import CSS stylesheet
+// IMPORT COMPONENTS
+import App from './App';//Import the App function component
+// IMPORT FUNCTIONS
+import reportWebVitals from './reportWebVitals';//Import reportWebVitals function from './reportWebVitals'
+// IMPORT BOOTSTRAP
+import 'bootstrap/dist/css/bootstrap.min.css';//Import React Bootstrap
+// IMPORT REACT ROUTER COMPONENTS
+import {BrowserRouter} from 'react-router-dom';//Import BrowserRouter from react-router-dom;
+
+// Create a root for rendering the React app using the element id
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
-  <React.StrictMode>
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>
+  <React.StrictMode>{/* Enable additional checks and warnings during development */}
+    {/* Render the BrowserRouter */}
+    <BrowserRouter>
+      {/* Render the main App.js function component */}
+      <App />
+    </BrowserRouter>
   </React.StrictMode>
 );
 
