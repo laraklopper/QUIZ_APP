@@ -23,6 +23,8 @@ export default function PastScores(//Export default PastScores function componen
   //============USE EFFECT HOOK============
   // Fetch the user's scores when the component mounts or when loggedIn changes
     useEffect(() => {
+      /* Conditional rendering to check if user 
+      is loggedIn before fetching scores*/ 
         if (loggedIn === true) {
             fetchUserScores()// Only fetch scores if the user is logged in
         }
