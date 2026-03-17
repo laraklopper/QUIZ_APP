@@ -5,15 +5,15 @@ require('dotenv').config();
 //Import required modules and packages
 const express = require('express');// Import Express to handle routing
 const jwt = require('jsonwebtoken');// Import the jsonwebtoken module for handling JSON Web Tokens
-const bcrypt = require('bcrypt');
-const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');// Import bcrypt for password hashing and comparison
+const mongoose = require('mongoose');// Import mongoose for ObjectId validation
 //Create an instance of the Express Router
 const router = express.Router()
 // Import the User model and middleware functions
 const User = require('../models/userSchema');//Import User model
 const Quiz = require('../models/quizSchema');// Import Quiz model
 const Score = require('../models/scoreSchema');// Import Score model
-const { checkJwtToken, hashPassword, checkPasswordStrength, checkAdmin } = require('./middleware');
+const { checkJwtToken, hashPassword, checkPasswordStrength, checkAdmin } = require('./middleware');// Import middleware: JWT auth, password hashing, strength check, admin guard
 // Extract environmental variables
 const secretKey = process.env.JWT_SECRET_KEY;
 
@@ -29,7 +29,7 @@ if (!secretKey) {
 // Route to Get current user details
 router.get('/me', checkJwtToken, async (req, res) => {
     try {
-        const userId = req.user?.userId;
+        const userId = req.user?.userId;// Extract the userId from the decoded JWT token payload
 
         //Conditional rendering to check if user ID exists
         if (!userId) {
@@ -37,9 +37,9 @@ router.get('/me', checkJwtToken, async (req, res) => {
             return res.status(401).json({ message: `Unauthorized` })// Send a 401 (Unauthorized) status code with a message
         }
 
-        const user = await User.findById(userId)
-        .select('-password')
-        .exec()
+        const user = await User.findById(userId)// Find the user in the database by their ID
+        .select('-password')// Exclude the password field from the returned document
+        .exec()// Execute the query
 
              // Conditional rendering to check if user exists
         if (!user) {
@@ -60,8 +60,8 @@ router.get('/findUsers', checkJwtToken, async (req, res) => {
     try {        
         const { username } = req.query;// Extract the username from the query parameters
         // If a username is provided, use it to filter users, otherwise return all users
-        const query = username ? { username } : {};
-        const users = await User.find(query).select('-password'); // Fetch users based on the query object
+        const query = username ? { username } : {};// Build the query object based on whether a username was provided
+        const users = await User.find(query).select('-password'); // Fetch matching users, excluding the password field
     
         // console.log(users);// Log the fetched users for debugging purposes
         res.status(200).json(users);// Send the list of users as the response
@@ -212,16 +212,18 @@ router.post('/register', checkPasswordStrength, hashPassword, async (req, res) =
 //Send a patch request to the /editUser/:id endpoint
 router.patch('/editUser/:id', checkJwtToken, async (req, res) => {
     try {
-        const { id } = req.params;
-        const { username, fullName, email } = req.body;
+        const { id } = req.params;// Extract the user ID from the URL parameters
+        const { username, fullName, email } = req.body;// Extract editable fields from the request body
 
         // Find the user by ID
         const user = await User.findById(id);
+        // Conditional rendering to check if user exists
         if (!user) {
+            console.error('[ERROR: userRoutes.js, editUser/:id]User not found' );
             return res.status(404).json({ message: 'User not found' });
         }
 
-        // Build updates from provided fields
+        // Build updates from provided fields — only include non-empty string values
         const updates = {};
         if (typeof username === 'string' && username.trim() !== '') {
             updates.username = username.trim();
@@ -233,9 +235,10 @@ router.patch('/editUser/:id', checkJwtToken, async (req, res) => {
             updates['fullName.lastName'] = fullName.lastName.trim();
         }
         if (typeof email === 'string' && email.trim() !== '') {
-            updates.email = email.trim().toLowerCase();
+            updates.email = email.trim().toLowerCase();// Normalise email to lowercase
         }
 
+        // Reject request if no valid fields were provided
         if (Object.keys(updates).length === 0) {
             console.error('[ERROR: userRoutes.js, editUser/:id] No valid fields provided for update');
             return res.status(400).json({ success: false, message: 'No valid fields provided for update' });
@@ -335,7 +338,7 @@ router.patch('/editPassword', checkJwtToken, checkPasswordStrength, hashPassword
             console.error('[ERROR: userRoutes.js, /editPassword] New password must be different from old password');//Log an error message in the console for debugging purposes
             return res.status(400).json({ success: false, message: 'New password must be different from old password' });//Send a 400 Bad Request status code with a message
         }
-        user.password = newPassword;
+        user.password = newPassword;// Assign the new (already hashed by middleware) password
         await user.save();// Save the updated user
         // Return a success response
         return res.status(200).json({ success: true, message: 'Password updated successfully' });
