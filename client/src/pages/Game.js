@@ -24,31 +24,31 @@ import { shuffleArray } from '../utilFunctions/quizFunctions';
 //===========MAIN GAME FUNCTION COMPONENT==========
 export default function Game(//Export default Game function component
   {//PROPS PASSED FROM PARENT COMPONENT (App.js)
-  logout,
-  currentUser,
-  quizList,
-  fetchQuizzes,
-  setError,
-  setQuizList,
-  setQuizName,
-  setQuestions,
-  quiz,
-  setQuiz,
-  userScores,
-  setUserScores,
-  selectedQuiz,
-  setSelectedQuiz,
-  loggedIn,
-  fetchUserScores,
-  quizName,
-  questions,
+  logout,         // Function to log the user out
+  currentUser,    // Object containing the currently logged-in user's details
+  quizList,       // Array of all available quizzes
+  fetchQuizzes,   // Function to fetch all quizzes from the server
+  setError,       // Function to set the global error state
+  setQuizList,    // Function to update the quiz list state
+  setQuizName,    // Function to set the name of the selected quiz
+  setQuestions,   // Function to set the questions for the selected quiz
+  quiz,           // Object containing the currently active quiz data
+  setQuiz,        // Function to set the active quiz
+  userScores,     // Array of the current user's past quiz scores
+  setUserScores,  // Function to update the user's scores state
+  selectedQuiz,   // Object representing the quiz selected for review in past scores
+  setSelectedQuiz,// Function to set the selected past quiz
+  loggedIn,       // Boolean indicating whether the user is logged in
+  fetchUserScores,// Function to fetch the current user's scores from the server
+  quizName,       // String storing the name of the currently active quiz
+  questions,      // Array of questions for the currently active quiz
 }) {
   // ==========STATE VARIABLES============
   // Quiz variables
   const [selectedQuizId, setSelectedQuizId] = useState();// State to store the selected quiz ID
   // Timer variables
-  const [timer, setTimer] = useState(10);// State to store Timer
-  const [quizTimer, setQuizTimer] = useState()//State to store quiz timer
+  const [timer, setTimer] = useState(10);// State to store the countdown timer value (seconds)
+  const [quizTimer, setQuizTimer] = useState()// State to store the quiz timer interval reference
   // Score variables
   const [showPastScores, setShowPastScores] = useState(false)//State to toggle past scores display
 
@@ -56,17 +56,17 @@ export default function Game(//Export default Game function component
   /* useEffect to fetch quizzes when the component 
   mounts or when fetchQuizzes changes*/
   useEffect(() => {
-    let isMounted = true;
-    const loadQuizzes = async () => {//Define an async function
+    let isMounted = true;// Track whether the component is still mounted to prevent state updates after unmount
+    const loadQuizzes = async () => {//Define an async function to load quizzes
       try {
-        fetchQuizzes()
+        fetchQuizzes()// Call the fetchQuizzes function passed down from App.js
       } catch (error) {
-        if(isMounted) setError('Error fetching quizzes', error)
-          console.error('Failed to fetch quizzes');//Log an error message in the console for debugging purposes 
+        if(isMounted) setError('Error fetching quizzes', error)// Only update state if component is still mounted
+          console.error('Failed to fetch quizzes');//Log an error message in the console for debugging purposes
       }
     }
-    loadQuizzes();
-    return () => {isMounted = false}
+    loadQuizzes();// Call the loadQuizzes function when the component mounts
+    return () => {isMounted = false}// Cleanup: set isMounted to false when the component unmounts
   },[fetchQuizzes, setError])
 
  
