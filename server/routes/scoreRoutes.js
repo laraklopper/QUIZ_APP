@@ -12,12 +12,11 @@ const router = express.Router();// Create a new router instance to define the ro
 
 //===========ROUTES===============
 //-----------GET----------------
-
+//GET:READ : Used to fetch information from the database
 // -------Route 1: GET /fetchScores-------
 // Fetches all scores, or scores filtered by username if provided as a query param.
 // Also performs a cleanup pass — removing stale scores whose quiz or user no longer exists.
 // Requires a valid JWT token (checkJwtToken middleware).
-// Example: GET /fetchScores?username=john
 router.get('/fetchScores', checkJwtToken, async (req, res) => {
     try {
         // Extract optional username filter from the query string
@@ -31,18 +30,18 @@ router.get('/fetchScores', checkJwtToken, async (req, res) => {
 
         // Fetch all existing quiz titles — used below to detect orphaned score records
         let quizTitles = await Quiz.find().select('title').exec();
-        let existingTitles = quizTitles.map(quiz => quiz.title);
+        let existingTitles = quizTitles.map(quiz => quiz.title);// Extract quiz titles into an array
 
         // Fetch all existing usernames — used below to detect orphaned score records
         let userNames = await User.find().select('username').exec();
-        let existingUsernames = userNames.map(user => user.username);
+        let existingUsernames = userNames.map(user => user.username);//Extract usernames into an array
 
         /* Cleanup: Remove any Score documents whose associated quiz or user
            has since been deleted. This keeps the scores collection in sync. */
         await Score.deleteMany({
             $or: [
-                { quizTitle: { $nin: existingTitles } },   // Quiz was deleted
-                { username: { $nin: existingUsernames } }   // User was deleted
+                { quizTitle: { $nin: existingTitles } },   // Delete scores with quiz title not in existingTitles 
+                { username: { $nin: existingUsernames } }   // Delete scores with usernames not in existing usernames
             ]
         });
 
@@ -52,17 +51,20 @@ router.get('/fetchScores', checkJwtToken, async (req, res) => {
         // Declare a variable to hold the query results
         let quizScores;
 
-        // If a username was provided, return only that user's scores; otherwise return all scores
-        if (username) {
-            quizScores = await Score.find({ username }).exec(); // Filtered by username
-        } else {
-            quizScores = await Score.find({}).exec(); // All scores
+         // Conditional rendering to check if a username is provided
+       
+        if (username) {// Filtered by username
+            // Find all scores for the user based on the username
+            quizScores = await Score.find({ username }).exec(); 
+        } else {// All scores
+            //Find all scores if no username is provided
+            quizScores = await Score.find({}).exec(); 
         }
 
-        console.log(quizScores); // Log fetched scores for debugging
+        console.log(`[RESPONSE: scoreRoutes.js, /fetchScores]: ${quizScores}`); // Log fetched scores in the console for debugging purposes
         return res.status(200).json({ success: true, scores: quizScores }); // Respond with the scores
     } catch (error) {
-        console.error('[ERROR: scoreRoutes.js:] An error occurred while fetching scores.', error);
+        console.error('[ERROR: scoreRoutes.js:] An error occurred while fetching scores.', error);//Log an error message in the console for debugging purposes    
         res.status(500).json({ success: false, message: 'An error occurred while fetching scores.', error: error.message });
     }
 });
@@ -70,7 +72,6 @@ router.get('/fetchScores', checkJwtToken, async (req, res) => {
 // -------Route 2: GET /findScores/:username-------
 // Fetches all scores belonging to a specific user, sorted newest first.
 // First verifies the user exists in the database before querying scores.
-// Example: GET /findScores/john
 router.get('/findScores/:username', async (req, res) => {
     try {
         const { username } = req.params; // Extract username from the URL parameter
@@ -103,7 +104,7 @@ router.get('/findScores/:username', async (req, res) => {
     } catch (error) {
         console.error(
             '[ERROR: scoreRoutes.js, /findScores/:username] An error occurred while fetching user scores.', error);
-        res.status(500).json(
+        res.status(500).json(// Return a 500 (Internal Server Error) status code with a message
             {
                 success: false,
                 message: 'An error occurred while fetching user scores.', error: error.message
@@ -114,7 +115,6 @@ router.get('/findScores/:username', async (req, res) => {
 // -------Route 3: GET /findScore/:username/:quizTitle-------
 // Fetches a single score for a specific user and quiz combination.
 // Returns 404 if no matching score record is found.
-// Example: GET /findScore/john/JavaScript%20Basics
 router.get('/findScore/:username/:quizTitle', async (req, res) => {
     try {
         const { username, quizTitle } = req.params; // Extract both username and quiz title from URL params
@@ -122,37 +122,39 @@ router.get('/findScore/:username/:quizTitle', async (req, res) => {
         // Query the Score collection for a document matching both username and quizTitle
         const result = await Score.findOne({ username, quizTitle }).exec();
 
-        // If no score exists for this user/quiz pair, return a 404 error
+        //Conditional rendering to check if a score is found for the user and quiz
         if (!result) {
-            console.error(
+            console.error(//Log an error message in the console for debugging purposes
                 `[scoreRoutes.js, /findScore/:username/:quizTitle] Score not found for user ${username} and quiz ${quizTitle}`
             );
-            return res.status(404).json(
+            return res.status(404).json( //  If no score exists for this user/quiz pair, return a 404 (Not Found) status code with an error message
                 { success: false, message: 'Score not found for this user and quiz.' }
             );
         }
 
-        res.status(200).json({ userScore: result }); // Return the matched score
-        console.log(result); // Log the result for debugging
+        res.status(200).json({ userScore: result }); // Return a status 200 (OK) response and the matched score  in JSON format
+        console.log(result); // Log the result for debugging purposes
     } catch (error) {
-        console.error(
+        console.error(//Log an error message in the console for debugging purposes
             '[ERROR: scoreRoutes.js, /findScore/:username/:quizTitle] An error occurred while fetching the user score for the specified quiz.', error);
-        res.status(500).json({ success: false, message: 'An error occurred while fetching the user score for the specified quiz.', error: error.message });
+        res.status(500).json(// Return a 500 (Internal Server Error) status code with a message
+            { 
+                success: false, 
+                message: 'An error occurred while fetching the user score for the specified quiz.', error: error.message });
     }
 })
 //-----------POST---------------
-
+//POST: CREATE: Used to submit data about a specific entity to the server
 // -------Route 4: POST /submitScore-------
 // Creates a new score record for a user on a specific quiz.
 // Validates input, confirms the quiz exists, and prevents duplicate entries
 // (one score per user per quiz — use PUT /updateScore to update an existing one).
-// Example body: { username: "john", quizTitle: "JavaScript Basics", score: 8 }
 router.post('/submitScore', async (req, res) => {
     try{
         // Extract the required fields from the request body
         const { username, quizTitle, score } = req.body;
 
-        // Validate all required fields: username and quizTitle must be non-empty strings,
+        // Conditional rendering to check all required fields: username and quizTitle must be non-empty strings,
         // score must be a number (allows 0 as a valid score via strict undefined check)
         if (!username || typeof username !== 'string' || !quizTitle || typeof quizTitle !== 'string' || score === undefined || typeof score !== 'number') {
             console.error('[scoreRoutes.js, /submitScore] Invalid input. Username and quiz title must be strings, and score must be a number.');
@@ -161,9 +163,11 @@ router.post('/submitScore', async (req, res) => {
 
         // Verify the quiz exists before saving a score against it
         const quiz = await Quiz.findOne({ title: quizTitle }).exec();
+        // Conditional rendering to check if the quiz exists
         if (!quiz) {
-            // Return 404 if the quiz title does not match any quiz in the database
+            //Log an error message in the console for debugging purposes
             console.error(`[scoreRoutes.js, /submitScore] Quiz not found: ${quizTitle}`);
+            // Return 404 (Not Found) response status if the quiz title does not match any quiz in the database
             return res.status(404).json({ success: false, message: 'Quiz not found.' });
         }
 
@@ -173,7 +177,8 @@ router.post('/submitScore', async (req, res) => {
         if (existingScore) {
             // Return 400 if a score record already exists; client should use PUT to update it
             console.error(`[scoreRoutes.js, /submitScore] Score already exists for user ${username} and quiz ${quizTitle}`);
-            return res.status(400).json({ success: false, message: 'Score already exists for this user and quiz.' });
+            return res.status(400).json(// Send a 400 (Bad Request) status code with a message
+                { success: false, message: 'Score already exists for this user and quiz.' });
         }
 
         // All checks passed — create and persist the new score document
@@ -185,7 +190,7 @@ router.post('/submitScore', async (req, res) => {
     catch (error) {
         console.error(
             '[ERROR: scoreRoutes.js, /submitScore] An error occurred while submitting the score.', error);
-        res.status(500).json(
+        res.status(500).json(// Return a 500 (Internal Server Error) status code with a message
             {
                 success: false,
                 message: 'An error occurred while submitting the score.', error: error.message
@@ -194,7 +199,7 @@ router.post('/submitScore', async (req, res) => {
 });
 
 //----------PUT----------------
-
+// PUT - UPDATE :Full replacement update of a resource on the database 
 // -------Route 5: PUT /updateScore/:id-------
 // Updates an existing score record identified by its MongoDB _id.
 // Only updates if the new score is strictly higher than the stored score —
@@ -207,16 +212,19 @@ router.put('/updateScore/:id', checkJwtToken, async (req, res) => {
         const { id } = req.params;   // MongoDB _id of the score document to update
         const { score } = req.body;  // The new score value submitted by the client
 
-        // Validate that the id is a properly formatted MongoDB ObjectId
+        // Conditional rendering to ensure that the id is a properly formatted MongoDB ObjectId
         // (prevents a CastError from Mongoose if a malformed id reaches the DB query)
         if (!mongoose.Types.ObjectId.isValid(id)) {
-            console.error(`[scoreRoutes.js, /updateScore/:id] Invalid score ID format: ${id}`);
-            return res.status(400).json({ success: false, message: 'Invalid score ID format.' });
+            console.error(`[scoreRoutes.js, /updateScore/:id] Invalid score ID format: ${id}`);//Log an error message in the console for debugging purposes    
+            return res.status(400).json({// Send a 400 (Bad Request) status code with a message
+                 success: false, 
+                 message: 'Invalid score ID format.' 
+                });
         }
 
-        // Validate the new score: must be a number and cannot be negative
+        // Conditional rendering to ensure the new score is a number and not be negative
         if (typeof score !== 'number' || score < 0) {
-            console.error(`[scoreRoutes.js, /updateScore/:id] Invalid score value: ${score}. Score must be a non-negative number.`);
+            console.error(`[scoreRoutes.js, /updateScore/:id] Invalid score value: ${score}. Score must be a non-negative number.`);//Log an error message in the console for debugging purposes    
             return res.status(400).json({ success: false, message: 'Invalid score value. Score must be a non-negative number.' });
         }
 
@@ -246,8 +254,12 @@ router.put('/updateScore/:id', checkJwtToken, async (req, res) => {
         console.log(`[scoreRoutes.js, /updateScore/:id] Updated score for user ${existingScore.username} on quiz ${existingScore.quizId}`);
         return res.status(200).json(editedScore); // Respond with the updated score document
     } catch (error) {
-        console.error('[ERROR: scoreRoutes.js, /updateScore/:id] An error occurred while updating the score.', error);
-        res.status(500).json({ success: false, message: 'An error occurred while updating the score.', error: error.message });
+        console.error(//Log an error message in the console for debugging purposes    
+            '[ERROR: scoreRoutes.js, /updateScore/:id] An error occurred while updating the score.', error);
+        res.status(500).json({ // Return a 500 (Internal Server Error) status code with a message
+            success: false, 
+            message: 'An error occurred while updating the score.', error: error.message 
+        });
     }
 })
 
