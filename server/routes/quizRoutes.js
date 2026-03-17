@@ -7,7 +7,7 @@ const router = express.Router();// Create a new router instance to define the ro
 const Quiz = require('../models/quizSchema'); // Import the Quiz model
 const Score = require('../models/scoreSchema'); //Import the Score model
 //Custom middleware
-const {checkJwtToken} = require('./middleware')
+const {checkJwtToken} = require('./middleware')// Import JWT authentication middleware to protect routes
 
 //=============ROUTES===============
 //-------GET---------------
@@ -15,14 +15,14 @@ const {checkJwtToken} = require('./middleware')
 // Send a GET request to /findQuizzes to retrieve all quizzes from the database
 router.get('/findQuizzes', checkJwtToken, async (req, res) => {
     try {
-        const quizzes = await Quiz.find();
-        res.status(200).json({success: true, quizList: quizzes});
+        const quizzes = await Quiz.find();// Retrieve all quiz documents from the database
+        res.status(200).json({success: true, quizList: quizzes});// Send a 200 OK status code with the list of quizzes
 
         console.log(`[DATA RETRIEVED: quizRoutes.js, '/findQuizzes'] ${quizzes.length} quizzes found.`);
-        
+
     } catch (error) {
         console.error('[ERROR: quizRoutes.js, /findQuizzes] Failed to retrieve quizzes:', error);
-        res.status(500).json({success: false, message: 'Failed to retrieve quizzes.'});
+        res.status(500).json({success: false, message: 'Failed to retrieve quizzes.'});// Send a 500 (Internal Server Error) status code with an error message
     }
 })
 //Route to get a specific quiz by its ID
@@ -38,7 +38,8 @@ router.get('/findQuiz/:id', checkJwtToken, async (req, res) => {
             return res.status(400).json({success: false, message: 'Invalid quiz ID.'});// Respond with a 400 (Bad Request) status and an error message
         }
 
-        const quiz = await Quiz.findById(id);//find the quiz by its ID in the database and populate the userId field with the 'username'
+        const quiz = await Quiz.findById(id);// Find the quiz document in the database by its ID
+        // Conditional rendering to check if the quiz exists
         if (!quiz) {
             console.error('[ERROR: quizRoutes.js, /findQuiz/:id] Quiz not found:', id);
             // If the quiz is not found, respond with a 404 (Not Found) status and an error message
@@ -46,10 +47,10 @@ router.get('/findQuiz/:id', checkJwtToken, async (req, res) => {
         }
         res.status(200).json({success: true, quiz: quiz});// If the quiz is found, send it as the JSON response
         console.log(`[SUCCESS: quizRoutes.js, /findQuiz/:id] Quiz found: ${quiz}`);
-        
+
     } catch (error) {
         console.error('[ERROR: quizRoutes.js, /findQuiz/:id] Failed to retrieve quiz:', error);
-        res.status(500).json({success: false, message: 'Failed to retrieve quiz.'});
+        res.status(500).json({success: false, message: 'Failed to retrieve quiz.'});// Send a 500 (Internal Server Error) status code with an error message
     }
 })
 //-------POST--------------
@@ -62,7 +63,7 @@ router.post('/createQuiz', checkJwtToken, async (req, res) => {
         //Conditional rendering to check if all required fields are present in the request body
         if (!title || !description || !username || !questions) {
             console.error('[ERROR: quizRoutes.js, /createQuiz] Missing required fields in request body:', req.body);
-            return res.status(400).json({success: false, message: 'Missing required fields: title, description, username, and questions are all required.'});
+            return res.status(400).json({success: false, message: 'Missing required fields: title, description, username, and questions are all required.'});// Send a 400 (Bad Request) status code with an error message
         }
 
         // Check if a quiz with the same title already exists in the database to prevent duplicate quiz titles
@@ -70,22 +71,22 @@ router.post('/createQuiz', checkJwtToken, async (req, res) => {
         // Conditional rendering to check if a quiz with the same title already exists in the database to prevent duplicate quiz titles
         if (existingQuiz) {
             console.error('[ERROR: quizRoutes.js, /createQuiz] Quiz with the same title already exists:', title);
-            return res.status(409).json({success: false, message: 'A quiz with the same title already exists. Please choose a different title.'});
+            return res.status(409).json({success: false, message: 'A quiz with the same title already exists. Please choose a different title.'});// Send a 409 (Conflict) status code with an error message
         }
 
         // Create a new quiz document using the Quiz model
         const newQuiz = new Quiz({
-            title,
-            description,
-            username,
-            questions
+            title,// Set the quiz title
+            description,// Set the quiz description
+            username,// Set the username of the quiz creator
+            questions// Set the array of quiz questions
         });
-        const savedQuiz = await newQuiz.save();
-        res.status(201).json({success: true, quiz: savedQuiz});
+        const savedQuiz = await newQuiz.save();// Persist the new quiz document to the database
+        res.status(201).json({success: true, quiz: savedQuiz});// Send a 201 (Created) status code with the saved quiz data
         console.log(`[SUCCESS: quizRoutes.js, /createQuiz] Quiz created successfully: ${savedQuiz}`);
     } catch (error) {
         console.error('[ERROR: quizRoutes.js, /createQuiz] Failed to create quiz:', error);
-        res.status(500).json({success: false, message: 'Failed to create quiz.'});
+        res.status(500).json({success: false, message: 'Failed to create quiz.'});// Send a 500 (Internal Server Error) status code with an error message
     }    
 });
 //--------PUT---------------
