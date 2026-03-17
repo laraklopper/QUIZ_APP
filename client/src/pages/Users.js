@@ -1,6 +1,6 @@
 // Users.js
 //IMPORT REQUIRED MODULES AND PACKAGES
-import React from 'react'
+import { useCallback } from 'react'
 // IMPORT CSS STYLESHEETS
 import '../css/pagesCSS/PageSetup.css'
 import '../css/pagesCSS/Users.css'
@@ -31,7 +31,7 @@ export default function Users(//Export default Users function component
       //============REQUESTS===============
   //----------DELETE----------------
   // Function to delete a user by their ID
-  const handleDeleteUser = async (userId) => {
+  const handleDeleteUser = useCallback(async (userId) => {
     try {
       const token = localStorage.getItem('token');// Retrieve JWT token from localStorage
       // Send a DELETE request to remove the user with the given ID
@@ -57,7 +57,7 @@ export default function Users(//Export default Users function component
     } catch (error) {
       console.error('[ERROR: Users.js] Error deleting user:', error.message);//Log an error message in the console for debugging purposes
     }
-  };
+  }, [setUsers]);
 
   // ================JSX RENDERING======================
 
@@ -85,6 +85,7 @@ export default function Users(//Export default Users function component
           </div>
         </Col>
       </Row>
+      {/* ----------DISPLAY LIST OF USERS--------- */}
       <Row id='userListRow'>
         <Col id='userListCol'>
         {/* TABLE DISPLAYING THE USERS LIST */}

@@ -22,16 +22,16 @@ import { FileQuestionMark } from 'lucide-react';
 //=============MAIN ADDQUIZ COMPONENT==============
 export default function AddQuiz(//Export default AddQuiz function component
   {//PROPS PASSED FROM PARENT COMPONENT (App.js)
-    logout,
-    currentUser,
-    quizName,
-    questions,
-    setQuizName,
-    setQuestions,
-    fetchQuizzes,
-    quizList,
-    error,
-    setError
+    logout,       // Function to log the user out
+    currentUser,  // Object containing the currently logged-in user's details
+    quizName,     // String storing the name of the quiz being created or edited
+    questions,    // Array of question objects for the quiz being created or edited
+    setQuizName,  // Function to update the quiz name state
+    setQuestions, // Function to update the questions state
+    fetchQuizzes, // Function to fetch all quizzes from the server
+    quizList,     // Array of all existing quizzes
+    error,        // Global error message string
+    setError      // Function to set the global error state
   }
 ) {
   //=============STATE VARIABLES===================
@@ -42,7 +42,7 @@ export default function AddQuiz(//Export default AddQuiz function component
     correctAnswer: '',
     options: ['', '', ''],
   })
-  const [description, setDescription] = useState('');//State to store the new quiz description
+  const [description, setDescription] = useState('');//State to store the quiz description being created or edited
   const [editQuizId, setEditQuizId] = useState(null);// State to store the ID of the quiz currently being edited
 
   //===============REACT HOOKS=====================
@@ -181,6 +181,7 @@ export default function AddQuiz(//Export default AddQuiz function component
         const data = await response.json().catch(() => ({}));// Safely parse the error response
         throw new Error(data.message || 'Failed to delete quiz.');
       }
+      // If the deleted quiz was open in the edit form, close and reset it
       // If the deleted quiz was open in the edit form, close and reset it
       if (editQuizId === quizId) {
         setEditQuizId(null);
