@@ -1,8 +1,10 @@
 // userRoutes.js
+/* Load environment variables from a .env 
+file using the dotenv package*/
 require('dotenv').config();
 //Import required modules and packages
-const express = require('express');
-const jwt = require('jsonwebtoken');
+const express = require('express');// Import Express to handle routing
+const jwt = require('jsonwebtoken');// Import the jsonwebtoken module for handling JSON Web Tokens
 // const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
 //Create an instance of the Express Router
@@ -84,10 +86,10 @@ router.post('/login', async (req, res) => {
             return res.status(400).json({ message: 'Username and password are required' });// Send a 400 (Bad Request) status code with a message
         }
 
-         //Find the user by username and include the password field
+         //Find the user by username 
         const user = await User.findOne({ 'username': username })
-            .select('+password')
-            .exec();
+            .select('+password')//include the password field
+            .exec();//Execute the query
 
         // Conditional rendering to check if user exists
         if (!user) {
@@ -137,21 +139,23 @@ router.post('/login', async (req, res) => {
 // Route for user registration
 router.post('/register', checkPasswordStrength, async (req, res) => {
     try {
-        const { username, fullName, email, dateOfBirth, admin, password } = req.body;
+        const { username, fullName, email, dateOfBirth, admin, password } = req.body;// Extract user details from the request body
 
-        // Validate required fields
+        //Conditional rendering to check that all the required fields exist
         if (!username || !fullName?.firstName || !fullName?.lastName || !email || !dateOfBirth || !password) {
             return res.status(400).json({ message: 'All required fields must be provided' });
         }
 
+        //------------CHECK FOR DUPLICATES===============
         // Check for duplicate username
         const existingUsername = await User.findOne({ username });
+        // Conditional rendering to check if a user with the same username already exists
         if (existingUsername) {
             return res.status(409).json({ message: 'Username is already taken' });
         }
-
         // Check for duplicate email
         const existingEmail = await User.findOne({ email: email.toLowerCase() });
+        // Conditional rendering to check if a user with the same email already exists
         if (existingEmail) {
             return res.status(409).json({ message: 'Email is already registered' });
         }
