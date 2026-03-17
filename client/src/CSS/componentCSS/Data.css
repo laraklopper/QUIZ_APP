@@ -1,27 +1,9 @@
 /* Data.css */
-.userDetailsLabel{
-    display: flex;
-    padding: 10px;
-    gap: 10px;
-}
-.dataTextHead{
-    text-transform: uppercase;
-    margin: 0px;
-    padding: 0px;
-    font-weight: 600;
-    font-family: "Playpen Sans", cursive
-}
+
+
 .dataText{
     text-transform: uppercase;
     font-family: "Playpen Sans", cursive
+    
 }
-.emailData{
-    text-transform: lowercase;
-    font-family: "Playpen Sans", cursive;
-    font-size: 20px;
-}
-#adminDataText, #usernameDataText,.currentUserFullName{
-    text-transform: uppercase;
-    font-family: "Playpen Sans", cursive;
-    font-size: 20px,
-}
+

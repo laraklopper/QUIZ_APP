@@ -1,136 +1,5 @@
 /* USER DATA.css */
-/* EditUserData.js */
-/* TEXT */
-#userProfileHeading{
-    display: flex;
-    margin: 10px 0px;
-    padding: 0px;
-    justify-content: center;
-    font-family: "Playpen Sans", cursive;
-    font-weight: 700;
-    text-decoration: underline;
-}
-/* Layout */
-/* Bootstrap Layout */
-/* Grid */
-#profileHeadingRow,
-#userDetailsRow1, #userDetailsRow2{
-    width: 100%;
-    margin: 0px;
-    padding: 0px;
-    display: flex;
-}
-#profileHeadingCol{
-    width: 100%;
-    margin: 0px;
-    padding: 0px;
-    display: flex;
-    justify-content: center;
-}
-#userDetailsCol1, #userDetailsCol2, #userDetailsCol3, 
-#userDetailsCol4, #userDetailsCol5{
-    display: flex;
-    margin: 0px;
-    padding: 0px;
-}
-#userDetailsDiv{
-    display: flex;
-    margin: 0px 5px;
-    padding: 0px;
-    flex-direction: column;
-    border: solid #323A42;
-    background-color: #B7B7B7;
-    width: 80%;
-}
-#editUserBlock, #editPasswordBlock{
-    display: flex;
-    width: inherit;
-    justify-content: center;
-    flex-direction: column;
-    padding: 10px 0px;
-    align-items: center;
-    margin: 0px;
-    background-color: #6c757d;
-}
-#toggleEditUserRow{
-    display: flex;
-    width: 100%;
-    margin: 0px;
-    padding: 0px;
-    flex-direction: column;
-    align-items: center;
-}
-#editUserCol {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-}
-#editUserBtnStack{
-    background-color: #BFBFBF;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 10px 0px;
-    gap: 10px; 
-}
-#editUserStack{
-    display: flex;
-    
-    justify-content: center;
-    width: 800px;
-    margin: 0px;
-    padding: 10px 5px;
-    align-items: center;
-}
-#edit-user-details,
-#edit-user-password{
-    display: flex;
-    align-items: center;
-    gap: 10px;
 
-}
-
-#edit-user-panal, #edit-password-pana{
-    width: inherit;
-  
-    display: flex;
-    justify-content: center;
-}
-
-
-/* BUTTONS */
-#toggleEditAccountBtn,
-#toggleEditPswdBtn{
-    height: 40px;
-    width: 180px;
-    margin: 5px;
-    padding: 0px;
-    align-items: center;
-    font-weight: 700;
-    font-family: "Roboto Mono", monospace;
-    font-size: 14px;
-    display: flex;
-    justify-content: center;
-    color: #000;
-    border: solid #323A42 3px;
-}
-#toggleEditAccountBtn:hover,
-#toggleEditPswdBtn:hover{
-    height: 40px;
-    width: 180px;
-    margin: 5px;
-    padding: 0px;
-    font-weight: 700;
-    font-family: "Roboto Mono", monospace;
-    font-size: 14px;
-    display: flex;
-    justify-content: center;
-    color: #fff;
-    border: solid #323A42 3px;
-    background-color: #323A42;
-}
 /* USER LIST TABLE */
 /* Users.js */
 #userListTable {
@@ -194,6 +63,20 @@
     padding: 5px 8px;
     text-transform: uppercase;
     border-radius: 3px;
+}
+.userDetailsHeading{
+    text-transform: uppercase;
+    margin: 0px;
+    padding: 0px;
+    font-weight: 600;
+    font-family: "Playpen Sans", cursive;
+    text-align: center;
+}
+.userDetailsLabel{
+    display: flex;
+    padding: 10px;
+    gap: 10px;
+    align-items: baseline;
 }
 
 /* DELETE BUTTON */

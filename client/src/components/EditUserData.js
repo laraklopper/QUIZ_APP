@@ -124,14 +124,14 @@ export default function EditUserData(//Export default EditUserData function comp
             <Col xs={6} md={4} id='userDetailsCol1'>
               {/* Username */}
               <span className='userDetailsLabel'>
-                  <h5 className='dataTextHead'>USERNAME:</h5>
+                  <h5 className='userDetailsHeading'>USERNAME:</h5>
                   <h5 id='usernameDataText'>{username}</h5>
               </span>
             </Col>
-            <Col xs={12} md={8} id='userdetailsCol2'>
+            <Col xs={12} md={8} id='userDetailsCol2'>
                 {/* User Full Name */}
                 <span className='userDetailsLabel'>
-                    <h5 className='dataTextHead'>NAME:</h5>
+                    <h5 className='userDetailsHeading'>NAME:</h5>
                     <h5 className='currentUserFullName'>{`${firstName} ${lastName}`} </h5>
                 </span>
             </Col>
@@ -141,21 +141,21 @@ export default function EditUserData(//Export default EditUserData function comp
             <Col xs={6} md={4} id='userDetailsCol3'>
             {/* user email */}
                   <span className='userDetailsLabel'>
-                        <h5 className='dataTextHead'>EMAIL: </h5>
+                        <h5 className='userDetailsHeading'>EMAIL: </h5>
                         <h5 className='emailData'>{email}</h5>
                     </span>
             </Col>
             {/* DATE OF BIRTH */}
             <Col xs={6} md={4} id='userDetailsCol4'>
                   <span className='userDetailsLabel'>
-                    <h5 className='dataTextHead'>DATE OF BIRTH: </h5>
+                    <h5 className='userDetailsHeading'>DATE OF BIRTH: </h5>
                     <h5 className='dataText'>{dateDisplay(dateOfBirth)}</h5>
                 </span>
             </Col>
             <Col xs={6} md={4} id='userDetailsCol5'>
               {/* User admin status*/}
                 <span className='userDetailsLabel'>
-                    <h5 className='dataTextHead'>ADMIN: </h5>
+                    <h5 className='userDetailsHeading'>ADMIN: </h5>
                     <h5 id='adminDataText'>{isAdmin}</h5>
                 </span>
             </Col>
