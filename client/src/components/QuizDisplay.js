@@ -122,8 +122,10 @@ export default function QuizDisplay(//Export default QuizDisplay function compon
       }
       const result = await response.json();// Parse the JSON response
 
-      // Update the user scores state with the new score
-      setUserScores(prevScores => [result, ...prevScores])
+      // Only update state if the score was actually improved
+      if (result.success !== false) {
+        setUserScores(prevScores => prevScores.map(s => s._id === result._id ? result : s));
+      }
       } catch (error) {
          console.error('Error saving score', error.message);//Log an error message in the console for debugging purposes
          setError('Error saving score', error.message)
