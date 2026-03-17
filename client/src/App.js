@@ -23,11 +23,14 @@ import ProtectedUserRoute from './protectedRoutes/ProtectedUserRoute'
 import ProtectedAdminRoute from './protectedRoutes/ProtectedAdminRoute'
 // IMPORT ICONS FROM LUCIDE-REACT
 import { Bug } from 'lucide-react';
+
 //=====MAIN APP FUNCTION COMPONENT==============
-export default function App() {
-  const [currentUser, setCurrentUser] = useState(null)
-  const [users, setUsers] = useState([])
-  const [userData, setUserData] = useState({
+export default function App() {//Export default App function component
+  //=======STATE VARIABLES===============
+  //User variables
+  const [currentUser, setCurrentUser] = useState(null)//State to store the user currently loggedIn
+  const [users, setUsers] = useState([])//State used to store a list of all the users
+  const [userData, setUserData] = useState({//State to store userData for login
     username: '',
     fullName: {
       firstName: '',
@@ -38,34 +41,40 @@ export default function App() {
     admin: false,
     password:'',
   })
-  const [quiz, setQuiz] = useState(null)
-  const [quizName, setQuizName] = useState('')
-  const [questions, setQuestions] = useState([])
-  const [quizList, setQuizList] = useState([])
+  // Quiz variables
+  const [quiz, setQuiz] = useState(null);//State to store the currently selected quiz
+  const [quizName, setQuizName] = useState('');//State to store the quizName 
+  const [questions, setQuestions] = useState([])//State to store  the List of questions in the quiz
+  const [quizList, setQuizList] = useState([])//State to store the list of quizzes
   const [selectedQuiz, setSelectedQuiz] = useState(null);// State to store the selected quiz
-    //Score variables
+  //Score variables
   const [userScores, setUserScores] = useState([]); // State to store the current user's quiz scores
   const [scores, setScores] =useState([]);// State to hold scores
-  const [loggedIn, setLoggedIn] = useState(false)
-  const [error, setError] = useState(null)
+  const [loggedIn, setLoggedIn] = useState(false);//Boolean to track whether or not the user is currently logged in
+  const [error, setError] = useState(null)//State to handle errors during data fetching
 
+  //===========Navigation======================
+  // Hook to navigate between different routes
   const navigate = useNavigate();
+  
   //============USE EFFECT HOOK TO FETCH USERS======================
   //Fetch users when the component mounts or when loggedIn changes
   useEffect(() => {
     // Function to fetch all users
     const fetchUsers = async () => {//Define an async function to fetch all users
       try {
-        const token = localStorage.getItem('token');
+        const token = localStorage.getItem('token');//Retrieve token from localStorage
 
-        if (!token || !loggedIn) return;
+        //Conditional rendering to check if the token exists and loggedIn state is true
+        if (!token || !loggedIn) return;// If no token is found or User is not logged in, exit the function
 
+        // Send a GET request to retrieve all registered users
         const response = await fetch(`http://localhost:3001/users/findUsers`, {
-          method: 'GET',
-          mode: 'cors',
+          method: 'GET', // HTTP request method
+          mode: 'cors', // Enable Cross-Origin Resource Sharing
           headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
+            'Content-Type': 'application/json', // Specify the Content-Type in the request payload
+            'Authorization': `Bearer ${token}` // Attach JWT token for authorization
           }
         })
         
@@ -85,7 +94,7 @@ export default function App() {
         }
 
       } catch (error) {
-        console.error(`ERROR: App.js: error fetching users`);
+        console.error(`ERROR: App.js: error fetching users`);//Log an error message in the console for debugging purposes
         setError(`ERROR: App.js: error fetching users: ${error.message}`);// Set the error state to display the error in the UI
       }
     }
@@ -96,6 +105,7 @@ export default function App() {
         const token = localStorage.getItem('token');
          if (!token || !loggedIn) return;// If no token is found, exit the function
 
+        // Send a GET request to retrieve the currently authenticated user's details
          const response = await fetch(`http://localhost:3001/users/me`, {
           method: 'GET',//HTTP request method
           mode: 'cors',//Enable Cross-Origin resource sharing mode
@@ -115,15 +125,20 @@ export default function App() {
         const fetchedCurrentUser = await response.json();// Parse the response as JSON and set the current user's details
         
         setCurrentUser(fetchedCurrentUser)// Update state with fetched user details
-       // console.log(fetchedCurrentUser);
+       // console.log(fetchedCurrentUser);//Log the current user details in the console for debugging purposes
       } catch (error) {
-        console.error('[ERROR: App.js]: Error fetching current user details');
-        setError(`Error fetching user details: ${error.message}`)
+        console.error('[ERROR: App.js]: Error fetching current user details');//Log an error message in the console for debugging purposes
+        setError(`Error fetching user details: ${error.message}`)// Set the error state to display the error in the UI       
       }
     }
 
+    //Conditional rendering to check if the user is logged in
     if (loggedIn) {
+       /*Call the FetchCurrentUser function to fetch the 
+      current user's details*/
       fetchCurrentUser();
+       /* Call the FetchUsers function to 
+      fetch the list of users*/
       fetchUsers()
     }
 
@@ -134,9 +149,10 @@ export default function App() {
     try {
       const token = localStorage.getItem('token');// Retrieve the JWT token from localStorage
 
+      // Send a GET request to retrieve all available quizzes
       const response = await fetch ('http://localhost:3001/quizzes/findQuizzes', {
-        method : 'GET',
-        mode: 'cors',
+        method : 'GET', // HTTP request method
+        mode: 'cors', // Enable Cross-Origin Resource Sharing
         headers: {
           'Content-Type': 'application/json',// Specify the Content-Type in the payload as JSON
           'Authorization': `Bearer ${token}`,// Attach JWT token to the Authorization header
@@ -146,6 +162,7 @@ export default function App() {
        /* Conditional rendering to check if the response
         is not successful (status code is not in the range 200-299)*/
       if (!response.ok) {
+        console.error('[ERROR: App.js]: Failed to fetch quizzes');//Log an error message in the console for debugging purposes
         throw new Error('Failed to fetch quizzes');//Throw an error message if the GET request is unsuccessful
       }
 
@@ -158,8 +175,8 @@ export default function App() {
     
 
     } catch (error) {
-      setError('Error fetching Quizzes', error)
-      console.error('[ERROR: APP.js]: Error fetching Quizzes', error);
+      setError('Error fetching Quizzes', error);// Set the error state to display the error in the UI       
+      console.error('[ERROR: APP.js]: Error fetching Quizzes', error);//Log an error message in the console for debugging purposes
     }
   },[])
 
