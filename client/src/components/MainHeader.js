@@ -24,7 +24,7 @@ export default function MainHeader(//Export default MainHeader function componen
     {//PROPS PASSED TO PARENT COMPONENT(Login.js, Registration.js)
         mainHeading}) {
     //=================STATE VARIABLES================
-    const [headerDate, setHeaderDate] = useState()
+    const [headerDate, setHeaderDate] = useState()//State to store header date/time (updated every second)
 
     useEffect(() => {
     // Create an interval that updates the time every second

@@ -18,8 +18,7 @@ import { Clock8, Calendar, User } from 'lucide-react';
 // IMPORT UTILITY FUNCTIONS
 import { dateDisplay, timeDisplay } from '../utilFunctions/dateFunctions';
 
-/*Header function component: Displays the main navigation header for logged-in users, including the
-current date and time, page heading, username, navigation links, and an animated event bar.*/
+//Header function component
 export default function Header(//Export default Header function component
     {//PROPS PASSED FROM PARENT COMPONENT (Home.js, Game.js, AddQuiz.js, Users.js)
         currentUser, 
@@ -28,7 +27,7 @@ export default function Header(//Export default Header function component
     }
 ) {
     //============STATE VARIABLES=============
-    const [date, setDate] = useState()
+    const [date, setDate] = useState()//State to store date/time (updated every second)
 
     //===========USE EFFECT HOOK===============
     //useEffect hook to display date and time

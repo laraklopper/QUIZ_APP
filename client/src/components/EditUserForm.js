@@ -14,8 +14,7 @@ import Button from 'react-bootstrap/Button';
 // IMPORT ICONS FROM LUCIDE-REACT
 import { UserRoundPen } from 'lucide-react';
 
-/*EditUserForm function component: Displays a form that allows users to edit their profile details,
-including username, first name, last name, and email address.*/
+// EditUserForm function component
 export default function EditUserForm(//Export default EditUserForm function component
   {//PROPS PASSED FROM PARENT COMPONENT (EditUserData.js)
     currentUser,

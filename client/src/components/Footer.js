@@ -19,7 +19,7 @@ import { Copyright } from 'lucide-react';
 // Import Utility Functions
 import { dateDisplay, timeDisplay } from '../utilFunctions/dateFunctions';
 
-//*Footer component: Displays the footer of the application, including the current date and time, logout Button and copyright information.*/
+//Footer function component
 export default function Footer(//Export default Footer component
   {//PROPS PASSED FROM PARENT COMPONENT (Home.js, Game.js, AddQuiz.js, Users.js)
     currentUser, 
@@ -46,10 +46,12 @@ export default function Footer(//Export default Footer component
   
   return (
     <footer id='footer' role='banner'>
-    {/* FOOTER ROW 1 */}
+    {/* FOOTER ROW 1: Stack 1 */}
      <Row id='footerRow1'>
         <Col id='footerCol1'>
+        {/* FOOTER STACK 1: User Status:Username + Admin Status, Clock: Date and time */}
             <Stack direction="horizontal" gap={3} id='footerStack1'>
+            {/* USER STATUS */}
                 <div  id='footerDetailsBlock'>
                     {currentUser && ( 
                       <ul id='footerStatusList'>
@@ -80,8 +82,9 @@ export default function Footer(//Export default Footer component
                     )}
                 </div>
                 <div className="p-2 ms-auto"></div>
+                {/* FOOTER CLOCK: DATE AND TIME */}
                 <div className="p-2" id='dateTimeBlock'>
-                {/* FOOTER CLOCK */}
+                {/* DATE AND TIME */}
                  <ListGroup variant='flush' id='dateTimeList' aria-labelledby='loggedInFooterDateTimeTitle'>
                   <p id='loggedInFooterDateTimeTitle' className='visually-hidden'>Current Date & Time</p>
                       <ListGroup.Item id='footerDateItem'>
@@ -99,13 +102,15 @@ export default function Footer(//Export default Footer component
             </Stack>
         </Col>
       </Row>
-      {/* FOOTER ROW 2 : Logout Button */}
+      {/* FOOTER ROW 2 : Stack 2 */}
       <Row id='footerRow2'>
         <Col id='footerCol2'>
+        {/* FOOTER STACK 2: Logout Button */}
             <Stack direction="horizontal" gap={3} id='footerStack2'>
                 <div className="p-2"></div>
                 <div className="p-2 ms-auto"></div>
                 <div id='logoutBlock'>
+                {/* Logout Button */}
                  <Button 
                   variant="warning" 
                   onClick={logout} 

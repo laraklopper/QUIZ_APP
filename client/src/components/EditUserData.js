@@ -19,8 +19,7 @@ import {dateDisplay} from '../utilFunctions/dateFunctions'
 import EditPasswordForm from './EditPasswordForm';
 import EditUserForm from './EditUserForm';
 
-/*EditUserData function component: Displays the current user's account details and provides
-toggle buttons to show or hide forms for editing the account profile or password.*/
+/*EditUserData function component*/
 export default function EditUserData(//Export default EditUserData function component
   {//PROPS PASSED FROM PARENT COMPONENT (Home.js)
     currentUser, 

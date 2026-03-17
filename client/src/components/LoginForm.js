@@ -14,8 +14,7 @@ import Button from 'react-bootstrap/Button';
 // IMPORT ICONS FROM LUCIDE-REACT
 import { Eye, EyeOff, LogIn } from 'lucide-react';
 
-/*LoginForm function component: Displays the login form with username and password fields, password
-visibility toggle, and client-side validation before submitting credentials.*/
+// LoginForm function component
 export default function LoginForm(//Export default LoginForm function component
   {//PROPS PASSED FROM PARENT COMPONENT(Login.js)
     userData, 

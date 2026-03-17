@@ -14,8 +14,7 @@ import Button from 'react-bootstrap/Button';
 // IMPORT ICONS FROM LUCIDE-REACT
 import { Eye, EyeOff, Asterisk, UserKey } from 'lucide-react';
 
-/*EditPasswordForm function component: Displays a form that allows users to update their password,
-including fields for the current and new password with visibility toggles and strength validation.*/
+// EditPasswordForm function component:
 export default function EditPasswordForm(//Export default EditPasswordForm function component
     {//PROPS PASSED FROM PARENT COMPONENT (EditUserData.js)
         setError

@@ -16,8 +16,7 @@ import { Asterisk} from 'lucide-react';
 // IMPORT CUSTOM COMPONENTS
 import NewQuestionsList from './NewQuestionsList';
 
-/*AddQuizForm function component: Displays a form for creating a new quiz, including fields for the
-quiz name, description, questions, correct answers, and alternative answer options.*/
+//AddQuizForm function component
 export default function AddQuizForm(//Export default AddQuizForm function component
   {//PROPS PASSED FROM PARENT COMPONENT (AddQuiz.js)
     currentUser, 

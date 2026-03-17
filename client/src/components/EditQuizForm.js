@@ -14,8 +14,7 @@ import Button from 'react-bootstrap/Button';
 // IMPORT ICONS FROM LUCIDE-REACT
 import { ArrowBigLeftDash, ArrowBigRightDash, FileQuestionMark } from 'lucide-react';
 
-/*EditQuizForm function component: Displays a form that allows admin users to edit an existing
-quiz, including its name, description, and individual questions with navigation between them.*/
+// EditQuizForm function component
 export default function EditQuizForm(//Export default EditQuizForm function component 
     {//PROPS PASSED FROM PARENT COMPONENT (AddQuiz.js)
         editQuiz,
