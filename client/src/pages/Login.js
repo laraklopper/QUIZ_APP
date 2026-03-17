@@ -76,7 +76,7 @@ export default function Login(//Export the default Login function component
             <Col id='loginEventCol'>
                 <div className='event-bar'>
                     <div className='event-track'>
-                         <IdCard  className='event-slide'/>
+                         <IdCard  className='event-slide' aria-hidden='true' size={32}/>
                     </div>
                 </div>
             </Col>
