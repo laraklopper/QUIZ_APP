@@ -1,26 +1,26 @@
 // Footer.js
 /*Footer component: Displays the footer of the application, 
 including the current date and time, logout Button and copyright information.*/
-//Import required modules and packages
+//IMPORT REQUIRED MODULES AND PACKAGES
 import React, { useEffect, useState } from 'react'
-// CSS STYLESHEETS
+// IMPORT CSS STYLESHEETS
 import '../css/componentCSS/Footer.css'
-// Animations CSS
+// IMPORT COMPONENT ANIMATIONS CSS
 import '../css/componentCSS/ComponentAnimations.css'
-// Bootstrap
+// IMPORT BOOTSTRAP COMPONENTS
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
-// Import Icons from Lucide-React
+// IMPORT ICONS FROM LUCIDE-REACT
 import { Calendar, Clock8, LogOut, ShieldUser, User} from 'lucide-react';
 import { Copyright } from 'lucide-react';
 // Import Utility Functions
 import { dateDisplay, timeDisplay } from '../utilFunctions/dateFunctions';
 
 //*Footer component: Displays the footer of the application, including the current date and time, logout Button and copyright information.*/
-export default function Footer(
+export default function Footer(//Export default Footer component
   {//PROPS PASSED FROM PARENT COMPONENT (Home.js, Game.js, AddQuiz.js, Users.js)
     currentUser, 
     logout
