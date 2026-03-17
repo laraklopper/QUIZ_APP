@@ -156,6 +156,7 @@ export default function EditPasswordForm(//Export default EditPasswordForm funct
                         disabled={loading}
                         placeholder='CURRENT PASSWORD'
                         value={currentPassword}
+                        // EVENTS
                         onChange={(e) => setCurrentPassword(e.target.value)}
                         onFocus={() => setPasswordMsg(true)}
                         onBlur={() => setPasswordMsg(false)}
@@ -211,10 +212,11 @@ export default function EditPasswordForm(//Export default EditPasswordForm funct
                         minLength={8}
                         placeholder='NEW PASSWORD'
                         value={newPassword}
+                        // EVNETS
                         onChange={(e) => setNewPassword(e.target.value)}
                         onFocus={() => setPasswordMsg(true)}// show password help text on focus
                         onBlur={() => setPasswordMsg(false)}// hide password help text on blur
-                        //ARIA attributes
+                        //ARIA ATTRIBUTES
                         aria-label="New password Input"
                         aria-required='true'
                     />
