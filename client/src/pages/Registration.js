@@ -1,4 +1,6 @@
 // Registration.js
+/* Registration page: displays registrationForm 
+and requirements for user registration*/
 //IMPORT REQUIRED MODULES AND PACKAGES
 import React, { useCallback, useState } from 'react'
 // IMPORT CSS STYLESHEETS
