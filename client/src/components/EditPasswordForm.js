@@ -17,19 +17,19 @@ import { Eye, EyeOff, Asterisk, UserKey } from 'lucide-react';
 // EditPasswordForm function component:
 export default function EditPasswordForm(//Export default EditPasswordForm function component
     {//PROPS PASSED FROM PARENT COMPONENT (EditUserData.js)
-        setError
+        setError // Function to set the global error state
     }
     ) {
     // ========STATE VARIABLES=================
     // Form variables
-    const [currentPassword, setCurrentPassword] = useState('')
-    const [newPassword, setNewPassword] = useState('')
+    const [currentPassword, setCurrentPassword] = useState('')// State to store the user's current password input
+    const [newPassword, setNewPassword] = useState('')// State to store the user's new password input
     const [loading, setLoading] = useState(false);// State variable to indicate if the form is submitting
-    // Password visibilty variables
-    const [showPassword, setShowPassword] = useState(false)
-    const [showNewPassword, setShowNewPassword] = useState(false)
+    // Password visibility variables
+    const [showPassword, setShowPassword] = useState(false)// State to toggle visibility of the current password field
+    const [showNewPassword, setShowNewPassword] = useState(false)// State to toggle visibility of the new password field
     // Message variables
-    const [passwordMsg, setPasswordMsg] = useState(false)
+    const [passwordMsg, setPasswordMsg] = useState(false)// State to toggle the password help text message
 
       //=============UTILITY FUNCTIONS=============
    // Function to check password strength
@@ -39,30 +39,31 @@ export default function EditPasswordForm(//Export default EditPasswordForm funct
             String(pwd || '')// Ensure pwd is a string before testing
         );
     }, []);
-    //Function to resetForm
+    // Function to reset the form fields back to their initial state
     const resetForm = useCallback(() => {
           const confirmReset = window.confirm(
              "Are you sure you want to clear the form?"
-             );// Confirm before clearing
-            if (!confirmReset) return;// If user cancels, exit function
-        setCurrentPassword('');
-        setNewPassword('')
-        setError?.(null)
+             );// Prompt the user to confirm before clearing
+            if (!confirmReset) return;// If user cancels, exit the function
+        setCurrentPassword('');// Clear the current password field
+        setNewPassword('')// Clear the new password field
+        setError?.(null)// Clear any existing error messages
     },[setError])
 
     //=============REQUESTS=========================
-    //Function to edit password
+    //-----------PATCH------------------------------
+    // Function to submit the password change to the server
     const editPassword = useCallback(async (e) => {
-        setLoading(true)
-        e.preventDefault();
-        setError?.(null)
+        setLoading(true)// Set loading state to true while the request is in progress
+        e.preventDefault();// Prevent the default form submission behaviour
+        setError?.(null)// Clear any previous error messages
         try {
-            // Client-side checks (still keep server-side validation too)
+            // Client-side validation checks before sending the request
                 if (!currentPassword || !newPassword) {
                     const msg = 'Both current and new passwords are required.';
-                    setError?.(msg);
-                    alert(msg);
-                    return;
+                    setError?.(msg);// Set the error state to display the error in the UI
+                    alert(msg);// Alert the user of the error
+                    return;// Exit the function early
                 }
                 // Conditional rendering to check if new password is different from current password
                 if (newPassword === currentPassword) {
@@ -87,19 +88,20 @@ export default function EditPasswordForm(//Export default EditPasswordForm funct
                     alert(msg);// Alert user of error
                     return;// Exit the function early
                 }
+                // Send a PATCH request to update the user's password
                 const response = await fetch('http://localhost:3001/users/editPassword', {
-                    method: 'PATCH',
-                    mode: 'cors',
+                    method: 'PATCH',// HTTP method for partial updates
+                    mode: 'cors',// Enable Cross-Origin Resource Sharing
                     headers: {
-                    'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`,     
+                        'Content-Type': 'application/json',// Specify the Content-Type in the request payload
+                        'Authorization': `Bearer ${token}`,// Attach JWT token for authorization
                     },
-                    body: JSON.stringify({
+                    body: JSON.stringify({// Convert the password data to a JSON string
                         currentPassword,
                         newPassword
                     })
                 })
-                const data = await response.json().catch (() => ({}));
+                const data = await response.json().catch(() => ({}));// Safely parse the JSON response (avoid crash if server returns non-JSON)
                 /* Conditional rendering to check if the response
             is not successful (status code is not in the range 200-299)*/
                 if (!response.ok) {
@@ -109,11 +111,10 @@ export default function EditPasswordForm(//Export default EditPasswordForm funct
                     return;// Exit the function early
                 }
 
-                resetForm();// Reset form fields on success
+                resetForm();// Reset all form fields on success
                 console.log('[SUCCESS: EditPasswordForm.js] Password successfully changed');// Log success message to console for debugging
-                setLoading(false);//Set loading to false
-                // setError?.(null)// Clear any error messages
-                alert('Password changed successfully.');// Alert user of success
+                setLoading(false);// Set loading to false after successful response
+                alert('Password changed successfully.');// Notify the user of success
         } catch (error) {
             const msg = error?.message || 'An error occurred while changing the password.';// Default error message
                 setError?.(msg);// Set the error state to display the error in the UI
@@ -168,8 +169,8 @@ export default function EditPasswordForm(//Export default EditPasswordForm funct
                     </div>
                 </div>
                 <div className="p-2" id='showCurrentPswdBlock'>
-                {/* Button to display current password */}
-                <Button 
+                {/* Button to toggle the visibility of the current password field */}
+                <Button
                 variant='warning' 
                 id='showCurrentPswdBtn'
                 type='button'
@@ -224,9 +225,10 @@ export default function EditPasswordForm(//Export default EditPasswordForm funct
                     
                 </div>
                 <div className="p-2" id='showNewPswdBlock'>
-                    <Button 
-                    variant='warning' 
-                    type='button' 
+                    {/* Button to toggle the visibility of the new password field */}
+                    <Button
+                    variant='warning'
+                    type='button'
                     id='showNewPswdBtn'
                     onClick={() => setShowNewPassword(prev => !prev)}
                     // ARIA attributes
@@ -266,8 +268,9 @@ export default function EditPasswordForm(//Export default EditPasswordForm funct
             </Stack>
         </div>
             <Stack gap={2} className="col-md-5 mx-auto" id='submitPswdChangeBlock'>
-                <Button 
-                variant="danger" 
+                {/* Button to reset all form fields */}
+                <Button
+                variant="danger"
                 id='clearFormBtn'
                 type='button'
                 onClick={resetForm}
@@ -284,8 +287,6 @@ export default function EditPasswordForm(//Export default EditPasswordForm funct
                 {loading ? 'Saving…' : 'Save changes'} <UserKey />
                 </Button>
             </Stack>
-  
-        
     </form>
   )
 }
