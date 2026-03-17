@@ -1,8 +1,8 @@
 // quizRoutes.js
 // Import necessary modules and packages
-const express = require('express');
-const mongoose = require('mongoose');
-const router = express.Router();
+const express = require('express');// Import express to create a router for handling quiz-related routes
+const mongoose = require('mongoose');// Import mongoose to validate ObjectId formats
+const router = express.Router();// Create a new router instance to define the routes for handling quiz scores
 // Import schemas
 const Quiz = require('../models/quizSchema'); // Import the Quiz model
 const Score = require('../models/scoreSchema'); //Import the Score model
