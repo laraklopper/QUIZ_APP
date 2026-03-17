@@ -21,7 +21,8 @@ export default function StartQuizForm(//Export default StartQuizForm function co
     quizTimer, 
     setQuizTimer, 
     quizStarted, 
-    handleQuizStart}) {
+    handleQuizStart
+  }) {
 
       //===============JSX RENDERING=================
 

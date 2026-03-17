@@ -21,6 +21,7 @@ import { useNavigate } from 'react-router-dom';
 // IMPORT ICONS FROM LUCIDE-REACT
 import {Form, ClipboardList, Pencil  } from 'lucide-react';
 
+// Default empty form state — defined outside the component to avoid re-creation on every render
 const EMPTY_FORM = {
   username: '',
   fullName: { firstName: '', lastName: '' },
@@ -32,11 +33,11 @@ const EMPTY_FORM = {
 
 //==========MAIN REGISTRATION COMPONENT============
 export default function Registration() {//Export the default Registration component
-  //==========================
+  // Hook to navigate between routes after a successful registration
   const navigate = useNavigate()
   // ===========STATE VARIABLES====================
-  const [newUserData, setNewUserData] = useState(EMPTY_FORM)
-  const [error, setError] = useState(null)
+  const [newUserData, setNewUserData] = useState(EMPTY_FORM)// State to store the new user's registration form data
+  const [error, setError] = useState(null)// State to store any error messages from the registration request
 
   //Function to registerNewUser
   const addUser = useCallback(async () => {
