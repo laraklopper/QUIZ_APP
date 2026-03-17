@@ -151,6 +151,9 @@ export default function Registration() {//Export the default Registration compon
                           <ListGroup.Item id='rule5'>
                                       <h6 className='rule'><Pencil size={16} aria-hidden='true'/>BY CREATING AN ACCOUNT, YOU AGREE TO OUR TERMS <br/> OF SERVICE AND PRIVACY POLICY</h6>
                           </ListGroup.Item>
+                          <ListGroup.Item id='rule5'>
+                                      <h6 className='rule'><Pencil size={16} aria-hidden='true'/>THE APPLICATION DOES NOT SUPPORT ANY FORM OF GAMBLING</h6>
+                          </ListGroup.Item>
                       </ListGroup>
                    </Card>
                   </Col>
