@@ -1,20 +1,15 @@
 // quizFunctions.js
 
-    // Function to format the timer into mm:ss format
-  export const formatTimer = (seconds) => {
-    const minutes = Math.floor(seconds / 60);  // Calculate the number of minutes
-    const secs = seconds % 60; // Calculate the remaining seconds
-    // Return the formatted time as a string in mm:ss format
-    // Pad seconds with a leading zero if less than 10
-    return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
-  };
-  
+// Converts a total number of seconds into a mm:ss formatted string
+// e.g. 75 -> "1:15"
+export const formatTimer = (seconds) => {
+    const minutes = Math.floor(seconds / 60); // Whole minutes
+    const secs = seconds % 60; // Remaining seconds
+    return `${minutes}:${secs < 10 ? '0' : ''}${secs}`; // Pad seconds with leading zero if needed
+};
 
-    //Function to randomise answers
-  
-   export const shuffleArray = (array) => {
-      //  Use the JavaScript sort method to shuffle the array
-      // The comparison function returns a random value between -0.5 and 0.5
-      // This results in a random order for each array element
-      return array.sort(() => Math.random() - 0.5);
-    }
+// Randomises the order of an array in place
+// Uses a Fisher-Yates-style approach via sort with a random comparator
+export const shuffleArray = (array) => {
+    return array.sort(() => Math.random() - 0.5);
+};
