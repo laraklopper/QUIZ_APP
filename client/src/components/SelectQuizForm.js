@@ -64,8 +64,7 @@ export default function SelectQuizForm(//Export default SelectQuizForm function 
                     </option>
                 ))}
                 </Form.Select>
-            </div>
-            
+            </div>           
         </Stack>
  
   )
