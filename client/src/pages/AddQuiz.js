@@ -1,4 +1,5 @@
 //AddQuiz.js
+//Import required modules and packages
 import React, { useState, useCallback, useEffect } from 'react'
 // CSS Stylesheets
 import '../css/pagesCSS/AddQuiz.css'
@@ -13,6 +14,7 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 import AddQuizForm from '../components/AddQuizForm';
 import EditQuizForm from '../components/EditQuizForm';
+// Import icons from lucide-react
 import { FileQuestionMark } from 'lucide-react';
 
 //=============MAIN ADDQUIZ COMPONENT==============
