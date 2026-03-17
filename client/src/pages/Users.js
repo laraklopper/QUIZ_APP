@@ -1,4 +1,5 @@
 // Users.js
+// Users component: UserList and delete user Button
 //IMPORT REQUIRED MODULES AND PACKAGES
 import { useCallback } from 'react'
 // IMPORT CSS STYLESHEETS

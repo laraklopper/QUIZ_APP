@@ -1,4 +1,5 @@
 // Login.js
+// Login Component: Login Form
 //IMPORT REQUIRED MODULES AND PACKAGES
 import React, {useCallback} from 'react'
 // IMPORT CSS STYLESHEETS
