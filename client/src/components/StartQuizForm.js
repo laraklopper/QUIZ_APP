@@ -17,11 +17,11 @@ import { Hourglass } from 'lucide-react';
 // StartQuizForm function component
 export default function StartQuizForm(//Export default StartQuizForm function component
   {//PROPS PASSED FROM PARENT COMPONENT (QuizDisplay.js)
-    quiz, 
-    quizTimer, 
-    setQuizTimer, 
-    quizStarted, 
-    handleQuizStart
+    quiz,           // Object containing the selected quiz data
+    quizTimer,      // Boolean indicating whether the countdown timer is enabled
+    setQuizTimer,   // Function to toggle the countdown timer on or off
+    quizStarted,    // Boolean indicating whether the quiz has already started
+    handleQuizStart // Function to start the quiz on form submission
   }) {
 
       //===============JSX RENDERING=================

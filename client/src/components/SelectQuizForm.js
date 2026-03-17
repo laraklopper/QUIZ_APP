@@ -15,16 +15,15 @@ import Form from 'react-bootstrap/Form';
 // SelectQuizForm function component
 export default function SelectQuizForm(//Export default SelectQuizForm function component
     {//PROPS PASSED FROM PARENT COMPONENT (Game.js)
-        selectedQuizId, 
-        setSelectedQuizId, 
-        quizList
+        selectedQuizId,   // String storing the ID of the currently selected quiz
+        setSelectedQuizId,// Function to update the selected quiz ID state
+        quizList          // Array of all available quiz objects
     }) {
 
-
      //============EVENT LISTENERS===============
-    // Function to handle quiz selection
+    // Function to update the selected quiz ID when the user picks a quiz from the dropdown
     const handleSelect = (event) => {
-        setSelectedQuizId(event.target.value)
+        setSelectedQuizId(event.target.value)// Set the selected quiz ID from the dropdown value
     }
 
     //==============JSX RENDERING==================
