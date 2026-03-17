@@ -147,21 +147,7 @@ export default function AddQuiz(//Export default addQuiz function component
     }
   }, [editQuizId, fetchQuizzes, setQuizName, setQuestions, currentUser, setError]);
 
-  // Function to toggle the edit form for a quiz
-  const handleEditToggle = useCallback((quiz) => {
-    if (editQuizId === quiz._id) {
-      setEditQuizId(null);
-      setQuizName('');
-      setDescription('');
-      setQuestions([]);
-    } else {
-      setEditQuizId(quiz._id);
-      setQuizName(quiz.title);
-      setDescription(quiz.description);
-      setQuestions(quiz.questions);
-      setNewQuizForm(false);
-    }
-  }, [editQuizId, setQuizName, setDescription, setQuestions]);
+
 
   // Function to submit edits to an existing quiz
   const editQuiz = useCallback(async () => {
@@ -206,6 +192,21 @@ export default function AddQuiz(//Export default addQuiz function component
   //Function to toggle Add Quiz form
   const toggleAddQuiz =  () => setNewQuizForm((prev) => !prev);
   
+    // Function to toggle the edit form for a quiz
+  const handleEditToggle = useCallback((quiz) => {
+    if (editQuizId === quiz._id) {
+      setEditQuizId(null);
+      setQuizName('');
+      setDescription('');
+      setQuestions([]);
+    } else {
+      setEditQuizId(quiz._id);
+      setQuizName(quiz.title);
+      setDescription(quiz.description);
+      setQuestions(quiz.questions);
+      setNewQuizForm(false);
+    }
+  }, [editQuizId, setQuizName, setDescription, setQuestions]);
   //=============JSX RENDERING=======================
   return (
     <Container id='pageContainer' role='main'>
