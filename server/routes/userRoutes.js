@@ -163,15 +163,15 @@ router.post('/register', checkPasswordStrength, hashPassword, async (req, res) =
 
         // Validate admin age (must be 18+)
         if (admin) {
-            const dob = new Date(dateOfBirth);
-            const today = new Date();
-            let age = today.getFullYear() - dob.getFullYear();
-            const monthDiff = today.getMonth() - dob.getMonth();
+            const dob = new Date(dateOfBirth);// Parse the date of birth string into a Date object
+            const today = new Date();// Get today's date
+            let age = today.getFullYear() - dob.getFullYear();// Calculate the initial age based on birth year
+            const monthDiff = today.getMonth() - dob.getMonth();// Check if the birthday has passed this year
             if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
-                age--;
+                age--;// Adjust age if the birthday hasn't occurred yet this year
             }
             if (age < 18) {
-                return res.status(400).json({ message: 'Admin users must be 18 years or older' });
+                return res.status(400).json({ message: 'Admin users must be 18 years or older' });// Send a 400 (Bad Request) status code with a message
             }
         }
 
@@ -188,7 +188,7 @@ router.post('/register', checkPasswordStrength, hashPassword, async (req, res) =
             password,
         });
 
-        await newUser.save();
+        await newUser.save();// Save the new user document to the database
 
         console.log('[INFO: userRoutes.js] New user registered:', {
             userId: newUser._id,
@@ -200,8 +200,8 @@ router.post('/register', checkPasswordStrength, hashPassword, async (req, res) =
     } catch (error) {
         // Surface Mongoose validation errors clearly
         if (error.name === 'ValidationError') {
-            const messages = Object.values(error.errors).map(e => e.message);
-            return res.status(400).json({ message: messages[0] });
+            const messages = Object.values(error.errors).map(e => e.message);// Extract all validation error messages
+            return res.status(400).json({ message: messages[0] });// Return the first validation error message
         }
         console.error('[ERROR: userRoutes.js] Registration failed:', error.message);
         res.status(500).json({ message: 'Internal Server Error' });
@@ -217,23 +217,23 @@ router.patch('/editUser/:id', checkJwtToken, async (req, res) => {
         const { username, fullName, email } = req.body;// Extract editable fields from the request body
 
         // Find the user by ID
-        const user = await User.findById(id);
+        const user = await User.findById(id);// Query the database for the user document
         // Conditional rendering to check if user exists
         if (!user) {
             console.error('[ERROR: userRoutes.js, editUser/:id]User not found' );
-            return res.status(404).json({ message: 'User not found' });
+            return res.status(404).json({ message: 'User not found' });// Send a 404 (Not Found) status code with a message
         }
 
         // Build updates from provided fields — only include non-empty string values
-        const updates = {};
+        const updates = {};// Object to hold only the fields that need to be updated
         if (typeof username === 'string' && username.trim() !== '') {
-            updates.username = username.trim();
+            updates.username = username.trim();// Trim whitespace from the username
         }
         if (typeof fullName?.firstName === 'string' && fullName.firstName.trim() !== '') {
-            updates['fullName.firstName'] = fullName.firstName.trim();
+            updates['fullName.firstName'] = fullName.firstName.trim();// Trim whitespace from the first name
         }
         if (typeof fullName?.lastName === 'string' && fullName.lastName.trim() !== '') {
-            updates['fullName.lastName'] = fullName.lastName.trim();
+            updates['fullName.lastName'] = fullName.lastName.trim();// Trim whitespace from the last name
         }
         if (typeof email === 'string' && email.trim() !== '') {
             updates.email = email.trim().toLowerCase();// Normalise email to lowercase
@@ -246,40 +246,40 @@ router.patch('/editUser/:id', checkJwtToken, async (req, res) => {
         }
 
         // Check for duplicate username or email (excluding current user)
-        const orConditions = [];
-        if (updates.username) orConditions.push({ username: updates.username });
-        if (updates.email) orConditions.push({ email: updates.email });
+        const orConditions = [];// Array to hold the duplicate-check conditions
+        if (updates.username) orConditions.push({ username: updates.username });// Add username condition if it is being updated
+        if (updates.email) orConditions.push({ email: updates.email });// Add email condition if it is being updated
 
         if (orConditions.length > 0) {
-            const dup = await User.findOne({ _id: { $ne: id }, $or: orConditions }).exec();
+            const dup = await User.findOne({ _id: { $ne: id }, $or: orConditions }).exec();// Search for another user with the same username or email
             if (dup) {
-                const field = dup.username === updates.username ? 'Username' : 'Email';
+                const field = dup.username === updates.username ? 'Username' : 'Email';// Determine which field caused the conflict
                 console.error(`[ERROR: userRoutes.js, /editUser/:id] ${field} already in use`);
-                return res.status(409).json({ message: `${field} is already in use` });
+                return res.status(409).json({ message: `${field} is already in use` });// Send a 409 (Conflict) status code with a message
             }
         }
 
         // Apply updates and save
         const oldUsername = user.username;// Capture old username before updating
-        if (updates.username) user.username = updates.username;
-        if (updates.email) user.email = updates.email;
+        if (updates.username) user.username = updates.username;// Apply the new username if provided
+        if (updates.email) user.email = updates.email;// Apply the new email if provided
         if (updates['fullName.firstName'] || updates['fullName.lastName']) {
             user.fullName = {
-                firstName: updates['fullName.firstName'] ?? user.fullName.firstName,
-                lastName: updates['fullName.lastName'] ?? user.fullName.lastName,
+                firstName: updates['fullName.firstName'] ?? user.fullName.firstName,// Use new first name or keep existing
+                lastName: updates['fullName.lastName'] ?? user.fullName.lastName,// Use new last name or keep existing
             };
         }
-        await user.save();
+        await user.save();// Persist the updated user document to the database
 
         // If username was changed, propagate it to the Quiz and Score collections
         if (updates.username && updates.username !== oldUsername) {
             await Quiz.updateMany(
                 { username: oldUsername },
-                { $set: { username: updates.username } }
+                { $set: { username: updates.username } }// Replace old username with new username in all Quiz documents
             );
             await Score.updateMany(
                 { username: oldUsername },
-                { $set: { username: updates.username } }
+                { $set: { username: updates.username } }// Replace old username with new username in all Score documents
             );
             console.log(`[INFO: userRoutes.js] Username propagated from '${oldUsername}' to '${updates.username}' in Quiz and Score collections`);
         }
@@ -289,11 +289,11 @@ router.patch('/editUser/:id', checkJwtToken, async (req, res) => {
             username: user.username,
         });
 
-        return res.status(200).json({ success: true, message: 'User updated successfully', updatedUser: user });
+        return res.status(200).json({ success: true, message: 'User updated successfully', updatedUser: user });// Send a 200 OK status code with the updated user data
 
     } catch (error) {
-        console.error('[ERROR: userRoutes.js] Edit User failed:', error.message);
-        res.status(500).json({ success: false, message: 'Internal Server Error' });
+        console.error('[ERROR: userRoutes.js] Edit User failed:', error.message);// Log an error message in the console for debugging purposes
+        res.status(500).json({ success: false, message: 'Internal Server Error' });// Send a 500 (Internal Server Error) status code with a message
     }
 });
 
@@ -328,7 +328,7 @@ router.patch('/editPassword', checkJwtToken, checkPasswordStrength, hashPassword
             console.error('[ERROR: userRoutes.js, /editPassword] User not found');//Log an error message in the console for debugging purposes
             return res.status(404).json({ success: false, message: 'User not found' });//Send a 404 (Not Found) status code with a message
         }
-        const isCurrentPasswordValid = await bcrypt.compare(currentPassword, user.password);
+        const isCurrentPasswordValid = await bcrypt.compare(currentPassword, user.password);// Compare the provided current password against the stored hash
         // Conditional rendering to check if current password is valid
         if (!isCurrentPasswordValid) {
             console.error('[ERROR: userRoutes.js, /editPassword] Current password is incorrect');//Log an error message in the console for debugging purposes
@@ -359,40 +359,41 @@ router.delete('/deleteUser/:id', checkJwtToken, checkAdmin, async (req, res) => 
           // 2) Ensure the user is logged in
         if (!loggedInUserId) {
             console.error('[ERROR: userRoutes.js, /deleteUser/:id] Unauthorized: No userId found in token');
-            return res.status(401).json({ message: 'Unauthorized' });
+            return res.status(401).json({ message: 'Unauthorized' });// Send a 401 (Unauthorized) status code with a message
         }
         const { id } = req.params; // 3) Extract id from the request parameters
         // Validate ObjectId format before attempting to delete
         if (!mongoose.isValidObjectId(id)) {
             console.error('[ERROR: userRoutes.js, /deleteUser/:id] Invalid ObjectId:', id);
-            return res.status(400).json({ message: 'Invalid user id.' });
+            return res.status(400).json({ message: 'Invalid user id.' });// Send a 400 (Bad Request) status code with a message
         }
         // 4) Prevent users from deleting their own account
         if (loggedInUserId === id) {
             console.error('[ERROR: userRoutes.js, /deleteUser/:id] Users cannot delete their own account');
-            return res.status(400).json({ message: 'Users cannot delete their own account' });
+            return res.status(400).json({ message: 'Users cannot delete their own account' });// Send a 400 (Bad Request) status code with a message
         }
 
-        // 5) Atomic delete:same company, cannot delete admin users
+        // 5) Atomic delete: only non-admin users can be deleted
         const removedUser = await User.findOneAndDelete({
-            _id: id,
+            _id: id,// Match the user by their ID
             admin: { $ne: true },   // Cannot delete admin users
-        }).select('_id username admin');
+        }).select('_id username admin');// Return only the fields needed for cascade deletion
 
+        // Conditional rendering to check if the user was found and deleted
         if (!removedUser) {
             console.error('[ERROR: userRoutes.js, /deleteUser/:id] User not found (or cannot be deleted).');
-            return res.status(404).json({ success: false, message: 'User not found (or cannot be deleted).' });
+            return res.status(404).json({ success: false, message: 'User not found (or cannot be deleted).' });// Send a 404 (Not Found) status code with a message
         }
 
         // Delete all scores and quizzes associated with this user
-        await Score.deleteMany({ username: removedUser.username });
-        await Quiz.deleteMany({ username: removedUser.username });
+        await Score.deleteMany({ username: removedUser.username });// Remove all score records belonging to the deleted user
+        await Quiz.deleteMany({ username: removedUser.username });// Remove all quiz records belonging to the deleted user
 
         console.log(`[INFO: userRoutes.js, /deleteUser/:id] User with ID ${id} deleted successfully`);
-        return res.status(200).json({ success: true, message: 'User deleted successfully' });
+        return res.status(200).json({ success: true, message: 'User deleted successfully' });// Send a 200 OK status code with a success message
     } catch (error) {
-        console.error('[ERROR: userRoutes.js, /deleteUser/:id] Error deleting user:', error.message);
-        return res.status(500).json({ success: false, message: 'Internal Server Error' });
+        console.error('[ERROR: userRoutes.js, /deleteUser/:id] Error deleting user:', error.message);// Log an error message in the console for debugging purposes
+        return res.status(500).json({ success: false, message: 'Internal Server Error' });// Send a 500 (Internal Server Error) status code with a message
     }
 })
 
