@@ -17,7 +17,7 @@ import { Calendar, Clock8, Copyright } from 'lucide-react';
 // IMPORT UTILITY FUNCTIONS
 import { dateDisplay, timeDisplay } from '../utilFunctions/dateFunctions';
 
-/*PageFooter function component Displays the footer of the application, including the current date and time, and copyright information.*/
+// PageFooter function component
 export default function PageFooter() {//Export default PageFooter component
     //========STATE VARIABLES================
     const [footerDate, setFooterDate] = useState(new Date())

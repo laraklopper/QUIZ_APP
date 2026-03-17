@@ -13,8 +13,7 @@ import Button from 'react-bootstrap/Button';
 // IMPORT UTILITY FUNCTIONS
 import { currentDate } from '../utilFunctions/dateFunctions';
 
-/*Results function component: Displays the user's quiz results after completion, showing the score
-and total questions, with a form to save the score to the database.*/
+// Results function component
 export default function Results(//Export default Results function component
   {// PROPS PASSED FROM PARENT COMPONENT (QuizDisplay.js)
     currentScore,

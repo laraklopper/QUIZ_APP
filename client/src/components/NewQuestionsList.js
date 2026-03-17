@@ -9,8 +9,7 @@ import '../css/componentCSS/ComponentAnimations.css'
 import Stack from 'react-bootstrap/Stack';
 import Button from 'react-bootstrap/Button';
 
-/*NewQuestionsList function component: Displays a list of new questions added to the quiz,
-allowing users to delete individual questions, clear the quiz form, or submit the new quiz.*/
+// NewQuestionsList function component
 export default function NewQuestionsList(//Export default NewQuestionsList function component
   {// PROPS PASSED FROM PARENT COMPONENT (AddQuizForm.js)
     addNewQuiz, 

@@ -12,8 +12,7 @@ import '../css/componentCSS/ComponentAnimations.css'
 import Stack from 'react-bootstrap/Stack';
 import Form from 'react-bootstrap/Form';
 
-/*SelectQuizForm function component: Displays a dropdown form that allows the user to select a quiz
-from the available quiz list before starting the game.*/
+// SelectQuizForm function component
 export default function SelectQuizForm(//Export default SelectQuizForm function component
     {//PROPS PASSED FROM PARENT COMPONENT (Game.js)
         selectedQuizId, 

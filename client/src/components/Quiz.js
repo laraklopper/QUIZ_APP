@@ -14,8 +14,7 @@ import { ArrowBigRightDash, RotateCcw, X ,Check, MessageCircleQuestionMark} from
 // IMPORT UTILITY FUNCTIONS
 import { formatTimer } from '../utilFunctions/quizFunctions';
 
-/*Quiz function component: Displays the active quiz, rendering each question with multiple-choice options,
-an optional countdown timer, answer feedback, current score, and navigation controls.*/
+// Quiz function component
 export default function Quiz(//Export default Quiz function component
   {//PROPS PASSED FROM PARENT COMPONENT (QuizDisplay.js)
     quiz,

@@ -14,8 +14,7 @@ import Button from 'react-bootstrap/Button';
 // IMPORT ICONS FROM LUCIDE-REACT
 import { Asterisk, Eye, EyeOff } from 'lucide-react';
 
-/*RegistrationForm function component: Displays the user registration form with fields for username,
-full name, email, date of birth, admin checkbox, and password, including client-side validation.*/
+// RegistrationForm function component
 export default function RegistrationForm(//Export default RegistrationForm function component
     {//PROPS PASSED FROM PARENT COMPONENT (Registration.js)
         newUserData, 

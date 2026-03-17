@@ -11,8 +11,7 @@ import '../css/componentCSS/ComponentAnimations.css'
 import Stack from 'react-bootstrap/Stack';
 import FormSelect from 'react-bootstrap/FormSelect';
 
-/*PastScores function component: Displays a table of the user's past quiz scores, with a dropdown
-to filter results by quiz name and a total attempts count per quiz.*/
+//PastScores function component
 export default function PastScores(//Export default PastScores function component
   {//PROPS PASSED FROM PARENT COMPONENT (GAME.js)
     userScores,

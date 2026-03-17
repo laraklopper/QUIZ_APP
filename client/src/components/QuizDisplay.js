@@ -13,8 +13,7 @@ import StartQuizForm from './StartQuizForm';
 import Quiz from './Quiz';
 import Results from './Results';
 
-/*QuizDisplay function component: Manages and displays the full quiz flow, including the start form,
-active quiz questions, and results screen, while handling score submission and quiz state.*/
+// QuizDisplay function component
 export default function QuizDisplay(//Export default QuizDisplay function component
   {//PROPS PASSED FROM PARENT COMPONENT (Game.js)
   quiz,

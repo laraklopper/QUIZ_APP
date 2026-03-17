@@ -14,8 +14,7 @@ import Button from 'react-bootstrap/Button';
 // IMPORT ICONS FROM LUCIDE-REACT
 import { Hourglass } from 'lucide-react';
 
-/*StartQuizForm function component: Displays a form that shows the selected quiz name, a timer
-checkbox toggle, and a button to start the quiz.*/
+// StartQuizForm function component
 export default function StartQuizForm(//Export default StartQuizForm function component
   {//PROPS PASSED FROM PARENT COMPONENT (QuizDisplay.js)
     quiz, 
@@ -41,7 +40,8 @@ export default function StartQuizForm(//Export default StartQuizForm function co
            {/* SELECTED QUIZ NAME */}
              <h3 className='quizTitle'>{quiz ? quiz.title : ''}</h3>
              {/* If the quiz does not exist display an empty string */}
-            </div>                    
+            </div>   
+                {/* TIMER BLOCK  */}
                  <div id='addTimerBlock'>
                       <label id='addTimerLabel' htmlFor='addQuizTimer'>
                         <p className='labelText'>ADD TIMER:</p>
