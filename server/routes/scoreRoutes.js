@@ -12,119 +12,130 @@ const router = express.Router();// Create a new router instance to define the ro
 
 //===========ROUTES===============
 //-----------GET----------------
-// Route to get all quiz scores//
-// Send a GET request to /fetchScores endpoint with an optional username query parameter to fetch all scores or scores for a specific user
+
+// -------Route 1: GET /fetchScores-------
+// Fetches all scores, or scores filtered by username if provided as a query param.
+// Also performs a cleanup pass — removing stale scores whose quiz or user no longer exists.
+// Requires a valid JWT token (checkJwtToken middleware).
+// Example: GET /fetchScores?username=john
 router.get('/fetchScores', checkJwtToken, async (req, res) => {
     try {
+        // Extract optional username filter from the query string
         const {username} = req.query;
 
-        //Conditional rendering to check if the username is a string
+        // Validate that username, if provided, is a string (guards against array injection e.g. ?username[]=foo)
         if (username && typeof username !== 'string') {
             console.error('[scoreRoutes.js:] Invalid username format. Username must be a string.');
             return res.status(400).json({ success: false, message: 'Invalid username format. Username must be a string.' });
         }
 
-         // Fetch all quiz tiles from the database to check for existing quizzes
-         let quizTitles = await Quiz.find().select('title').exec();
-         let existingTitles = quizTitles.map(quiz => quiz.title);
-         // Fetch all usernames from the database to check for existing users
-         let userNames = await User.find().select('username').exec();
-         let existingUsernames = userNames.map(user => user.username);
+        // Fetch all existing quiz titles — used below to detect orphaned score records
+        let quizTitles = await Quiz.find().select('title').exec();
+        let existingTitles = quizTitles.map(quiz => quiz.title);
 
-         /* Remove any Score documents where the quiz title or
-          username no longer exists in the Quiz or User collection*/
-          await Score.deleteMany({
+        // Fetch all existing usernames — used below to detect orphaned score records
+        let userNames = await User.find().select('username').exec();
+        let existingUsernames = userNames.map(user => user.username);
+
+        /* Cleanup: Remove any Score documents whose associated quiz or user
+           has since been deleted. This keeps the scores collection in sync. */
+        await Score.deleteMany({
             $or: [
-                { quizTitle: { $nin: existingTitles } },
-                { username: { $nin: existingUsernames } }
+                { quizTitle: { $nin: existingTitles } },   // Quiz was deleted
+                { username: { $nin: existingUsernames } }   // User was deleted
             ]
         });
 
-        console.log(existingTitles);//Log the existing quiz names in the console for debugging purposes
-        console.log(existingUsernames);//Log the existing usernames in the console for debugging purposes
+        console.log(existingTitles);     // Log existing quiz titles for debugging
+        console.log(existingUsernames);  // Log existing usernames for debugging
 
-          // Declare a variable to store the quiz scores
-          let quizScores;
+        // Declare a variable to hold the query results
+        let quizScores;
 
-          // Conditional rendering to check if a username is provided
-            if (username) {
-                quizScores = await Score.find({ username }).exec(); // Fetch scores for the specified username
-            } else {
-                quizScores = await Score.find({}).exec(); // Fetch all scores if no username is provided
-            }
+        // If a username was provided, return only that user's scores; otherwise return all scores
+        if (username) {
+            quizScores = await Score.find({ username }).exec(); // Filtered by username
+        } else {
+            quizScores = await Score.find({}).exec(); // All scores
+        }
 
-          //Log the fetched scores in the console for debugging puroses
-          console.log(quizScores);
-          // Return the fetched user scores in JSON format  
-          return res.status(200).json({ success: true, scores: quizScores });
+        console.log(quizScores); // Log fetched scores for debugging
+        return res.status(200).json({ success: true, scores: quizScores }); // Respond with the scores
     } catch (error) {
         console.error('[ERROR: scoreRoutes.js:] An error occurred while fetching scores.', error);
         res.status(500).json({ success: false, message: 'An error occurred while fetching scores.', error: error.message });
     }
 });
 
-// Route to fetch all scores for a single user
-//send a GET request to /findScores/:username endpoint with the username as a parameter to fetch all scores for that user
+// -------Route 2: GET /findScores/:username-------
+// Fetches all scores belonging to a specific user, sorted newest first.
+// First verifies the user exists in the database before querying scores.
+// Example: GET /findScores/john
 router.get('/findScores/:username', async (req, res) => {
     try {
-        const { username } = req.params;// Extract the username from the request parameters
+        const { username } = req.params; // Extract username from the URL parameter
 
-        //Conditional rendering to check if the username field exists and is a string
+        // Validate that username is present and is a string
         if (!username || typeof username !== 'string') {
-            console.error(//Log an error message in the console for debugging purposes    
+            console.error(
                 '[scoreRoutes.js, /findScores/:username] Invalid username format. Username must be a string.'
             );
             return res.status(400).json({ success: false, message: 'Invalid username format. Username must be a string.' });
         }
-        // Fetch the user document based on the username
-        const user = await User.findOne({ username })
-        .exec();//Execute the Query
 
-        // Conditional rendering to check if the user exists
+        // Look up the user in the database to confirm they exist before fetching their scores
+        const user = await User.findOne({ username })
+            .exec(); // Execute the query
+
+        // If the user does not exist, return a 404 error
         if (!user) {
-            console.error(`[scoreRoutes.js, /findScores/:username] User not found: ${username}`);//Log an error message in the console for debugging purposes    
+            console.error(`[scoreRoutes.js, /findScores/:username] User not found: ${username}`);
             return res.status(404).json({ success: false, message: 'User not found.' });
         }
-        // Fetch the user score based on the user id
-        const result = await Score.find({ username: user.username })
-            .sort({createdAt: -1 })// Sort the scores by creation date (most recent first)
-            .exec();// Execute the query
 
-        res.status(200).json({userScores: result});
-        console.log(result);//Log the results in the console for debugging purposes
+        // Fetch all scores for the confirmed user, sorted by most recent first
+        const result = await Score.find({ username: user.username })
+            .sort({ createdAt: -1 }) // Descending order — newest score appears first
+            .exec(); // Execute the query
+
+        res.status(200).json({ userScores: result }); // Return the user's scores
+        console.log(result); // Log results for debugging
     } catch (error) {
-        console.error(// Log an error message in the console for debugging purposes
+        console.error(
             '[ERROR: scoreRoutes.js, /findScores/:username] An error occurred while fetching user scores.', error);
-        res.status(500).json(// Send 500(Internal server error) status code and error message in JSON response
-            { 
-                success: false, 
-                message: 'An error occurred while fetching user scores.', error: error.message 
+        res.status(500).json(
+            {
+                success: false,
+                message: 'An error occurred while fetching user scores.', error: error.message
             });
     }
 })
 
-//Route to fetch a single score for a specific quiz and user
-//Send a GET request to /findScore/:username/:quizTitle endpoint with the username and quiz title as parameters to fetch the score for that specific quiz and user
-//Find userScore for a specific quiz
+// -------Route 3: GET /findScore/:username/:quizTitle-------
+// Fetches a single score for a specific user and quiz combination.
+// Returns 404 if no matching score record is found.
+// Example: GET /findScore/john/JavaScript%20Basics
 router.get('/findScore/:username/:quizTitle', async (req, res) => {
     try {
-        const { username, quizTitle } = req.params;// Extract the username and quiz title from the request parameters   
-        // Fetch the score for the specified quiz and user
+        const { username, quizTitle } = req.params; // Extract both username and quiz title from URL params
+
+        // Query the Score collection for a document matching both username and quizTitle
         const result = await Score.findOne({ username, quizTitle }).exec();
 
-        // Conditional rendering to check if the score exists
+        // If no score exists for this user/quiz pair, return a 404 error
         if (!result) {
-            console.error(// Log an error message in the console for debugging purposes
+            console.error(
                 `[scoreRoutes.js, /findScore/:username/:quizTitle] Score not found for user ${username} and quiz ${quizTitle}`
             );
             return res.status(404).json(
                 { success: false, message: 'Score not found for this user and quiz.' }
             );
         }
-        res.status(200).json({ userScore: result });
-        console.log(result);//Log the result in the console for debugging purposes
+
+        res.status(200).json({ userScore: result }); // Return the matched score
+        console.log(result); // Log the result for debugging
     } catch (error) {
-        console.error(// Log an error message in the console for debugging purposes
+        console.error(
             '[ERROR: scoreRoutes.js, /findScore/:username/:quizTitle] An error occurred while fetching the user score for the specified quiz.', error);
         res.status(500).json({ success: false, message: 'An error occurred while fetching the user score for the specified quiz.', error: error.message });
     }
