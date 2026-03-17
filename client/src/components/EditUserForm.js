@@ -17,31 +17,33 @@ import { UserRoundPen } from 'lucide-react';
 // EditUserForm function component
 export default function EditUserForm(//Export default EditUserForm function component
   {//PROPS PASSED FROM PARENT COMPONENT (EditUserData.js)
-    currentUser,
-    editUserData,
-    setEditUserData,
-    editUserProfile
+    currentUser,    // Object containing the currently logged-in user's details
+    editUserData,   // Object storing the current values of the edit form fields
+    setEditUserData,// Function to update the edit form fields state
+    editUserProfile // Function to submit the updated profile to the server
   }) {
 
-    //========EVENT LISTENENRS============
-  const handleUpdate=(e) => {
+    //========EVENT LISTENERS============
+  // Function to handle the form submission for editing a user profile
+  const handleUpdate = (e) => {
       e.preventDefault()//Prevent default form submission
-  const confirmEdit = window.confirm('Are you sure you want to edit user details')
+  const confirmEdit = window.confirm('Are you sure you want to edit user details')// Prompt the user to confirm before editing
        //Conditional rendering: if user cancels, exit function
        if (!confirmEdit) {
-        return// exit function
+        return// Exit the function
        }
       console.log('[EditUserForm.js]: Edit user account');//Log a message in the console for debugging purposes
-      editUserProfile()
+      editUserProfile()// Call the editUserProfile function passed down from EditUserData.js
   }
-  // Function to handle Input Change
+
+  // Function to handle input changes for both flat and nested (fullName) fields
  const handleInputChange = (event) => {
-  const {name, value} = event.target;
+  const {name, value} = event.target;// Destructure name and value from the input event
 
     if (name.startsWith('fullName.')) {
-            // Extract the specific field name ('firstName', 'lastName')
+            // Extract the specific nested field name (e.g. 'firstName' or 'lastName')
             const [, field] = name.split('.');
-            // Update the specific key in the 'fullName' object inside newUserData
+            // Update only the targeted key within the fullName object, keeping others unchanged
             setEditUserData((prevState) => ({
                 ...prevState, // Keep the rest of the state unchanged
                 fullName: {
@@ -53,25 +55,25 @@ export default function EditUserForm(//Export default EditUserForm function comp
         else {
             // For non-nested fields (like email, username), update directly
             setEditUserData((prev) => ({
-                ...prev,// Spread previous state
-                [name]: value// Update targeted field
+                ...prev,// Spread previous state to keep other fields unchanged
+                [name]: value// Update the targeted field
             }));
         }
- } 
-  //Function to clear form
-    const clearForm = () => {
-        // Confirm before clearing the form
-        const confirmClear = window.confirm("Are you sure you want to clear the form?");
-        // If user cancels, exit function
-        if (!confirmClear) return;
+ }
 
-        setEditUserData({ // Reset editUserData state to currentUser values or empty strings
+  // Function to reset the form fields back to the current user's existing values
+    const clearForm = () => {
+        // Prompt the user to confirm before clearing the form
+        const confirmClear = window.confirm("Are you sure you want to clear the form?");
+        if (!confirmClear) return;// If the user cancels, exit the function
+
+        setEditUserData({// Reset editUserData state to the current user's values or empty strings
             username: currentUser?.username || '',
             fullName: {
                 firstName: currentUser.fullName?.firstName || '',
                 lastName: currentUser.fullName?.lastName || ''
             },
-            email: currentUser?.email || ''           
+            email: currentUser?.email || ''
         });
     };
 
@@ -168,20 +170,22 @@ export default function EditUserForm(//Export default EditUserForm function comp
     </Stack>
     </div>
       <Stack gap={2} className="col-md-5 mx-auto" id='editUserBtnStack' role='toolbar'>
-        <Button 
-          variant="light" 
-          id='editUserBtn' 
-          type='submit' 
+        {/* Button to submit the updated user profile */}
+        <Button
+          variant="light"
+          id='editUserBtn'
+          type='submit'
           role='button'
           aria-label='Button to submit edit user profile form'
           >
           EDIT USER <UserRoundPen aria-hidden='true' forntweight={700}/>
           </Button>
-        <Button 
-        variant="danger" 
-        id='clearFormBtn' 
-        type='button' 
-        onClick={clearForm} 
+        {/* Button to reset all form fields back to the current user's values */}
+        <Button
+        variant="danger"
+        id='clearFormBtn'
+        type='button'
+        onClick={clearForm}
         aria-label='Button to clear edit user profile form'
         >
         CLEAR FORM
