@@ -23,7 +23,7 @@ router.get('/fetchScores', checkJwtToken, async (req, res) => {
         // Extract optional username filter from the query string
         const {username} = req.query;
 
-        // Validate that username, if provided, is a string (guards against array injection e.g. ?username[]=foo)
+        // Conditional rendering to check that username, if provided, is a string (guards against array injection e.g. ?username[]=foo)
         if (username && typeof username !== 'string') {
             console.error('[scoreRoutes.js:] Invalid username format. Username must be a string.');
             return res.status(400).json({ success: false, message: 'Invalid username format. Username must be a string.' });
@@ -141,98 +141,113 @@ router.get('/findScore/:username/:quizTitle', async (req, res) => {
     }
 })
 //-----------POST---------------
-//Route to submit a quiz score
-//send a POST request to /submitScore endpoint with the username, quiz title, and score in the request body to submit a new score for a quiz
+
+// -------Route 4: POST /submitScore-------
+// Creates a new score record for a user on a specific quiz.
+// Validates input, confirms the quiz exists, and prevents duplicate entries
+// (one score per user per quiz — use PUT /updateScore to update an existing one).
+// Example body: { username: "john", quizTitle: "JavaScript Basics", score: 8 }
 router.post('/submitScore', async (req, res) => {
     try{
-        const { username, quizTitle, score } = req.body;// Extract the username, quiz title, and score from the request body
+        // Extract the required fields from the request body
+        const { username, quizTitle, score } = req.body;
 
-        // Conditional rendering to check if the required fields are present and valid
+        // Validate all required fields: username and quizTitle must be non-empty strings,
+        // score must be a number (allows 0 as a valid score via strict undefined check)
         if (!username || typeof username !== 'string' || !quizTitle || typeof quizTitle !== 'string' || score === undefined || typeof score !== 'number') {
             console.error('[scoreRoutes.js, /submitScore] Invalid input. Username and quiz title must be strings, and score must be a number.');
             return res.status(400).json({ success: false, message: 'Invalid input. Username and quiz title must be strings, and score must be a number.' });
         }
 
-        // Check if the quiz exists
+        // Verify the quiz exists before saving a score against it
         const quiz = await Quiz.findOne({ title: quizTitle }).exec();
-        //Conditional rendering to check if the quiz exists
         if (!quiz) {
+            // Return 404 if the quiz title does not match any quiz in the database
             console.error(`[scoreRoutes.js, /submitScore] Quiz not found: ${quizTitle}`);
             return res.status(404).json({ success: false, message: 'Quiz not found.' });
         }
 
-        //Check if a score already exists for the quiz    
+        // Check whether this user already has a score for this quiz
+        // Each user is limited to one score record per quiz — duplicates are rejected here
         const existingScore = await Score.findOne({ username, quizTitle }).exec();
-
-        // Conditional rendering to Check if a score already exists for the user and the quiz
         if (existingScore) {
+            // Return 400 if a score record already exists; client should use PUT to update it
             console.error(`[scoreRoutes.js, /submitScore] Score already exists for user ${username} and quiz ${quizTitle}`);
             return res.status(400).json({ success: false, message: 'Score already exists for this user and quiz.' });
         }
 
-        const newScore = await new Score({ username, quizTitle, score }).save();// Create a new score
-        res.status(201).json(newScore);// Return the new score in JSON format
-       
-    //Log the score in the console for debugging purposes
-        console.log(`Score submitted: ${username} scored ${score} on quiz ${quizTitle}`);
+        // All checks passed — create and persist the new score document
+        const newScore = await new Score({ username, quizTitle, score }).save();
+        res.status(201).json(newScore); // Respond with 201 (Created) and the saved score document
+
+        console.log(`Score submitted: ${username} scored ${score} on quiz ${quizTitle}`); // Log for debugging
     }
     catch (error) {
-        console.error(// Log an error message in the console for debugging purposes
+        console.error(
             '[ERROR: scoreRoutes.js, /submitScore] An error occurred while submitting the score.', error);
-        res.status(500).json(// Respond with a 500 (Internal Server Error) status
-            { 
-                success: false, 
-                message: 'An error occurred while submitting the score.', error: error.message 
+        res.status(500).json(
+            {
+                success: false,
+                message: 'An error occurred while submitting the score.', error: error.message
             });
     }
 });
+
 //----------PUT----------------
-// Route to update a UserScore
-// Send a PUT request to the  /updateScore/:id endpoint with the score ID as a parameter and the new score in the request body to update an existing score
+
+// -------Route 5: PUT /updateScore/:id-------
+// Updates an existing score record identified by its MongoDB _id.
+// Only updates if the new score is strictly higher than the stored score —
+// this enforces a "personal best" model where scores can only improve.
+// Also increments the attempts counter each time an update is made.
+// Requires a valid JWT token (checkJwtToken middleware).
+// Example: PUT /updateScore/64abc123... with body { score: 10 }
 router.put('/updateScore/:id', checkJwtToken, async (req, res) => {
     try {
-        const { id } = req.params;// Extract the score ID from the request parameters
-        const { score } = req.body;// Extract the new score from the request body
+        const { id } = req.params;   // MongoDB _id of the score document to update
+        const { score } = req.body;  // The new score value submitted by the client
 
-        //Conditional rendering to check that the Id is a valid ObjectId
-            if (!mongoose.Types.ObjectId.isValid(id)) {
-                console.error(`[scoreRoutes.js, /updateScore/:id] Invalid score ID format: ${id}`);//Log an error message in the console for debugging purposes    
-                return res.status(400).json({ success: false, message: 'Invalid score ID format.' });
-            }
+        // Validate that the id is a properly formatted MongoDB ObjectId
+        // (prevents a CastError from Mongoose if a malformed id reaches the DB query)
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            console.error(`[scoreRoutes.js, /updateScore/:id] Invalid score ID format: ${id}`);
+            return res.status(400).json({ success: false, message: 'Invalid score ID format.' });
+        }
 
+        // Validate the new score: must be a number and cannot be negative
+        if (typeof score !== 'number' || score < 0) {
+            console.error(`[scoreRoutes.js, /updateScore/:id] Invalid score value: ${score}. Score must be a non-negative number.`);
+            return res.status(400).json({ success: false, message: 'Invalid score value. Score must be a non-negative number.' });
+        }
 
-        //Conditional rendering to check if the score is a 0 or a positive number
-            if (typeof score !== 'number' || score < 0) {
-                console.error(`[scoreRoutes.js, /updateScore/:id] Invalid score value: ${score}. Score must be a non-negative number.`);
-                return res.status(400).json({ success: false, message: 'Invalid score value. Score must be a non-negative number.' });
-            }
-        
-           const existingScore = await Score.findById(id).exec();// Find existing score by id
-         //Conditional rendering to check if the score was found
-            if (!existingScore) {
-                console.error(`[scoreRoutes.js, /updateScore/:id] Score not found with ID: ${id}`);
-                // If no score is found, return a 404 (Not Found) error
-                return res.status(404).json({ success: false, message: 'Score not found.' });
-            }
-             // Conditional rendering to check if new score is higher
-            if (existingScore.score >= score) {
-                console.log(`[scoreRoutes.js, /updateScore/:id] Existing score (${existingScore.score}) is higher than or equal to new score (${score}). No update performed.`);
-                // If the new score is not higher than the existing score, return early
-                return res.status(200).json({ success: false, message: 'New score is not higher than the existing score' });
-                }
+        // Fetch the current score document to compare against the new value
+        const existingScore = await Score.findById(id).exec();
+        if (!existingScore) {
+            // Return 404 if no score document exists with the given id
+            console.error(`[scoreRoutes.js, /updateScore/:id] Score not found with ID: ${id}`);
+            return res.status(404).json({ success: false, message: 'Score not found.' });
+        }
 
-                 // Find the score by its ID and update it
-                const editedScore = await Score.findByIdAndUpdate(
-                    id,//Score id
-                    { score, $inc: { attempts: 1 } },// Increment attempts 
-                    { new: true } //Return the updated document
-                );
-        
-         console.log(`[scoreRoutes.js, /updateScore/:id] Updated score for user ${existingScore.username} on quiz ${existingScore.quizId}`);//Log the edited score in the console for debugging purposes              
-        return res.status(200).json(editedScore); // Return the updated score in JSON format
+        // Enforce personal best logic: only update if the new score is strictly higher
+        // Returns early without modifying the document if the new score is equal or lower
+        if (existingScore.score >= score) {
+            console.log(`[scoreRoutes.js, /updateScore/:id] Existing score (${existingScore.score}) is higher than or equal to new score (${score}). No update performed.`);
+            return res.status(200).json({ success: false, message: 'New score is not higher than the existing score' });
+        }
+
+        // Update the score and increment the attempts counter in a single atomic operation.
+        // { new: true } returns the updated document rather than the original.
+        const editedScore = await Score.findByIdAndUpdate(
+            id,                              // Target document by its _id
+            { score, $inc: { attempts: 1 } },// Set new score and increment attempts by 1
+            { new: true }                    // Return the updated document in the response
+        );
+
+        console.log(`[scoreRoutes.js, /updateScore/:id] Updated score for user ${existingScore.username} on quiz ${existingScore.quizId}`);
+        return res.status(200).json(editedScore); // Respond with the updated score document
     } catch (error) {
-        console.error('[ERROR: scoreRoutes.js, /updateScore/:id] An error occurred while updating the score.', error);//Log an error message in the console for debugging purposes    
-        res.status(500).json({ success: false, message: 'An error occurred while updating the score.', error: error.message });// Return 500 (Internal Server Error) status code for server error
+        console.error('[ERROR: scoreRoutes.js, /updateScore/:id] An error occurred while updating the score.', error);
+        res.status(500).json({ success: false, message: 'An error occurred while updating the score.', error: error.message });
     }
 })
 
