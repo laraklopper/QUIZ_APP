@@ -97,7 +97,8 @@ router.post('/login', async (req, res) => {
             return res.status(404).json({ message: 'User not found' });// Send a 404 (Not Found) status code with a message
         }
 
-        const isPasswordValid = await bcrypt.compare(password, user.password);
+        const isPasswordValid = await bcrypt.compare(password, user.password);// Compare the provided password against the stored hashed password
+        // Conditional rendering to check if password is valid
         if (!isPasswordValid) {
             console.error('[ERROR: userRoutes.js] Incorrect password');
             return res.status(401).json({ message: 'Invalid credentials' });// Send a 401 (Unauthorized) status code with a message
@@ -123,10 +124,10 @@ router.post('/login', async (req, res) => {
         });
         // Send a 200 OK status code with the JWT token and user details
         return res.status(200).json({
-            token: jwtToken,
-            userId: user._id,
-            fullName: user.fullName,
-            isAdmin: !!user.admin,
+            token: jwtToken,// The signed JWT for subsequent authenticated requests
+            userId: user._id,// The user's unique database ID
+            fullName: user.fullName,// The user's full name object
+            isAdmin: !!user.admin,// Boolean flag indicating admin status
         });
 
 
