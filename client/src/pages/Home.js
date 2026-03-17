@@ -35,18 +35,19 @@ export default function Home(//Export default Home function component
      <Header heading='HOME' currentUser={currentUser}/>
      {/* Section 1: Welcome Message + Animation */}
       <section id='welcomeSection'>
-      <Row id='welcomeRow'>
-          <Col id='welcomeCol1'></Col>
+      <Row id='welcomeRow' aria-live='polite'>
+          <Col id='welcomeCol1' aria-live='polite'></Col>
           <Col xs={6} id='welcomeMsg' aria-live='polite'>
               {/* welcome msg */}
               <div id='welcomeDiv'>
                 <span className='welcomeLabel'>
                   <h2 id='welcomeHeading'>WELCOME:</h2>
+                  {/* Display user first and last name */}
                   <h2 id='welcomeUser'>{`${firstName} ${lastName}`}</h2>
                 </span>
               </div> 
           </Col>
-          <Col id='welcomeCol2'></Col>
+          <Col id='welcomeCol2' aria-live='polite'></Col>
         </Row>
       {/* ===========EVENT/ANIMATION============*/}
         <Row id='homeEventRow' aria-hidden='true' role='presentation' aria-live='polite'>
@@ -65,6 +66,7 @@ export default function Home(//Export default Home function component
           <EditUserData currentUser={currentUser} setCurrentUser={setCurrentUser} setError={setError}/>
         </div>
       </section>
+      {/* Render the Footer component */}
       <Footer logout={logout} currentUser={currentUser}/>
     </Container>
   )
