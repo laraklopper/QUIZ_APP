@@ -1,4 +1,5 @@
 // Game.js
+// Game component: display quiz, quiz results and past quiz scores
 //IMPORT REQUIRED MODULES AND PACKAGES
 import React, { useCallback, useEffect, useState } from 'react'
 // IMPORT CSS STYLESHEETS
