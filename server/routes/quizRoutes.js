@@ -34,7 +34,7 @@ router.get('/findQuiz/:id', checkJwtToken, async (req, res) => {
 
         //Conditional rendering to check if the quiz id exists in the database
         if (!id || !mongoose.Types.ObjectId.isValid(id)) {
-            console.error('[ERROR: quizRoutes.js, /findQuiz/:id] Invalid quiz ID provided:', id);
+            console.error('[ERROR: quizRoutes.js, /findQuiz/:id] Invalid quiz ID provided:', id);//Log an error message in the console for debugging purposes
             return res.status(400).json({success: false, message: 'Invalid quiz ID.'});// Respond with a 400 (Bad Request) status and an error message
         }
 
@@ -46,10 +46,10 @@ router.get('/findQuiz/:id', checkJwtToken, async (req, res) => {
             return res.status(404).json({success: false, message: 'Quiz not found.'});
         }
         res.status(200).json({success: true, quiz: quiz});// If the quiz is found, send it as the JSON response
-        console.log(`[SUCCESS: quizRoutes.js, /findQuiz/:id] Quiz found: ${quiz}`);
+        console.log(`[SUCCESS: quizRoutes.js, /findQuiz/:id] Quiz found: ${quiz}`);//Log a message in the console for debugging purposes
 
     } catch (error) {
-        console.error('[ERROR: quizRoutes.js, /findQuiz/:id] Failed to retrieve quiz:', error);
+        console.error('[ERROR: quizRoutes.js, /findQuiz/:id] Failed to retrieve quiz:', error);//Log an error message in the console for debugging purposes
         res.status(500).json({success: false, message: 'Failed to retrieve quiz.'});// Send a 500 (Internal Server Error) status code with an error message
     }
 })
@@ -62,7 +62,7 @@ router.post('/createQuiz', checkJwtToken, async (req, res) => {
 
         //Conditional rendering to check if all required fields are present in the request body
         if (!title || !description || !username || !questions) {
-            console.error('[ERROR: quizRoutes.js, /createQuiz] Missing required fields in request body:', req.body);
+            console.error('[ERROR: quizRoutes.js, /createQuiz] Missing required fields in request body:', req.body);//Log an error message in the console for debugging purposes
             return res.status(400).json({success: false, message: 'Missing required fields: title, description, username, and questions are all required.'});// Send a 400 (Bad Request) status code with an error message
         }
 
@@ -70,7 +70,7 @@ router.post('/createQuiz', checkJwtToken, async (req, res) => {
         const existingQuiz = await Quiz.findOne({title: title.trim()});
         // Conditional rendering to check if a quiz with the same title already exists in the database to prevent duplicate quiz titles
         if (existingQuiz) {
-            console.error('[ERROR: quizRoutes.js, /createQuiz] Quiz with the same title already exists:', title);
+            console.error('[ERROR: quizRoutes.js, /createQuiz] Quiz with the same title already exists:', title);//Log an error message in the console for debugging purposes
             return res.status(409).json({success: false, message: 'A quiz with the same title already exists. Please choose a different title.'});// Send a 409 (Conflict) status code with an error message
         }
 
@@ -83,9 +83,9 @@ router.post('/createQuiz', checkJwtToken, async (req, res) => {
         });
         const savedQuiz = await newQuiz.save();// Persist the new quiz document to the database
         res.status(201).json({success: true, quiz: savedQuiz});// Send a 201 (Created) status code with the saved quiz data
-        console.log(`[SUCCESS: quizRoutes.js, /createQuiz] Quiz created successfully: ${savedQuiz}`);
+        console.log(`[SUCCESS: quizRoutes.js, /createQuiz] Quiz created successfully: ${savedQuiz}`);//Log a message in the console for debugging purposes
     } catch (error) {
-        console.error('[ERROR: quizRoutes.js, /createQuiz] Failed to create quiz:', error);
+        console.error('[ERROR: quizRoutes.js, /createQuiz] Failed to create quiz:', error);//Log an error message in the console for debugging purposes
         res.status(500).json({success: false, message: 'Failed to create quiz.'});// Send a 500 (Internal Server Error) status code with an error message
     }    
 });
@@ -100,6 +100,7 @@ router.put('/editQuiz/:id', checkJwtToken, async (req, res) => {
 
         //Conditional rendering to check if the quizId is a valid MongoDB ObjectId
             if (!mongoose.Types.ObjectId.isValid(id)) {
+                console.error('ERROR: quizRoutes.js, /editQuiz/:id]: Invalid Quiz ID');//Log an error message in the console for debugging purposes
                 return res.status(400).json({ success: false, message: 'Invalid quiz ID' });// Send a 400 (Bad Request) status code with an error message
             }
 
@@ -114,7 +115,7 @@ router.put('/editQuiz/:id', checkJwtToken, async (req, res) => {
 
         // Conditional rendering to ensure the user editing the quiz is the one who created it, or is an admin
         if (quiz.username !== username && !req.user.isAdmin) {
-            console.error('[ERROR: quizRoutes.js, /editQuiz/:id] Unauthorized edit attempt by:', username);
+            console.error('[ERROR: quizRoutes.js, /editQuiz/:id] Unauthorized edit attempt by:', username);//Log an error message in the console for debugging purposes
             return res.status(403).json({ success: false, message: 'You are not authorized to edit this quiz.' });// Send a 403 (Forbidden) status code with an error message
         }
 
@@ -130,7 +131,7 @@ router.put('/editQuiz/:id', checkJwtToken, async (req, res) => {
         if (questions && Array.isArray(questions) && questions.length === 5) {
             updatedQuiz.questions = questions// Assign the validated questions array to the update object
         } else {
-            console.error('[ERROR: quizRoutes.js, /editQuiz/:id] Invalid questions provided:', questions);
+            console.error('[ERROR: quizRoutes.js, /editQuiz/:id] Invalid questions provided:', questions);//Log an error message in the console for debugging purposes
             return res.status(400).json({success: false, message: 'Invalid questions provided. Questions must be an array of 5 questions.'});// Send a 400 (Bad Request) status code with an error message
         }
 
@@ -149,14 +150,14 @@ router.put('/editQuiz/:id', checkJwtToken, async (req, res) => {
             { new: true}// Return the updated document instead of the original
         );
 
-        console.log("[SUCCESS: quizRoutes.js, '/editQuiz/:id'] QUIZ: ", updatedQuiz);
+        console.log("[SUCCESS: quizRoutes.js, '/editQuiz/:id'] QUIZ: ", updatedQuiz);//Log a message in the console for debugging purposes
 
         // Respond with the updated quiz
          res.status(200).json({ success: true, editedQuiz});// Send a 200 OK status code with the updated quiz data
         console.log(editedQuiz);//Log the updated quiz in the console for debugging purposes
 
     } catch (error) {
-        console.error('[ERROR: quizRoutes.js, /editQuiz/:id] Failed to update quiz:', error);
+        console.error('[ERROR: quizRoutes.js, /editQuiz/:id] Failed to update quiz:', error);//Log an error message in the console for debugging purposes
         res.status(500).json({success: false, message: 'Failed to update quiz.'});// Send a 500 (Internal Server Error) status code with an error message
     }
 });
@@ -169,18 +170,19 @@ router.patch('/updateQuiz/:id', checkJwtToken, async (req, res) => {
         const { title, description, username, questions } = req.body;// Extract title, description, username, and questions from the request body   
         //Conditional rendering to check if the quizId is a valid MongoDB ObjectId
         if (!mongoose.Types.ObjectId.isValid(id)) {
+            console.error('[ERROR: quizRoutes.js, /updateQuiz/:id]: Invalid quiz ID');//Log an error message in the console for debugging purposes
             return res.status(400).json({ success: false, message: 'Invalid quiz ID' });// Send a 400 (Bad Request) status code with an error message
         }
         const quiz = await Quiz.findById(id);// Find the quiz document in the database by its ID
         console.log(quiz);//Log the quiz in the console for debugging purposes
         //Conditional rendering to check that the quiz exists
         if (!quiz) {
-            console.error('Quiz not found');//Log an error message in the console for debugging purposes
+            console.error('[ERROR: quizRoutes.js, /updateQuiz/:id]:Quiz not found');//Log an error message in the console for debugging purposes
             return res.status(404).json({ success: false, message: 'Quiz not found' });// If the quiz doesn't exist, return a 404(Not found)response
         }
         // Conditional rendering to ensure the user editing the quiz is the one who created it, or is an admin
         if (quiz.username !== username && !req.user.isAdmin) {
-            console.error('[ERROR: quizRoutes.js, /updateQuiz/:id] Unauthorized update attempt by:', username);
+            console.error('[ERROR: quizRoutes.js, /updateQuiz/:id] Unauthorized update attempt by:', username);//Log an error message in the console for debugging purposes
             return res.status(403).json({ success: false, message: 'You are not authorized to update this quiz.' });// Send a 403 (Forbidden) status code with an error message
         }
         const updatedQuiz = {}//Create the updated quiz object
@@ -194,7 +196,7 @@ router.patch('/updateQuiz/:id', checkJwtToken, async (req, res) => {
         if (questions && Array.isArray(questions) && questions.length === 5) {
             updatedQuiz.questions = questions// Assign the validated questions array to the update object
         } else {
-            console.error('[ERROR: quizRoutes.js, /updateQuiz/:id] Invalid questions provided:', questions);
+            console.error('[ERROR: quizRoutes.js, /updateQuiz/:id] Invalid questions provided:', questions);//Log an error message in the console for debugging purposes
             return res.status(400).json({success: false, message: 'Invalid questions provided. Questions must be an array of 5 questions.'});// Send a 400 (Bad Request) status code with an error message
         }
         //Conditional rendering to check if the quizTitle was changed
@@ -211,12 +213,12 @@ router.patch('/updateQuiz/:id', checkJwtToken, async (req, res) => {
             { $set : updatedQuiz},//Set the updated quiz fields
             { new: true}// Return the updated document instead of the original
         );
-        console.log("[SUCCESS: quizRoutes.js, '/updateQuiz/:id'] QUIZ: ", updatedQuiz);
+        console.log("[SUCCESS: quizRoutes.js, '/updateQuiz/:id'] QUIZ: ", updatedQuiz);//Log a message in the console for debugging purposes
         // Respond with the updated quiz
             res.status(200).json({ success: true, editedQuiz});// Send a 200 OK status code with the updated quiz data
         console.log(editedQuiz);//Log the updated quiz in the console for debugging purposes
     } catch (error) {
-        console.error('[ERROR: quizRoutes.js, /updateQuiz/:id] Failed to update quiz:', error);
+        console.error('[ERROR: quizRoutes.js, /updateQuiz/:id] Failed to update quiz:', error);//Log an error message in the console for debugging purposes
         res.status(500).json({success: false, message: 'Failed to update quiz.'});// Send a 500 (Internal Server Error) status code with an error message
     }
 });
@@ -237,7 +239,7 @@ router.delete('/deleteQuiz/:id' , checkJwtToken,  async (req, res) => {
 
         // Only the quiz creator or an admin can delete the quiz
         if (quiz.username !== username && !req.user.isAdmin) {
-            console.error('[ERROR: quizRoutes.js, /deleteQuiz/:id] Unauthorized delete attempt by:', username);
+            console.error('[ERROR: quizRoutes.js, /deleteQuiz/:id] Unauthorized delete attempt by:', username);//Log an error message in the console for debugging purposes
             return res.status(403).json({ success: false, message: 'You are not authorized to delete this quiz.' });// Send a 403 (Forbidden) status code with an error message
         }
 
