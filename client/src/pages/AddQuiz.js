@@ -104,12 +104,12 @@ export default function AddQuiz(//Export default addQuiz function component
         setDescription('');
         setQuestions([]);
         setCurrentQuestion({ questionText: '', correctAnswer: '', options: ['', '', ''] });
+        setNewQuizForm(false);
         fetchQuizzes();
+        alert('New Quiz successfully added');//Notify user
       } else {
         throw new Error(data.message || 'Failed to create quiz.');
       }
-      
-      alert('New Quiz successfully added');//Notify user
     } catch (error) {
       console.error('[ERROR: AddQuiz.js]', error.message);
       setError(error.message);
