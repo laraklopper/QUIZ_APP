@@ -18,10 +18,10 @@ router.get('/findQuizzes', checkJwtToken, async (req, res) => {
         const quizzes = await Quiz.find();// Retrieve all quiz documents from the database
         res.status(200).json({success: true, quizList: quizzes});// Send a 200 OK status code with the list of quizzes
 
-        console.log(`[DATA RETRIEVED: quizRoutes.js, '/findQuizzes'] ${quizzes.length} quizzes found.`);
+        console.log(`[DATA RETRIEVED: quizRoutes.js, '/findQuizzes'] ${quizzes.length} quizzes found.`);//Log a  message in the console for debugging purposes
 
     } catch (error) {
-        console.error('[ERROR: quizRoutes.js, /findQuizzes] Failed to retrieve quizzes:', error);
+        console.error('[ERROR: quizRoutes.js, /findQuizzes] Failed to retrieve quizzes:', error);//Log an error message in the console for debugging purposes
         res.status(500).json({success: false, message: 'Failed to retrieve quizzes.'});// Send a 500 (Internal Server Error) status code with an error message
     }
 })
