@@ -71,6 +71,9 @@ font-family: "Noto Serif", serif;
 #0E97C4
 ```
 ```
+<!-- DATA/DETAILS -->
+```
+```
 <!-- WARNINGS/ERROR -->
 #C22419
 #dc3545

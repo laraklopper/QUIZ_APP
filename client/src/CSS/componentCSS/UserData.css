@@ -12,7 +12,8 @@
     padding: 0px;
     flex-direction: column;
     border: solid #323A42;
-    background-color: #83AE2C;
+    background-color: #B7B7B7;
+    width: 80%;
 }
 #toggleEditUserRow{
     display: flex;

@@ -113,6 +113,7 @@ export default function EditUserData(//Export default EditUserData function comp
           <h2 id="userDetailsHeading" className="visually-hidden">
             User account details
           </h2>
+          {/* ROW 1: username + full name */}
           <Row id='userDetailsRow1'>
             <Col xs={6} md={4} id='userDetailsCol1'>
               {/* Username */}
@@ -129,13 +130,16 @@ export default function EditUserData(//Export default EditUserData function comp
                 </span>
             </Col>
           </Row>
+          {/* Row 2: Email + Date of birth + admin status*/}
           <Row id='userDetailsRow2'>
             <Col xs={6} md={4} id='userDetailsCol3'>
+            {/* user email */}
                   <span className='userDetailsLabel'>
                         <h5 className='dataTextHead'>EMAIL: </h5>
                         <h5 className='emailData'>{email}</h5>
                     </span>
             </Col>
+            {/* DATE OF BIRTH */}
             <Col xs={6} md={4} id='userDetailsCol4'>
                   <span className='userDetailsLabel'>
                     <h5 className='dataTextHead'>DATE OF BIRTH: </h5>
@@ -149,13 +153,12 @@ export default function EditUserData(//Export default EditUserData function comp
                     <h5 id='adminDataText'>{isAdmin}</h5>
                 </span>
             </Col>
-            
           </Row>      
-        
       </div>
         {/* Edit User details */}
         <Row id='toggleEditUserRow'>
           <Col id='editUserCol'>
+          {/* EDIT USER BUTTONS */}
              <Stack gap={2} className="col-md-5 mx-auto" id='editUserBtnStack'>
                 <div  id='edit-user-details'>
                  <p className='btnText'>CLICK HERE TO:</p>
@@ -172,6 +175,7 @@ export default function EditUserData(//Export default EditUserData function comp
                           aria-expanded={showAccountForm}
                           aria-controls='edit-user-panal'
                           >
+                          {/* Toggle text based on form */}
                           {showAccountForm ? 'EXIT': 'EDIT ACCOUNT'}
                         </Button>
                   </div>
@@ -190,6 +194,7 @@ export default function EditUserData(//Export default EditUserData function comp
                           aria-controls='edit-password-panal' 
                           aria-label='Button to toggle Edit user Form'
                           >
+                          {/* Toggle text based on form */}
                             {showPasswordForm ? 'EXIT' : 'EDIT PASSWORD'}
                         </Button>
                     </div>
@@ -207,7 +212,7 @@ export default function EditUserData(//Export default EditUserData function comp
                         role='region'
                         aria-labelledby='editAccountHeading'
                         >
-                          {/* Screen Reader Heading */}
+                          {/* ----------Screen Reader Heading -----------*/}
                             <h3 id="editAccountHeading" className="visually-hidden">Edit account details</h3>
                             {/* Render the EditUserForm component */}
                             <EditUserForm
@@ -223,7 +228,7 @@ export default function EditUserData(//Export default EditUserData function comp
                     {/* Toggle Edit passwordForm. */}
                     {showPasswordForm && (
                       <div id='edit-password-panal' role='region' aria-labelledby='editPasswordHeading'>
-                       {/* Screen Reader Heading */}
+                       {/*--------- Screen Reader Heading------------ */}
                             <h3 id="editPasswordHeading" className="visually-hidden">Edit Password details</h3>
                       {/* Render the EditPasswordForm component */}
                         <EditPasswordForm
