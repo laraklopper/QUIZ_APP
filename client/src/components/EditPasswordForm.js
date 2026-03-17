@@ -212,7 +212,7 @@ export default function EditPasswordForm(//Export default EditPasswordForm funct
                         minLength={8}
                         placeholder='NEW PASSWORD'
                         value={newPassword}
-                        // EVNETS
+                        // EVENTS
                         onChange={(e) => setNewPassword(e.target.value)}
                         onFocus={() => setPasswordMsg(true)}// show password help text on focus
                         onBlur={() => setPasswordMsg(false)}// hide password help text on blur
