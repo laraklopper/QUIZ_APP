@@ -100,9 +100,9 @@ export default function App() {//Export default App function component
     }
 
     // Function to fetch a (current) single user
-    const fetchCurrentUser = async () => {
+    const fetchCurrentUser = async () => {//Define an async function to fetch current user details
       try {
-        const token = localStorage.getItem('token');
+        const token = localStorage.getItem('token');//Retrieve token from localStorage
          if (!token || !loggedIn) return;// If no token is found, exit the function
 
         // Send a GET request to retrieve the currently authenticated user's details
