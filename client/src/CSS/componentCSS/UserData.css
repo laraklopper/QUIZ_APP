@@ -1,10 +1,16 @@
 /* USER DATA.css */
 /* EditUserData.js */
-#userDetailsRow1, #userDetailsR{
+#userDetailsRow1, #userDetailsRow2{
     width: 100%;
     margin: 0px;
     padding: 0px;
     display: flex;
+}
+#userDetailsCol1, #userDetailsCol2, #userDetailsCol3, 
+#userDetailsCol4, #userDetailsCol5{
+    display: flex;
+    margin: 0px;
+    padding: 0px;
 }
 #userDetailsDiv{
     display: flex;
@@ -14,6 +20,16 @@
     border: solid #323A42;
     background-color: #B7B7B7;
     width: 80%;
+}
+#editUserBlock, #editPasswordBlock{
+    display: flex;
+    width: inherit;
+    justify-content: center;
+    flex-direction: column;
+    padding: 10px 0px;
+    align-items: center;
+    margin: 0px;
+    background-color: #6c757d;
 }
 #toggleEditUserRow{
     display: flex;
@@ -40,7 +56,7 @@
 }
 #editUserStack{
     display: flex;
-    background-color: #6c757d;
+    
     justify-content: center;
     width: 800px;
     margin: 0px;
@@ -54,25 +70,14 @@
     gap: 10px;
 
 }
-#editPasswordBlock{
-   width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-        padding: 10px 0px;
-        margin: 0px;
-}
-#edit-user-panal{
-    width: 700px;
-    border: solid;
+
+#edit-user-panal, #edit-password-pana{
+    width: inherit;
+  
     display: flex;
     justify-content: center;
 }
-#edit-password-panal{
-    width: 500px;
-    display: flex;
-    justify-content: center;
-}
+
 
 /* BUTTONS */
 #toggleEditAccountBtn,

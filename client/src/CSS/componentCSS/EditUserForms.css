@@ -13,6 +13,9 @@ EditPasswordForm: PATCH
     flex-direction: column;
     width: 100%;
     background-color: #808080;
+        padding: 10px;
+    margin: 10px;
+
 }
 #editUserDetails{
     display: flex;
@@ -49,6 +52,7 @@ PATCH: editPassword
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 500px;
 }
 #currentPasswordInputStack{
     display: flex;
