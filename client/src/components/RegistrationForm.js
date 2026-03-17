@@ -1,4 +1,5 @@
 // RegistrationForm.js
+//Import required modules and packages
 import React, { useMemo, useState } from 'react'
 //CSS STYLESHEETS
 import '../css/componentCSS/FormSetup.css';

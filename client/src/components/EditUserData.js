@@ -1,4 +1,5 @@
 // EditUserData.js
+//Import required modules and packages
 import React, { useCallback, useState } from 'react'
 // CSS STYLESHEETS
 import '../css/componentCSS/UserData.css'

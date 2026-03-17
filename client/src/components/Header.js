@@ -1,4 +1,5 @@
 // Header.js
+//Import required modules and packages
 import React, { useEffect, useState } from 'react'
 // CSS Stylesheets
 import '../css/componentCSS/Header.css'

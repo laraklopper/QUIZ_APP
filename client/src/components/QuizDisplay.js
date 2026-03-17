@@ -1,4 +1,5 @@
 // QuizDisplay.js
+//Import required modules and packages
 import React, { useCallback, useState, useEffect } from 'react'
 // CSS STYLESHEETS
 import '../css/componentCSS/QuizDisplay.css'

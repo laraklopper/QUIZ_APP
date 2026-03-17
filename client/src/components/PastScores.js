@@ -1,4 +1,5 @@
 //PastScores.js
+//Import required modules and packages
 import React, { useEffect } from 'react';
 // CSS STYLESHEETS
 import '../css/componentCSS/Scores.css'

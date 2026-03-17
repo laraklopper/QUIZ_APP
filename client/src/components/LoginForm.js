@@ -1,4 +1,5 @@
 // LoginForm.js
+//Import required modules and packages
 import React, { useMemo, useState } from 'react'
 // CSS Stylesheets
 import '../css/componentCSS/LoginForm.css'
