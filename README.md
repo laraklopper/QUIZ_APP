@@ -16,8 +16,9 @@ https://github.com/laraklopper/QUIZ-APPLICATION.git
 4. [DNS CONNECTION](#dns-connection)
 5. [APPLICATION FEATURES](#application-features)
 6. [APPLICATION SECURITY](#application-security)
-7. [ARIA](#aria)
-8. [REFERENCES](#references)
+7. [ARIA](#accessible-rich-internet-applications-aria)
+8. [FRAMEWORKS AND MIDDLEWARE](#frameworks-and-middleware)
+9. [REFERENCES](#references)
 
 ## HOW TO USE THE APPLICATION
 
@@ -239,38 +240,29 @@ ARIA (`Accessible Rich Internet Applications`) is a set of HTML attributes defin
 | `role="button"` | Applied to non-button elements styled and used as buttons | Custom button elements in `EditPasswordForm`, `EditUserData` |
 | `role="presentation"` | Removes semantic meaning from a purely decorative element | Decorative images and containers in page components |
 
+## FRAMEWORKS AND MIDDLEWARE
+
+_SERVER_
+
+| _SERVER MIDDLEWARE_ | _CLI / TERMINAL_ | _LINK_ |
+|---|---|---|
+| express | `npm install express` | https://expressjs.com/ |
+| nodemon | `npm install nodemon` | https://www.npmjs.com/package/nodemon |
+| cors | `npm install cors` | https://www.npmjs.com/package/cors |
+| dotenv | `npm install dotenv` | https://www.npmjs.com/package/dotenv |
+| bcrypt | `npm install bcrypt` | https://www.npmjs.com/package/bcrypt |
+| mongoose | `npm install mongoose` | https://www.npmjs.com/package/mongoose |
+| helmet | `npm install helmet` | https://www.npmjs.com/package/helmet |
+
+_CLIENT_
+
+| _CLIENT PACKAGE_ | _CLI / TERMINAL_ | _LINK_ |
+|---|---|---|
+| react | `npx create-react-app@latest client` | https://react.dev/reference/react |
+| react-bootstrap | `npm install react-bootstrap bootstrap` | https://react-bootstrap.netlify.app/ |
+| react-router-dom | `npm i react-router-dom` | https://www.npmjs.com/package/react-router-dom |
+| lucide-react | `npm install lucide-react` | https://lucide.dev/guide/installation |
+
 ## REFERENCES
-- https://www.geeksforgeeks.org/mern/understand-mern-stack/
-- https://developer.mozilla.org/en-US/docs/Web/HTTP
-- https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods/PATCH
-- https://mongoosejs.com/docs/connections.html
-- https://mongoosejs.com/docs/api/query.html#Query.prototype.exec()
-- https://mongoosejs.com/docs/api/query.html#Query.prototype.populate()
-- https://mongoosejs.com/docs/api/query.html#Query.prototype.deleteMany()
-- https://mongoosejs.com/docs/api/query.html#Query.prototype.populate()
-- https://mongoosejs.com/docs/api/aggregate.html#Aggregate.prototype.exec()
-- https://developer.mozilla.org/en-US/docs/Glossary/CORS
-- https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA
-- https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes
-- https://webhint.io/docs/user-guide/hints/hint-apple-touch-icons/
-- https://www.w3schools.com/tags/tag_title.asp
-- https://developer.mozilla.org/en-US/docs/Web/Accessibility/Guides/Understanding_WCAG/Keyboard
 
-
- ### FRAMEWORKS AND MIDDLEWARE
- _SERVER_
-  - https://expressjs.com/
-  - https://www.npmjs.com/package/dotenv 
-  - https://www.npmjs.com/package/nodemon
-  - https://www.npmjs.com/package/mongoose
-  - https://www.npmjs.com/package/cors
-  - https://www.npmjs.com/package/helmet
-  - https://www.npmjs.com/package/bcrypt
-
-
- _CLIENT_
-
- - https://react-bootstrap.netlify.app/
- - https://react.dev/reference/react
- - https://www.npmjs.com/package/react-router-dom 
- - https://lucide.dev/guide/installation
+ [Docs/REFERENCES.md](Docs/REFERENCES.md)
