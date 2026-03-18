@@ -107,7 +107,7 @@ export default function Registration() {//Export the default Registration compon
         <Col id='regisEventCol'>
           <div className='event-bar'>
             <div className='event-track'>
-             <Form className='event-slide' />
+             <Form className='event-slide' aria-hidden='true' />
             </div>
           </div>
         </Col>
