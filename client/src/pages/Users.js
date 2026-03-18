@@ -68,7 +68,7 @@ export default function Users(//Export default Users function component
      {/* Render the HeaderComponent with USERS as the Heading */}
      <Header heading='USERS' currentUser={currentUser}/>
      {/* SECTION 1: User List */}
-     <section id='userList'>
+     <section id='userList' aria-label='User list'>
          <Row id='userListHeadingRow'>
         <Col id='userListHeadCol1'></Col>
         <Col xs={5} id='userListHeadCol'>
@@ -77,7 +77,7 @@ export default function Users(//Export default Users function component
         <Col id='userListHeadCol2'></Col>
       </Row>
       {/* =========EVENT/ANIMATION=========== */}
-      <Row id='usersEventRow' role='presentation'>
+      <Row id='usersEventRow' role='presentation' aria-hidden='true'>
         <Col id='usersEventCol'>
           <div className='event-bar'>
             <div className='event-track'>
@@ -87,11 +87,11 @@ export default function Users(//Export default Users function component
         </Col>
       </Row>
       {/* ----------DISPLAY LIST OF USERS--------- */}
-      <Row id='userListRow'>
+      <Row id='userListRow' aria-live='polite'>
         <Col id='userListCol'>
         {/* TABLE DISPLAYING THE USERS LIST */}
           {users && users.length > 0 ? (
-            <table id='userListTable'>
+            <table id='userListTable' aria-label='Registered users'>
               <thead>
                 <tr>
                   <th>USERNAME</th>
@@ -126,6 +126,8 @@ export default function Users(//Export default Users function component
                             size='sm'
                             disabled={isDisabled}
                             onClick={() => !isDisabled && handleDeleteUser(user._id)}
+                            aria-label={`Delete user ${user.username}`}
+                            aria-disabled={isDisabled}
                           >
                             DELETE
                           </Button>

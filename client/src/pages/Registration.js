@@ -113,8 +113,8 @@ export default function Registration() {//Export the default Registration compon
         </Col>
       </Row>
       {/* SECTION 1: Registration Form */}
-      <section id='regisSection'>
-        {error && <p id='errorMessage'>{error}</p>}
+      <section id='regisSection' aria-label='Registration form'>
+        {error && <p id='errorMessage' role='alert' aria-live='assertive'>{error}</p>}
         {/* Registration Form */}
         <div id='regis-panel'>
         {/* Render the RegistrationForm Component */}
@@ -127,7 +127,7 @@ export default function Registration() {//Export the default Registration compon
         </div>
       </section>
       {/* SECTION 2: Registration Information */}
-      <section id='infoSection'>
+      <section id='infoSection' aria-label='Registration requirements'>
              <Row id='rulesRow'>
                <Col id='rulesCol1'></Col>
                <Col xs={6} id='rulesCol'>

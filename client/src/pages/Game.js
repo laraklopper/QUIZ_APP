@@ -137,7 +137,7 @@ export default function Game(//Export default Game function component
       <Header currentUser={currentUser} heading='GAME'/>
       {/* SECTION 1: quizdisplay component and 
       select quiz form component */}
-      <section id='quizSection'>
+      <section id='quizSection' aria-label='Quiz'>
         {/* SELECT QUIZ FORM */}
          <Row id='selectQuizRow'>
           <Col></Col>
@@ -185,7 +185,7 @@ export default function Game(//Export default Game function component
           </div>
       </section>
       {/* SECTION 2: Past Quiz Results + Toggle Results  */}
-      <section id='scoresSection'>
+      <section id='scoresSection' aria-label='Past scores'>
         {/* PAST QUIZ RESULTS*/}
         <Row id='pastScoresRow'>
         

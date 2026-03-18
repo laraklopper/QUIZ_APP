@@ -224,7 +224,7 @@ export default function AddQuiz(//Export default AddQuiz function component
       {/* HEADER */}
       <Header currentUser={currentUser} heading='ADD QUIZ'/>
       {/* QUIZ LIST SECTION */}
-      <section id='quizList'>
+      <section id='quizList' aria-label='Quiz list'>
         <Row id='quizListRow' aria-live='polite'>
           <Col xs={6} md={4}></Col>
           <Col xs={6} md={4} id='toggleQuizListCol'>
@@ -273,9 +273,9 @@ export default function AddQuiz(//Export default AddQuiz function component
                             {(currentUser?.admin || quiz.username === currentUser?.username) && (
                               <>
                                 {/* Delete quiz button */}
-                                <Button variant='danger' type='button' id='deleteQuizBtn' onClick={() => deleteQuiz(quiz._id)}>DELETE QUIZ</Button>
+                                <Button variant='danger' type='button' id='deleteQuizBtn' onClick={() => deleteQuiz(quiz._id)} aria-label={`Delete quiz: ${quiz.title}`}>DELETE QUIZ</Button>
                                 {/* Toggle edit quiz form button — label changes based on whether this quiz is being edited */}
-                                <Button variant='warning' type='button' id='toggleEditQuizBtn' onClick={() => handleEditToggle(quiz)}>{editQuizId === quiz._id ? 'EXIT' : 'EDIT QUIZ'}</Button>
+                                <Button variant='warning' type='button' id='toggleEditQuizBtn' onClick={() => handleEditToggle(quiz)} aria-label={editQuizId === quiz._id ? `Exit editing ${quiz.title}` : `Edit quiz: ${quiz.title}`} aria-expanded={editQuizId === quiz._id} aria-controls='edit-quiz-panal'>{editQuizId === quiz._id ? 'EXIT' : 'EDIT QUIZ'}</Button>
                               </>
                             )}
                           </div>
@@ -323,7 +323,7 @@ export default function AddQuiz(//Export default AddQuiz function component
         </Col>
       </Row>
       {/* ADD QUIZ SECTION */}
-      <section id='newQuizSection'>
+      <section id='newQuizSection' aria-label='Add new quiz'>
         <Row id='addQuizRow'>
           <Col xs={12} md={12} id='addQuizCol'>
             <div className='toggle-btn-div'>

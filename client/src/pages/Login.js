@@ -84,7 +84,7 @@ export default function Login(//Export the default Login function component
             </Col>
         </Row>
         {/* SECTION 1: Login Form */}
-        <section id='loginSection'>
+        <section id='loginSection' aria-label='Login form'>
         <Row id='loginRow'>
                 <Col></Col>
                 <Col xs={6} id='loginCol'>

@@ -36,10 +36,10 @@ export default function Home(//Export default Home function component
     {/* Render the Header componenent with HOME as the heading */}
      <Header heading='HOME' currentUser={currentUser}/>
      {/* Section 1: Welcome Message + Animation */}
-      <section id='welcomeSection'>
+      <section id='welcomeSection' aria-label='Welcome message'>
       <Row id='welcomeRow' aria-live='polite'>
-          <Col id='welcomeCol1' aria-live='polite'></Col>
-          <Col xs={6} id='welcomeMsg' aria-live='polite'>
+          <Col id='welcomeCol1'></Col>
+          <Col xs={6} id='welcomeMsg'>
               {/* welcome msg */}
               <div id='welcomeDiv'>
                 <span className='welcomeLabel'>
@@ -47,13 +47,13 @@ export default function Home(//Export default Home function component
                   {/* Display user first and last name */}
                   <h2 id='welcomeUser'>{`${firstName} ${lastName}`}</h2>
                 </span>
-              </div> 
+              </div>
           </Col>
-          <Col id='welcomeCol2' aria-live='polite'></Col>
+          <Col id='welcomeCol2'></Col>
         </Row>
       {/* ===========EVENT/ANIMATION============*/}
-        <Row id='homeEventRow' aria-hidden='true' role='presentation' aria-live='polite'>
-          <Col id='homeEventCol' aria-live='polite'>
+        <Row id='homeEventRow' aria-hidden='true' role='presentation'>
+          <Col id='homeEventCol'>
             <div className='event-bar'>
               <div className='event-track'>
                 <FileUser className='event-slide' size={32} aria-hidden='true' focusable="false" />
@@ -63,7 +63,7 @@ export default function Home(//Export default Home function component
         </Row>
       </section>
       {/* SECTION 2 : user profile + edit user forms */}
-      <section id='userProfile'>
+      <section id='userProfile' aria-label='User profile'>
         <div id='userProfileBlock'>
           <EditUserData currentUser={currentUser} setCurrentUser={setCurrentUser} setError={setError}/>
         </div>
