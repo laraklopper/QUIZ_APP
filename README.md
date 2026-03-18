@@ -243,7 +243,9 @@ ARIA (`Accessible Rich Internet Applications`) is a set of HTML attributes defin
 ## FRAMEWORKS AND THIRD PARTY MIDDLEWARE
 
 Third-party middleware and packages are pre-built modules installed via `npm` that are used extend the application's functionality without requiring custom implementation. They handle common concerns such as routing, database connectivity, security, and UI components, allowing development to focus on application-specific logic.
+
 ### Application Middleware Used
+
 #### _SERVER_
 
 | _PACKAGE_ | _CLI / TERMINAL_ | _PURPOSE_ | _LINK_ |
