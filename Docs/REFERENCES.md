@@ -15,6 +15,8 @@
 - https://webhint.io/docs/user-guide/hints/hint-apple-touch-icons/
 - https://www.w3schools.com/tags/tag_title.asp
 - https://developer.mozilla.org/en-US/docs/Web/Accessibility/Guides/Understanding_WCAG/Keyboard
+- https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Guides
+- https://www.w3.org/TR/wai-aria-1.2/#intro_ria_accessibility
 - https://dev.to/justinw7/what-is-middlewares-in-mern--42if
 - https://www.geeksforgeeks.org/node-js/how-to-use-third-party-middleware-in-express-js/
 

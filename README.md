@@ -204,8 +204,10 @@ const hashPassword = async (req, res, next) => {
 Password strength is validated before hashing via the `checkPasswordStrength` middleware, which rejects any password that does not meet the minimum requirements: at least 8 characters and at least one special character (`!@#$%^&*` etc.).
 
 ## ACCESSIBLE RICH INTERNET APPLICATIONS (`ARIA`)
+The domain of web accessibility defines how to make web content usable by persons with disabilities.
+ARIA (`Accessible Rich Internet Applications`) is a set of HTML attributes defined by the (`Web Accessibility Initiative `) WAI-ARIA specification that improve accessibility for users of assistive technologies such as screen readers. 
 
-ARIA (`Accessible Rich Internet Applications`) is a set of HTML attributes defined by the (`Web Accessibility Initiative `)WAI-ARIA specification that improve accessibility for users of assistive technologies such as screen readers. The front end of this application uses ARIA attributes throughout its React components to communicate structure, state, and meaning to assistive technology.
+The front end of this application uses ARIA attributes throughout its React components to communicate structure, state, and meaning to assistive technology.
 
 ### _ARIA ATTRIUBUTES USED_
 
