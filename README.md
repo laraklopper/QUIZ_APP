@@ -204,7 +204,7 @@ Password strength is validated before hashing via the `checkPasswordStrength` mi
 
 ## Accessible Rich Internet Applications ARIA
 
-ARIA (Accessible Rich Internet Applications) is a set of HTML attributes defined by the WAI-ARIA specification that improve accessibility for users of assistive technologies such as screen readers. The front end of this application uses ARIA attributes throughout its React components to communicate structure, state, and meaning to assistive technology.
+ARIA (`Accessible Rich Internet Applications`) is a set of HTML attributes defined by the (`Web Accessibility Initiative `)WAI-ARIA specification that improve accessibility for users of assistive technologies such as screen readers. The front end of this application uses ARIA attributes throughout its React components to communicate structure, state, and meaning to assistive technology.
 
 ### ARIA Attributes Used
 
@@ -253,6 +253,7 @@ ARIA (Accessible Rich Internet Applications) is a set of HTML attributes defined
 - https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes
 - https://webhint.io/docs/user-guide/hints/hint-apple-touch-icons/
 - https://www.w3schools.com/tags/tag_title.asp
+- https://developer.mozilla.org/en-US/docs/Web/Accessibility/Guides/Understanding_WCAG/Keyboard
 
 
  ### FRAMEWORKS AND MIDDLEWARE
