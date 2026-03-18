@@ -15,8 +15,10 @@
 - https://webhint.io/docs/user-guide/hints/hint-apple-touch-icons/
 - https://www.w3schools.com/tags/tag_title.asp
 - https://developer.mozilla.org/en-US/docs/Web/Accessibility/Guides/Understanding_WCAG/Keyboard
+- https://dev.to/justinw7/what-is-middlewares-in-mern--42if
+- https://www.geeksforgeeks.org/node-js/how-to-use-third-party-middleware-in-express-js/
 
-**FRAMEWORKS AND MIDDLEWARE**
+**FRAMEWORKS AND MIDDLEWARE REFERENCES**
 
  _SERVER_
   - https://expressjs.com/
@@ -26,7 +28,6 @@
   - https://www.npmjs.com/package/cors
   - https://www.npmjs.com/package/helmet
   - https://www.npmjs.com/package/bcrypt
-
 
  _CLIENT_
 
