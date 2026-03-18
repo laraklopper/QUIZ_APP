@@ -16,6 +16,7 @@
     margin: 0px;
     padding: 0px;
     width: 100%;
+    background-color: #000;
     display: flex;
 }
 #userListHeadCol1,
@@ -56,7 +57,7 @@
     font-size: 28px;
     text-transform: uppercase;
     text-decoration: underline;
-    color: #3D0F13;
+    color: #FFF;
     margin: 0px;
-    padding: 0px;
+    padding: 10px 0px;
 }

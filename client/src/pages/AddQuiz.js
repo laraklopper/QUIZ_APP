@@ -225,6 +225,23 @@ export default function AddQuiz(//Export default AddQuiz function component
       <Header currentUser={currentUser} heading='ADD QUIZ'/>
       {/* QUIZ LIST SECTION */}
       <section id='quizList' aria-label='Quiz list'>
+      <Row id='quizListHeadingRow' aria-live='polite'>
+        <Col id='quizListHeadingCol1'></Col>
+        <Col xs={5} id='quizListHeadingCol'>
+          <h3 id='quizListHeading'>QUIZZES</h3>
+        </Col>
+        <Col id='quizListHeadingCol1'></Col>
+      </Row>
+        {/* ==========EVENT/ANIMATION==============*/}
+      <Row id='addQuizEventRow' role='presentation' aria-hidden='true'>
+        <Col id='addQuizEventCol'>
+          <div className='event-bar'>
+            <div className='event-track'>
+              <FileQuestionMark className='event-slide' size={32} aria-hidden='true' focusable="false" />
+            </div>
+          </div>
+        </Col>
+      </Row>
         <Row id='quizListRow' aria-live='polite'>
           <Col xs={6} md={4}></Col>
           <Col xs={6} md={4} id='toggleQuizListCol'>
@@ -312,16 +329,7 @@ export default function AddQuiz(//Export default AddQuiz function component
           </Row>
         )}
       </section>
-      {/* DECORATIVE ANIMATION BAR */}
-      <Row id='addQuizEventRow' role='presentation' aria-hidden='true'>
-        <Col id='addQuizEventCol'>
-          <div className='event-bar'>
-            <div className='event-track'>
-              <FileQuestionMark className='event-slide' size={32} aria-hidden='true' focusable="false" />
-            </div>
-          </div>
-        </Col>
-      </Row>
+    
       {/* ADD QUIZ SECTION */}
       <section id='newQuizSection' aria-label='Add new quiz'>
         <Row id='addQuizRow'>

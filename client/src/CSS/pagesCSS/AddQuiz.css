@@ -9,6 +9,34 @@
     background-color: #0095C7;
     flex-direction: column;
 }
+#quizListHeadingRow{
+    background-color: #000;
+    margin: 0px;
+    padding: 10px 0px;
+    width: 100%;
+    display: flex;
+}
+#quizListHeadingCol1, #quizListHeadingCol2 {
+    display: flex;
+    margin: 0px;
+    padding: 0px;
+}
+#quizListHeadingCol{
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+    justify-content: center;
+}
+#quizListHeading{
+    font-family: "Playpen Sans", cursive;
+    font-weight: 800;
+    font-size: 28px;
+    text-transform: uppercase;
+    text-decoration: underline;
+    color: #FFF;
+    margin: 0px;
+    padding: 0px;
+}
 /* LAYOUT */
 #quizListTableRow{
     margin: 0px;
