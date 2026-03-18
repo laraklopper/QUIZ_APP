@@ -16,8 +16,8 @@ https://github.com/laraklopper/QUIZ-APPLICATION.git
 4. [DNS CONNECTION](#dns-connection)
 5. [APPLICATION FEATURES](#application-features)
 6. [APPLICATION SECURITY](#application-security)
-7. [ARIA](#accessible-rich-internet-applications-aria)
-8. [FRAMEWORKS AND MIDDLEWARE](#frameworks-and-middleware)
+7. [ACCESSIBLE RICH INTERNET APPLICATIONS (`ARIA`)](#accessible-rich-internet-applications-aria)
+8. [FRAMEWORKS AND THIRD PARTYMIDDLEWARE](#frameworks-and-third-party-middleware)
 9. [REFERENCES](#references)
 
 ## HOW TO USE THE APPLICATION
@@ -203,11 +203,11 @@ const hashPassword = async (req, res, next) => {
 
 Password strength is validated before hashing via the `checkPasswordStrength` middleware, which rejects any password that does not meet the minimum requirements: at least 8 characters and at least one special character (`!@#$%^&*` etc.).
 
-## Accessible Rich Internet Applications ARIA
+## ACCESSIBLE RICH INTERNET APPLICATIONS (`ARIA`)
 
 ARIA (`Accessible Rich Internet Applications`) is a set of HTML attributes defined by the (`Web Accessibility Initiative `)WAI-ARIA specification that improve accessibility for users of assistive technologies such as screen readers. The front end of this application uses ARIA attributes throughout its React components to communicate structure, state, and meaning to assistive technology.
 
-### ARIA Attributes Used
+### _ARIA ATTRIUBUTES USED_
 
 | Attribute | Purpose | Where Used |
 |---|---|---|
@@ -226,7 +226,7 @@ ARIA (`Accessible Rich Internet Applications`) is a set of HTML attributes defin
 | `aria-disabled` | Marks an element as disabled without removing it from the accessibility tree | `Results` component |
 | `aria-readonly` | Indicates a field is read-only | Result fields in `Results` component |
 
-### ARIA Roles Used
+### _ARIA ROLES USED_
 
 | Role | Purpose | Where Used |
 |---|---|---|
@@ -240,28 +240,31 @@ ARIA (`Accessible Rich Internet Applications`) is a set of HTML attributes defin
 | `role="button"` | Applied to non-button elements styled and used as buttons | Custom button elements in `EditPasswordForm`, `EditUserData` |
 | `role="presentation"` | Removes semantic meaning from a purely decorative element | Decorative images and containers in page components |
 
-## FRAMEWORKS AND MIDDLEWARE
+## FRAMEWORKS AND THIRD PARTY MIDDLEWARE
 
-_SERVER_
+Third-party middleware and packages are pre-built modules installed via `npm` that are used extend the application's functionality without requiring custom implementation. They handle common concerns such as routing, database connectivity, security, and UI components, allowing development to focus on application-specific logic.
+### Application Middleware Used
+#### _SERVER_
 
-| _SERVER MIDDLEWARE_ | _CLI / TERMINAL_ | _LINK_ |
-|---|---|---|
-| express | `npm install express` | https://expressjs.com/ |
-| nodemon | `npm install nodemon` | https://www.npmjs.com/package/nodemon |
-| cors | `npm install cors` | https://www.npmjs.com/package/cors |
-| dotenv | `npm install dotenv` | https://www.npmjs.com/package/dotenv |
-| bcrypt | `npm install bcrypt` | https://www.npmjs.com/package/bcrypt |
-| mongoose | `npm install mongoose` | https://www.npmjs.com/package/mongoose |
-| helmet | `npm install helmet` | https://www.npmjs.com/package/helmet |
+| _PACKAGE_ | _CLI / TERMINAL_ | _PURPOSE_ | _LINK_ |
+|---|---|---|---|
+| express | `npm install express` | Fast, minimalist web framework for Node.js; handles routing, middleware chaining, and HTTP request/response | [expressjs.com](https://expressjs.com/) |
+| nodemon | `npm install nodemon` | Development utility that watches for file changes and automatically restarts the server | [npmjs.com/nodemon](https://www.npmjs.com/package/nodemon) |
+| cors | `npm install cors` | Enables Cross-Origin Resource Sharing; controls which origins are permitted to access the API | [npmjs.com/cors](https://www.npmjs.com/package/cors) |
+| dotenv | `npm install dotenv` | Loads environment variables from a `.env` file into `process.env`; keeps secrets out of source code | [npmjs.com/dotenv](https://www.npmjs.com/package/dotenv) |
+| bcrypt | `npm install bcrypt` | Password hashing library; used to hash passwords before storage and compare them on login | [npmjs.com/bcrypt](https://www.npmjs.com/package/bcrypt) |
+| mongoose | `npm install mongoose` | ODM (Object Data Modelling) library for MongoDB; provides schema-based data modelling and query helpers | [npmjs.com/mongoose](https://www.npmjs.com/package/mongoose) |
+| helmet | `npm install helmet` | Sets secure HTTP response headers to protect against common web vulnerabilities such as XSS and clickjacking | [npmjs.com/helmet](https://www.npmjs.com/package/helmet) |
+| jsonwebtoken | `npm install jsonwebtoken` | Signs and verifies JSON Web Tokens used to authenticate and authorise users on protected routes | [npmjs.com/jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken) |
 
-_CLIENT_
+#### _CLIENT_
 
-| _CLIENT PACKAGE_ | _CLI / TERMINAL_ | _LINK_ |
-|---|---|---|
-| react | `npx create-react-app@latest client` | https://react.dev/reference/react |
-| react-bootstrap | `npm install react-bootstrap bootstrap` | https://react-bootstrap.netlify.app/ |
-| react-router-dom | `npm i react-router-dom` | https://www.npmjs.com/package/react-router-dom |
-| lucide-react | `npm install lucide-react` | https://lucide.dev/guide/installation |
+| _PACKAGE_ | _CLI / TERMINAL_ | _PURPOSE_ | _LINK_ |
+|---|---|---|---|
+| react | `npx create-react-app@latest client` | JavaScript library for building user interfaces using reusable, stateful components | [react.dev](https://react.dev/reference/react) |
+| react-bootstrap | `npm install react-bootstrap bootstrap` | Bootstrap component library rebuilt for React; provides pre-styled, accessible UI components | [react-bootstrap.netlify.app](https://react-bootstrap.netlify.app/) |
+| react-router-dom | `npm i react-router-dom` | Declarative client-side routing library for React; manages navigation between pages and views | [npmjs.com/react-router-dom](https://www.npmjs.com/package/react-router-dom) |
+| lucide-react | `npm install lucide-react` | Icon library providing clean, consistent SVG icons as React components | [lucide.dev](https://lucide.dev/guide/installation) |
 
 ## REFERENCES
 
