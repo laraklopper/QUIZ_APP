@@ -1,12 +1,11 @@
 /* USER DATA.css */
-
 /* USER LIST TABLE */
 /* Users.js */
 #userListTable {
     width: 100%;
     border-collapse: collapse;
     background-color: #F7F7F7;
-    overflow-y: scroll;
+    overflow: scroll;
     margin: 0px;
     padding: 0px;
 }
@@ -24,17 +23,19 @@
     font-size: 20px;
     padding: 10px 8px;
 }
+/* ----------Table Body */
 #userListTable tbody tr:nth-child(even) {
     background-color: #D6D6D6;
     text-align: center;
-        height: 35px;
+    height: 35px;
 }
 #userListTable tbody tr:nth-child(odd) {
     background-color: #F7F7F7;
     text-align: center;
     font-size: 16px;
-        height: 35px;
+    height: 35px;
 }
+/* ------------TABLE DATA------------ */
 #userListTable td, .userUsername, .userFullName {
     text-align: center;
     text-transform: uppercase;
@@ -64,21 +65,7 @@
     text-transform: uppercase;
     border-radius: 3px;
 }
-.userDetailsHeading{
-    text-transform: uppercase;
-    margin: 0px;
-    padding: 0px;
-    font-weight: 600;
-    font-family: "Playpen Sans", cursive;
-    text-align: center;
-}
-.userDetailsLabel{
-    display: flex;
-    padding: 10px;
-    gap: 10px;
-    align-items: baseline;
-}
-
+/* --------BUTTONS--------------------- */
 /* DELETE BUTTON */
 #deleteUserBtn {
     height: 40px;
@@ -97,6 +84,8 @@
 #deleteUserBtn:hover {
     color: #fff;
     height: 40px;
+    font-weight: 700;
+    font-family: "Roboto Mono", monospace;
     width: 150px;
     background-color: #3D0F13;
     border: solid #3D0F13 2px;

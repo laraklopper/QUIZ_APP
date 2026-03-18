@@ -51,7 +51,6 @@
     text-transform: uppercase;
     color: #3D0F13;
     font-family: "Playpen Sans", cursive;
-    
     padding: 0px 0px 0px 5px;
     margin: 0px;
     font-style: italic;
@@ -71,12 +70,14 @@
 /* User Details */
 #userDetails{
     display: flex;
+    width: 100%;
     margin: 0px 0px 10px 0px;
     padding: 10px;
     flex-direction: column;
     align-items: center;
     background-color: #0095C7;
 }
+/* LAYOUT */
 #userDetailsDiv{
     display: flex;
     padding: 0px;
@@ -108,6 +109,14 @@
     padding: 0px;
 }
 /*User Details Text */
+.userDetailsHeading{
+    text-transform: uppercase;
+    margin: 0px;
+    padding: 0px;
+    font-weight: 600;
+    font-family: "Playpen Sans", cursive;
+    text-align: center;
+}
 .emailData{
     text-transform: lowercase;
     font-family: "Playpen Sans", cursive;
@@ -122,23 +131,6 @@
     
 }
 /* EDIT LAYOUT */
-#editUserCol {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    margin: 0px;
-    padding: 0px;
-}
-#editUserBtnStack{
-    background-color: #BFBFBF;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 10px 0px;
-    gap: 10px; 
-}
 /* EditUserData.js */
 /* TEXT */
 #userProfileHeading{
@@ -149,12 +141,37 @@
     font-family: "Playpen Sans", cursive;
     font-weight: 700;
     text-decoration: underline;
+    text-decoration-color: #3D0F13;
 }
 /* Layout */
 /* Bootstrap Layout */
 /* Grid */
-
-
+#toggleEditUserRow{
+    display: flex;
+    width: 100%;
+    margin: 5px 0px 0px 0px;
+    padding: 0px;
+    flex-direction: column;
+    align-items: center;
+}
+#editUserCol {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin: 0px;
+    padding: 0px;
+}
+/* Stack */
+#editUserBtnStack{
+    background-color: #BFBFBF;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px 0px;
+    gap: 10px; 
+}
 #editUserBlock, #editPasswordBlock{
     display: flex;
     width: inherit;
@@ -165,19 +182,9 @@
     margin: 0px;
     background-color: #6c757d;
 }
-#toggleEditUserRow{
-    display: flex;
-    width: 100%;
-        margin: 5px 0px 0px 0px;
-    padding: 0px;
-    flex-direction: column;
-    align-items: center;
-}
-
 
 #editUserStack{
-    display: flex;
-    
+    display: flex;  
     justify-content: center;
     width: 800px;
     margin: 0px;
@@ -191,16 +198,11 @@
     gap: 10px;
 
 }
-
-
-#edit-user-panal, #edit-password-pana{
+#edit-user-panal, #edit-password-panal{
     width: inherit;
-  
     display: flex;
     justify-content: center;
 }
-
-
 /* BUTTONS */
 #toggleEditAccountBtn,
 #toggleEditPswdBtn{
