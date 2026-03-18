@@ -1,7 +1,7 @@
 // Users.js
 // Users component: UserList and delete user Button
 //IMPORT REQUIRED MODULES AND PACKAGES
-import { useCallback } from 'react'
+import { useCallback, useState } from 'react'
 // IMPORT CSS STYLESHEETS
 import '../css/pagesCSS/PageSetup.css'
 import '../css/pagesCSS/Users.css'
@@ -28,6 +28,9 @@ export default function Users(//Export default Users function component
     users,       // Array of all registered users
     setUsers     // Function to update the users list state
   }) {
+
+  //=============STATE VARIABLES===================
+  const [showUserList, setShowUserList] = useState(false);
 
       //============REQUESTS===============
   //----------DELETE----------------
@@ -86,8 +89,26 @@ export default function Users(//Export default Users function component
           </div>
         </Col>
       </Row>
+      {/* TOGGLE USERS BUTTON */}
+      <Row id='userListRow'>
+        <Col id='userListCol1'></Col>
+        <Col xs={5} id='toggleUserListCol'>
+          <Button
+            variant='secondary'
+            type='button'
+            id='toggleUserListBtn'
+            onClick={() => setShowUserList((prev) => !prev)}
+            aria-expanded={showUserList}
+            aria-controls='userListTableRow'
+          >
+            {showUserList ? 'HIDE USERS' : 'SHOW USERS'}
+          </Button>
+        </Col>
+        <Col id='userListCol2'></Col>
+      </Row>
       {/* ----------DISPLAY LIST OF USERS--------- */}
-      <Row id='userListRow' aria-live='polite'>
+      {showUserList && (
+      <Row id='userListTableRow' aria-live='polite'>
         <Col id='userListCol'>
         {/* TABLE DISPLAYING THE USERS LIST */}
           {users && users.length > 0 ? (
@@ -143,6 +164,7 @@ export default function Users(//Export default Users function component
           )}
         </Col>
       </Row>
+      )}
      </section>
      {/* FOOTER */}
       <Footer logout={logout} currentUser={currentUser}/>

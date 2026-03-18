@@ -51,6 +51,35 @@
     align-items: center;
 }
 /* TEXT */
+#toggleUserListCol {
+    margin: 10px 0px;
+    padding: 0px;
+    display: flex;
+    justify-content: center;
+}
+#toggleUserListBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 180px;
+    font-weight: 700;
+    font-family: "Roboto Mono", monospace;
+    height: 40px;
+    color: #000;
+    border: solid #323A42 3px;
+}
+#toggleUserListBtn:hover {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 180px;
+    height: 40px;
+    color: #FFF;
+    font-weight: 700;
+    font-family: "Roboto Mono", monospace;
+    border: solid #323A42 3px;
+    background-color: #323A42;
+}
 #userListHeading {
     font-family: "Playpen Sans", cursive;
     font-weight: 800;
